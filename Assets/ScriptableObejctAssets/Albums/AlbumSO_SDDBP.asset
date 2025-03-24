@@ -49,3 +49,4 @@ MonoBehaviour:
   - songName: "Thi\xEAn h\xE0 tr\u01B0\u1EDBc hi\xEAn nh\xE0"
     songImage: {fileID: 21300000, guid: f1daf069536697a48a99ef5adbe000e0, type: 3}
     songClip: {fileID: 8300000, guid: 1487f0fc6d3d7cc4cab8f107fec7cd22, type: 3}
+  physicalCDAlbum: 1

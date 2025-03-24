@@ -6,17 +6,17 @@ using UnityEngine.XR.ARFoundation;
 public static class StaticEventHandler
 {
 
-    public static event Action<SongDescription, PhysicalCDAlbum> OnSongChanged;
+    public static event Action<AlbumSO, int> OnSongChanged;
 
-    public static void InvokeSongChanged(SongDescription songDescription, PhysicalCDAlbum physicalCDAlbum)
+    public static void InvokeSongChanged(AlbumSO album, int index)
     {
-        OnSongChanged?.Invoke(songDescription, physicalCDAlbum);
+        OnSongChanged?.Invoke(album, index);
     }
-    public static event Action<AlbumSO, PhysicalCDAlbum> OnStartFirstSong;
+    public static event Action<AlbumSO> OnStartFirstSong;
 
-    public static void InvokeStartFirstSong(AlbumSO album, PhysicalCDAlbum physicalCDAlbum)
+    public static void InvokeStartFirstSong(AlbumSO album)
     {
-        OnStartFirstSong?.Invoke(album, physicalCDAlbum);
+        OnStartFirstSong?.Invoke(album);
     }
 
 

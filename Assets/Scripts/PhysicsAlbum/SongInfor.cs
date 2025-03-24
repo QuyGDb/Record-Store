@@ -25,15 +25,15 @@ public class SongInfor : MonoBehaviour
         StaticEventHandler.OnSongChanged -= UpdateUITransition;
     }
 
-    private void UpdateUITransition(SongDescription song, PhysicalCDAlbum physicalCDAlbum)
+    private void UpdateUITransition(AlbumSO albumSO, int index)
     {
-        if (physicalCDAlbum == PhysicalCDAlbum.Gieo)
+        if (albumSO.physicalCDAlbum == PhysicalCDAlbum.Gieo)
         {
-            ApplyUITransition(song);
+            ApplyUITransition(albumSO.songs[index]);
         }
-        if (physicalCDAlbum == PhysicalCDAlbum.SDDBP)
+        if (albumSO.physicalCDAlbum == PhysicalCDAlbum.SDDBP)
         {
-            ApplyUITransition(song);
+            ApplyUITransition(albumSO.songs[index]);
         }
 
     }
