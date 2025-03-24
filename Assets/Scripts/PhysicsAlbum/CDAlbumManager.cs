@@ -1,40 +1,40 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class CDAlbumManager : MonoBehaviour
+public class CDAlbumManager : SingletonMonobehaviour<CDAlbumManager>
 {
-    [HideInInspector] public ARTrackedImage aRTrackedImage;
     [SerializeField] private Image artistImage;
     [SerializeField] private TextMeshProUGUI artistName;
     [SerializeField] private TextMeshProUGUI albumName;
     [SerializeField] private TextMeshProUGUI genres;
-    [HideInInspector] public AlbumSO albumSO;
-
+    public AlbumSO albumSO;
     private void Start()
     {
-        SelectAlbum(aRTrackedImage);
+        SelectAlbum();
     }
 
-    private async void SelectAlbum(ARTrackedImage aRTrackedImage)
+
+    private async void SelectAlbum()
     {
-        switch (aRTrackedImage.referenceImage.name)
+        switch (albumSO.physicalCDAlbum)
         {
-            case "Gieo":
+            case PhysicalCDAlbum.Gieo:
                 albumSO = GameManager.Instance.albumSOs[0];
                 //wait for subcriber to be ready to receive the event
                 await Awaitable.WaitForSecondsAsync(2.5f);
-                StaticEventHandler.InvokeStartFirstSong(albumSO, PhysicalCDAlbum.Gieo);
                 break;
-            case "SDDBP":
+            case PhysicalCDAlbum.SDDBP:
                 albumSO = GameManager.Instance.albumSOs[1];
                 await Awaitable.WaitForSecondsAsync(2.5f);
-                StaticEventHandler.InvokeStartFirstSong(albumSO, PhysicalCDAlbum.SDDBP);
                 break;
         }
         SetAlbumInfo();
+        StaticEventHandler.InvokeStartFirstSong(albumSO);
+
     }
     void SetAlbumInfo()
     {

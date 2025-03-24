@@ -10,4 +10,6 @@ public class AlbumSO : ScriptableObject
     public string genres;
     public GameObject albumPrefab;
     public List<SongDescription> songs;
+    public PhysicalCDAlbum physicalCDAlbum;
+
 }

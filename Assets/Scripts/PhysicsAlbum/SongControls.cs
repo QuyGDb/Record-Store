@@ -23,22 +23,22 @@ public class SongControls : MonoBehaviour
     {
         StaticEventHandler.OnStartFirstSong -= HandleStartFirstSong;
     }
-    private void HandleStartFirstSong(AlbumSO album, PhysicalCDAlbum physicalCDAlbum)
+    private void HandleStartFirstSong(AlbumSO album)
     {
-        if (physicalCDAlbum == PhysicalCDAlbum.Gieo)
+        if (album.physicalCDAlbum == PhysicalCDAlbum.Gieo)
         {
             albumSO = album;
             currentTrack = 0;
             PlayTrack();
         }
-        if (physicalCDAlbum == PhysicalCDAlbum.SDDBP)
+        if (album.physicalCDAlbum == PhysicalCDAlbum.SDDBP)
         {
             albumSO = album;
             currentTrack = 0;
             PlayTrack();
         }
-
     }
+
     private void Start()
     {
 
@@ -81,17 +81,17 @@ public class SongControls : MonoBehaviour
     void PlayTrack()
     {
 
-        if (albumSO.name == "Gieo")
+        if (albumSO.albumName == "Gieo")
         {
             audioSource.clip = albumSO.songs[currentTrack].songClip;
             audioSource.Play();
-            StaticEventHandler.InvokeSongChanged(albumSO.songs[currentTrack], PhysicalCDAlbum.Gieo);
+            StaticEventHandler.InvokeSongChanged(albumSO, currentTrack);
         }
-        if (albumSO.name == "SDDBP")
+        if (albumSO.albumName == "SDDBP")
         {
             audioSource.clip = albumSO.songs[currentTrack].songClip;
             audioSource.Play();
-            StaticEventHandler.InvokeSongChanged(albumSO.songs[currentTrack], PhysicalCDAlbum.SDDBP);
+            StaticEventHandler.InvokeSongChanged(albumSO, currentTrack);
         }
     }
 }

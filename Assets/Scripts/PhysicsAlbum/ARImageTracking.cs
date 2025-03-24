@@ -21,10 +21,10 @@ public class ARImageTracking : MonoBehaviour
             AddPrefabForImage(newImage);
         }
 
-        foreach (var updatedImage in eventArgs.updated)
-        {
-            UpdatePrefabPosition(updatedImage);
-        }
+        //foreach (var updatedImage in eventArgs.updated)
+        //{
+        //    UpdatePrefabPosition(updatedImage);
+        //}
 
         foreach (var removed in eventArgs.removed)
         {
@@ -50,22 +50,26 @@ public class ARImageTracking : MonoBehaviour
         if (prefabToSpawn != null)
         {
             GameObject spawned = Instantiate(prefabToSpawn, trackedImage.transform.position, trackedImage.transform.rotation);
-            spawned.GetComponent<CDAlbumManager>().aRTrackedImage = trackedImage;
-            spawnerAlbums.Add(trackedImage.referenceImage.name, spawned);
+            //Debug.Log("Spawned prefab for image: " + imageName);
+            //Debug.Log("Spawned prefab for image: " + spawned.name);
+            //spawnerAlbums.Add(trackedImage.referenceImage.name, spawned);
+            //spawned.transform.SetParent(trackedImage.transform);
         }
+        Debug.Log("Added prefab for image: " + imageName);
     }
 
-    void UpdatePrefabPosition(ARTrackedImage trackedImage)
-    {
-        string imageName = trackedImage.referenceImage.name;
+    //void UpdatePrefabPosition(ARTrackedImage trackedImage)
+    //{
+    //    string imageName = trackedImage.referenceImage.name;
 
-        if (spawnerAlbums.ContainsKey(imageName))
-        {
-            GameObject spawnedObject = spawnerAlbums[imageName];
-            spawnedObject.transform.position = trackedImage.transform.position;
-            spawnedObject.transform.rotation = trackedImage.transform.rotation;
-        }
-    }
+    //    if (spawnerAlbums.ContainsKey(imageName))
+    //    {
+    //        GameObject spawnedObject = spawnerAlbums[imageName];
+    //        spawnedObject.transform.SetParent(trackedImage.transform);
+    //        spawnedObject.transform.localPosition = Vector3.zero;
+    //        spawnedObject.transform.localRotation = Quaternion.identity;
+    //    }
+    //}
 
 
     void RemovePrefab(ARTrackedImage trackedImage)
@@ -75,7 +79,7 @@ public class ARImageTracking : MonoBehaviour
         if (spawnerAlbums.ContainsKey(imageName))
         {
             GameObject spawnedObject = spawnerAlbums[imageName];
-            spawnedObject.gameObject.SetActive(false);
+            // spawnedObject.gameObject.SetActive(false);
         }
     }
 }
