@@ -12,29 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601ecf9ccf8beb54bb7be04d31e10039, type: 3}
   m_Name: AlbumSO_SDDBP
   m_EditorClassIdentifier: 
-  artistImage: {fileID: 0}
+  artistImage: {fileID: 21300000, guid: 1e8c7351c68f67d4ba9a183c4485bb21, type: 3}
   artistName: Datmanic
-  albumName: "Sao \u0111\u1EE7 \u0111\u1EC3 bao ph\u1EE7"
+  albumName: SDDBP
   genre: Rap
   year: 2024
+  albumPrefab: {fileID: 8026740499196981599, guid: 8b4c21ea582a78340a3ed79755c3ee75,
+    type: 3}
   songs:
   - songName: "Lu\xF4n s\u1EBD su\xF4n s\u1EBB"
     songImage: {fileID: 21300000, guid: e15952abd56b26947bb2e874423a90df, type: 3}
+    songClip: {fileID: 0}
   - songName: "Lao ra ngo\u1EA1i \xF4"
     songImage: {fileID: 21300000, guid: 2732d1d7452cbbb459840d97feb6eafd, type: 3}
+    songClip: {fileID: 0}
   - songName: O
     songImage: {fileID: 21300000, guid: 1891037590c36cd45b46845816f95913, type: 3}
+    songClip: {fileID: 0}
   - songName: Hallelujah
     songImage: {fileID: 21300000, guid: d56ec59eae6b4884dad241029580f4c7, type: 3}
+    songClip: {fileID: 0}
   - songName: "Ti\u1EBFng ca ti\xEAn c\xE1"
     songImage: {fileID: 21300000, guid: 06baa6cd28803dc4297b1a60f33f8b9a, type: 3}
+    songClip: {fileID: 0}
   - songName: "Th\u01B0 vi\u1EC7n \u1EDF ngh\u0129a trang"
     songImage: {fileID: 21300000, guid: 99a76f3e23dff264992092e835449bce, type: 3}
+    songClip: {fileID: 0}
   - songName: "H\u1EA1t gi\u1ED1ng h\u1EA1t b\u1EE5i"
     songImage: {fileID: 21300000, guid: 21ba3e7764d82454190ab46192f31c74, type: 3}
+    songClip: {fileID: 0}
   - songName: Souls
     songImage: {fileID: 21300000, guid: 42b0fe8a1abc0ff4c8424e0179b11df8, type: 3}
+    songClip: {fileID: 0}
   - songName: noiniemnhungnho
     songImage: {fileID: 21300000, guid: 73daa3e34e3fa8d4d804e9dbb62c4b34, type: 3}
+    songClip: {fileID: 0}
   - songName: "Thi\xEAn h\xE0 tr\u01B0\u1EDBc hi\xEAn nh\xE0"
     songImage: {fileID: 21300000, guid: f1daf069536697a48a99ef5adbe000e0, type: 3}
+    songClip: {fileID: 0}

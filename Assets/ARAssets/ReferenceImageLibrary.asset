@@ -21,9 +21,19 @@ MonoBehaviour:
       m_GuidLow: 5079242704638236242
       m_GuidHigh: 10388539655331145344
     m_SerializedTextureGuid:
-      m_GuidLow: 14903725973267188443
-      m_GuidHigh: 8330209074924734970
-    m_Size: {x: 0.13, y: 0.1292806}
+      m_GuidLow: 13791214632427263342
+      m_GuidHigh: 5204472029449984216
+    m_Size: {x: 0.13, y: 0.108107045}
     m_SpecifySize: 1
-    m_Name: Album_Gieo
+    m_Name: Gieo
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5247788423317169233
+      m_GuidHigh: 9353622348928008082
+    m_SerializedTextureGuid:
+      m_GuidLow: 1636006319120036856
+      m_GuidHigh: 14548993666213708730
+    m_Size: {x: 0.3, y: 0.2794922}
+    m_SpecifySize: 1
+    m_Name: SDDBP
     m_Texture: {fileID: 0}

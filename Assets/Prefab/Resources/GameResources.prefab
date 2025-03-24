@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3231122906181037714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2504543440422970068}
+  - component: {fileID: -8803648086994028515}
+  m_Layer: 0
+  m_Name: GameResources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2504543440422970068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231122906181037714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5685453, y: -0.09354837, z: 1.8324921}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8803648086994028515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231122906181037714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6474df8e4118c4c912d22b9162cc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyUnwalkableCollisionTilesArray: []
+  preferredEnemyPathTile: {fileID: 0}
+  damegeFlashMaterial: {fileID: 0}
+  litMaterial: {fileID: 0}
+  ammoHitEffectPrefab: {fileID: 0}
+  bloodEffectPrefab: {fileID: 0}
+  playerShadowPrefab: {fileID: 0}
+  beginUI: {fileID: 0}
+  boss: {fileID: 0}
+  soundsMasterMixerGroup: {fileID: 0}
+  musicMasterMixerGroup: {fileID: 0}
+  musicLowSnapshot: {fileID: 0}
+  musicOnFullSnapshot: {fileID: 0}
+  musicOffSnapshot: {fileID: 0}
+  musicTrack1: {fileID: 0}
+  musicTrack2: {fileID: 0}
+  musicTrack_Bossfight: {fileID: 0}
+  rain: {fileID: 0}
+  getHurtEnemy: {fileID: 0}
+  getHurtPlayer: {fileID: 0}
+  clickButton: {fileID: 0}
+  flowingWater: {fileID: 0}
+  waweOceanEffect: {fileID: 0}
