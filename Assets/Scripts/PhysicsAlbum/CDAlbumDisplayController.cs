@@ -32,7 +32,7 @@ public class CDAlbumDisplayController : MonoBehaviour
             songImageMAT.DOFloat(0f, "_FadeAmount", 2f).OnComplete(() =>
             {
                 songImage.GetComponent<Transform>()
-                .DORotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360)
+                .DOLocalRotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360)
                  .SetLoops(-1, LoopType.Restart)
                   .SetEase(Ease.Linear);
 

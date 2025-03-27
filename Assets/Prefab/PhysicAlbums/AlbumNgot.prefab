@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1202497295200390147}
   - component: {fileID: 3454351987621458902}
   - component: {fileID: 4535592872198505446}
+  - component: {fileID: 5197603625003380912}
   m_Layer: 0
   m_Name: Next
   m_TagString: Untagged
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5197603625003380912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981596251780218002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3f083c516279d459d5b272fb2ed45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1877108849440017057
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +145,7 @@ GameObject:
   - component: {fileID: 4907548279566667592}
   - component: {fileID: 5881647186036421977}
   - component: {fileID: 940926937685543478}
+  - component: {fileID: 9013990957827546165}
   m_Layer: 0
   m_Name: Previous
   m_TagString: Untagged
@@ -240,6 +254,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9013990957827546165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877108849440017057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3f083c516279d459d5b272fb2ed45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2667533370755547659
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,8 +336,8 @@ MonoBehaviour:
 
     Alternative Rock'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e22b84c32483c2e40a6bc6bdfeae52da, type: 2}
-  m_sharedMaterial: {fileID: 7285102366134398909, guid: e22b84c32483c2e40a6bc6bdfeae52da,
+  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
+  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -414,7 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2886535665085765638}
   m_Layer: 0
-  m_Name: AlbumInfor
+  m_Name: AlbumInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,6 +481,7 @@ GameObject:
   - component: {fileID: 6743529116438912188}
   - component: {fileID: 752224764527982903}
   - component: {fileID: 7761914362551687051}
+  - component: {fileID: 7456163699981387617}
   m_Layer: 0
   m_Name: Pause
   m_TagString: Untagged
@@ -563,6 +590,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7456163699981387617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814852735546470048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3f083c516279d459d5b272fb2ed45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3241091945310387356
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,8 +670,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Artist: Ng\u1ECDt"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e22b84c32483c2e40a6bc6bdfeae52da, type: 2}
-  m_sharedMaterial: {fileID: 7285102366134398909, guid: e22b84c32483c2e40a6bc6bdfeae52da,
+  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
+  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -979,8 +1018,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Album: Gieo'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e22b84c32483c2e40a6bc6bdfeae52da, type: 2}
-  m_sharedMaterial: {fileID: 7285102366134398909, guid: e22b84c32483c2e40a6bc6bdfeae52da,
+  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
+  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1107,7 +1146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.594}
+  m_AnchoredPosition: {x: 0, y: 0.602}
   m_SizeDelta: {x: 0.8, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2940762232978397389
@@ -1161,7 +1200,7 @@ GameObject:
   - component: {fileID: 308881389556532881}
   - component: {fileID: 4032197289228175144}
   - component: {fileID: 9139240150383493307}
-  - component: {fileID: 424338077478332413}
+  - component: {fileID: 9178859735165283868}
   m_Layer: 0
   m_Name: AlbumNgot
   m_TagString: Untagged
@@ -1237,7 +1276,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4032197289228175144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1272,7 +1311,7 @@ MonoBehaviour:
   songImage: {fileID: 2007029258819142377}
   songControls: {fileID: 6213915259717009350}
   songImageMAT: {fileID: 2100000, guid: b91991fa262abf94bbac26e80a7e61f4, type: 2}
---- !u!114 &424338077478332413
+--- !u!114 &9178859735165283868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1357,8 +1396,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "M\u1EA5y khi"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e22b84c32483c2e40a6bc6bdfeae52da, type: 2}
-  m_sharedMaterial: {fileID: 7285102366134398909, guid: e22b84c32483c2e40a6bc6bdfeae52da,
+  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
+  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

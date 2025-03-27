@@ -1,6 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
@@ -10,10 +11,13 @@ public class SongControls : MonoBehaviour
     private AudioSource audioSource;
     private AlbumSO albumSO;
     private int currentTrack;
+    private PhysicalCDAlbum physicalCDAlbum;
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         buttons = GetComponentsInChildren<Button>();
+        CDAlbumManager cdAlbumManager = GetComponentInParent<CDAlbumManager>();
+        physicalCDAlbum = cdAlbumManager.albumSO.physicalCDAlbum;
     }
     private void OnEnable()
     {
@@ -23,75 +27,83 @@ public class SongControls : MonoBehaviour
     {
         StaticEventHandler.OnStartFirstSong -= HandleStartFirstSong;
     }
+
     private void HandleStartFirstSong(AlbumSO album)
     {
-        if (album.physicalCDAlbum == PhysicalCDAlbum.Gieo)
+        if (physicalCDAlbum == album.physicalCDAlbum)
         {
             albumSO = album;
             currentTrack = 0;
-            PlayTrack();
-        }
-        if (album.physicalCDAlbum == PhysicalCDAlbum.SDDBP)
-        {
-            albumSO = album;
-            currentTrack = 0;
-            PlayTrack();
+            PlayTrack(null);
         }
     }
 
-    private void Start()
+    private UnityAction actionPlayPrevious;
+    private UnityAction actionPause;
+    private UnityAction actionPlayNext;
+
+    void Start()
     {
+        // Khởi tạo delegate cho mỗi button
+        actionPlayPrevious = () => PlayPreviousTrack(buttons[0]);
+        actionPause = () => PauseTrack(buttons[1]);
+        actionPlayNext = () => PlayNextTrack(buttons[2]);
 
-        buttons[0].onClick.AddListener(PlayPreviousTrack);
-        buttons[1].onClick.AddListener(PauseTrack);
-        buttons[2].onClick.AddListener(PlayNextTrack);
+        // Gán listener sử dụng delegate đã lưu
+        buttons[0].onClick.AddListener(actionPlayPrevious);
+        buttons[1].onClick.AddListener(actionPause);
+        buttons[2].onClick.AddListener(actionPlayNext);
     }
 
+    private void OnDestroy()
+    {
+        // Gỡ bỏ listener bằng delegate đã lưu
+        buttons[0].onClick.RemoveListener(actionPlayPrevious);
+        buttons[1].onClick.RemoveListener(actionPause);
+        buttons[2].onClick.RemoveListener(actionPlayNext);
+    }
 
-    void PlayPreviousTrack()
+    void PlayPreviousTrack(Button button)
     {
         if (currentTrack > 0)
         {
             currentTrack--;
-            PlayTrack();
+            PlayTrack(button);
         }
     }
 
-    void PlayNextTrack()
+    void PlayNextTrack(Button button)
     {
         if (currentTrack < albumSO.songs.Count - 1)
         {
             currentTrack++;
-            PlayTrack();
+            PlayTrack(button);
         }
     }
 
-    void PauseTrack()
+    void PauseTrack(Button button)
     {
         if (audioSource.isPlaying)
         {
             audioSource.Pause();
+            button.GetComponent<SongControlsButtonEffect>().ClickEffect();
         }
         else
         {
+            button.GetComponent<SongControlsButtonEffect>().ClickEffect();
             audioSource.Play();
         }
     }
 
-    void PlayTrack()
+    void PlayTrack(Button button)
     {
+        if (physicalCDAlbum != albumSO.physicalCDAlbum)
+            return;
+        if (button != null)
+            button.GetComponent<SongControlsButtonEffect>().ClickEffect();
+        audioSource.clip = albumSO.songs[currentTrack].songClip;
+        audioSource.Play();
 
-        if (albumSO.albumName == "Gieo")
-        {
-            audioSource.clip = albumSO.songs[currentTrack].songClip;
-            audioSource.Play();
-            StaticEventHandler.InvokeSongChanged(albumSO, currentTrack);
-        }
-        if (albumSO.albumName == "SDDBP")
-        {
-            audioSource.clip = albumSO.songs[currentTrack].songClip;
-            audioSource.Play();
-            StaticEventHandler.InvokeSongChanged(albumSO, currentTrack);
-        }
+        StaticEventHandler.InvokeSongChanged(albumSO, currentTrack);
     }
 }
