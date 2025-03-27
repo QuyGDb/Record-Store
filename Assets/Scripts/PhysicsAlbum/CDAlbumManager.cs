@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class CDAlbumManager : SingletonMonobehaviour<CDAlbumManager>
+public class CDAlbumManager : MonoBehaviour
 {
     [SerializeField] private Image artistImage;
     [SerializeField] private TextMeshProUGUI artistName;
@@ -14,34 +14,33 @@ public class CDAlbumManager : SingletonMonobehaviour<CDAlbumManager>
     public AlbumSO albumSO;
     private void Start()
     {
+
         SelectAlbum();
+
     }
 
 
     private async void SelectAlbum()
     {
-        switch (albumSO.physicalCDAlbum)
-        {
-            case PhysicalCDAlbum.Gieo:
-                albumSO = GameManager.Instance.albumSOs[0];
-                //wait for subcriber to be ready to receive the event
-                await Awaitable.WaitForSecondsAsync(2.5f);
-                break;
-            case PhysicalCDAlbum.SDDBP:
-                albumSO = GameManager.Instance.albumSOs[1];
-                await Awaitable.WaitForSecondsAsync(2.5f);
-                break;
-        }
+
         SetAlbumInfo();
+        await Awaitable.WaitForSecondsAsync(2.5f);
         StaticEventHandler.InvokeStartFirstSong(albumSO);
 
     }
     void SetAlbumInfo()
     {
+
         artistImage.sprite = albumSO.artistImage;
         artistName.text = "Artist: " + albumSO.artistName;
         albumName.text = "Album: " + albumSO.albumName;
         genres.text = "Genres: " + albumSO.genres;
+        artistImage.gameObject.SetActive(false);
+        albumName.gameObject.SetActive(false);
+        genres.gameObject.SetActive(false);
+        artistImage.gameObject.SetActive(true);
+        albumName.gameObject.SetActive(true);
+        genres.gameObject.SetActive(true);
     }
 }
 
