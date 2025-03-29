@@ -22,6 +22,7 @@ public class GameResources : MonoBehaviour
     }
 
     public Material defaultMaterial;
+    public Material selectAnchorMAT;
 
     #region SOUNDS
 
@@ -36,7 +37,8 @@ public class GameResources : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-
+        HelperUtilities.ValidateCheckEmptyString(this, nameof(defaultMaterial), defaultMaterial.name);
+        HelperUtilities.ValidateCheckEmptyString(this, nameof(selectAnchorMAT), selectAnchorMAT.name);
         HelperUtilities.ValidateCheckNullValue(this, nameof(musicMasterMixerGroup), musicMasterMixerGroup);
         HelperUtilities.ValidateCheckNullValue(this, nameof(musicLowSnapshot), musicLowSnapshot);
         HelperUtilities.ValidateCheckNullValue(this, nameof(musicOnFullSnapshot), musicOnFullSnapshot);

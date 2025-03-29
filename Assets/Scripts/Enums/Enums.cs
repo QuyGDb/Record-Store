@@ -14,13 +14,16 @@ public enum MusicGenres
     CityPop,
 }
 
-public enum AnchorsManagerState
+public enum AnchorAction
 {
-    Creating,
-    Deleting,
+    None,
+    Create,
+    Delete,
+    Select,
 }
-public enum AnChorType
+public enum AnchorType
 {
+    None,
     Pathing,
     Attachment
 }

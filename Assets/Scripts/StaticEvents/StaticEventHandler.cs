@@ -19,11 +19,11 @@ public static class StaticEventHandler
         OnStartFirstSong?.Invoke(album);
     }
 
-    public static event Action<AnchorsManagerState> OnAnchorsManagerStateChanged;
+    public static event Action<AnchorsManager> OnAnchorsManager;
 
-    public static void InvokeAnchorsManagerStateChanged(AnchorsManagerState state)
+    public static void InvokeAnchorsManager(AnchorsManager anchorsManager)
     {
-        OnAnchorsManagerStateChanged?.Invoke(state);
+        OnAnchorsManager?.Invoke(anchorsManager);
     }
 
 }

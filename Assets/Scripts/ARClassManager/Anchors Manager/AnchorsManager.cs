@@ -1,8 +1,10 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
@@ -15,13 +17,10 @@ public class AnchorsManager : MonoBehaviour
     private ARRaycastManager arRaycastManager;
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     [ShowInInspector]
-    private Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
-    [ShowInInspector]
-    private Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
-    [ShowInInspector]
-    private List<string> cloudAnchorIds = new List<string>();
-    private AnchorsManagerState anchorsManagerState = AnchorsManagerState.Creating;
-    [SerializeField] private GameObject cloundAnchorPrefab;
+    public Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
+
+    public AnchorAction anchorAction;
+    public ARAnchor currentSelectAnchor;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
@@ -29,41 +28,29 @@ public class AnchorsManager : MonoBehaviour
     }
     private void Start()
     {
-        StaticEventHandler.OnAnchorsManagerStateChanged += OnAnchorsManagerStateChanged;
-
+        StaticEventHandler.InvokeAnchorsManager(this);
     }
     void OnEnable() => arAnchorsManager.trackablesChanged.AddListener(OnAnchorChanged);
 
     void OnDisable() => arAnchorsManager.trackablesChanged.RemoveListener(OnAnchorChanged);
-    private void OnDestroy()
-    {
-        StaticEventHandler.OnAnchorsManagerStateChanged -= OnAnchorsManagerStateChanged;
-    }
 
-    private void OnAnchorsManagerStateChanged(AnchorsManagerState state)
-    {
-        anchorsManagerState = state;
-    }
 
     private void OnAnchorChanged(ARTrackablesChangedEventArgs<ARAnchor> eventArgs)
     {
         foreach (var newAnchor in eventArgs.added)
         {
             trackedAnchors[newAnchor.trackableId.ToString()] = newAnchor;
-            Debug.Log($"🔵 Anchor mới: {newAnchor.trackableId}");
         }
         foreach (var updatedAnchor in eventArgs.updated)
         {
             if (trackedAnchors.ContainsKey(updatedAnchor.trackableId.ToString()))
             {
                 trackedAnchors[updatedAnchor.trackableId.ToString()] = updatedAnchor;
-                Debug.Log($"🟢 Anchor cập nhật: {updatedAnchor.trackableId}");
             }
         }
         foreach (var removedAnchor in eventArgs.removed)
         {
             trackedAnchors.Remove(removedAnchor.Key.ToString());
-            Debug.Log($"🔴 Anchor bị xóa: {removedAnchor.Value.trackableId}");
         }
     }
 
@@ -76,7 +63,7 @@ public class AnchorsManager : MonoBehaviour
             ARAnchor anchor = result.value;
         }
     }
-    private ARAnchor SelectAnchor()
+    public ARAnchor SelectAnchor()
     {
         Vector2 inputPosition = Vector2.zero;
         bool isPressed = false;
@@ -101,9 +88,17 @@ public class AnchorsManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 ARAnchor anchor = hit.transform.GetComponent<ARAnchor>();
-                if (anchor != null)
+                if (anchor != null && anchor != currentSelectAnchor)
                 {
+                    currentSelectAnchor = anchor;
+                    anchor.GetComponent<MeshRenderer>().material = GameResources.Instance.selectAnchorMAT;
                     return anchor;
+                }
+                if (anchor != null && anchor == currentSelectAnchor)
+                {
+                    currentSelectAnchor.GetComponent<MeshRenderer>().material = GameResources.Instance.defaultMaterial;
+                    currentSelectAnchor = null;
+                    return null;
                 }
             }
         }
@@ -112,124 +107,54 @@ public class AnchorsManager : MonoBehaviour
 
     public void DeleteAnchor()
     {
-        ARAnchor anchor = SelectAnchor();
-        if (anchor != null)
-        {
-            arAnchorsManager.TryRemoveAnchor(anchor);
-        }
+        arAnchorsManager.TryRemoveAnchor(currentSelectAnchor);
     }
 
 
     private void Update()
     {
+        if (IsPointerOverUIObject())
+            return;
+
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
-            if (anchorsManagerState == AnchorsManagerState.Creating)
-            {
-                PlaceAnchor(Touchscreen.current.primaryTouch.position.ReadValue());
-            }
-            if (anchorsManagerState == AnchorsManagerState.Deleting)
-            {
-                DeleteAnchor();
-            }
+            HandleAnchorAction();
         }
 #if UNITY_EDITOR
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            if (anchorsManagerState == AnchorsManagerState.Creating)
+            HandleAnchorAction();
+#endif
+        }
+
+        void HandleAnchorAction()
+        {
+            if (anchorAction == AnchorAction.Create)
             {
-                PlaceAnchor(Mouse.current.position.ReadValue());
+                PlaceAnchor(Touchscreen.current.primaryTouch.position.ReadValue());
             }
-            if (anchorsManagerState == AnchorsManagerState.Deleting)
+            if (anchorAction == AnchorAction.Create)
             {
                 DeleteAnchor();
             }
-#endif
+            if (anchorAction == AnchorAction.Select)
+            {
+                SelectAnchor();
+            }
+            if (anchorAction == AnchorAction.None)
+            {
+                return;
+            }
         }
     }
-    public void HostCloudAllAnchors()
+
+    private bool IsPointerOverUIObject()
     {
-        StartCoroutine(HostCloudAllAnchorsRoutine());
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
-
-    private IEnumerator HostCloudAllAnchorsRoutine()
-    {
-        foreach (var anchor in trackedAnchors)
-        {
-            yield return StartCoroutine(HostCloudAnchorRoutine(anchor.Value));
-        }
-    }
-
-    public void HostSelectAnchor()
-    {
-        ARAnchor anchor = SelectAnchor();
-        if (anchor != null)
-        {
-            StartCoroutine(HostCloudAnchorRoutine(anchor));
-        }
-    }
-
-
-    private IEnumerator HostCloudAnchorRoutine(ARAnchor aRAnchor)
-    {
-
-        HostCloudAnchorPromise hostCloudAnchorPromise = arAnchorsManager.HostCloudAnchorAsync(aRAnchor, 300);
-        while (hostCloudAnchorPromise.State == PromiseState.Pending)
-        {
-            yield return null;
-        }
-
-        if (hostCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
-        {
-            cloudAnchorIds.Add(hostCloudAnchorPromise.Result.CloudAnchorId);
-        }
-        else
-        {
-            Debug.LogError($"❌ Lưu Cloud Anchor thất bại! Trạng thái: {hostCloudAnchorPromise.Result.CloudAnchorState}");
-        }
-    }
-
-    public void ResolveAllCloudAnchors()
-    {
-        StartCoroutine(ResolveAllCloudAnchorsRoutine());
-    }
-
-    private IEnumerator ResolveAllCloudAnchorsRoutine()
-    {
-        foreach (var cloudAnchorId in cloudAnchorIds)
-        {
-            yield return StartCoroutine(ResolveCloudAnchorRoutine(cloudAnchorId));
-        }
-    }
-
-    public void ResolveSelectCloudAnchor()
-    {
-
-        //StartCoroutine(ResolveCloudAnchorRoutine(anchor.cloudAnchorId));
-    }
-    private IEnumerator ResolveCloudAnchorRoutine(string cloudAnchorId)
-    {
-        ResolveCloudAnchorPromise resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
-
-        // Đợi cho đến khi Promise hoàn thành
-        while (resolveCloudAnchorPromise.State == PromiseState.Pending)
-        {
-            yield return null; // Chờ frame tiếp theo
-        }
-
-        if (resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
-        {
-            ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
-            cloudAnchors.Add(cloudAnchorId, resolveCloudAnchorPromise.Result.Anchor);
-            GameObject gameObject = Instantiate(cloundAnchorPrefab, aRCloudAnchor.transform);
-            gameObject.transform.localPosition = Vector3.zero;
-
-        }
-        else
-        {
-            Debug.LogError($"❌ Không thể tải Cloud Anchor. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}");
-        }
-    }
-
 
 }

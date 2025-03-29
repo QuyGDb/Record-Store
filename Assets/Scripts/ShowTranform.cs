@@ -11,7 +11,7 @@ public class ShowTranform : MonoBehaviour
     }
     private void Update()
     {
-        TextMeshProUGUI.text = @$"Position: {transform.position} + rotate: {transform.rotation.ToEulerAngles()}";
+        TextMeshProUGUI.text = @$"Position: {transform.position} + rotate: {Quaternion.ToEulerAngles(transform.rotation)}";
 
     }
 }
