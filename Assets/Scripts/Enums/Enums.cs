@@ -21,9 +21,3 @@ public enum AnchorAction
     Select,
     Delete,
 }
-public enum AnchorType
-{
-    None,
-    Pathing,
-    Attachment
-}

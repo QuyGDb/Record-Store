@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AnchorDetails : MonoBehaviour
+[System.Serializable]
+public class AnchorDetails
 {
-    private string anchorName;
-    private string anchorDescription;
-    private Sprite anchorImage;
+    public string anchorName;
+    public string anchorDescription;
+    public Sprite anchorrSprite;
 
 }
