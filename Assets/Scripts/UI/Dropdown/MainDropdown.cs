@@ -22,25 +22,28 @@ public class MainDropdown : MonoBehaviour
         switch (arg0)
         {
             case 0:
-                DeactivveAllCanvas();
-                canvas[0].enabled = true;
+                DeactivateAllCanvas();
                 break;
             case 1:
-                DeactivveAllCanvas();
-                canvas[1].enabled = true;
+                DeactivateAllCanvas();
+                canvas[0].enabled = true;
                 break;
             case 2:
-                DeactivveAllCanvas();
+                DeactivateAllCanvas();
+                canvas[1].enabled = true;
+                break;
+            case 3:
+                DeactivateAllCanvas();
                 canvas[2].enabled = true;
                 break;
         }
     }
-
-    private void DeactivveAllCanvas()
+    private void DeactivateAllCanvas()
     {
         foreach (var item in canvas)
         {
             item.enabled = false;
         }
     }
+
 }
