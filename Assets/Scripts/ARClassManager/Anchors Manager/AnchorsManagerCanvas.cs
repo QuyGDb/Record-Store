@@ -29,6 +29,7 @@ public class AnchorsManagerCanvas : MonoBehaviour
 
     private void OnDropdownValueChanged(int arg0)
     {
+
         anchorsManager.anchorAction = (AnchorAction)arg0;
     }
 }

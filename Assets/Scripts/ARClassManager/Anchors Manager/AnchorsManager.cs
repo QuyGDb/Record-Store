@@ -20,7 +20,7 @@ public class AnchorsManager : MonoBehaviour
     public Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
 
     public AnchorAction anchorAction;
-    public ARAnchor currentSelectAnchor;
+    [HideInInspector] public ARAnchor currentSelectAnchor;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
@@ -68,7 +68,6 @@ public class AnchorsManager : MonoBehaviour
         Vector2 inputPosition = Vector2.zero;
         bool isPressed = false;
 
-        // Kiểm tra nếu đang dùng màn hình cảm ứng
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
             inputPosition = Touchscreen.current.primaryTouch.position.ReadValue();
@@ -113,22 +112,17 @@ public class AnchorsManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(IsPointerOverUI());
-        if (IsPointerOverUI())
-            return;
-#if UNITY_ANDROID || UNITY_IOS
+        //if (IsPointerOverUI())
+        // return;
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
             HandleAnchorAction(Touchscreen.current.primaryTouch.position.ReadValue());
-#endif
+
         }
 
-
-#if UNITY_EDITOR
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             HandleAnchorAction(Mouse.current.position.ReadValue());
-#endif
         }
 
         void HandleAnchorAction(Vector2 touchPostion)
@@ -137,7 +131,7 @@ public class AnchorsManager : MonoBehaviour
             {
                 PlaceAnchor(touchPostion);
             }
-            if (anchorAction == AnchorAction.Create)
+            if (anchorAction == AnchorAction.Delete)
             {
                 DeleteAnchor();
             }
@@ -152,27 +146,23 @@ public class AnchorsManager : MonoBehaviour
         }
     }
 
-    public bool IsPointerOverUI()
-    {
-        Vector2 pointerPosition;
+    //private bool IsPointerOverUI()
+    //{
+    //    Vector2 pointerPosition;
 
-#if UNITY_ANDROID || UNITY_IOS
-        if (Touchscreen.current == null || Touchscreen.current.primaryTouch.press.isPressed == false)
-            return false;
-        pointerPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
-        pointerPosition = Mouse.current.position.ReadValue();
-#else
-        return false; // Mặc định không hỗ trợ nền tảng khác
-#endif
+    //    if (Touchscreen.current == null || Touchscreen.current.primaryTouch.press.isPressed == false)
+    //        return false;
+    //    pointerPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+    //    pointerPosition = Mouse.current.position.ReadValue();
+    //    return false; // Mặc định không hỗ trợ nền tảng khác
 
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
-        {
-            position = pointerPosition
-        };
+    //    PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+    //    {
+    //        position = pointerPosition
+    //    };
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
-    }
+    //    List<RaycastResult> results = new List<RaycastResult>();
+    //    EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+    //    return results.Count > 0;
+    //}
 }

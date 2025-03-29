@@ -25,5 +25,11 @@ public static class StaticEventHandler
     {
         OnAnchorsManager?.Invoke(anchorsManager);
     }
+    public static event Action<CloudAnchorsManager> OnCloudAnchorsManager;
+
+    public static void InvokeCloudAnchorsManager(CloudAnchorsManager cloudAnchorsManager)
+    {
+        OnCloudAnchorsManager?.Invoke(cloudAnchorsManager);
+    }
 
 }
