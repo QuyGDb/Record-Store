@@ -113,25 +113,29 @@ public class AnchorsManager : MonoBehaviour
 
     private void Update()
     {
-        if (IsPointerOverUIObject())
+        Debug.Log(IsPointerOverUI());
+        if (IsPointerOverUI())
             return;
-
+#if UNITY_ANDROID || UNITY_IOS
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
-            HandleAnchorAction();
-        }
-#if UNITY_EDITOR
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            HandleAnchorAction();
+            HandleAnchorAction(Touchscreen.current.primaryTouch.position.ReadValue());
 #endif
         }
 
-        void HandleAnchorAction()
+
+#if UNITY_EDITOR
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            HandleAnchorAction(Mouse.current.position.ReadValue());
+#endif
+        }
+
+        void HandleAnchorAction(Vector2 touchPostion)
         {
             if (anchorAction == AnchorAction.Create)
             {
-                PlaceAnchor(Touchscreen.current.primaryTouch.position.ReadValue());
+                PlaceAnchor(touchPostion);
             }
             if (anchorAction == AnchorAction.Create)
             {
@@ -148,13 +152,27 @@ public class AnchorsManager : MonoBehaviour
         }
     }
 
-    private bool IsPointerOverUIObject()
+    public bool IsPointerOverUI()
     {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 pointerPosition;
+
+#if UNITY_ANDROID || UNITY_IOS
+        if (Touchscreen.current == null || Touchscreen.current.primaryTouch.press.isPressed == false)
+            return false;
+        pointerPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+#elif UNITY_STANDALONE_WIN || UNITY_EDITOR
+        pointerPosition = Mouse.current.position.ReadValue();
+#else
+        return false; // Mặc định không hỗ trợ nền tảng khác
+#endif
+
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+        {
+            position = pointerPosition
+        };
+
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
-
 }
