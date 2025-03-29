@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -20,7 +21,11 @@ public class AnchorsManager : MonoBehaviour
     public Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
 
     public AnchorAction anchorAction;
+    private ARAnchor previousSelectAnchor;
     [HideInInspector] public ARAnchor currentSelectAnchor;
+    private Texture2D texture;
+    [SerializeField] private TextMeshProUGUI quatityText;
+    private Image image;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
@@ -59,8 +64,24 @@ public class AnchorsManager : MonoBehaviour
         if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
         {
             Pose hitPose = hitResults[0].pose;
-            Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
-            ARAnchor anchor = result.value;
+            FeatureMapQuality quality = arAnchorsManager.EstimateFeatureMapQualityForHosting(hitPose);
+            if (quality == FeatureMapQuality.Insufficient)
+            {
+                quatityText.text = quality.ToString();
+            }
+            if (quality == FeatureMapQuality.Sufficient)
+            {
+                quatityText.text = quality.ToString();
+            }
+            if (quality == FeatureMapQuality.Good)
+            {
+                quatityText.text = quality.ToString();
+                Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
+
+                ARAnchor anchor = result.value;
+                CaptureScreenshot(anchor);
+            }
+
         }
     }
     public ARAnchor SelectAnchor()
@@ -89,7 +110,11 @@ public class AnchorsManager : MonoBehaviour
                 ARAnchor anchor = hit.transform.GetComponent<ARAnchor>();
                 if (anchor != null && anchor != currentSelectAnchor)
                 {
+                    previousSelectAnchor = currentSelectAnchor;
+                    if (previousSelectAnchor != null)
+                        previousSelectAnchor.GetComponent<MeshRenderer>().material = GameResources.Instance.defaultMaterial;
                     currentSelectAnchor = anchor;
+
                     anchor.GetComponent<MeshRenderer>().material = GameResources.Instance.selectAnchorMAT;
                     return anchor;
                 }
@@ -112,8 +137,9 @@ public class AnchorsManager : MonoBehaviour
 
     private void Update()
     {
-        //if (IsPointerOverUI())
-        // return;
+        Debug.Log(EventSystem.current.IsPointerOverGameObject());
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
             HandleAnchorAction(Touchscreen.current.primaryTouch.position.ReadValue());
@@ -131,10 +157,7 @@ public class AnchorsManager : MonoBehaviour
             {
                 PlaceAnchor(touchPostion);
             }
-            if (anchorAction == AnchorAction.Delete)
-            {
-                DeleteAnchor();
-            }
+
             if (anchorAction == AnchorAction.Select)
             {
                 SelectAnchor();
@@ -144,25 +167,25 @@ public class AnchorsManager : MonoBehaviour
                 return;
             }
         }
+        if (anchorAction == AnchorAction.Delete)
+        {
+            if (currentSelectAnchor != null)
+                DeleteAnchor();
+        }
     }
+    async void CaptureScreenshot(ARAnchor anchor)
+    {
+        await Awaitable.EndOfFrameAsync();
 
-    //private bool IsPointerOverUI()
-    //{
-    //    Vector2 pointerPosition;
+        int width = Screen.width;
+        int height = Screen.height;
 
-    //    if (Touchscreen.current == null || Touchscreen.current.primaryTouch.press.isPressed == false)
-    //        return false;
-    //    pointerPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-    //    pointerPosition = Mouse.current.position.ReadValue();
-    //    return false; // Mặc định không hỗ trợ nền tảng khác
+        // Tạo Texture2D
+        Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+        texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        texture.Apply();
 
-    //    PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
-    //    {
-    //        position = pointerPosition
-    //    };
-
-    //    List<RaycastResult> results = new List<RaycastResult>();
-    //    EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-    //    return results.Count > 0;
-    //}
+        image = anchor.GetComponent<Image>();
+        image.sprite = Sprite.Create(texture, new Rect(0, 0, width, height), Vector2.zero);
+    }
 }

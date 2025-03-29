@@ -26,7 +26,6 @@ public class HostAndReSolveAnchorCanvas : MonoBehaviour
     private void OnCloudAnchorsManager(CloudAnchorsManager manager)
     {
         cloudAnchorsManager = manager;
-        Debug.Log("CloudAnchorsManager is set" + manager);
         buttons[0].onClick.AddListener(() => cloudAnchorsManager.HostCurrentSelectAnchor());
         buttons[1].onClick.AddListener(() => cloudAnchorsManager.ResolveAllCloudAnchors());
 

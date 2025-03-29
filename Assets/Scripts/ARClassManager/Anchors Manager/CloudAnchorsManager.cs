@@ -12,10 +12,10 @@ public class CloudAnchorsManager : MonoBehaviour
     AnchorsManager anchorsManager;
     private ARAnchorManager arAnchorsManager;
     [SerializeField] private GameObject cloundAnchorPrefab;
-    public Dictionary<string, AnchorType> cloudAnchorIdToAnchorType = new Dictionary<string, AnchorType>();
+    public Dictionary<string, AnchorDetails> cloudAnchorIdToAnchorType = new Dictionary<string, AnchorDetails>();
     [ShowInInspector]
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
-    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] private TextMeshProUGUI saveStateText;
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
@@ -29,20 +29,16 @@ public class CloudAnchorsManager : MonoBehaviour
     public void HostCurrentSelectAnchor()
     {
         ARAnchor anchor = anchorsManager.currentSelectAnchor;
-        AnchorType anchorType = anchor.GetComponent<AnchorDetailsHandler>().anchorType;
         if (anchor != null)
         {
-            textMeshProUGUI.text = $"Đang tải current Cloud Anchor";
-            StartCoroutine(HostCloudAnchorRoutine(anchor, anchorType));
+            StartCoroutine(HostCloudAnchorRoutine(anchor));
         }
     }
 
 
-    private IEnumerator HostCloudAnchorRoutine(ARAnchor aRAnchor, AnchorType anChorType)
+    private IEnumerator HostCloudAnchorRoutine(ARAnchor aRAnchor)
     {
-        textMeshProUGUI.text = $"Đang tải Cloud Anchor";
         HostCloudAnchorPromise hostCloudAnchorPromise = arAnchorsManager.HostCloudAnchorAsync(aRAnchor, 300);
-        textMeshProUGUI.text = $"Đang tải Cloud Anchor1";
         while (hostCloudAnchorPromise.State == PromiseState.Pending)
         {
             yield return null;
@@ -50,15 +46,15 @@ public class CloudAnchorsManager : MonoBehaviour
 
         if (hostCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
-            cloudAnchorIdToAnchorType.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anChorType);
+            AnchorDetails anchorDetails = new AnchorDetails();
 
+            cloudAnchorIdToAnchorType.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
+            saveStateText.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
             SaveCloudAnchorIdsToAnchorType();
-
-            textMeshProUGUI.text = $"Cloud Anchor Id: {hostCloudAnchorPromise.Result.CloudAnchorId}";
         }
         else
         {
-            Debug.LogError($"Error {hostCloudAnchorPromise.Result.CloudAnchorState}");
+            saveStateText.text = $"Error {hostCloudAnchorPromise.Result.CloudAnchorState}";
         }
     }
 
@@ -73,6 +69,7 @@ public class CloudAnchorsManager : MonoBehaviour
         StartCoroutine(ResolveAllCloudAnchorsRoutine());
     }
 
+
     private IEnumerator ResolveAllCloudAnchorsRoutine()
     {
         if (cloudAnchorIdToAnchorType == null || cloudAnchorIdToAnchorType.Count == 0)
@@ -81,18 +78,20 @@ public class CloudAnchorsManager : MonoBehaviour
         }
         foreach (var cloudAnchorId in cloudAnchorIdToAnchorType)
         {
-            yield return StartCoroutine(ResolveCloudAnchorRoutine(cloudAnchorId.Key, cloudAnchorId.Value));
+            yield return StartCoroutine(ResolveCloudAnchorRoutine(cloudAnchorId.Key));
         }
     }
 
 
-    private IEnumerator ResolveCloudAnchorRoutine(string cloudAnchorId, AnchorType anChorType)
+    private IEnumerator ResolveCloudAnchorRoutine(string cloudAnchorId)
     {
-        textMeshProUGUI.text = $"🔄 Đang tải Cloud Anchor: {cloudAnchorId}";
+        saveStateText.text = $"🔄 Đang tải Cloud Anchor: {cloudAnchorId}";
         ResolveCloudAnchorPromise resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending)
         {
+            //Debug.Log("🔄 Đang tải Cloud Anchor: " + Time.frameCount);
+            saveStateText.text = $"🔄 FIND + {Time.frameCount}";
             yield return null;
         }
 
@@ -110,7 +109,7 @@ public class CloudAnchorsManager : MonoBehaviour
 
             GameObject gameObject = Instantiate(cloundAnchorPrefab, aRCloudAnchor.transform);
             gameObject.transform.localPosition = Vector3.zero;
-            textMeshProUGUI.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
+            saveStateText.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
             //Vector3 anchorPosition = aRCloudAnchor.transform.position;
             //Quaternion anchorRotation = aRCloudAnchor.transform.rotation;
             //gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
@@ -120,7 +119,7 @@ public class CloudAnchorsManager : MonoBehaviour
         else
         {
             Debug.LogError($"❌ Không thể tải Cloud Anchor {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}");
-            textMeshProUGUI.text = $"❌ Không thể tải Cloud Anchor {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
+            saveStateText.text = $"❌ Không thể tải Cloud Anchor {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
         }
     }
 

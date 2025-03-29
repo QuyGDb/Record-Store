@@ -18,8 +18,8 @@ public enum AnchorAction
 {
     None,
     Create,
-    Delete,
     Select,
+    Delete,
 }
 public enum AnchorType
 {
