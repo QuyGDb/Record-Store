@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using static TMPro.TMP_Compatibility;
+using static UnityEngine.Rendering.DebugUI;
 
 public class CloudAnchorsManager : MonoBehaviour
 {
@@ -16,16 +18,25 @@ public class CloudAnchorsManager : MonoBehaviour
     [ShowInInspector]
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
     [SerializeField] private TextMeshProUGUI saveStateText;
+    private string nameCurrentAnchor;
+    private string descriptionCurrentAnchor;
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
         arAnchorsManager = GetComponent<ARAnchorManager>();
         cloudAnchorIdToAnchorType = ES3.Load("cloudAnchorIdToAnchorType", cloudAnchorIdToAnchorType);
+        StaticEventHandler.OnSendAnchorInfo += OnSendIAnchornfo;
+
     }
     private void Start()
     {
         StaticEventHandler.InvokeCloudAnchorsManager(this);
     }
+    private void OnDestroy()
+    {
+        StaticEventHandler.OnSendAnchorInfo -= OnSendIAnchornfo;
+    }
+
     public void HostCurrentSelectAnchor()
     {
         ARAnchor anchor = anchorsManager.currentSelectAnchor;
@@ -35,6 +46,12 @@ public class CloudAnchorsManager : MonoBehaviour
         }
     }
 
+
+    private void OnSendIAnchornfo(string arg1, string arg2)
+    {
+        nameCurrentAnchor = arg1;
+        descriptionCurrentAnchor = arg2;
+    }
 
     private IEnumerator HostCloudAnchorRoutine(ARAnchor aRAnchor)
     {
@@ -47,6 +64,9 @@ public class CloudAnchorsManager : MonoBehaviour
         if (hostCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
             AnchorDetails anchorDetails = new AnchorDetails();
+            anchorDetails.anchorrSprite = aRAnchor.GetComponentInChildren<Image>().sprite;
+            anchorDetails.anchorName = nameCurrentAnchor;
+            anchorDetails.anchorDescription = descriptionCurrentAnchor;
 
             cloudAnchorIdToAnchorType.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
             saveStateText.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";

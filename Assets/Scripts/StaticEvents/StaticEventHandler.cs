@@ -31,5 +31,10 @@ public static class StaticEventHandler
     {
         OnCloudAnchorsManager?.Invoke(cloudAnchorsManager);
     }
+    public static event Action<string, string> OnSendAnchorInfo;
 
+    public static void InvokeSendInfo(string name, string description)
+    {
+        OnSendAnchorInfo?.Invoke(name, description);
+    }
 }
