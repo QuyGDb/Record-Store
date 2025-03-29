@@ -23,7 +23,7 @@
 // The camera's pose driver in ARF5 needs Input System (New) but sample has not been ported to
 // support new input so make sure Settings > Player > Other Settings > Active Input Handling
 // is set to Both
-#error The cloud anchores sample needs Active Input Handling set to Both
+//#error The cloud anchores sample needs Active Input Handling set to Both
 #endif // !(ENABLE_INPUT_SYSTEM && ENABLE_LEGACY_INPUT_MANAGER)
 
 namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors

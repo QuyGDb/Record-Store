@@ -13,3 +13,14 @@ public enum MusicGenres
     RnB,
     CityPop,
 }
+
+public enum AnchorsManagerState
+{
+    Creating,
+    Deleting,
+}
+public enum AnChorType
+{
+    Pathing,
+    Attachment
+}

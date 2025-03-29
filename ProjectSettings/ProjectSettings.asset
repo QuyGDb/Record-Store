@@ -143,6 +143,8 @@ PlayerSettings:
   bundleVersion: 1.0.0
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 7c336d871de35d241998488408f7a647, type: 3}
+  - {fileID: 11400000, guid: fef60efca66389343895ee8765ebc194, type: 2}
+  - {fileID: 11400000, guid: 9fa7a493f1584824db7c91f97ee78d98, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -164,7 +166,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.unity.template.ar_mobile
+    Android: com.trinhquy.RecordStore
     Standalone: com.unity.template.ar-mobile
     iPhone: com.unity.template.armobile
   buildNumber:
@@ -173,7 +175,7 @@ PlayerSettings:
     VisionOS: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 1
+  overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 30
   AndroidTargetSdkVersion: 0
@@ -257,13 +259,13 @@ PlayerSettings:
   clonedFromGUID: 069202b91adc77e41923adcf0d1b815b
   templatePackageId: com.unity.template.ar-mobile@2.0.2
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 1
-  useCustomLauncherManifest: 1
+  useCustomMainManifest: 0
+  useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 1
-  useCustomLauncherGradleManifest: 1
-  useCustomBaseGradleTemplate: 1
-  useCustomGradlePropertiesTemplate: 1
-  useCustomGradleSettingsTemplate: 1
+  useCustomLauncherGradleManifest: 0
+  useCustomBaseGradleTemplate: 0
+  useCustomGradlePropertiesTemplate: 0
+  useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 1
   AndroidTargetArchitectures: 2
   AndroidSplashScreenScale: 0
@@ -821,23 +823,24 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN
-    EmbeddedLinux: DOTWEEN
+    Android: DOTWEEN;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_INSPECTOR_3_2;ODIN_INSPECTOR_3_3;ES3_TMPRO;ES3_UGUI
+    EmbeddedLinux: DOTWEEN;ES3_TMPRO;ES3_UGUI
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
-    LinuxHeadlessSimulation: DOTWEEN
-    Nintendo Switch: DOTWEEN
-    PS4: DOTWEEN
-    PS5: DOTWEEN
-    QNX: DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Nintendo Switch: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS4: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS5: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    QNX: DOTWEEN;ES3_TMPRO;ES3_UGUI
     ReservedCFE: DOTWEEN
-    Standalone: DOTWEEN
-    VisionOS: DOTWEEN
-    WebGL: DOTWEEN
-    Windows Store Apps: DOTWEEN
-    XboxOne: DOTWEEN
-    iPhone: UNITY_XR_ARKIT_LOADER_ENABLED;DOTWEEN
-    tvOS: DOTWEEN
+    Server: ES3_TMPRO;ES3_UGUI
+    Standalone: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    VisionOS: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    WebGL: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Windows Store Apps: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    XboxOne: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    iPhone: UNITY_XR_ARKIT_LOADER_ENABLED;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    tvOS: DOTWEEN;ES3_TMPRO;ES3_UGUI
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -935,7 +938,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
   cloudProjectId: 4c50c4d8-3e01-49b4-ae32-b3c00f754bfd
   framebufferDepthMemorylessMode: 0
