@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -14,22 +15,22 @@ using UnityEngine.XR.ARSubsystems;
 public class AnchorsManager : MonoBehaviour
 {
     private ARAnchorManager arAnchorsManager;
-
     private ARRaycastManager arRaycastManager;
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     [ShowInInspector]
     public Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
-
+    FeatureMapQuality quality;
     public AnchorAction anchorAction;
     private ARAnchor previousSelectAnchor;
     [HideInInspector] public ARAnchor currentSelectAnchor;
-    private Texture2D texture;
     [SerializeField] private TextMeshProUGUI quatityText;
+    private XROrigin xrOrigin;
     private Image image;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
         arRaycastManager = GetComponent<ARRaycastManager>();
+        xrOrigin = GetComponent<XROrigin>();
     }
     private void Start()
     {
@@ -64,24 +65,21 @@ public class AnchorsManager : MonoBehaviour
         if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
         {
             Pose hitPose = hitResults[0].pose;
-            FeatureMapQuality quality = arAnchorsManager.EstimateFeatureMapQualityForHosting(hitPose);
-            if (quality == FeatureMapQuality.Insufficient)
-            {
-                quatityText.text = quality.ToString();
-            }
-            if (quality == FeatureMapQuality.Sufficient)
-            {
-                quatityText.text = quality.ToString();
-            }
-            if (quality == FeatureMapQuality.Good)
-            {
-                quatityText.text = quality.ToString();
-                Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
 
-                ARAnchor anchor = result.value;
-                CaptureScreenshot(anchor);
-            }
-
+            //Pose cameraPose = new Pose(xrOrigin.Camera.transform.localPosition,
+            //                           xrOrigin.Camera.transform.localRotation);
+            //quality = arAnchorsManager.EstimateFeatureMapQualityForHosting(cameraPose);
+            //quatityText.text = quality.ToString();
+            //if (quality == FeatureMapQuality.Insufficient)
+            //    return;
+            //if (quality == FeatureMapQuality.Sufficient)
+            //    return;
+            //if (quality == FeatureMapQuality.Good)
+            //{
+            //    quatityText.text = quality.ToString();
+            Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
+            ARAnchor anchor = result.value;
+            CaptureScreenshot(anchor);
         }
     }
     public ARAnchor SelectAnchor()
@@ -137,34 +135,21 @@ public class AnchorsManager : MonoBehaviour
 
     private void Update()
     {
+        //Pose cameraPose = new Pose(xrOrigin.Camera.transform.localPosition,
+        //                              xrOrigin.Camera.transform.localRotation);
+        //quality = arAnchorsManager.EstimateFeatureMapQualityForHosting(cameraPose);
+        //quatityText.text = quality.ToString();
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
             HandleAnchorAction(Touchscreen.current.primaryTouch.position.ReadValue());
-
         }
 
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             HandleAnchorAction(Mouse.current.position.ReadValue());
-        }
-
-        void HandleAnchorAction(Vector2 touchPostion)
-        {
-            if (anchorAction == AnchorAction.Create)
-            {
-                PlaceAnchor(touchPostion);
-            }
-
-            if (anchorAction == AnchorAction.Select)
-            {
-                SelectAnchor();
-            }
-            if (anchorAction == AnchorAction.None)
-            {
-                return;
-            }
         }
         if (anchorAction == AnchorAction.Delete)
         {
@@ -172,6 +157,24 @@ public class AnchorsManager : MonoBehaviour
                 DeleteAnchor();
         }
     }
+
+    void HandleAnchorAction(Vector2 touchPostion)
+    {
+        if (anchorAction == AnchorAction.Create)
+        {
+            PlaceAnchor(touchPostion);
+        }
+
+        if (anchorAction == AnchorAction.Select)
+        {
+            SelectAnchor();
+        }
+        if (anchorAction == AnchorAction.None)
+        {
+            return;
+        }
+    }
+
     async void CaptureScreenshot(ARAnchor anchor)
     {
         await Awaitable.EndOfFrameAsync();
@@ -184,7 +187,7 @@ public class AnchorsManager : MonoBehaviour
         texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         texture.Apply();
 
-        image = anchor.GetComponent<Image>();
+        image = anchor.GetComponentInChildren<Image>();
         image.sprite = Sprite.Create(texture, new Rect(0, 0, width, height), Vector2.zero);
     }
 }

@@ -86,11 +86,11 @@ public class SongControls : MonoBehaviour
         if (audioSource.isPlaying)
         {
             audioSource.Pause();
-            button.GetComponent<SongControlsButtonEffect>().ClickEffect();
+            button.GetComponent<SongControlsButton>().ClickEffect();
         }
         else
         {
-            button.GetComponent<SongControlsButtonEffect>().ClickEffect();
+            button.GetComponent<SongControlsButton>().ClickEffect();
             audioSource.Play();
         }
     }
@@ -100,7 +100,7 @@ public class SongControls : MonoBehaviour
         if (physicalCDAlbum != albumSO.physicalCDAlbum)
             return;
         if (button != null)
-            button.GetComponent<SongControlsButtonEffect>().ClickEffect();
+            button.GetComponent<SongControlsButton>().ClickEffect();
         audioSource.clip = albumSO.songs[currentTrack].songClip;
         audioSource.Play();
 

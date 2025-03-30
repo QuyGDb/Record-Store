@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SongControlsButtonEffect : MonoBehaviour
+public class SongControlsButton : MonoBehaviour
 {
     Button button;
     private Vector3 originalScale;

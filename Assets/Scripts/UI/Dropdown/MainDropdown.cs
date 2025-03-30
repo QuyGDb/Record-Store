@@ -10,6 +10,7 @@ public class MainDropdown : MonoBehaviour
 
     private void Awake()
     {
+
         dropdown = GetComponent<TMP_Dropdown>();
         dropdown.onValueChanged.AddListener(OnValueChanged);
     }

@@ -8,15 +8,13 @@ public class AnchorsManagerCanvas : MonoBehaviour
 {
     private TMP_Dropdown dropdown;
     private AnchorsManager anchorsManager;
-    private CloudAnchorsManager cloudAnchorsManager;
-    public InputField[] inputFields;
-    private UnityEngine.UI.Button buttons;
-    private TextMeshProUGUI warningText;
+    [SerializeField] public TMP_InputField[] inputFields;
+    [SerializeField] private UnityEngine.UI.Button saveButtons;
+    [SerializeField] private TextMeshProUGUI warningText;
     private void Awake()
     {
         dropdown = GetComponentInChildren<TMP_Dropdown>();
-        buttons = GetComponentInChildren<UnityEngine.UI.Button>();
-        inputFields = GetComponentsInChildren<InputField>();
+        inputFields = GetComponentsInChildren<TMP_InputField>();
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
         StaticEventHandler.OnCloudAnchorsManager += OnCloudAnchorsManager;
@@ -24,36 +22,29 @@ public class AnchorsManagerCanvas : MonoBehaviour
     private void OnDestroy()
     {
         dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
-        buttons.onClick.RemoveAllListeners();
+        saveButtons.onClick.RemoveAllListeners();
         StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
         StaticEventHandler.OnCloudAnchorsManager -= OnCloudAnchorsManager;
-
+        saveButtons.onClick.RemoveListener(IsVaildCloudAnchor);
     }
 
 
     private void OnCloudAnchorsManager(CloudAnchorsManager manager)
     {
-        cloudAnchorsManager = manager;
-        buttons.onClick.AddListener(() =>
-        {
-            if (IsVaildCloudAnchor())
-                cloudAnchorsManager.HostCurrentSelectAnchor();
-        });
-
+        saveButtons.onClick.AddListener(IsVaildCloudAnchor);
     }
-    bool IsVaildCloudAnchor()
-    {
 
+    void IsVaildCloudAnchor()
+    {
         if (string.IsNullOrWhiteSpace(inputFields[0].text) && string.IsNullOrWhiteSpace(inputFields[1].text))
         {
             warningText.text = "Vui lòng nhập dữ liệu!";
-            warningText.gameObject.SetActive(true);
-            return false;
         }
         else
         {
-            warningText.gameObject.SetActive(false);
-            return true;
+            inputFields[0].text = "";
+            inputFields[1].text = "";
+            StaticEventHandler.InvokeSendInfo(inputFields[0].text, inputFields[1].text);
 
         }
     }

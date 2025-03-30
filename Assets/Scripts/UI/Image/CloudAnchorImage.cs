@@ -24,7 +24,7 @@ public class CloudAnchorImage : MonoBehaviour, IPointerClickHandler
     }
     private void Start()
     {
-        image.sprite = anchorDetails.anchorrSprite;
+        image.sprite = anchorDetails.anchorSprite;
         textMeshProUGUIs[0].text = anchorDetails.anchorName;
         textMeshProUGUIs[1].text = anchorDetails.anchorDescription;
         toggle.onValueChanged.AddListener(OnTioggleChange);
