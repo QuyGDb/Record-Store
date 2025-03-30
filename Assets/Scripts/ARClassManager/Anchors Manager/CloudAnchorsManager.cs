@@ -1,11 +1,13 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 using static TMPro.TMP_Compatibility;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -14,19 +16,34 @@ public class CloudAnchorsManager : MonoBehaviour
     AnchorsManager anchorsManager;
     private ARAnchorManager arAnchorsManager;
     [SerializeField] private GameObject cloundAnchorPrefab;
-    public Dictionary<string, AnchorDetails> cloudAnchorIdToAnchorType = new Dictionary<string, AnchorDetails>();
+    public Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
     [ShowInInspector]
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
     [SerializeField] private TextMeshProUGUI saveStateText;
+
+    List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
     private string descriptionCurrentAnchor;
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
         arAnchorsManager = GetComponent<ARAnchorManager>();
-        cloudAnchorIdToAnchorType = ES3.Load("cloudAnchorIdToAnchorType", cloudAnchorIdToAnchorType);
+        LoadCloudAnchorDetails();
         StaticEventHandler.OnSendAnchorInfo += OnSendIAnchornfo;
+        StaticEventHandler.OnSelectCloudAnchor += OnSelectCloudAnchor;
 
+    }
+    public void RemoveCloudAnchorInAnchorDetails()
+    {
+        if (cloudAnchorsSelectedList == null || cloudAnchorsSelectedList.Count == 0) return;
+        foreach (var cloudAnchorsSelected in cloudAnchorsSelectedList)
+        {
+            if (cloudAnchorDetails.ContainsKey(cloudAnchorsSelected))
+            {
+                cloudAnchorDetails.Remove(cloudAnchorsSelected);
+            }
+        }
+        SaveCloudAnchorDetails();
     }
     private void Start()
     {
@@ -35,6 +52,19 @@ public class CloudAnchorsManager : MonoBehaviour
     private void OnDestroy()
     {
         StaticEventHandler.OnSendAnchorInfo -= OnSendIAnchornfo;
+        StaticEventHandler.OnSelectCloudAnchor -= OnSelectCloudAnchor;
+    }
+
+    private void OnSelectCloudAnchor(bool isOn, string cloudAnchorId)
+    {
+        if (isOn)
+        {
+            cloudAnchorsSelectedList.Add(cloudAnchorId);
+        }
+        else
+        {
+            cloudAnchorsSelectedList.Remove(cloudAnchorId);
+        }
     }
 
     public void HostCurrentSelectAnchor()
@@ -63,14 +93,10 @@ public class CloudAnchorsManager : MonoBehaviour
 
         if (hostCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
-            AnchorDetails anchorDetails = new AnchorDetails();
-            anchorDetails.anchorrSprite = aRAnchor.GetComponentInChildren<Image>().sprite;
-            anchorDetails.anchorName = nameCurrentAnchor;
-            anchorDetails.anchorDescription = descriptionCurrentAnchor;
-
-            cloudAnchorIdToAnchorType.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
+            AnchorDetails anchorDetails = InitializeAnchorDetails(aRAnchor, hostCloudAnchorPromise);
+            cloudAnchorDetails.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
             saveStateText.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
-            SaveCloudAnchorIdsToAnchorType();
+            SaveCloudAnchorDetails();
         }
         else
         {
@@ -78,39 +104,21 @@ public class CloudAnchorsManager : MonoBehaviour
         }
     }
 
-    public void ResolveAllCloudAnchors()
+
+    public void ResolveSelectedCloudAnchor()
     {
-
-        if (cloudAnchorIdToAnchorType == null || cloudAnchorIdToAnchorType.Count == 0)
+        foreach (var cloudAnchorId in cloudAnchorsSelectedList)
         {
-            return;
-        }
-
-        StartCoroutine(ResolveAllCloudAnchorsRoutine());
-    }
-
-
-    private IEnumerator ResolveAllCloudAnchorsRoutine()
-    {
-        if (cloudAnchorIdToAnchorType == null || cloudAnchorIdToAnchorType.Count == 0)
-        {
-            yield break;
-        }
-        foreach (var cloudAnchorId in cloudAnchorIdToAnchorType)
-        {
-            yield return StartCoroutine(ResolveCloudAnchorRoutine(cloudAnchorId.Key));
+            StartCoroutine(ResolveCloudAnchorRoutine(cloudAnchorId));
         }
     }
-
 
     private IEnumerator ResolveCloudAnchorRoutine(string cloudAnchorId)
     {
-        saveStateText.text = $"🔄 Đang tải Cloud Anchor: {cloudAnchorId}";
         ResolveCloudAnchorPromise resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending)
         {
-            //Debug.Log("🔄 Đang tải Cloud Anchor: " + Time.frameCount);
             saveStateText.text = $"🔄 FIND + {Time.frameCount}";
             yield return null;
         }
@@ -120,15 +128,11 @@ public class CloudAnchorsManager : MonoBehaviour
         {
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
 
-
-            // Gán AnchorType
-            // AnchorDetailsHandler detailsHandler = aRCloudAnchor.gameObject.AddComponent<AnchorDetailsHandler>();
-            //  detailsHandler.anchorType = anChorType;
-
             cloudAnchors.Add(cloudAnchorId, aRCloudAnchor);
 
             GameObject gameObject = Instantiate(cloundAnchorPrefab, aRCloudAnchor.transform);
             gameObject.transform.localPosition = Vector3.zero;
+            cloudAnchorsSelectedList.Remove(cloudAnchorId);
             saveStateText.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
             //Vector3 anchorPosition = aRCloudAnchor.transform.position;
             //Quaternion anchorRotation = aRCloudAnchor.transform.rotation;
@@ -143,9 +147,25 @@ public class CloudAnchorsManager : MonoBehaviour
         }
     }
 
-    void SaveCloudAnchorIdsToAnchorType()
+    void SaveCloudAnchorDetails()
     {
-        ES3.Save("cloudAnchorIdToAnchorType", cloudAnchorIdToAnchorType);
+        ES3.Save("cloudAnchorDetails", cloudAnchorDetails);
+        StaticEventHandler.InvokeCloudAnchorDetailsChanged(cloudAnchorDetails);
+    }
+    void LoadCloudAnchorDetails()
+    {
+        cloudAnchorDetails = ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
+        StaticEventHandler.InvokeCloudAnchorDetailsChanged(cloudAnchorDetails);
+    }
+
+    AnchorDetails InitializeAnchorDetails(ARAnchor aRAnchor, HostCloudAnchorPromise hostCloudAnchorPromise)
+    {
+        AnchorDetails anchorDetails = new AnchorDetails();
+        anchorDetails.anchorrSprite = aRAnchor.GetComponentInChildren<Image>().sprite;
+        anchorDetails.anchorName = nameCurrentAnchor;
+        anchorDetails.anchorDescription = descriptionCurrentAnchor;
+        anchorDetails.cloudAnchorId = hostCloudAnchorPromise.Result.CloudAnchorId;
+        return anchorDetails;
     }
 }
 

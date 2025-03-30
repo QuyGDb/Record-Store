@@ -137,7 +137,6 @@ public class AnchorsManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(EventSystem.current.IsPointerOverGameObject());
         if (EventSystem.current.IsPointerOverGameObject())
             return;
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)

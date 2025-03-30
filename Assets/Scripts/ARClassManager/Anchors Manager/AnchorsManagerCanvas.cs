@@ -20,7 +20,6 @@ public class AnchorsManagerCanvas : MonoBehaviour
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
         StaticEventHandler.OnCloudAnchorsManager += OnCloudAnchorsManager;
-        StaticEventHandler.OnSendAnchorInfo += OnSendIAnchornfo;
     }
     private void OnDestroy()
     {
@@ -28,14 +27,9 @@ public class AnchorsManagerCanvas : MonoBehaviour
         buttons.onClick.RemoveAllListeners();
         StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
         StaticEventHandler.OnCloudAnchorsManager -= OnCloudAnchorsManager;
-        StaticEventHandler.OnSendAnchorInfo -= OnSendIAnchornfo;
 
     }
 
-    private void OnSendIAnchornfo(string arg1, string arg2)
-    {
-
-    }
 
     private void OnCloudAnchorsManager(CloudAnchorsManager manager)
     {

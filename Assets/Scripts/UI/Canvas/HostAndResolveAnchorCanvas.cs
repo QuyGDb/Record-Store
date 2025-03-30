@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HostAndReSolveAnchorCanvas : MonoBehaviour
+public class HostAndResolveAnchorCanvas : MonoBehaviour
 {
     private Button[] buttons;
-    private CloudAnchorsManager cloudAnchorsManager;
+    private ScrollRect scrollRect;
     private void Awake()
     {
         buttons = GetComponentsInChildren<Button>();
+        scrollRect = GetComponentInChildren<ScrollRect>();
     }
 
     private void OnEnable()
@@ -25,9 +26,13 @@ public class HostAndReSolveAnchorCanvas : MonoBehaviour
 
     private void OnCloudAnchorsManager(CloudAnchorsManager manager)
     {
-        cloudAnchorsManager = manager;
-        buttons[0].onClick.AddListener(() => cloudAnchorsManager.HostCurrentSelectAnchor());
-        buttons[1].onClick.AddListener(() => cloudAnchorsManager.ResolveAllCloudAnchors());
+        buttons[0].onClick.AddListener(ToggleScrollRec);
+        buttons[1].onClick.AddListener(manager.ResolveSelectedCloudAnchor);
+        buttons[2].onClick.AddListener(manager.RemoveCloudAnchorInAnchorDetails);
+    }
 
+    void ToggleScrollRec()
+    {
+        scrollRect.gameObject.SetActive(!scrollRect.gameObject.activeSelf);
     }
 }

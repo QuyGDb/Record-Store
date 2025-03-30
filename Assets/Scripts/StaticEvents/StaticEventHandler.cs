@@ -37,4 +37,17 @@ public static class StaticEventHandler
     {
         OnSendAnchorInfo?.Invoke(name, description);
     }
+
+    public static event Action<bool, string> OnSelectCloudAnchor;
+
+    public static void InvokeSelectCloudAnchor(bool isSelect, string cloudAnchorId)
+    {
+        OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
+    }
+    public static event Action<Dictionary<string, AnchorDetails>> OnCloudAnchorDetailsChanged;
+
+    public static void InvokeCloudAnchorDetailsChanged(Dictionary<string, AnchorDetails> cloudAnchorDetails)
+    {
+        OnCloudAnchorDetailsChanged?.Invoke(cloudAnchorDetails);
+    }
 }
