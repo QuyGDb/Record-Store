@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
-
 public class CloudAnchorsManager : MonoBehaviour
 {
     AnchorsManager anchorsManager;
@@ -154,6 +153,7 @@ public class CloudAnchorsManager : MonoBehaviour
             cloudAnchors.Add(cloudAnchorId, aRCloudAnchor);
 
             GameObject gameObject = Instantiate(cloudAnchorPrefab, aRCloudAnchor.transform);
+            gameObject.AddComponent<LocalAxis>();
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             resolveNotifyText.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
         }

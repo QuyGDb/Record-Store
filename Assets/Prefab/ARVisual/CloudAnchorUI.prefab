@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 8387502688696302192}
   - component: {fileID: 1637640043984740077}
   m_Layer: 0
-  m_Name: CloudAnchorImage
+  m_Name: CloudAnchorUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

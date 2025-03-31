@@ -16,7 +16,7 @@ MonoBehaviour:
   artistName: Datmanic
   albumName: SDDBP
   genres: Hip-Hop/Rap
-  albumPrefab: {fileID: 8026740499196981599, guid: 8b4c21ea582a78340a3ed79755c3ee75,
+  albumPrefab: {fileID: 42531759583339074, guid: 8b4c21ea582a78340a3ed79755c3ee75,
     type: 3}
   songs:
   - songName: "Lu\xF4n s\u1EBD su\xF4n s\u1EBB"

@@ -16,7 +16,7 @@ MonoBehaviour:
   artistName: "Ng\u1ECDt"
   albumName: Gieo
   genres: Indie Pop, \nAlternative Rock
-  albumPrefab: {fileID: 7100773709930266198, guid: f816ec677d15ee646bac2bf20b0da3cb,
+  albumPrefab: {fileID: 411845982676857053, guid: f816ec677d15ee646bac2bf20b0da3cb,
     type: 3}
   songs:
   - songName: "B\u1EA1n th\u1ECF TV nh\u1ECF"
@@ -52,3 +52,4 @@ MonoBehaviour:
   - songName: "M\u1EA5t t\xEDch"
     songImage: {fileID: 2051130401, guid: 4b804fc8111e1fd4e8251763683d394f, type: 3}
     songClip: {fileID: 8300000, guid: 9e9ab7b0c646ab2489b68f5fb5255688, type: 3}
+  physicalCDAlbum: 0
