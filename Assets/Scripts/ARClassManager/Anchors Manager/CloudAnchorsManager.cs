@@ -85,12 +85,11 @@ public class CloudAnchorsManager : MonoBehaviour
     }
     private IEnumerator HostCloudAnchorRoutine(ARAnchor aRAnchor)
     {
-
-
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if PLATFORM_ANDROID && !UNITY_EDITOR
         HostCloudAnchorPromise hostCloudAnchorPromise = arAnchorsManager.HostCloudAnchorAsync(aRAnchor, 300);
         while (hostCloudAnchorPromise.State == PromiseState.Pending)
         {
+            hostNotifyText.text = $"🔄 HOST + {Time.frameCount}";
             yield return null;
         }
 

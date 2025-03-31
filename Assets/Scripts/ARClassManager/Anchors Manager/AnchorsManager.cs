@@ -27,7 +27,7 @@ public class AnchorsManager : MonoBehaviour
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
         arRaycastManager = GetComponent<ARRaycastManager>();
-        arCameraCapture = GetComponent<ARCameraCapture>();
+        arCameraCapture = GetComponentInChildren<ARCameraCapture>();
     }
     private void Start()
     {
