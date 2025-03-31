@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class CloudAnchorImage : MonoBehaviour, IPointerClickHandler
 {
     public AnchorDetails anchorDetails;
-    public Image image;
+    public Image targetImage;
     public TextMeshProUGUI[] textMeshProUGUIs;
     private Toggle toggle;
+    private RectTransform contentTransform;
     public void OnPointerClick(PointerEventData eventData)
     {
         toggle.gameObject.SetActive(!toggle.gameObject.activeSelf);
@@ -18,11 +19,34 @@ public class CloudAnchorImage : MonoBehaviour, IPointerClickHandler
 
     private void Awake()
     {
-        image = GetComponent<Image>();
+        targetImage = GetComponent<Image>();
         textMeshProUGUIs = GetComponentsInChildren<TextMeshProUGUI>();
         toggle = GetComponentInChildren<Toggle>();
+        contentTransform = transform.parent.GetComponent<RectTransform>();
+        toggle.onValueChanged.AddListener(OnToggleChange);
+
     }
     private void Start()
+    {
+        SetSprite();
+        SetInforAnchorImage();
+    }
+    private void OnDestroy()
+    {
+        toggle.onValueChanged.RemoveListener(OnToggleChange);
+    }
+    void OnToggleChange(bool isOn)
+    {
+        StaticEventHandler.InvokeSelectCloudAnchor(isOn, anchorDetails.cloudAnchorId);
+    }
+
+
+    void SetInforAnchorImage()
+    {
+        textMeshProUGUIs[0].text = anchorDetails.anchorName;
+        textMeshProUGUIs[1].text = anchorDetails.anchorDescription;
+    }
+    private Sprite SetSprite()
     {
         byte[] spriteBytes = anchorDetails.anchorImage;
         Texture2D texture = new Texture2D(2, 2);
@@ -32,17 +56,11 @@ public class CloudAnchorImage : MonoBehaviour, IPointerClickHandler
             new Rect(0, 0, texture.width, texture.height),
             new Vector2(0.5f, 0.5f)
         );
-        image.sprite = newSprite;
-        textMeshProUGUIs[0].text = anchorDetails.anchorName;
-        textMeshProUGUIs[1].text = anchorDetails.anchorDescription;
-        toggle.onValueChanged.AddListener(OnTioggleChange);
+        targetImage.sprite = newSprite;
+
+        return newSprite;
+
     }
-    private void OnDestroy()
-    {
-        toggle.onValueChanged.RemoveListener(OnTioggleChange);
-    }
-    void OnTioggleChange(bool isOn)
-    {
-        StaticEventHandler.InvokeSelectCloudAnchor(isOn, anchorDetails.cloudAnchorId);
-    }
+
+
 }

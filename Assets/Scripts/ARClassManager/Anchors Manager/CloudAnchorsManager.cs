@@ -19,7 +19,6 @@ public class CloudAnchorsManager : MonoBehaviour
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
     [SerializeField] private TextMeshProUGUI hostNotifyText;
     [SerializeField] private TextMeshProUGUI resolveNotifyText;
-    private ARCameraCapture arCameraCapture;
     [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
     private string descriptionCurrentAnchor;
@@ -27,7 +26,6 @@ public class CloudAnchorsManager : MonoBehaviour
     {
         anchorsManager = GetComponent<AnchorsManager>();
         arAnchorsManager = GetComponent<ARAnchorManager>();
-        arCameraCapture = GetComponentInChildren<ARCameraCapture>();
         StaticEventHandler.OnSendAnchorInfo += OnSendAnchorInfo;
         StaticEventHandler.OnSelectCloudAnchor += OnSelectCloudAnchor;
 
@@ -35,13 +33,11 @@ public class CloudAnchorsManager : MonoBehaviour
 
     public void RemoveCloudAnchorInAnchorDetails()
     {
-        Debug.Log("Remove cloud anchor in anchor details");
         if (cloudAnchorsSelectedList == null || cloudAnchorsSelectedList.Count == 0) return;
         foreach (var cloudAnchorsSelected in cloudAnchorsSelectedList)
         {
             if (cloudAnchorDetails.ContainsKey(cloudAnchorsSelected))
             {
-                Debug.Log("Remove cloud anchor in anchor details");
                 cloudAnchorDetails.Remove(cloudAnchorsSelected);
             }
         }
@@ -158,14 +154,8 @@ public class CloudAnchorsManager : MonoBehaviour
             cloudAnchors.Add(cloudAnchorId, aRCloudAnchor);
 
             GameObject gameObject = Instantiate(cloudAnchorPrefab, aRCloudAnchor.transform);
-            gameObject.transform.localPosition = Vector3.zero;
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             resolveNotifyText.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
-            //Vector3 anchorPosition = aRCloudAnchor.transform.position;
-            //Quaternion anchorRotation = aRCloudAnchor.transform.rotation;
-            //gameObject.GetComponentInChildren<TextMeshProUGUI>().text =
-            //    $"📍 Pos: {anchorPosition.x:F2}, {anchorPosition.y:F2}, {anchorPosition.z:F2}\n" +
-            //    $"🔄 Rot: {anchorRotation.eulerAngles.x:F2}, {anchorRotation.eulerAngles.y:F2}, {anchorRotation.eulerAngles.z:F2}";
         }
         else
         {

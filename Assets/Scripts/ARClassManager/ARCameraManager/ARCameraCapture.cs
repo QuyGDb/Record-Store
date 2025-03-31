@@ -56,7 +56,7 @@ public class ARCameraCapture : MonoBehaviour
             inputRect = new RectInt(0, 0, image.width, image.height), // Toàn bộ ảnh
             outputDimensions = new Vector2Int(image.width, image.height), // Giữ nguyên kích thước
             outputFormat = TextureFormat.RGBA32, // Đổi sang RGBA
-            transformation = XRCpuImage.Transformation.None // Không xoay hoặc lật ảnh
+            transformation = XRCpuImage.Transformation.MirrorY // Không xoay hoặc lật ảnh
         };
 
         // Tạo bộ đệm lưu dữ liệu ảnh
