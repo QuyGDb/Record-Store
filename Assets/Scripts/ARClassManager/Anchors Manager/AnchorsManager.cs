@@ -1,9 +1,6 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http;
 using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -20,20 +17,17 @@ public class AnchorsManager : MonoBehaviour
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     [ShowInInspector]
     public Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
-    FeatureMapQuality quality;
     public AnchorAction anchorAction;
     private ARAnchor previousSelectAnchor;
     [HideInInspector] public ARAnchor currentSelectAnchor;
-    [SerializeField] private TextMeshProUGUI quatityText;
-    private XROrigin xrOrigin;
     private Image image;
     private ARCameraCapture arCameraCapture;
+    [SerializeField] private TextMeshProUGUI quatityText;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
         arRaycastManager = GetComponent<ARRaycastManager>();
-        xrOrigin = GetComponent<XROrigin>();
-        arCameraCapture = GetComponentInChildren<ARCameraCapture>();
+        arCameraCapture = GetComponent<ARCameraCapture>();
     }
     private void Start()
     {
@@ -68,18 +62,6 @@ public class AnchorsManager : MonoBehaviour
         if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
         {
             Pose hitPose = hitResults[0].pose;
-
-            //Pose cameraPose = new Pose(xrOrigin.Camera.transform.localPosition,
-            //                           xrOrigin.Camera.transform.localRotation);
-            //quality = arAnchorsManager.EstimateFeatureMapQualityForHosting(cameraPose);
-            //quatityText.text = quality.ToString();
-            //if (quality == FeatureMapQuality.Insufficient)
-            //    return;
-            //if (quality == FeatureMapQuality.Sufficient)
-            //    return;
-            //if (quality == FeatureMapQuality.Good)
-            //{
-            //    quatityText.text = quality.ToString();
             Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
             ARAnchor anchor = result.value;
 #if UNITY_EDITOR
@@ -144,17 +126,12 @@ public class AnchorsManager : MonoBehaviour
 
     public void DeleteAnchor()
     {
-        Debug.Log("Delete Anchor" + currentSelectAnchor);
         arAnchorsManager.TryRemoveAnchor(currentSelectAnchor);
     }
 
 
     private void Update()
     {
-        //Pose cameraPose = new Pose(xrOrigin.Camera.transform.localPosition,
-        //                              xrOrigin.Camera.transform.localRotation);
-        //quality = arAnchorsManager.EstimateFeatureMapQualityForHosting(cameraPose);
-        //quatityText.text = quality.ToString();
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -199,7 +176,6 @@ public class AnchorsManager : MonoBehaviour
         int width = Screen.width;
         int height = Screen.height;
 
-        // Tạo Texture2D
         Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
         texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         texture.Apply();
