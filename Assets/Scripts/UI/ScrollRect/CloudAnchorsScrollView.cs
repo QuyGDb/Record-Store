@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
+[RequireComponent(typeof(ScrollView))]
 public class CloudAnchorsScrollView : MonoBehaviour
 {
-    private GameObject prefab;
+    [SerializeField] private GameObject prefab;
     public GameObject content;
+
     private List<GameObject> cloudAnchorImages = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI textMeshProUGUI;
     private void Awake()
@@ -21,30 +22,36 @@ public class CloudAnchorsScrollView : MonoBehaviour
 
     private void OnCloudAnchorsManager(Dictionary<string, AnchorDetails> cloudAnchorDetails)
     {
-        textMeshProUGUI.text = $"Anchor đã lưu 1 {cloudAnchorDetails.Count}";
-        if (cloudAnchorDetails == null)
-            return;
-        if (cloudAnchorDetails.Count == 0)
-            return;
+
         foreach (var cloudAnchorImage in cloudAnchorImages)
         {
             Destroy(cloudAnchorImage);
         }
-        if (cloudAnchorDetails == null || cloudAnchorDetails.Count == 0)
+        if (cloudAnchorDetails.Count == 0)
         {
-            textMeshProUGUI.text = $"Anchor đã lưu 2 {cloudAnchorDetails.Count}";
-            return;
+            Debug.Log("No cloud anchor");
         }
         foreach (var cloudAnchor in cloudAnchorDetails)
         {
             GameObject gameObject = Instantiate(prefab, content.transform);
             cloudAnchorImages.Add(gameObject);
-            CloudAnchorImage cloudAnchorImage = gameObject.GetComponent<CloudAnchorImage>();
-            cloudAnchorImage.image.sprite = cloudAnchor.Value.anchorSprite;
-            cloudAnchorImage.textMeshProUGUIs[0].text = cloudAnchor.Value.anchorName;
-            cloudAnchorImage.textMeshProUGUIs[1].text = cloudAnchor.Value.anchorDescription;
-
+            gameObject.GetComponent<CloudAnchorImage>().anchorDetails = cloudAnchor.Value;
         }
+    }
+
+    private Sprite TextureToSprite(byte[] textureBytes)
+    {
+        Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+
+        if (!texture.LoadImage(textureBytes))
+        {
+            Debug.LogError("Không thể load hình từ byte array.");
+            return null;
+        }
+
+        Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+
+        return newSprite;
     }
 
 }

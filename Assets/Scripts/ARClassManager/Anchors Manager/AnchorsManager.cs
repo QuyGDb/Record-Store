@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
 using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -26,11 +27,13 @@ public class AnchorsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI quatityText;
     private XROrigin xrOrigin;
     private Image image;
+    private ARCameraCapture arCameraCapture;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
         arRaycastManager = GetComponent<ARRaycastManager>();
         xrOrigin = GetComponent<XROrigin>();
+        arCameraCapture = GetComponentInChildren<ARCameraCapture>();
     }
     private void Start()
     {
@@ -79,8 +82,20 @@ public class AnchorsManager : MonoBehaviour
             //    quatityText.text = quality.ToString();
             Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
             ARAnchor anchor = result.value;
-            CaptureScreenshot(anchor);
+#if UNITY_EDITOR
+
+            await CaptureScreenshot(anchor);
+#endif
+#if UNITY_ANDROID && !UNITY_EDITOR
+            byte[] imageByte = await arCameraCapture.Capture();
+            quatityText.text = $"Image byte length: {imageByte.Length}";
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(imageByte);
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+            anchor.GetComponentInChildren<Image>().sprite = sprite;
+#endif
         }
+
     }
     public ARAnchor SelectAnchor()
     {
@@ -129,6 +144,7 @@ public class AnchorsManager : MonoBehaviour
 
     public void DeleteAnchor()
     {
+        Debug.Log("Delete Anchor" + currentSelectAnchor);
         arAnchorsManager.TryRemoveAnchor(currentSelectAnchor);
     }
 
@@ -175,9 +191,10 @@ public class AnchorsManager : MonoBehaviour
         }
     }
 
-    async void CaptureScreenshot(ARAnchor anchor)
+    async Awaitable<Texture2D> CaptureScreenshot(ARAnchor anchor)
     {
         await Awaitable.EndOfFrameAsync();
+        byte[] textureData;
 
         int width = Screen.width;
         int height = Screen.height;
@@ -186,8 +203,10 @@ public class AnchorsManager : MonoBehaviour
         Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
         texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         texture.Apply();
-
+        textureData = texture.EncodeToPNG();
         image = anchor.GetComponentInChildren<Image>();
         image.sprite = Sprite.Create(texture, new Rect(0, 0, width, height), Vector2.zero);
+        return texture; ;
+
     }
 }

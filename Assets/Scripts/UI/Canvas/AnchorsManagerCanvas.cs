@@ -17,35 +17,30 @@ public class AnchorsManagerCanvas : MonoBehaviour
         inputFields = GetComponentsInChildren<TMP_InputField>();
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
-        StaticEventHandler.OnCloudAnchorsManager += OnCloudAnchorsManager;
+        saveButtons.onClick.AddListener(IsVaildCloudAnchor);
     }
     private void OnDestroy()
     {
         dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         saveButtons.onClick.RemoveAllListeners();
         StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
-        StaticEventHandler.OnCloudAnchorsManager -= OnCloudAnchorsManager;
         saveButtons.onClick.RemoveListener(IsVaildCloudAnchor);
     }
 
 
-    private void OnCloudAnchorsManager(CloudAnchorsManager manager)
-    {
-        saveButtons.onClick.AddListener(IsVaildCloudAnchor);
-    }
-
     void IsVaildCloudAnchor()
     {
+
         if (string.IsNullOrWhiteSpace(inputFields[0].text) && string.IsNullOrWhiteSpace(inputFields[1].text))
         {
+
             warningText.text = "Vui lòng nhập dữ liệu!";
         }
         else
         {
+            StaticEventHandler.InvokeSendInfo(inputFields[0].text, inputFields[1].text);
             inputFields[0].text = "";
             inputFields[1].text = "";
-            StaticEventHandler.InvokeSendInfo(inputFields[0].text, inputFields[1].text);
-
         }
     }
     private void OnAnchorsManager(AnchorsManager anchorsManager)
