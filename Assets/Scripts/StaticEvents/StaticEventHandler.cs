@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 public static class StaticEventHandler
@@ -49,5 +50,11 @@ public static class StaticEventHandler
     public static void InvokeCloudAnchorDetailsChanged(Dictionary<string, AnchorDetails> cloudAnchorDetails)
     {
         OnCloudAnchorDetailsChanged?.Invoke(cloudAnchorDetails);
+    }
+    public static event Action<MusicObjectListSO> OnObjectMusicListChanged;
+
+    public static void InvokeObjectMusicListChanged(MusicObjectListSO objectMusicList)
+    {
+        OnObjectMusicListChanged?.Invoke(objectMusicList);
     }
 }

@@ -148,11 +148,10 @@ public class CloudAnchorsManager : MonoBehaviour
         if (resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
-
             cloudAnchors.Add(cloudAnchorId, aRCloudAnchor);
-
             GameObject gameObject = Instantiate(cloudAnchorPrefab, aRCloudAnchor.transform);
             gameObject.AddComponent<LocalAxis>();
+            gameObject.transform.rotation = Quaternion.identity;
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             resolveNotifyText.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
         }

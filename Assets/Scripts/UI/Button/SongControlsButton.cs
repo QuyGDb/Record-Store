@@ -11,6 +11,11 @@ public class SongControlsButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         originalScale = transform.localScale;
+        button.onClick.AddListener(ClickEffect);
+    }
+    private void OnDestroy()
+    {
+        button.onClick.RemoveListener(ClickEffect);
     }
     public void ClickEffect()
     {

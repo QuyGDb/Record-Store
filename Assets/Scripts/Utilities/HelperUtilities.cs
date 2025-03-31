@@ -88,6 +88,35 @@ public static class HelperUtilities
         return degrees;
 
     }
+    public static Sprite TextureToSprite(Texture2D texture)
+    {
+        if (texture == null) return null;
+
+        return Sprite.Create(texture,
+                             new Rect(0, 0, texture.width, texture.height),
+                             new Vector2(0.5f, 0.5f),
+                             100.0f); // Pixels Per Unit (PPU)
+    }
+    public static Texture2D SpriteToTexture(Sprite sprite)
+    {
+        if (sprite == null) return null;
+
+        Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+        Color[] pixels = sprite.texture.GetPixels((int)sprite.rect.x,
+                                                  (int)sprite.rect.y,
+                                                  (int)sprite.rect.width,
+                                                  (int)sprite.rect.height);
+        texture.SetPixels(pixels);
+        texture.Apply();
+
+        return texture;
+    }
+    public static byte[] TextureToBytes(Texture2D texture, bool usePNG = true)
+    {
+        if (texture == null) return null;
+
+        return usePNG ? texture.EncodeToPNG() : texture.EncodeToJPG();
+    }
 
     /// <summary>
     /// Get a random direction vector

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,7 +9,6 @@ public class CloudAnchorsScrollView : MonoBehaviour
     public GameObject content;
 
     private List<GameObject> cloudAnchorImages = new List<GameObject>();
-    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
     private void Awake()
     {
         StaticEventHandler.OnCloudAnchorDetailsChanged += OnCloudAnchorsManager;
