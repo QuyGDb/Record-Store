@@ -509,7 +509,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &8154654771462426875
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,9 +579,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 758ac31a9bff9ac4181f54de54a6ecb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e8c7351c68f67d4ba9a183c4485bb21, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -601,6 +601,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c16e2e8755aff4ea4a8fe5a4a0c315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anchorDetails:
+    anchorName: 
+    anchorDescription: 
+    cloudAnchorId: 
+    anchorImage: 
+  image: {fileID: 0}
+  textMeshProUGUIs: []
 --- !u!1 &9212810337819218625
 GameObject:
   m_ObjectHideFlags: 0
