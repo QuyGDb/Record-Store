@@ -12,9 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5166c1913852f7b41b446f37232782b7, type: 3}
   m_Name: ListSO_InstrumentShowCaseSO_VN
   m_EditorClassIdentifier: 
-  instrumentList:
-  - {fileID: 1047918772569867758, guid: 10720a49e97d9564587a499ac78da7b1, type: 3}
-  - {fileID: 3600045166406027491, guid: 1b2e1d5790f1a304089665539151e417, type: 3}
-  - {fileID: 62574126209303206, guid: c1a1eefcc1aaee04b9c4e30d5861c9b2, type: 3}
-  - {fileID: 2155014289470420218, guid: 4c83062a74099ad4ab972f5b0672f56d, type: 3}
-  - {fileID: 1334803832773059835, guid: da4eab8d50f1b5f4baf79c5af08baa4d, type: 3}
+  musicObjects:
+  - instrumentPrefab: {fileID: 1047918772569867758, guid: 10720a49e97d9564587a499ac78da7b1,
+      type: 3}
+    instrumentSprite: {fileID: 21300000, guid: feb6d0c30c818764aaee2780a4ccb633, type: 3}
+  - instrumentPrefab: {fileID: 3600045166406027491, guid: 1b2e1d5790f1a304089665539151e417,
+      type: 3}
+    instrumentSprite: {fileID: 21300000, guid: cdc7531d7ca15794d94eb26f18a3e6fd, type: 3}
+  - instrumentPrefab: {fileID: 62574126209303206, guid: c1a1eefcc1aaee04b9c4e30d5861c9b2,
+      type: 3}
+    instrumentSprite: {fileID: 21300000, guid: 4d41b8fd8fd51434586b8d7419a58fa5, type: 3}
+  - instrumentPrefab: {fileID: 2155014289470420218, guid: 4c83062a74099ad4ab972f5b0672f56d,
+      type: 3}
+    instrumentSprite: {fileID: 21300000, guid: 96a05663e4597f94abbc0fcdb18243c9, type: 3}
+  - instrumentPrefab: {fileID: 1334803832773059835, guid: da4eab8d50f1b5f4baf79c5af08baa4d,
+      type: 3}
+    instrumentSprite: {fileID: 21300000, guid: a8dee53ba9419664d83c5b44519df22e, type: 3}

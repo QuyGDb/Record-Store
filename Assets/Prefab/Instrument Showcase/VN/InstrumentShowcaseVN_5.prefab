@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5365483288131515562}
   - component: {fileID: 6814614979570660450}
   - component: {fileID: 641154128988326170}
-  m_Layer: 0
+  - component: {fileID: -1643005019633424107}
+  m_Layer: 9
   m_Name: InstrumentShowcaseVN_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,6 +88,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-1643005019633424107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334803832773059835}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.63046944, y: 0.12699291, z: 0.34611332}
+  m_Center: {x: 0.0015675068, y: -0.063248806, z: 0.17291541}
 --- !u!1001 &848376907545498805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +121,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DanKlongPut
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147875065594727386, guid: de273385c52e1574c8e018deef4181bc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147875065594727386, guid: de273385c52e1574c8e018deef4181bc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3900954
       objectReference: {fileID: 0}
     - target: {fileID: 8246130500649883787, guid: de273385c52e1574c8e018deef4181bc,
         type: 3}
@@ -118,17 +150,17 @@ PrefabInstance:
     - target: {fileID: 8246130500649883787, guid: de273385c52e1574c8e018deef4181bc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07
+      value: -0.121
       objectReference: {fileID: 0}
     - target: {fileID: 8246130500649883787, guid: de273385c52e1574c8e018deef4181bc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.012000012
+      value: -0.036
       objectReference: {fileID: 0}
     - target: {fileID: 8246130500649883787, guid: de273385c52e1574c8e018deef4181bc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14799999
+      value: 0.139
       objectReference: {fileID: 0}
     - target: {fileID: 8246130500649883787, guid: de273385c52e1574c8e018deef4181bc,
         type: 3}

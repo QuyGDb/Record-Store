@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Anchor
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - CloudAnchor
+  - Instrument
+  - SelectedInstrument
+  - Showcase
   - 
   - 
   - 

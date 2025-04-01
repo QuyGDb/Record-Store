@@ -454,7 +454,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3147253929854734310}
-  m_Layer: 0
+  - component: {fileID: 1581567997557259758}
+  m_Layer: 7
   m_Name: DanDa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,6 +478,23 @@ Transform:
   - {fileID: 4439583949620290814}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1581567997557259758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618316308601039873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded8638ddd98d974388c63ea1687c407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTranforms: {fileID: 0}
+  instrumentDetails:
+    instrumentPrefab: {fileID: 0}
+    instrumentSprite: {fileID: 0}
+    instrumentTransform: {fileID: 0}
 --- !u!1 &919804437377589094
 GameObject:
   m_ObjectHideFlags: 0

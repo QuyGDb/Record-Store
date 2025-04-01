@@ -2000,7 +2000,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8246130500649883787}
-  m_Layer: 0
+  - component: {fileID: 4161710752232325561}
+  m_Layer: 7
   m_Name: DanKlongPut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2023,6 +2024,23 @@ Transform:
   - {fileID: 8147875065594727386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4161710752232325561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330594911458257622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded8638ddd98d974388c63ea1687c407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTranforms: {fileID: 0}
+  instrumentDetails:
+    instrumentPrefab: {fileID: 0}
+    instrumentSprite: {fileID: 0}
+    instrumentTransform: {fileID: 0}
 --- !u!1 &3369774777953118257
 GameObject:
   m_ObjectHideFlags: 0

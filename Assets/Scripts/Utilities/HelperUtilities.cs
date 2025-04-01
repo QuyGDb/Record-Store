@@ -166,22 +166,12 @@ public static class HelperUtilities
     /// <summary>
     /// Get the mouse world position.
     /// </summary>
-    public static Vector3 GetMouseWorldPosition()
+
+    public static Vector3 GetWorldPosition(Vector2 screenPosition)
     {
-        if (mainCamera == null) mainCamera = Camera.main;
-
-        Vector3 mouseScreenPosition = Mouse.current.position.ReadValue();
-
-        // Clamp mouse position to screen size
-        mouseScreenPosition.x = Mathf.Clamp(mouseScreenPosition.x, 0f, Screen.width);
-        mouseScreenPosition.y = Mathf.Clamp(mouseScreenPosition.y, 0f, Screen.height);
-
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
-        worldPosition.z = 0f;
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane + 5f)); // 5f là kho?ng cách t? Camera
         return worldPosition;
-
     }
-
     /// <summary>
     /// positive range debug check - set isZeroAllowed to true if the min and max range values can both be zero. Returns true if there is an error
     /// </summary>

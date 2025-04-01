@@ -12,6 +12,7 @@ using UnityEngine.XR.ARSubsystems;
 
 public class AnchorsManager : MonoBehaviour
 {
+    public LayerMask anchorLayer;
     private ARAnchorManager arAnchorsManager;
     private ARRaycastManager arRaycastManager;
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
@@ -23,6 +24,7 @@ public class AnchorsManager : MonoBehaviour
     private Image image;
     private ARCameraCapture arCameraCapture;
     [SerializeField] private TextMeshProUGUI quatityText;
+    public byte[] imageByte;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
@@ -68,13 +70,9 @@ public class AnchorsManager : MonoBehaviour
 
             await CaptureScreenshot(anchor);
 #endif
-#if UNITY_ANDROID && !UNITY_EDITOR
-            byte[] imageByte = await arCameraCapture.Capture();
-            quatityText.text = $"Image byte length: {imageByte.Length}";
-            Texture2D texture = new Texture2D(2, 2);
-            texture.LoadImage(imageByte);
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-            anchor.GetComponentInChildren<Image>().sprite = sprite;
+#if PLATFORM_ANDROID && !UNITY_EDITOR
+            imageByte = await arCameraCapture.Capture();
+
 #endif
         }
 
@@ -94,28 +92,32 @@ public class AnchorsManager : MonoBehaviour
         {
             inputPosition = Mouse.current.position.ReadValue();
             isPressed = true;
+            Debug.Log(inputPosition);
         }
 #endif
         if (isPressed)
         {
-            Ray ray = Camera.main.ScreenPointToRay(inputPosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+
+            RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.one, Mathf.Infinity, anchorLayer);
+            Debug.Log(hit.collider);
+            if (hit.collider != null)
             {
                 ARAnchor anchor = hit.transform.GetComponent<ARAnchor>();
+                Debug.Log(anchor);
                 if (anchor != null && anchor != currentSelectAnchor)
                 {
                     previousSelectAnchor = currentSelectAnchor;
                     if (previousSelectAnchor != null)
-                        previousSelectAnchor.GetComponent<MeshRenderer>().material = GameResources.Instance.defaultMaterial;
-                    currentSelectAnchor = anchor;
+                        previousSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
 
-                    anchor.GetComponent<MeshRenderer>().material = GameResources.Instance.selectAnchorMAT;
+                    currentSelectAnchor = anchor;
+                    anchor.GetComponent<SpriteRenderer>().color = Color.green;
                     return anchor;
                 }
-                if (anchor != null && anchor == currentSelectAnchor)
+                else if (anchor != null && anchor == currentSelectAnchor)
                 {
-                    currentSelectAnchor.GetComponent<MeshRenderer>().material = GameResources.Instance.defaultMaterial;
+                    // Nếu nhấn lại cùng một Anchor, bỏ chọn
+                    currentSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
                     currentSelectAnchor = null;
                     return null;
                 }
@@ -123,7 +125,6 @@ public class AnchorsManager : MonoBehaviour
         }
         return null;
     }
-
     public void DeleteAnchor()
     {
         arAnchorsManager.TryRemoveAnchor(currentSelectAnchor);
@@ -180,9 +181,7 @@ public class AnchorsManager : MonoBehaviour
         texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         texture.Apply();
         textureData = texture.EncodeToPNG();
-        image = anchor.GetComponentInChildren<Image>();
-        image.sprite = Sprite.Create(texture, new Rect(0, 0, width, height), Vector2.zero);
-        return texture; ;
+        return texture;
 
     }
 }

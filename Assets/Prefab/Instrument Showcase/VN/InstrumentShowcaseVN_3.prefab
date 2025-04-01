@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6269288188594120948}
   - component: {fileID: 4750796961421578499}
   - component: {fileID: 3871655362890944385}
-  m_Layer: 0
+  - component: {fileID: -652179519612505958}
+  m_Layer: 9
   m_Name: InstrumentShowcaseVN_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,6 +88,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-652179519612505958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62574126209303206}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.53979695, y: 0.19181374, z: 0.35134393}
+  m_Center: {x: -0.0006873131, y: -0.09595725, z: 0.17601763}
 --- !u!1001 &1635636925302616140
 PrefabInstance:
   m_ObjectHideFlags: 0

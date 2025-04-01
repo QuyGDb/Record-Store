@@ -11,7 +11,6 @@ public class CloudAnchorsManager : MonoBehaviour
 {
     AnchorsManager anchorsManager;
     private ARAnchorManager arAnchorsManager;
-    [SerializeField] private GameObject cloudAnchorPrefab;
     [ShowInInspector]
     public Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
     [ShowInInspector]
@@ -119,8 +118,7 @@ public class CloudAnchorsManager : MonoBehaviour
     {
         AnchorDetails anchorDetails = new AnchorDetails();
 
-        anchorDetails.anchorImage = aRAnchor.GetComponentInChildren<Image>().sprite.texture.EncodeToPNG();
-        resolveNotifyText.text = $"📍 Đã tạo Cloud Anchor: {aRAnchor}";
+        anchorDetails.anchorImage = anchorsManager.imageByte;
         hostNotifyText.text = $"📍 Đã tạo Cloud Anchor: {hostCloudAnchorPromise}";
         anchorDetails.anchorName = nameCurrentAnchor;
         anchorDetails.anchorDescription = descriptionCurrentAnchor;
@@ -148,10 +146,9 @@ public class CloudAnchorsManager : MonoBehaviour
         if (resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
+            aRCloudAnchor.gameObject.layer = LayerMask.NameToLayer("CloudAnchor");
             cloudAnchors.Add(cloudAnchorId, aRCloudAnchor);
-            GameObject gameObject = Instantiate(cloudAnchorPrefab, aRCloudAnchor.transform);
-            gameObject.AddComponent<LocalAxis>();
-            gameObject.transform.rotation = Quaternion.identity;
+            aRCloudAnchor.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             resolveNotifyText.text = $"📍 Đã tải Cloud Anchor: {cloudAnchorId}";
         }
