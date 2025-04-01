@@ -10,7 +10,7 @@ public class HostAndResolveAnchorCanvas : MonoBehaviour
     {
         buttons = GetComponentsInChildren<Button>();
         scrollRect = GetComponentInChildren<ScrollRect>();
-        buttons[0].onClick.AddListener(ToggleScrollRec);
+        buttons[0].onClick.AddListener(ToggleScrollRect);
         StaticEventHandler.OnCloudAnchorsManager += OnCloudAnchorsManager;
     }
 
@@ -28,7 +28,7 @@ public class HostAndResolveAnchorCanvas : MonoBehaviour
         buttons[2].onClick.AddListener(manager.RemoveCloudAnchorInAnchorDetails);
     }
 
-    void ToggleScrollRec()
+    void ToggleScrollRect()
     {
         scrollRect.gameObject.SetActive(!scrollRect.gameObject.activeSelf);
     }

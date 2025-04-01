@@ -25,10 +25,7 @@ public class CloudAnchorsScrollView : MonoBehaviour
         {
             Destroy(cloudAnchorImage);
         }
-        if (cloudAnchorDetails.Count == 0)
-        {
-            Debug.Log("No cloud anchor");
-        }
+
         foreach (var cloudAnchor in cloudAnchorDetails)
         {
             GameObject gameObject = Instantiate(prefab, content.transform);

@@ -1,5 +1,6 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.XR.CoreUtils;
@@ -25,19 +26,58 @@ public class AnchorsManager : MonoBehaviour
     private ARCameraCapture arCameraCapture;
     [SerializeField] private TextMeshProUGUI quatityText;
     public byte[] imageByte;
+    private InputSystem_Actions inputActions;
     private void Awake()
     {
         arAnchorsManager = GetComponent<ARAnchorManager>();
         arRaycastManager = GetComponent<ARRaycastManager>();
         arCameraCapture = GetComponentInChildren<ARCameraCapture>();
+        inputActions = new InputSystem_Actions();
     }
     private void Start()
     {
         StaticEventHandler.InvokeAnchorsManager(this);
     }
-    void OnEnable() => arAnchorsManager.trackablesChanged.AddListener(OnAnchorChanged);
+    void OnEnable()
+    {
+        inputActions.Enable();
 
-    void OnDisable() => arAnchorsManager.trackablesChanged.RemoveListener(OnAnchorChanged);
+        inputActions.Touch.TouchPress.performed += ctx => OnTouchPerformed(ctx);
+        inputActions.Mouse.MouseClick.performed += ctx => OnMousePerformed(ctx);
+        arAnchorsManager.trackablesChanged.AddListener(OnAnchorChanged);
+    }
+
+    private void OnMousePerformed(InputAction.CallbackContext ctx)
+    {
+        Vector2 inputPosition = Vector2.zero;
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            inputPosition = Mouse.current.position.ReadValue();
+        }
+        HandleAnchorAction(inputPosition);
+    }
+
+    private void OnTouchPerformed(InputAction.CallbackContext ctx)
+    {
+
+        Vector2 inputPosition = Vector2.zero;
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+        {
+            inputPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+        }
+
+
+        HandleAnchorAction(inputPosition);
+    }
+
+    void OnDisable()
+    {
+        inputActions.Touch.TouchPress.performed -= ctx => OnTouchPerformed(ctx);
+        inputActions.Mouse.MouseClick.performed -= ctx => OnMousePerformed(ctx);
+        arAnchorsManager.trackablesChanged.RemoveListener(OnAnchorChanged);
+        inputActions.Disable();
+    }
+
 
 
     private void OnAnchorChanged(ARTrackablesChangedEventArgs<ARAnchor> eventArgs)
@@ -66,6 +106,7 @@ public class AnchorsManager : MonoBehaviour
             Pose hitPose = hitResults[0].pose;
             Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
             ARAnchor anchor = result.value;
+            anchor.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 #if UNITY_EDITOR
 
             await CaptureScreenshot(anchor);
@@ -98,29 +139,34 @@ public class AnchorsManager : MonoBehaviour
         if (isPressed)
         {
 
-            RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.one, Mathf.Infinity, anchorLayer);
-            Debug.Log(hit.collider);
-            if (hit.collider != null)
-            {
-                ARAnchor anchor = hit.transform.GetComponent<ARAnchor>();
-                Debug.Log(anchor);
-                if (anchor != null && anchor != currentSelectAnchor)
-                {
-                    previousSelectAnchor = currentSelectAnchor;
-                    if (previousSelectAnchor != null)
-                        previousSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
+            Ray ray = Camera.main.ScreenPointToRay(inputPosition);
 
-                    currentSelectAnchor = anchor;
-                    anchor.GetComponent<SpriteRenderer>().color = Color.green;
-                    return anchor;
-                }
-                else if (anchor != null && anchor == currentSelectAnchor)
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, anchorLayer))
+            {
+                if (hit.collider != null)
                 {
-                    // Nếu nhấn lại cùng một Anchor, bỏ chọn
-                    currentSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
-                    currentSelectAnchor = null;
-                    return null;
+                    ARAnchor anchor = hit.transform.GetComponent<ARAnchor>();
+                    if (anchor != null && anchor != currentSelectAnchor)
+                    {
+                        previousSelectAnchor = currentSelectAnchor;
+                        if (previousSelectAnchor != null)
+                            previousSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
+
+                        currentSelectAnchor = anchor;
+                        anchor.GetComponent<SpriteRenderer>().color = Color.green;
+                        return anchor;
+                    }
+                    else if (anchor != null && anchor == currentSelectAnchor)
+                    {
+                        // Nếu nhấn lại cùng một Anchor, bỏ chọn
+                        currentSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
+                        currentSelectAnchor = null;
+                        return null;
+                    }
                 }
+
+
             }
         }
         return null;
@@ -136,15 +182,7 @@ public class AnchorsManager : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-        {
-            HandleAnchorAction(Touchscreen.current.primaryTouch.position.ReadValue());
-        }
 
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            HandleAnchorAction(Mouse.current.position.ReadValue());
-        }
         if (anchorAction == AnchorAction.Delete)
         {
             if (currentSelectAnchor != null)
