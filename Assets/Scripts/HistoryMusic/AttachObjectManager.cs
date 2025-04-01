@@ -26,9 +26,9 @@ public class AttachObjectManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        StaticEventHandler.OnCloudAnchorSelected += StaticEventHandler_OnCloudAnchorSelected;
+        StaticEventHandler.OnAnchorSelected += StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSelected += StaticEventHandler_OnInstrumentSelected;
-        StaticEventHandler.OnCurrentCloudAnchorChanged += StaticEventHandler_OnCurrentCloudAnchorChanged;
+        StaticEventHandler.OnCurrentAnchorChanged += StaticEventHandler_OnCurrentCloudAnchorChanged;
         inputActions.Enable();
         inputActions.Mouse.MouseClick.performed += ctx => SelectObject(ctx);
         inputActions.Touch.TouchPress.performed += ctx => SelectObject(ctx);
@@ -36,9 +36,9 @@ public class AttachObjectManager : MonoBehaviour
 
     private void OnDisable()
     {
-        StaticEventHandler.OnCloudAnchorSelected -= StaticEventHandler_OnCloudAnchorSelected;
+        StaticEventHandler.OnAnchorSelected -= StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSelected -= StaticEventHandler_OnInstrumentSelected;
-        StaticEventHandler.OnCurrentCloudAnchorChanged -= StaticEventHandler_OnCurrentCloudAnchorChanged;
+        StaticEventHandler.OnCurrentAnchorChanged -= StaticEventHandler_OnCurrentCloudAnchorChanged;
         inputActions.Mouse.MouseClick.performed -= ctx => SelectObject(ctx);
         inputActions.Touch.TouchPress.performed -= ctx => SelectObject(ctx);
         inputActions.Disable();

@@ -101,12 +101,13 @@ public class AnchorsManager : MonoBehaviour
 
     private async void PlaceAnchor(Vector2 position)
     {
-        if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
+        if (arRaycastManager.Raycast(position, hitResults, TrackableType.PlaneWithinPolygon))
         {
             Pose hitPose = hitResults[0].pose;
             Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
             ARAnchor anchor = result.value;
             anchor.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            quatityText.text = anchor.gameObject.transform.rotation.eulerAngles.ToString();
 #if UNITY_EDITOR
 
             await CaptureScreenshot(anchor);

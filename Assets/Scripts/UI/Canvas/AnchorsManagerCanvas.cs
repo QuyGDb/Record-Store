@@ -17,16 +17,26 @@ public class AnchorsManagerCanvas : MonoBehaviour
         inputFields = GetComponentsInChildren<TMP_InputField>();
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
+        StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
         saveButtons.onClick.AddListener(IsVaildCloudAnchor);
+
     }
     private void OnDestroy()
     {
         dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         saveButtons.onClick.RemoveAllListeners();
         StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
+        StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
         saveButtons.onClick.RemoveListener(IsVaildCloudAnchor);
     }
 
+    private void OnMainDropdownChanged(int index)
+    {
+        if (index != 0)
+        {
+            dropdown.value = 0;
+        }
+    }
 
     void IsVaildCloudAnchor()
     {

@@ -1,8 +1,5 @@
-using Google.XR.ARCoreExtensions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 public static class StaticEventHandler
@@ -66,11 +63,11 @@ public static class StaticEventHandler
         OnInstrumentSelected?.Invoke(instrument, isSelected);
     }
 
-    public static event Action<ARAnchor> OnCurrentCloudAnchorChanged;
+    public static event Action<ARAnchor> OnCurrentAnchorChanged;
 
-    public static void InvokeCurrentCloudAnchorChanged(ARAnchor cloudAnchor)
+    public static void InvokeCurrentAnchorChanged(ARAnchor cloudAnchor)
     {
-        OnCurrentCloudAnchorChanged?.Invoke(cloudAnchor);
+        OnCurrentAnchorChanged?.Invoke(cloudAnchor);
     }
 
     public static event Action<AttachObjectManager> OnAttachObjectManagerChanged;
@@ -80,10 +77,17 @@ public static class StaticEventHandler
         OnAttachObjectManagerChanged?.Invoke(attachObjectManager);
     }
 
-    public static event Action<ARAnchor> OnCloudAnchorSelected;
+    public static event Action<ARAnchor> OnAnchorSelected;
 
-    public static void InvokeCloudAnchorSelected(ARAnchor cloudAnchor)
+    public static void InvokeAnchorSelected(ARAnchor cloudAnchor)
     {
-        OnCloudAnchorSelected?.Invoke(cloudAnchor);
+        OnAnchorSelected?.Invoke(cloudAnchor);
+    }
+
+    public static event Action<int> OnMainDropdownChanged;
+
+    public static void InvokeMainDropdownChanged(int index)
+    {
+        OnMainDropdownChanged?.Invoke(index);
     }
 }

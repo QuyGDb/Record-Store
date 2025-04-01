@@ -38,6 +38,7 @@ public class MainDropdown : MonoBehaviour
                 canvas[2].enabled = true;
                 break;
         }
+        StaticEventHandler.InvokeMainDropdownChanged(arg0);
     }
     private void DeactivateAllCanvas()
     {

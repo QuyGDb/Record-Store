@@ -9,7 +9,6 @@ public class CloudAnchorDispatcher : MonoBehaviour
     [SerializeField] private LayerMask cloudAnchorLayer; // Layer của cloud anchor
     private ARAnchor currentARCloudAnchor;
     private InputSystem_Actions inputActions;
-    [SerializeField] private TextMeshProUGUI TextMeshProUGUI;
     void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -32,8 +31,6 @@ public class CloudAnchorDispatcher : MonoBehaviour
 
     private void OnTouchPerformed(InputAction.CallbackContext context)
     {
-        TextMeshProUGUI.text = "Touch performed";
-        Debug.Log("Touch performed");
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
             Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
@@ -43,8 +40,6 @@ public class CloudAnchorDispatcher : MonoBehaviour
 
     private void OnMousePerformed(InputAction.CallbackContext context)
     {
-        TextMeshProUGUI.text = "Mouse performed";
-        Debug.Log("Mouse performed");
         if (Mouse.current != null && Mouse.current.leftButton.isPressed)
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
@@ -56,20 +51,32 @@ public class CloudAnchorDispatcher : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
         RaycastHit hit;
-        TextMeshProUGUI.text = "Checking for cloud anchor";
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, cloudAnchorLayer))
         {
             if (hit.collider != null)
             {
-                TextMeshProUGUI.text = "Cloud Anchor Hit";
-                if (currentARCloudAnchor == hit.collider.gameObject.GetComponent<ARAnchor>())
+                ARAnchor hitAnchor = hit.collider.gameObject.GetComponent<ARAnchor>();
+
+                if (hitAnchor != null)
                 {
-                    currentARCloudAnchor.GetComponent<SpriteRenderer>().color = Color.white;
+                    if (currentARCloudAnchor == hitAnchor)
+                    {
+                        currentARCloudAnchor.GetComponent<SpriteRenderer>().color = Color.white;
+                        currentARCloudAnchor = null;
+                        StaticEventHandler.InvokeAnchorSelected(null);
+                    }
+                    else
+                    {
+                        if (currentARCloudAnchor != null)
+                        {
+                            currentARCloudAnchor.GetComponent<SpriteRenderer>().color = Color.white;
+                        }
+
+                        currentARCloudAnchor = hitAnchor;
+                        currentARCloudAnchor.GetComponent<SpriteRenderer>().color = Color.red;
+                        StaticEventHandler.InvokeAnchorSelected(currentARCloudAnchor);
+                    }
                 }
-                currentARCloudAnchor = hit.collider.gameObject.GetComponent<ARAnchor>();
-                currentARCloudAnchor.GetComponent<SpriteRenderer>().color = Color.red;
-                StaticEventHandler.InvokeCloudAnchorSelected(currentARCloudAnchor);
-                TextMeshProUGUI.text = "Cloud Anchor Selected";
             }
         }
     }
