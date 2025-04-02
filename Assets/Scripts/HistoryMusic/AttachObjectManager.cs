@@ -19,6 +19,7 @@ public class AttachObjectManager : MonoBehaviour
     private GameObject selectedGameObject;
     public float scaleSpeed = 0.1f;
     private InputSystem_Actions inputActions;
+    private int mainDropDownValue;
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -28,6 +29,7 @@ public class AttachObjectManager : MonoBehaviour
         StaticEventHandler.OnAnchorSelected += StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSelected += StaticEventHandler_OnInstrumentSelected;
         StaticEventHandler.OnCurrentAnchorChanged += StaticEventHandler_OnCurrentCloudAnchorChanged;
+        StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
         inputActions.Enable();
         inputActions.Mouse.MouseClick.performed += ctx => SelectObject(ctx);
         inputActions.Touch.TouchPress.performed += ctx => SelectObject(ctx);
@@ -38,9 +40,15 @@ public class AttachObjectManager : MonoBehaviour
         StaticEventHandler.OnAnchorSelected -= StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSelected -= StaticEventHandler_OnInstrumentSelected;
         StaticEventHandler.OnCurrentAnchorChanged -= StaticEventHandler_OnCurrentCloudAnchorChanged;
+        StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
         inputActions.Mouse.MouseClick.performed -= ctx => SelectObject(ctx);
         inputActions.Touch.TouchPress.performed -= ctx => SelectObject(ctx);
         inputActions.Disable();
+    }
+
+    private void OnMainDropdownChanged(int value)
+    {
+        mainDropDownValue = value;
     }
 
     private void StaticEventHandler_OnCloudAnchorSelected(ARAnchor anchor)
@@ -57,10 +65,9 @@ public class AttachObjectManager : MonoBehaviour
         currentCloudAnchor = anchor;
     }
 
-
-
     private void StaticEventHandler_OnInstrumentSelected(InstrumentDetails instrument, bool isAdd)
     {
+        // select list of instrument to add to the select anchor
         if (isAdd)
         {
             selectedInstrumentList.Add(instrument);
@@ -70,25 +77,21 @@ public class AttachObjectManager : MonoBehaviour
             selectedInstrumentList.Remove(instrument);
         }
     }
-    private void Update()
-    {
 
-        MoveObject(selectedGameObject);
-        ScaleObject();
-    }
     public void PlaceObject()
     {
+        if (currentCloudAnchor == null) return;
         foreach (InstrumentDetails instrument in selectedInstrumentList)
         {
             GameObject instrumentObject = Instantiate(instrument.instrumentPrefab, currentCloudAnchor.transform);
-            instrumentObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            instrumentObject.transform.rotation = Quaternion.Euler(-90, 0, 0);
             instrumentObject.transform.position = currentCloudAnchor.transform.position;
         }
-
     }
 
     public void SelectObject(InputAction.CallbackContext context)
     {
+        if (mainDropDownValue != 3) return;
         Vector2 screenPosition = Vector2.zero;
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
@@ -102,49 +105,13 @@ public class AttachObjectManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, hitLayers))
         {
             selectedGameObject = hit.collider.gameObject;
+            Debug.Log(selectedGameObject.name);
         }
     }
 
-    private void MoveObject(GameObject gameObject)
-    {
-        if (gameObject != null)
-        {
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-            gameObject.transform.position = HelperUtilities.GetWorldPosition(mousePosition);
-        }
-    }
-
-    public void ScaleObject()
-    {
-        if (selectedGameObject == null) return; // Không có object được chọn thì không làm gì
-
-        if (Mouse.current != null && Mouse.current.scroll.ReadValue().y != 0)
-        {
-            float scrollDelta = Mouse.current.scroll.ReadValue().y * scaleSpeed;
-            selectedGameObject.transform.localScale += Vector3.one * scrollDelta;
-        }
-#if PLATFORM_ANDROID && !UNITY_EDITOR
-
-        if (Touchscreen.current != null && Touchscreen.current.touches.Count >= 2)
-        {
-            TouchControl touch1 = Touchscreen.current.touches[0];
-            TouchControl touch2 = Touchscreen.current.touches[1];
-
-            Vector2 prevPos1 = touch1.startPosition.ReadValue();
-            Vector2 prevPos2 = touch2.startPosition.ReadValue();
-            Vector2 currPos1 = touch1.position.ReadValue();
-            Vector2 currPos2 = touch2.position.ReadValue();
-
-            float prevDistance = Vector2.Distance(prevPos1, prevPos2);
-            float currDistance = Vector2.Distance(currPos1, currPos2);
-            float scaleFactor = (currDistance - prevDistance) * scaleSpeed;
-
-            selectedGameObject.transform.localScale += Vector3.one * scaleFactor;
-        }
-#endif
-    }
     public void SaveObjectAtReleasePosition()
     {
+        if (selectedGameObject == null) return;
         Transform transform = selectedGameObject.transform;
         ES3.Save(selectedGameObject.name, transform);
     }

@@ -170,6 +170,13 @@ public class CloudAnchorsManager : MonoBehaviour
         StaticEventHandler.InvokeCloudAnchorDetailsChanged(cloudAnchorDetails);
     }
 
-
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(notify), notify);
+    }
+#endif
+    #endregion
 }
 

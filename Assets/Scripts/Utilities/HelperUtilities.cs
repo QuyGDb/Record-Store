@@ -169,7 +169,7 @@ public static class HelperUtilities
 
     public static Vector3 GetWorldPosition(Vector2 screenPosition)
     {
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.nearClipPlane + 5f)); // 5f là kho?ng cách t? Camera
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, mainCamera.transform.position.z));
         return worldPosition;
     }
     /// <summary>

@@ -18,9 +18,9 @@ public class MainDropdown : MonoBehaviour
     {
         dropdown.onValueChanged.RemoveListener(OnValueChanged);
     }
-    private void OnValueChanged(int arg0)
+    private void OnValueChanged(int value)
     {
-        switch (arg0)
+        switch (value)
         {
             case 0:
                 DeactivateAllCanvas();
@@ -38,7 +38,7 @@ public class MainDropdown : MonoBehaviour
                 canvas[2].enabled = true;
                 break;
         }
-        StaticEventHandler.InvokeMainDropdownChanged(arg0);
+        StaticEventHandler.InvokeMainDropdownChanged(value);
     }
     private void DeactivateAllCanvas()
     {

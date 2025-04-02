@@ -1,4 +1,5 @@
 ﻿using Google.XR.ARCoreExtensions;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ public class CloudAnchorDispatcher : MonoBehaviour
     [SerializeField] private LayerMask cloudAnchorLayer; // Layer của cloud anchor
     private ARAnchor currentARCloudAnchor;
     private InputSystem_Actions inputActions;
+    int mainDropDownValue;
     void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -19,13 +21,20 @@ public class CloudAnchorDispatcher : MonoBehaviour
         inputActions.Enable();
         inputActions.Touch.TouchPress.performed += ctx => OnTouchPerformed(ctx);
         inputActions.Mouse.MouseClick.performed += ctx => OnMousePerformed(ctx);
+        StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
     }
 
     void OnDisable()
     {
         inputActions.Touch.TouchPress.performed -= ctx => OnTouchPerformed(ctx);
         inputActions.Mouse.MouseClick.performed -= ctx => OnMousePerformed(ctx);
+        StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
         inputActions.Disable();
+    }
+
+    private void OnMainDropdownChanged(int value)
+    {
+        mainDropDownValue = value;
     }
 
     private void OnTouchPerformed(InputAction.CallbackContext context)
@@ -48,6 +57,7 @@ public class CloudAnchorDispatcher : MonoBehaviour
 
     void CheckForCloudAnchor(Vector2 screenPosition)
     {
+        if (mainDropDownValue != 2) return;
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, cloudAnchorLayer))

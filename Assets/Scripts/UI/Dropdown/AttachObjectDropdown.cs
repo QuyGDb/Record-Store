@@ -18,6 +18,10 @@ public class AttachObjectDropdown : MonoBehaviour
     {
         dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
     }
+    private void Start()
+    {
+        StaticEventHandler.InvokeObjectMusicListChanged(instrumentShowCaseVN);
+    }
     private void OnDropdownValueChanged(int objects)
     {
         switch (dropdown.value)
