@@ -42,8 +42,6 @@ public class ARCameraCapture : MonoBehaviour
         }
     }
 
-
-
     private byte[] ConvertTextureToByteArray(Texture2D texture)
     {
         return texture.EncodeToPNG();

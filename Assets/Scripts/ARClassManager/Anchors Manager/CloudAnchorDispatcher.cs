@@ -17,7 +17,6 @@ public class CloudAnchorDispatcher : MonoBehaviour
     void OnEnable()
     {
         inputActions.Enable();
-
         inputActions.Touch.TouchPress.performed += ctx => OnTouchPerformed(ctx);
         inputActions.Mouse.MouseClick.performed += ctx => OnMousePerformed(ctx);
     }

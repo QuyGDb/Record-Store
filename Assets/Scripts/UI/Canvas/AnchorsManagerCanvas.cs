@@ -43,7 +43,6 @@ public class AnchorsManagerCanvas : MonoBehaviour
 
         if (string.IsNullOrWhiteSpace(inputFields[0].text) && string.IsNullOrWhiteSpace(inputFields[1].text))
         {
-
             warningText.text = "Vui lòng nhập dữ liệu!";
         }
         else

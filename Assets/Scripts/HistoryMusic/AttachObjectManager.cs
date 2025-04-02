@@ -19,7 +19,6 @@ public class AttachObjectManager : MonoBehaviour
     private GameObject selectedGameObject;
     public float scaleSpeed = 0.1f;
     private InputSystem_Actions inputActions;
-    public TextMeshProUGUI notifyText;
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -47,8 +46,6 @@ public class AttachObjectManager : MonoBehaviour
     private void StaticEventHandler_OnCloudAnchorSelected(ARAnchor anchor)
     {
         currentCloudAnchor = anchor;
-        Debug.Log("Current Cloud Anchor: " + anchor.trackableId);
-        notifyText.text = "Current Cloud Anchor: " + anchor.trackableId;
     }
 
     private void Start()
@@ -58,7 +55,6 @@ public class AttachObjectManager : MonoBehaviour
     private void StaticEventHandler_OnCurrentCloudAnchorChanged(ARAnchor anchor)
     {
         currentCloudAnchor = anchor;
-        notifyText.text = "Current Cloud Anchor: " + anchor.trackableId;
     }
 
 
@@ -94,7 +90,6 @@ public class AttachObjectManager : MonoBehaviour
     public void SelectObject(InputAction.CallbackContext context)
     {
         Vector2 screenPosition = Vector2.zero;
-        notifyText.text = "Select Object";
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
             screenPosition = Touchscreen.current.primaryTouch.position.ReadValue();
