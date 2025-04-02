@@ -65,7 +65,6 @@ public class AnchorsManager : MonoBehaviour
             inputPosition = Touchscreen.current.primaryTouch.position.ReadValue();
         }
 
-
         HandleAnchorAction(inputPosition);
     }
 
@@ -100,7 +99,7 @@ public class AnchorsManager : MonoBehaviour
 
     private async void PlaceAnchor(Vector2 position)
     {
-        if (arRaycastManager.Raycast(position, hitResults, TrackableType.FeaturePoint))
+        if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
         {
             Pose hitPose = hitResults[0].pose;
             Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);

@@ -31,8 +31,8 @@ public class AttachObjectManager : MonoBehaviour
         StaticEventHandler.OnCurrentAnchorChanged += StaticEventHandler_OnCurrentCloudAnchorChanged;
         StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
         inputActions.Enable();
-        inputActions.Mouse.MouseClick.performed += ctx => SelectObject(ctx);
-        inputActions.Touch.TouchPress.performed += ctx => SelectObject(ctx);
+        //inputActions.Mouse.MouseClick.performed += ctx => SelectObject(ctx);
+        //inputActions.Touch.TouchPress.performed += ctx => SelectObject(ctx);
     }
 
     private void OnDisable()
@@ -41,8 +41,8 @@ public class AttachObjectManager : MonoBehaviour
         StaticEventHandler.OnInstrumentSelected -= StaticEventHandler_OnInstrumentSelected;
         StaticEventHandler.OnCurrentAnchorChanged -= StaticEventHandler_OnCurrentCloudAnchorChanged;
         StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
-        inputActions.Mouse.MouseClick.performed -= ctx => SelectObject(ctx);
-        inputActions.Touch.TouchPress.performed -= ctx => SelectObject(ctx);
+        //inputActions.Mouse.MouseClick.performed -= ctx => SelectObject(ctx);
+        //inputActions.Touch.TouchPress.performed -= ctx => SelectObject(ctx);
         inputActions.Disable();
     }
 
