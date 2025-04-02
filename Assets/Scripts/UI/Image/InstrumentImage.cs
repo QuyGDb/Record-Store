@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class InstrumentImage : MonoBehaviour, IPointerClickHandler
 {
-    [HideInInspector] public Image instrumentImage;
+    [HideInInspector] public Image image;
     private Color defaultColor;
     private Color selectedColor;
     bool isSelected = false;
     [HideInInspector] public InstrumentDetails instrmentDetails;
     public void Awake()
     {
-        instrumentImage = GetComponent<Image>();
-        defaultColor = instrumentImage.color;
+        image = GetComponent<Image>();
+        defaultColor = image.color;
         selectedColor = new Color(0.5f, 0.5f, 0.5f, 1);
     }
 
@@ -24,12 +24,12 @@ public class InstrumentImage : MonoBehaviour, IPointerClickHandler
         if (isSelected)
         {
             StaticEventHandler.InvokeInstrumentSelected(instrmentDetails, isSelected);
-            instrumentImage.color = selectedColor;
+            image.color = selectedColor;
         }
         else
         {
             StaticEventHandler.InvokeInstrumentSelected(instrmentDetails, isSelected);
-            instrumentImage.color = defaultColor;
+            image.color = defaultColor;
         }
     }
 

@@ -22,7 +22,6 @@ public class AnchorsManager : MonoBehaviour
     public AnchorAction anchorAction;
     private ARAnchor previousSelectAnchor;
     [HideInInspector] public ARAnchor currentSelectAnchor;
-    private Image image;
     private ARCameraCapture arCameraCapture;
     [SerializeField] private TextMeshProUGUI quatityText;
     public byte[] imageByte;
@@ -176,8 +175,6 @@ public class AnchorsManager : MonoBehaviour
     {
         arAnchorsManager.TryRemoveAnchor(currentSelectAnchor);
     }
-
-
     private void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -223,4 +220,14 @@ public class AnchorsManager : MonoBehaviour
         return texture;
 
     }
+
+
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(quatityText), quatityText);
+    }
+#endif
+    #endregion
 }

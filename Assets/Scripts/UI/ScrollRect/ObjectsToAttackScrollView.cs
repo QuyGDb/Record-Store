@@ -12,16 +12,28 @@ public class ObjectsToAttackScrollView : MonoBehaviour
 
     private void Awake()
     {
-        StaticEventHandler.OnObjectMusicListChanged += UpdateScrollView;
+        StaticEventHandler.OnObjectMusicListChanged += OnObjectMusicListChanged;
     }
     private void OnDestroy()
     {
-        StaticEventHandler.OnObjectMusicListChanged -= UpdateScrollView;
+        StaticEventHandler.OnObjectMusicListChanged -= OnObjectMusicListChanged;
     }
-
-    private void UpdateScrollView(MusicObjectListSO sO)
+    private void Start()
+    {
+        if (musicObjects != null)
+        {
+            UpdateScrollView();
+        }
+    }
+    private void OnObjectMusicListChanged(MusicObjectListSO sO)
     {
         musicObjects = sO.musicObjects;
+        UpdateScrollView();
+
+    }
+
+    private void UpdateScrollView()
+    {
         foreach (Transform child in content)
         {
             Destroy(child.gameObject);
@@ -30,9 +42,8 @@ public class ObjectsToAttackScrollView : MonoBehaviour
         {
             GameObject GO = Instantiate(prefab, content);
             InstrumentImage instrumentImage = GO.GetComponent<InstrumentImage>();
-            instrumentImage.instrumentImage.sprite = musicObject.instrumentSprite;
+            instrumentImage.image.sprite = musicObject.instrumentSprite;
             instrumentImage.instrmentDetails = musicObject;
         }
-
     }
 }
