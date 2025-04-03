@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 public class InstrumentsManager : MonoBehaviour
@@ -9,8 +10,9 @@ public class InstrumentsManager : MonoBehaviour
     public LayerMask hitLayers;
     private InstrumentShowcase previousInstrumentShowcase;
     private InstrumentShowcase currentInstrumentShowcase;
+    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+
     public float scaleSpeed = 0.1f;
-    private int mainDropDownValue;
     private void Awake()
     {
     }
@@ -19,7 +21,6 @@ public class InstrumentsManager : MonoBehaviour
         StaticEventHandler.OnAnchorSelected += StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSOSelected += StaticEventHandler_OnInstrumentSelected;
         StaticEventHandler.OnCurrentAnchorChanged += StaticEventHandler_OnCurrentCloudAnchorChanged;
-        StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
         StaticEventHandler.OnInstrumentShowcaseChanged += StaticEventHandler_OnInstrumentShowcaseChanged;
     }
 
@@ -38,14 +39,10 @@ public class InstrumentsManager : MonoBehaviour
         StaticEventHandler.OnAnchorSelected -= StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSOSelected -= StaticEventHandler_OnInstrumentSelected;
         StaticEventHandler.OnCurrentAnchorChanged -= StaticEventHandler_OnCurrentCloudAnchorChanged;
-        StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
         StaticEventHandler.OnInstrumentShowcaseChanged -= StaticEventHandler_OnInstrumentShowcaseChanged;
     }
 
-    private void OnMainDropdownChanged(int value)
-    {
-        mainDropDownValue = value;
-    }
+
 
     private void StaticEventHandler_OnCloudAnchorSelected(ARAnchor anchor)
     {
@@ -91,8 +88,12 @@ public class InstrumentsManager : MonoBehaviour
     public void SaveObjectAtReleasePosition()
     {
         if (currentInstrumentShowcase == null) return;
-        Transform transform = currentInstrumentShowcase.transform;
-        ES3.Save(currentInstrumentShowcase.instrumentShowcaseSO.instrumentName, transform);
+        LocalTransfrom localTransfrom = new LocalTransfrom();
+        localTransfrom.localPosition = currentInstrumentShowcase.transform.localPosition;
+        localTransfrom.localRotation = currentInstrumentShowcase.transform.rotation;
+        localTransfrom.localScale = currentInstrumentShowcase.transform.localScale;
+        textMeshProUGUI.text = localTransfrom.localPosition + ", " + localTransfrom.localRotation + ", " + localTransfrom.localScale;
+        ES3.Save(currentInstrumentShowcase.instrumentShowcaseSO.instrumentName, localTransfrom);
     }
 
     public void DeteleCurrentSelectedObject()

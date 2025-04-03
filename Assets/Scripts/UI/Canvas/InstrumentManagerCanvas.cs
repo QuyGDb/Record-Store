@@ -26,7 +26,6 @@ public class InstrumentManagerCanvas : MonoBehaviour
     }
     private void OnInstrumentsManagerChanged(InstrumentsManager manager)
     {
-        buttons[0].onClick.AddListener((ToggleScrollRect));
         buttons[1].onClick.AddListener(() =>
         {
             ToggleScrollRect();
@@ -36,6 +35,8 @@ public class InstrumentManagerCanvas : MonoBehaviour
         buttons[3].onClick.AddListener((manager.DeteleCurrentSelectedObject));
 
     }
+
+
 
     void ToggleScrollRect()
     {

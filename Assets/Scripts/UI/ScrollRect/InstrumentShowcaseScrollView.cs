@@ -8,7 +8,7 @@ public class InstrumentShowcaseScrollView : MonoBehaviour
 {
     [SerializeField] private Transform content;
     [SerializeField] private GameObject prefab;
-    public InstrumentShowcaseListSO instrumentListSO;
+    [HideInInspector] public InstrumentShowcaseListSO instrumentListSO;
 
     private void Awake()
     {

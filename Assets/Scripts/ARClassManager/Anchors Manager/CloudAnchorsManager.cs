@@ -15,7 +15,8 @@ public class CloudAnchorsManager : MonoBehaviour
     public Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
     [ShowInInspector]
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
-    [SerializeField] private TextMeshProUGUI notify;
+    [SerializeField] private TextMeshProUGUI notifyforHost;
+    [SerializeField] private TextMeshProUGUI notifyforResolve;
     [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
     private AnchorType currentAnchorType;
@@ -84,7 +85,7 @@ public class CloudAnchorsManager : MonoBehaviour
         HostCloudAnchorPromise hostCloudAnchorPromise = arAnchorsManager.HostCloudAnchorAsync(aRAnchor, 300);
         while (hostCloudAnchorPromise.State == PromiseState.Pending)
         {
-            notify.text = $"🔄 HOST + {Time.frameCount}";
+            notifyforHost.text = $"🔄 HOST + {Time.frameCount}";
             yield return null;
         }
 
@@ -92,11 +93,11 @@ public class CloudAnchorsManager : MonoBehaviour
         {
             AnchorDetails anchorDetails = InitializeAnchorDetails(aRAnchor, hostCloudAnchorPromise);
             cloudAnchorDetails.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
-            notify.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
+            notifyforHost.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
 
         }
         else
-            notify.text = $"Error {hostCloudAnchorPromise.Result.CloudAnchorState}";
+            notifyforHost.text = $"Error {hostCloudAnchorPromise.Result.CloudAnchorState}";
 #endif
 
 #if UNITY_EDITOR
@@ -115,7 +116,7 @@ public class CloudAnchorsManager : MonoBehaviour
         anchorDetails.anchorImage = anchorsManager.imageByte;
         anchorDetails.anchorName = nameCurrentAnchor;
         anchorDetails.anchorType = currentAnchorType;
-        notify.text = $"📍 Đã tạo Cloud Anchor: {hostCloudAnchorPromise}";
+        notifyforHost.text = $"📍 Đã tạo Cloud Anchor: {hostCloudAnchorPromise}";
         anchorDetails.cloudAnchorId = hostCloudAnchorPromise.Result.CloudAnchorId;
         return anchorDetails;
     }
@@ -141,11 +142,11 @@ public class CloudAnchorsManager : MonoBehaviour
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
             QueryARCloudAnchor(aRCloudAnchor, cloudAnchorId);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
-            notify.text = $"✅ Đã tải Cloud Anchor {cloudAnchorId} thành công";
+            notifyforResolve.text = $"✅ Đã tải Cloud Anchor {cloudAnchorId} thành công";
         }
         else
         {
-            notify.text = $"❌ Không thể tải Cloud Anchor {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
+            notifyforResolve.text = $"❌ Không thể tải Cloud Anchor {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
         }
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)
@@ -180,7 +181,7 @@ public class CloudAnchorsManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        HelperUtilities.ValidateCheckNullValue(this, nameof(notify), notify);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(notifyforHost), notifyforHost);
     }
 #endif
     #endregion
