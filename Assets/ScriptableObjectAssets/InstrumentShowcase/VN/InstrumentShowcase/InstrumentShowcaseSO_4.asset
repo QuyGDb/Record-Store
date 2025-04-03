@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b36dd3db6589c94fbb0058683d56524, type: 3}
+  m_Name: InstrumentShowcaseSO_4
+  m_EditorClassIdentifier: 
+  instrumentName: InstrumentShowcaseVN_4
+  instrumentPrefab: {fileID: 2155014289470420218, guid: 4c83062a74099ad4ab972f5b0672f56d,
+    type: 3}
+  instrumentSprite: {fileID: 21300000, guid: 96a05663e4597f94abbc0fcdb18243c9, type: 3}

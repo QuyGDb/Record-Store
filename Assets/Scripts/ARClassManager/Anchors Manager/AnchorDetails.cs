@@ -3,7 +3,7 @@ using UnityEngine;
 public class AnchorDetails
 {
     public string anchorName;
-    public string anchorDescription;
+    public AnchorType anchorType;
     public string cloudAnchorId;
     public byte[] anchorImage;
 

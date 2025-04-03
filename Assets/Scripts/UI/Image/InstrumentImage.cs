@@ -10,7 +10,7 @@ public class InstrumentImage : MonoBehaviour, IPointerClickHandler
     private Color defaultColor;
     private Color selectedColor;
     bool isSelected = false;
-    [HideInInspector] public InstrumentDetails instrmentDetails;
+    public InstrumentShowcaseSO instrumentShowcase;
     public void Awake()
     {
         image = GetComponent<Image>();
@@ -23,12 +23,13 @@ public class InstrumentImage : MonoBehaviour, IPointerClickHandler
         isSelected = !isSelected;
         if (isSelected)
         {
-            StaticEventHandler.InvokeInstrumentSelected(instrmentDetails, isSelected);
+            StaticEventHandler.InvokeInstrumentShowcaseSOSelected(instrumentShowcase, isSelected);
+            Debug.Log(instrumentShowcase);
             image.color = selectedColor;
         }
         else
         {
-            StaticEventHandler.InvokeInstrumentSelected(instrmentDetails, isSelected);
+            StaticEventHandler.InvokeInstrumentShowcaseSOSelected(instrumentShowcase, isSelected);
             image.color = defaultColor;
         }
     }

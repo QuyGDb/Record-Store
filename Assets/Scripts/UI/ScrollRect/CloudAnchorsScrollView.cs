@@ -30,7 +30,7 @@ public class CloudAnchorsScrollView : MonoBehaviour
         {
             GameObject gameObject = Instantiate(prefab, content.transform);
             cloudAnchorImages.Add(gameObject);
-            gameObject.GetComponent<CloudAnchorImage>().anchorDetails = cloudAnchor.Value;
+            gameObject.GetComponent<CloudAnchorUI>().anchorDetails = cloudAnchor.Value;
         }
     }
 

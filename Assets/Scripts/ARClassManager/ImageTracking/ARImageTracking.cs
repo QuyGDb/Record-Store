@@ -36,10 +36,10 @@ public class ARImageTracking : MonoBehaviour
         switch (imageName)
         {
             case "Gieo":
-                prefabToSpawn = GameManager.Instance.albumSOs[0].albumPrefab;
+                prefabToSpawn = GameResources.Instance.Ngot.albumPrefab;
                 break;
             case "SDDBP":
-                prefabToSpawn = GameManager.Instance.albumSOs[1].albumPrefab;
+                prefabToSpawn = GameResources.Instance.SDDBP.albumPrefab;
                 break;
 
         }

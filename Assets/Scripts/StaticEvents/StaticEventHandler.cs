@@ -1,5 +1,7 @@
+using Google.XR.ARCoreExtensions;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 public static class StaticEventHandler
@@ -30,11 +32,11 @@ public static class StaticEventHandler
     {
         OnCloudAnchorsManager?.Invoke(cloudAnchorsManager);
     }
-    public static event Action<string, string> OnSendAnchorInfo;
+    public static event Action<string, AnchorType> OnSendAnchorInfo;
 
-    public static void InvokeSendInfo(string name, string description)
+    public static void InvokeSendInfo(string name, AnchorType anchorType)
     {
-        OnSendAnchorInfo?.Invoke(name, description);
+        OnSendAnchorInfo?.Invoke(name, anchorType);
     }
 
     public static event Action<bool, string> OnSelectCloudAnchor;
@@ -49,18 +51,18 @@ public static class StaticEventHandler
     {
         OnCloudAnchorDetailsChanged?.Invoke(cloudAnchorDetails);
     }
-    public static event Action<MusicObjectListSO> OnObjectMusicListChanged;
+    public static event Action<InstrumentShowcaseListSO> OnInstrumentListSOChanged;
 
-    public static void InvokeObjectMusicListChanged(MusicObjectListSO objectMusicList)
+    public static void InvokeInstrumentShowCaseListVNChanged(InstrumentShowcaseListSO objectMusicList)
     {
-        OnObjectMusicListChanged?.Invoke(objectMusicList);
+        OnInstrumentListSOChanged?.Invoke(objectMusicList);
     }
 
-    public static event Action<InstrumentDetails, bool> OnInstrumentSelected;
+    public static event Action<InstrumentShowcaseSO, bool> OnInstrumentSOSelected;
 
-    public static void InvokeInstrumentSelected(InstrumentDetails instrument, bool isSelected)
+    public static void InvokeInstrumentShowcaseSOSelected(InstrumentShowcaseSO instrument, bool isSelected)
     {
-        OnInstrumentSelected?.Invoke(instrument, isSelected);
+        OnInstrumentSOSelected?.Invoke(instrument, isSelected);
     }
 
     public static event Action<ARAnchor> OnCurrentAnchorChanged;
@@ -70,11 +72,11 @@ public static class StaticEventHandler
         OnCurrentAnchorChanged?.Invoke(cloudAnchor);
     }
 
-    public static event Action<AttachObjectManager> OnAttachObjectManagerChanged;
+    public static event Action<InstrumentsManager> OnInstrumentsManagerChanged;
 
-    public static void InvokeAttachObjectManagerChanged(AttachObjectManager attachObjectManager)
+    public static void InvokeInstrumentsManagerChanged(InstrumentsManager attachObjectManager)
     {
-        OnAttachObjectManagerChanged?.Invoke(attachObjectManager);
+        OnInstrumentsManagerChanged?.Invoke(attachObjectManager);
     }
 
     public static event Action<ARAnchor> OnAnchorSelected;
@@ -89,5 +91,26 @@ public static class StaticEventHandler
     public static void InvokeMainDropdownChanged(int index)
     {
         OnMainDropdownChanged?.Invoke(index);
+    }
+
+    public static event Action<InstrumentShowcase> OnInstrumentShowcaseChanged;
+
+    public static void InvokeInstrumentShowcaseChanged(InstrumentShowcase instrumentShowcase)
+    {
+        OnInstrumentShowcaseChanged?.Invoke(instrumentShowcase);
+    }
+
+    public static event Action<Transform> OnRotateObjectChanged;
+
+    public static void InvokeRotateObjectChanged(Transform transform)
+    {
+        OnRotateObjectChanged?.Invoke(transform);
+    }
+
+    public static event Action<ARCloudAnchor, AnchorType> OnInstantiateAtAnchor;
+
+    public static void InvokeInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType anchorType)
+    {
+        OnInstantiateAtAnchor?.Invoke(aRAnchor, anchorType);
     }
 }

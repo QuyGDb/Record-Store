@@ -31,7 +31,12 @@ public class GameResources : MonoBehaviour
     public AudioMixerSnapshot musicOnFullSnapshot;
     public AudioMixerSnapshot musicOffSnapshot;
 
+    public InstrumentShowcaseListSO instrumentShowCaseVN;
+    public InstrumentShowcaseListSO instrumentShowCaseOversea;
 
+
+    public AlbumSO Ngot;
+    public AlbumSO SDDBP;
     #endregion
     #region Validation
 #if UNITY_EDITOR

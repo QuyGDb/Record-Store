@@ -50,3 +50,9 @@ MonoBehaviour:
   musicLowSnapshot: {fileID: 0}
   musicOnFullSnapshot: {fileID: 0}
   musicOffSnapshot: {fileID: 0}
+  instrumentShowCaseVN: {fileID: 11400000, guid: 5d32c388c91991545a5138a43635ae40,
+    type: 2}
+  instrumentShowCaseOversea: {fileID: 11400000, guid: 4c5c7175fdf2d2545b1b924ceef1cdd5,
+    type: 2}
+  Ngot: {fileID: 11400000, guid: f2101e50addd61e4c9bc456511a28f1f, type: 2}
+  SDDBP: {fileID: 11400000, guid: fb94107dca78e424dae4ef006e58ca63, type: 2}

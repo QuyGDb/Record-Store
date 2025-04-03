@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b8e693a92d38b4085b90e1aacaafd6, type: 3}
+  m_Name: InstrumentShowcaseListSO_VN 1
+  m_EditorClassIdentifier: 
+  instrumentShowcaseList:
+  - {fileID: 11400000, guid: 38d4a64897974f549b9567dfdf85f3a9, type: 2}
+  - {fileID: 11400000, guid: 21cdcf5679ad6374fac6dec35e3b6edb, type: 2}
+  - {fileID: 11400000, guid: 13b7e202ea46a8946983fb6ceafcb65b, type: 2}
+  - {fileID: 11400000, guid: 7ff96b0b0a43e034e8ed92276d762306, type: 2}
+  - {fileID: 11400000, guid: d624d768731187240958aafce96e2c3f, type: 2}

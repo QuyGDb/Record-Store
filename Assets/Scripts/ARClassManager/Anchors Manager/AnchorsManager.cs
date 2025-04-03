@@ -102,10 +102,9 @@ public class AnchorsManager : MonoBehaviour
         if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
         {
             Pose hitPose = hitResults[0].pose;
+            hitPose.rotation = Quaternion.Euler(0, 0, 0);
             Result<ARAnchor> result = await arAnchorsManager.TryAddAnchorAsync(hitPose);
             ARAnchor anchor = result.value;
-            anchor.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            quatityText.text = anchor.gameObject.transform.rotation.eulerAngles.ToString();
 #if UNITY_EDITOR
 
             await CaptureScreenshot(anchor);

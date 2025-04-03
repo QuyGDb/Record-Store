@@ -6,16 +6,19 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class AnchorsManagerCanvas : MonoBehaviour
 {
-    private TMP_Dropdown dropdown;
+    private TMP_Dropdown anchorActionDropdown;
+    private AnchorTypeDropdown anchorTypeDropdown;
     private AnchorsManager anchorsManager;
-    [SerializeField] public TMP_InputField[] inputFields;
+    [SerializeField] public TMP_InputField inputField;
     [SerializeField] private UnityEngine.UI.Button saveButtons;
     [SerializeField] private TextMeshProUGUI warningText;
+
     private void Awake()
     {
-        dropdown = GetComponentInChildren<TMP_Dropdown>();
-        inputFields = GetComponentsInChildren<TMP_InputField>();
-        dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+        anchorActionDropdown = GetComponentInChildren<TMP_Dropdown>();
+        anchorTypeDropdown = GetComponentInChildren<AnchorTypeDropdown>();
+        inputField = GetComponentInChildren<TMP_InputField>();
+        anchorActionDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
         StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
         saveButtons.onClick.AddListener(IsVaildCloudAnchor);
@@ -23,7 +26,7 @@ public class AnchorsManagerCanvas : MonoBehaviour
     }
     private void OnDestroy()
     {
-        dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
+        anchorActionDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         saveButtons.onClick.RemoveAllListeners();
         StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
         StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
@@ -34,28 +37,26 @@ public class AnchorsManagerCanvas : MonoBehaviour
     {
         if (index != 0)
         {
-            dropdown.value = 0;
+            anchorActionDropdown.value = 0;
         }
     }
 
     void IsVaildCloudAnchor()
     {
 
-        if (string.IsNullOrWhiteSpace(inputFields[0].text) && string.IsNullOrWhiteSpace(inputFields[1].text))
+        if (string.IsNullOrWhiteSpace(inputField.text) && anchorTypeDropdown.dropdown.value == 0)
         {
             warningText.text = "Vui lòng nhập dữ liệu!";
         }
         else
         {
-            StaticEventHandler.InvokeSendInfo(inputFields[0].text, inputFields[1].text);
-            inputFields[0].text = "";
-            inputFields[1].text = "";
+            StaticEventHandler.InvokeSendInfo(inputField.text, anchorTypeDropdown.anchorType);
         }
     }
     private void OnAnchorsManager(AnchorsManager anchorsManager)
     {
         this.anchorsManager = anchorsManager;
-        anchorsManager.anchorAction = (AnchorAction)dropdown.value;
+        anchorsManager.anchorAction = (AnchorAction)anchorActionDropdown.value;
     }
 
     private void OnDropdownValueChanged(int arg0)

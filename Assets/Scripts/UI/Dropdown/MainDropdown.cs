@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MainDropdown : MonoBehaviour
 {
-    [SerializeField] Canvas[] canvas = new Canvas[3];
+    [SerializeField] Canvas[] canvas = new Canvas[4];
     TMP_Dropdown dropdown;
 
     private void Awake()
@@ -36,6 +36,7 @@ public class MainDropdown : MonoBehaviour
             case 3:
                 DeactivateAllCanvas();
                 canvas[2].enabled = true;
+                canvas[3].enabled = true;
                 break;
         }
         StaticEventHandler.InvokeMainDropdownChanged(value);

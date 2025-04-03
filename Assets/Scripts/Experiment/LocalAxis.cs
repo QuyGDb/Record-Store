@@ -4,12 +4,26 @@ public class LocalAxis : MonoBehaviour
 {
     private LineRenderer lineX, lineY, lineZ;
 
-    void Start()
+    void Awake()
     {
         lineX = CreateLine(Color.red);
         lineY = CreateLine(Color.green);
         lineZ = CreateLine(Color.blue);
     }
+
+    private void OnEnable()
+    {
+        lineX.enabled = true;
+        lineY.enabled = true;
+        lineZ.enabled = true;
+    }
+    private void OnDisable()
+    {
+        lineX.enabled = false;
+        lineY.enabled = false;
+        lineZ.enabled = false;
+    }
+
 
     void Update()
     {
@@ -35,7 +49,7 @@ public class LocalAxis : MonoBehaviour
 
     void DrawAxis()
     {
-        float axisLength = 1.0f; // Độ dài trục
+        float axisLength = 0.3f; // Độ dài trục
 
         // Vẽ trục X (màu đỏ)
         lineX.SetPosition(0, transform.position);
