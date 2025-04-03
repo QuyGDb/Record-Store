@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4573280125584197080}
   - component: {fileID: 2685556016504348356}
   - component: {fileID: -4031394007590069275}
-  - component: {fileID: -8011910283909953258}
   - component: {fileID: 3019386325889914484}
   - component: {fileID: 989348628963547692}
   m_Layer: 9
@@ -141,29 +140,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-8011910283909953258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2155014289470420218}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b309761041ee54265b7f9a8c0f373dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObjectPlaneTranslationMode: 1
-  m_EnablePlaneClassificationFilter: 0
-  m_PlaneClassificationsList: 
-  m_PlaneClassifications: 0
-  m_UseInteractorOrientation: 0
-  m_MinScale: 100
-  m_MaxScale: 500
-  m_ScaleSensitivity: 0.75
-  m_Elasticity: 0.15
-  m_EnableElasticBreakLimit: 0
-  m_ElasticBreakLimit: 0.5
 --- !u!114 &3019386325889914484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +229,7 @@ MonoBehaviour:
   m_SmoothPosition: 0
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
-  m_TrackRotation: 1
+  m_TrackRotation: 0
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
@@ -261,7 +237,7 @@ MonoBehaviour:
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
   m_TightenScale: 0.1
-  m_ThrowOnDetach: 1
+  m_ThrowOnDetach: 0
   m_ThrowSmoothingDuration: 0.25
   m_ThrowSmoothingCurve:
     serializedVersion: 2
@@ -298,13 +274,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b309761041ee54265b7f9a8c0f373dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObjectPlaneTranslationMode: 2
+  m_ObjectPlaneTranslationMode: 1
   m_EnablePlaneClassificationFilter: 0
   m_PlaneClassificationsList: 
   m_PlaneClassifications: 0
   m_UseInteractorOrientation: 0
-  m_MinScale: 0.25
-  m_MaxScale: 2
+  m_MinScale: 100
+  m_MaxScale: 500
   m_ScaleSensitivity: 0.75
   m_Elasticity: 0.15
   m_EnableElasticBreakLimit: 0
