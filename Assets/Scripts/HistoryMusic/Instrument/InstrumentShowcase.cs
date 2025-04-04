@@ -30,8 +30,11 @@ public class InstrumentShowcase : MonoBehaviour
         LoadTransform();
     }
 
-    private void LoadTransform()
+    public async void LoadTransform()
     {
+        gameObject.SetActive(false);
+        await Awaitable.WaitForSecondsAsync(3f);
+        gameObject.SetActive(true);
         gameObject.transform.localPosition = localTransfrom.localPosition;
         gameObject.transform.localRotation = localTransfrom.localRotation;
         gameObject.transform.localScale = localTransfrom.localScale;

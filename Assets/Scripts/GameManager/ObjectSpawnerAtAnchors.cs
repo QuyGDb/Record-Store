@@ -7,7 +7,7 @@ using UnityEngine.XR.ARFoundation;
 
 public class ObjectSpawnerAtAnchors : MonoBehaviour
 {
-
+    private List<GameObject> instrumentShowcaseList = new List<GameObject>();
     private void Awake()
     {
         StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
@@ -24,12 +24,12 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         {
             case AnchorType.IntrumentShowCaseVN:
                 List<InstrumentShowcaseSO> instrumentShowcaseSOs = GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList;
-                List<GameObject> instrumentShowcaseGOList = new List<GameObject>();
+                List<GameObject> instrumentShowcasePrefabList = new List<GameObject>();
                 foreach (var instrumentShowcaseSO in instrumentShowcaseSOs)
                 {
-                    instrumentShowcaseGOList.Add(instrumentShowcaseSO.instrumentPrefab);
+                    instrumentShowcasePrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
                 }
-                InitializeObjectsAtAnchors(aRAnchor, instrumentShowcaseGOList);
+                InitializeObjectsAtAnchors(aRAnchor, instrumentShowcasePrefabList);
                 break;
             case AnchorType.InstrumentShowCaseOversea:
                 InstrumentShowcaseListSO instrumentShowcaseListSOOversea = GameResources.Instance.instrumentShowCaseOversea;
@@ -44,6 +44,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         foreach (var item in gameObject)
         {
             GameObject obj = Instantiate(item, aRAnchor.transform);
+            instrumentShowcaseList.Add(obj);
         }
 
     }

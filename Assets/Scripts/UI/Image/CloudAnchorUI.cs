@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class CloudAnchorUI : MonoBehaviour, IPointerClickHandler
 {
-    public AnchorDetails anchorDetails;
-    public Image targetImage;
-    public TextMeshProUGUI textMeshProUGUI;
+    [HideInInspector] public AnchorDetails anchorDetails;
+    [HideInInspector] public Image targetImage;
+    [HideInInspector] public TextMeshProUGUI textMeshProUGUI;
     private bool isSelected = false;
     private Color defaultColor;
     private Color selectedColor;
@@ -40,7 +40,7 @@ public class CloudAnchorUI : MonoBehaviour, IPointerClickHandler
     }
     void SetInforAnchorImage()
     {
-        textMeshProUGUI.text = anchorDetails.anchorName + "Type: " + anchorDetails.anchorType.ToString();
+        textMeshProUGUI.text = anchorDetails.anchorName + " - Type: " + anchorDetails.anchorType.ToString();
 
     }
     private Sprite SetSprite()

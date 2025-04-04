@@ -135,6 +135,7 @@ public class CloudAnchorsManager : MonoBehaviour
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending)
         {
+            notifyforResolve.text = $"🔄 Đang tải Cloud Anchor {cloudAnchorId} + {Time.frameCount}";
             yield return null;
         }
         if (resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
@@ -142,7 +143,8 @@ public class CloudAnchorsManager : MonoBehaviour
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
             QueryARCloudAnchor(aRCloudAnchor, cloudAnchorId);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
-            notifyforResolve.text = $"✅ Đã tải Cloud Anchor {cloudAnchorId} thành công";
+            notifyforResolve.text = $"Position: {aRCloudAnchor.pose.position}, Rotation: {aRCloudAnchor.pose.rotation}";
+
         }
         else
         {

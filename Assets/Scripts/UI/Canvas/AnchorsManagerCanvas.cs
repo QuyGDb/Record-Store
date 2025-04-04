@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 using static UnityEngine.Rendering.DebugUI;
 
 public class AnchorsManagerCanvas : MonoBehaviour
@@ -9,10 +10,11 @@ public class AnchorsManagerCanvas : MonoBehaviour
     private TMP_Dropdown anchorActionDropdown;
     private AnchorTypeDropdown anchorTypeDropdown;
     private AnchorsManager anchorsManager;
-    [SerializeField] public TMP_InputField inputField;
+    [SerializeField] private ARPlaneManager arPlaneManager;
+    [HideInInspector] public TMP_InputField inputField;
     [SerializeField] private UnityEngine.UI.Button saveButtons;
     [SerializeField] private TextMeshProUGUI warningText;
-
+    bool isPlanesActive = false;
     private void Awake()
     {
         anchorActionDropdown = GetComponentInChildren<TMP_Dropdown>();
@@ -59,8 +61,22 @@ public class AnchorsManagerCanvas : MonoBehaviour
         anchorsManager.anchorAction = (AnchorAction)anchorActionDropdown.value;
     }
 
-    private void OnDropdownValueChanged(int arg0)
+    private void OnDropdownValueChanged(int value)
     {
-        anchorsManager.anchorAction = (AnchorAction)arg0;
+        anchorsManager.anchorAction = (AnchorAction)value;
+
+        if (value == 3)
+        {
+            anchorsManager.DeleteAnchor();
+        }
+        if (value == 4)
+        {
+            foreach (var plane in arPlaneManager.trackables)
+            {
+                plane.gameObject.SetActive(isPlanesActive);
+            }
+            isPlanesActive = !isPlanesActive;
+        }
     }
+
 }

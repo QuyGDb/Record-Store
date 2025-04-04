@@ -19,6 +19,7 @@ public class RotateARObjectManager : MonoBehaviour
         buttons[3].onClick.AddListener(() => RotateYNegative(currentTransform));
         buttons[4].onClick.AddListener(() => RotateZPositive(currentTransform));
         buttons[5].onClick.AddListener(() => RotateZNegative(currentTransform));
+        buttons[6].onClick.AddListener(() => ResetRotate(currentTransform));
     }
     private void OnDestroy()
     {
@@ -29,6 +30,7 @@ public class RotateARObjectManager : MonoBehaviour
         buttons[3].onClick.RemoveListener(() => RotateYNegative(currentTransform));
         buttons[4].onClick.RemoveListener(() => RotateZPositive(currentTransform));
         buttons[5].onClick.RemoveListener(() => RotateZNegative(currentTransform));
+        buttons[6].onClick.RemoveListener(() => ResetRotate(currentTransform));
     }
     private void RotateXPositive(Transform transform)
     {
@@ -54,8 +56,13 @@ public class RotateARObjectManager : MonoBehaviour
     {
         transform.Rotate(Vector3.forward, -90);
     }
+    private void ResetRotate(Transform transform)
+    {
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
     private void RotateObject(Transform transform)
     {
         currentTransform = transform;
     }
+
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6384105876888708655}
   - component: {fileID: 5843910889580277432}
   - component: {fileID: 9172917550576693297}
+  - component: {fileID: 6290618995910145236}
   m_Layer: 0
   m_Name: AlbumSDDBP
   m_TagString: Untagged
@@ -141,6 +142,18 @@ MonoBehaviour:
   albumName: {fileID: 3438963255140468364}
   genres: {fileID: 511947666946368610}
   albumSO: {fileID: 11400000, guid: fb94107dca78e424dae4ef006e58ca63, type: 2}
+--- !u!114 &6290618995910145236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42531759583339074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000b75b1e1dc39f4db2326e15ab40c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493047512172564533
 GameObject:
   m_ObjectHideFlags: 0

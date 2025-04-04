@@ -2,16 +2,15 @@
 
 public class DrawAxis : MonoBehaviour
 {
-    void Start()
-    {
-        float axisLength = 0.5f;  // Tăng độ dài trục để dễ nhìn hơn
-        float lineWidth = 0.02f;  // Tăng độ dày
+    float axisLength = 0.5f;  // Tăng độ dài trục để dễ nhìn hơn
+    float lineWidth = 0.02f;
 
+    private void Update()
+    {
         DrawLine(Vector3.zero, Vector3.right * axisLength, Color.red, lineWidth);   // X - Đỏ
         DrawLine(Vector3.zero, Vector3.up * axisLength, Color.green, lineWidth);    // Y - Xanh lá
         DrawLine(Vector3.zero, Vector3.forward * axisLength, Color.blue, lineWidth);// Z - Xanh dương
     }
-
     void DrawLine(Vector3 start, Vector3 end, Color color, float width)
     {
         GameObject line = new GameObject("Line");

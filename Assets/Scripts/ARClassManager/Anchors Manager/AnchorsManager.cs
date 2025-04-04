@@ -14,7 +14,7 @@ using UnityEngine.XR.ARSubsystems;
 public class AnchorsManager : MonoBehaviour
 {
     public LayerMask anchorLayer;
-    private ARAnchorManager arAnchorsManager;
+    [HideInInspector] public ARAnchorManager arAnchorsManager;
     private ARRaycastManager arRaycastManager;
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     [ShowInInspector]
@@ -138,7 +138,6 @@ public class AnchorsManager : MonoBehaviour
         {
 
             Ray ray = Camera.main.ScreenPointToRay(inputPosition);
-
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, anchorLayer))
             {
@@ -157,7 +156,6 @@ public class AnchorsManager : MonoBehaviour
                     }
                     else if (anchor != null && anchor == currentSelectAnchor)
                     {
-                        // Nếu nhấn lại cùng một Anchor, bỏ chọn
                         currentSelectAnchor.GetComponent<SpriteRenderer>().color = Color.white;
                         currentSelectAnchor = null;
                         return null;
@@ -175,15 +173,21 @@ public class AnchorsManager : MonoBehaviour
     }
     private void Update()
     {
+        if (anchorAction == AnchorAction.None)
+        {
+            quatityText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
+        }
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
 
-        if (anchorAction == AnchorAction.Delete)
-        {
-            if (currentSelectAnchor != null)
-                DeleteAnchor();
-        }
+    }
+    private Pose GetCameraPose()
+    {
+        Pose cameraPose = new Pose();
+        cameraPose.position = Camera.main.transform.position;
+        cameraPose.rotation = Camera.main.transform.rotation;
+        return cameraPose;
     }
 
     void HandleAnchorAction(Vector2 touchPostion)
