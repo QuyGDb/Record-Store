@@ -33,7 +33,7 @@ public class InstrumentShowcase : MonoBehaviour
     public async void LoadTransform()
     {
         gameObject.SetActive(false);
-        await Awaitable.WaitForSecondsAsync(3f);
+        await Awaitable.NextFrameAsync();
         gameObject.SetActive(true);
         gameObject.transform.localPosition = localTransfrom.localPosition;
         gameObject.transform.localRotation = localTransfrom.localRotation;

@@ -99,7 +99,7 @@ public class AnchorsManager : MonoBehaviour
 
     private async void PlaceAnchor(Vector2 position)
     {
-        if (arRaycastManager.Raycast(position, hitResults, TrackableType.AllTypes))
+        if (arRaycastManager.Raycast(position, hitResults, TrackableType.FeaturePoint))
         {
             Pose hitPose = hitResults[0].pose;
             hitPose.rotation = Quaternion.Euler(0, 0, 0);

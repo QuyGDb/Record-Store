@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6304851584300069914}
   - component: {fileID: -953638893048156410}
+  - component: {fileID: 5895073175158792407}
   m_Layer: 7
   m_Name: Dan T rung
   m_TagString: Untagged
@@ -133,7 +134,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTranforms: {fileID: 0}
-  instrumentDetails:
-    instrumentPrefab: {fileID: 0}
-    instrumentSprite: {fileID: 0}
-    instrumentTransform: {fileID: 0}
+--- !u!136 &5895073175158792407
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6175072515175909937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.05
+  m_Height: 1.64
+  m_Direction: 1
+  m_Center: {x: 0.5, y: 1, z: -0.6}

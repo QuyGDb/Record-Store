@@ -56,3 +56,4 @@ MonoBehaviour:
     type: 2}
   Ngot: {fileID: 11400000, guid: f2101e50addd61e4c9bc456511a28f1f, type: 2}
   SDDBP: {fileID: 11400000, guid: fb94107dca78e424dae4ef006e58ca63, type: 2}
+  wallSO_ShowcaseVN: {fileID: 11400000, guid: 1ab769f58582c0c48963a8ee7f97a5d4, type: 2}

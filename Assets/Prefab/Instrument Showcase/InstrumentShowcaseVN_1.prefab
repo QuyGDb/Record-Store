@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1567178068879756443}
   - component: {fileID: 2587486476860365836}
   - component: {fileID: 7695118648155211319}
-  - component: {fileID: -1601115320012049862}
   - component: {fileID: 4253107651058829156}
+  - component: {fileID: -4519861439606302607}
   - component: {fileID: 3370133902909225490}
   - component: {fileID: -8338606438652716556}
   m_Layer: 9
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
-  m_AttachTransform: {fileID: 0}
+  m_AttachTransform: {fileID: 2954506106104636385}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
@@ -243,29 +243,6 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!114 &-1601115320012049862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1047918772569867758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b309761041ee54265b7f9a8c0f373dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObjectPlaneTranslationMode: 1
-  m_EnablePlaneClassificationFilter: 0
-  m_PlaneClassificationsList: 
-  m_PlaneClassifications: 16
-  m_UseInteractorOrientation: 0
-  m_MinScale: 1
-  m_MaxScale: 3
-  m_ScaleSensitivity: 0.1
-  m_Elasticity: 0.15
-  m_EnableElasticBreakLimit: 0
-  m_ElasticBreakLimit: 0.5
 --- !u!65 &4253107651058829156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -287,6 +264,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.53979695, y: 0.19181375, z: 0.31209}
   m_Center: {x: -0.00068730116, y: -0.095957235, z: 0.15639053}
+--- !u!114 &-4519861439606302607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047918772569867758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PermittedDisplacementAxes: 6
+  m_ConstrainedAxisDisplacementMode: 1
+  m_TwoHandedRotationMode: 1
+  m_AllowOneHandedScaling: 1
+  m_AllowTwoHandedScaling: 1
+  m_OneHandedScaleSpeed: 0.5
+  m_ThresholdMoveRatioForScale: 0.05
+  m_ClampScaling: 1
+  m_MinimumScaleRatio: 0.25
+  m_MaximumScaleRatio: 2
+  m_ScaleMultiplier: 0.25
 --- !u!114 &3370133902909225490
 MonoBehaviour:
   m_ObjectHideFlags: 0

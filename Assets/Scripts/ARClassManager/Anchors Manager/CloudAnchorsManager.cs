@@ -144,7 +144,6 @@ public class CloudAnchorsManager : MonoBehaviour
             QueryARCloudAnchor(aRCloudAnchor, cloudAnchorId);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             notifyforResolve.text = $"Position: {aRCloudAnchor.pose.position}, Rotation: {aRCloudAnchor.pose.rotation}";
-
         }
         else
         {

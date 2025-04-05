@@ -26,9 +26,6 @@ public class InstrumentDropdown : MonoBehaviour
             case 0:
                 StaticEventHandler.InvokeInstrumentShowCaseListVNChanged(GameResources.Instance.instrumentShowCaseVN);
                 break;
-            case 1:
-                StaticEventHandler.InvokeInstrumentShowCaseListVNChanged(GameResources.Instance.instrumentShowCaseOversea);
-                break;
 
         }
     }

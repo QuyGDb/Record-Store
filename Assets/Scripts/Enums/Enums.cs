@@ -28,3 +28,10 @@ public enum AnchorType
     InstrumentShowCaseOversea,
     Poster
 }
+public enum PlaneEdge
+{
+    Left,
+    Right,
+    Top,
+    Bottom
+}

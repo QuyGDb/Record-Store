@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8698980106286280671}
   - component: {fileID: -6420249214439025545}
   - component: {fileID: 7308089983509766337}
-  - component: {fileID: -3911959383447514481}
   - component: {fileID: 2172611197787918008}
+  - component: {fileID: -4260103615521512332}
   - component: {fileID: -2306741738127602711}
   - component: {fileID: -3566905840296122324}
   m_Layer: 9
@@ -242,29 +242,6 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!114 &-3911959383447514481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3600045166406027491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b309761041ee54265b7f9a8c0f373dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObjectPlaneTranslationMode: 1
-  m_EnablePlaneClassificationFilter: 0
-  m_PlaneClassificationsList: 
-  m_PlaneClassifications: 0
-  m_UseInteractorOrientation: 0
-  m_MinScale: 1
-  m_MaxScale: 3
-  m_ScaleSensitivity: 0.1
-  m_Elasticity: 0.15
-  m_EnableElasticBreakLimit: 0
-  m_ElasticBreakLimit: 0.5
 --- !u!65 &2172611197787918008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -286,6 +263,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.63046944, y: 0.12699291, z: 0.4141431}
   m_Center: {x: 0.0015675128, y: -0.0632488, z: 0.20693006}
+--- !u!114 &-4260103615521512332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3600045166406027491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PermittedDisplacementAxes: 6
+  m_ConstrainedAxisDisplacementMode: 1
+  m_TwoHandedRotationMode: 1
+  m_AllowOneHandedScaling: 1
+  m_AllowTwoHandedScaling: 1
+  m_OneHandedScaleSpeed: 0.5
+  m_ThresholdMoveRatioForScale: 0.05
+  m_ClampScaling: 1
+  m_MinimumScaleRatio: 0.25
+  m_MaximumScaleRatio: 2
+  m_ScaleMultiplier: 0.25
 --- !u!114 &-2306741738127602711
 MonoBehaviour:
   m_ObjectHideFlags: 0
