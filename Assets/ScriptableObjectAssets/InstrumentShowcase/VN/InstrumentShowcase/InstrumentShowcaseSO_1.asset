@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: InstrumentShowcaseSO_1
   m_EditorClassIdentifier: 
   instrumentName: InstrumentShowcaseVN_1
-  instrumentPrefab: {fileID: 1047918772569867758, guid: 10720a49e97d9564587a499ac78da7b1,
+  instrumentPrefab: {fileID: 4234639339526793505, guid: 5161312c4c67e3c449f5db4747de8962,
     type: 3}
   instrumentSprite: {fileID: 21300000, guid: feb6d0c30c818764aaee2780a4ccb633, type: 3}

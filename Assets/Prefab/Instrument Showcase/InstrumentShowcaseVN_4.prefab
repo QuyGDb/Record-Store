@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5838345690451683078}
   - component: {fileID: 4573280125584197080}
   - component: {fileID: -4031394007590069275}
-  - component: {fileID: 3019386325889914484}
   - component: {fileID: 6358477670069532709}
+  - component: {fileID: 3019386325889914484}
   - component: {fileID: -1789815524615467063}
   - component: {fileID: 5077350787179573747}
   - component: {fileID: -4252289408347221243}
@@ -121,6 +121,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6358477670069532709
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155014289470420218}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.53979695, y: 0.19181375, z: 0.52515286}
+  m_Center: {x: -0.00068730116, y: -0.095957235, z: 0.26292202}
 --- !u!114 &3019386325889914484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +157,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -239,31 +260,11 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
-  m_StartingSingleGrabTransformers: []
+  m_StartingSingleGrabTransformers:
+  - {fileID: -1789815524615467063}
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!65 &6358477670069532709
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2155014289470420218}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.53979695, y: 0.19181375, z: 0.52515286}
-  m_Center: {x: -0.00068730116, y: -0.095957235, z: 0.26292202}
 --- !u!114 &-1789815524615467063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,8 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PermittedDisplacementAxes: 6
-  m_ConstrainedAxisDisplacementMode: 1
+  m_PermittedDisplacementAxes: 5
+  m_ConstrainedAxisDisplacementMode: 0
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
   m_AllowTwoHandedScaling: 1
