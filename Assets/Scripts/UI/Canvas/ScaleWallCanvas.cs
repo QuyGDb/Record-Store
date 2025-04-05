@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 public class ScaleWallCanvas : MonoBehaviour
 {
     private TMP_Dropdown dropdown;
@@ -9,7 +10,7 @@ public class ScaleWallCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI placeHolder;
     private TransformWallManager transformWallManager;
     private PlaneEdge selectedEdge;
-
+    private Button[] buttons;
     public int OnTransformWallManager { get; private set; }
 
     private void Awake()
@@ -19,6 +20,9 @@ public class ScaleWallCanvas : MonoBehaviour
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         inputField.onEndEdit.AddListener(OnInputFieldEndEdit);
         StaticEventHandler.OnTransformWallManagerChanged += GetTransformWallManager;
+        buttons = GetComponentsInChildren<Button>();
+        buttons[0].onClick.AddListener(AddZpositon);
+        buttons[1].onClick.AddListener(SubtractZpositon);
     }
 
     private void GetTransformWallManager(TransformWallManager manager)
@@ -46,6 +50,8 @@ public class ScaleWallCanvas : MonoBehaviour
         dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         inputField.onEndEdit.RemoveListener(OnInputFieldEndEdit);
         StaticEventHandler.OnTransformWallManagerChanged -= GetTransformWallManager;
+        buttons[0].onClick.RemoveListener(AddZpositon);
+        buttons[1].onClick.RemoveListener(SubtractZpositon);
     }
     private void OnInputFieldEndEdit(string value)
     {
@@ -78,5 +84,22 @@ public class ScaleWallCanvas : MonoBehaviour
         }
     }
 
+    private void AddZpositon()
+    {
+        transform.position += new Vector3(0, 0, 0.01f);
+    }
+    private void SubtractZpositon()
+    {
+        transform.position -= new Vector3(0, 0, 0.01f);
+    }
+
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(placeHolder), placeHolder);
+    }
+#endif
+    #endregion
 
 }

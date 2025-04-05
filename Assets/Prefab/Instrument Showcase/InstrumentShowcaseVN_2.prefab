@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2172611197787918008}
   - component: {fileID: 7308089983509766337}
   - component: {fileID: -4260103615521512332}
-  - component: {fileID: -2306741738127602711}
   - component: {fileID: -3566905840296122324}
   m_Layer: 9
   m_Name: InstrumentShowcaseVN_2
@@ -287,18 +286,6 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
---- !u!114 &-2306741738127602711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3600045166406027491}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000b75b1e1dc39f4db2326e15ab40c53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3566905840296122324
 MonoBehaviour:
   m_ObjectHideFlags: 0
