@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class InstrumentManagerCanvas : MonoBehaviour
 {
     private Button[] buttons;
-    private ScrollRect scrollRect;
     private TMP_Dropdown musicObjectsDropdown;
     private void Awake()
     {
         buttons = GetComponentsInChildren<Button>();
-        scrollRect = GetComponentInChildren<ScrollRect>();
         musicObjectsDropdown = GetComponentInChildren<TMP_Dropdown>();
         StaticEventHandler.OnInstrumentsManagerChanged += OnInstrumentsManagerChanged;
     }
@@ -21,14 +19,12 @@ public class InstrumentManagerCanvas : MonoBehaviour
     }
     private void Start()
     {
-        scrollRect.gameObject.SetActive(false);
         musicObjectsDropdown.gameObject.SetActive(false);
     }
     private void OnInstrumentsManagerChanged(InstrumentsManager manager)
     {
         buttons[1].onClick.AddListener(() =>
         {
-            ToggleScrollRect();
             manager.PlaceInstrument();
         });
         buttons[2].onClick.AddListener((manager.SaveObjectAtReleasePosition));
@@ -38,17 +34,5 @@ public class InstrumentManagerCanvas : MonoBehaviour
 
 
 
-    void ToggleScrollRect()
-    {
-        if (scrollRect.gameObject.activeSelf)
-        {
-            musicObjectsDropdown.gameObject.SetActive(false);
-            scrollRect.gameObject.SetActive(false);
-        }
-        else
-        {
-            musicObjectsDropdown.gameObject.SetActive(true);
-            scrollRect.gameObject.SetActive(true);
-        }
-    }
+
 }
