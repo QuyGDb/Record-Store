@@ -113,4 +113,12 @@ public static class StaticEventHandler
     {
         OnInstantiateAtAnchor?.Invoke(aRAnchor, anchorType);
     }
+
+    public static event Action<TransformWallManager> OnTransformWallManagerChanged;
+
+    public static void InvokeTransformWallManager(TransformWallManager transformWallManager)
+    {
+        OnTransformWallManagerChanged?.Invoke(transformWallManager);
+    }
+
 }

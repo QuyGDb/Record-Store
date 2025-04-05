@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class ObjectSpawnerAtAnchors : MonoBehaviour
 {
     private List<GameObject> instrumentShowcaseList = new List<GameObject>();
+
+    private TransformWallManager transformWallManager;
     private void Awake()
     {
         StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
@@ -29,21 +32,33 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
                 {
                     instrumentShowcasePrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
                 }
-                InitializeObjectsAtAnchors(aRAnchor, instrumentShowcasePrefabList);
+                InitializeWall(aRAnchor, instrumentShowcasePrefabList);
+
                 break;
-            case AnchorType.InstrumentShowCaseOversea:
-                InstrumentShowcaseListSO instrumentShowcaseListSOOversea = GameResources.Instance.instrumentShowCaseOversea;
-                break;
+
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
 
-    void InitializeObjectsAtAnchors(ARCloudAnchor aRAnchor, List<GameObject> gameObject)
+    private void InitializeWall(ARCloudAnchor cloudAnchor, List<GameObject> instrumentShowcasePrefabList)
+    {
+        GameObject wall = Instantiate(GameResources.Instance.wallSO_ShowcaseVN.wallPrefab, transform);
+        wall.transform.SetParent(cloudAnchor.transform);
+        wall.transform.localPosition = new Vector3(0, 0, 0);
+        wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        transformWallManager = wall.GetComponent<TransformWallManager>();
+        transformWallManager.wallSO = GameResources.Instance.wallSO_ShowcaseVN;
+        InitializeObjectsAtAnchors(wall.transform, instrumentShowcasePrefabList);
+
+        StaticEventHandler.InvokeTransformWallManager(transformWallManager);
+    }
+
+    void InitializeObjectsAtAnchors(Transform transform, List<GameObject> gameObject)
     {
         foreach (var item in gameObject)
         {
-            GameObject obj = Instantiate(item, aRAnchor.transform);
+            GameObject obj = Instantiate(item, transform);
             instrumentShowcaseList.Add(obj);
         }
 
