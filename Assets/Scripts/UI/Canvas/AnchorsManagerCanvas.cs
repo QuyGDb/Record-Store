@@ -8,11 +8,11 @@ using UnityEngine.XR.ARFoundation;
 public class AnchorsManagerCanvas : MonoBehaviour
 {
     private AnchorTypeDropdown anchorTypeDropdown;
-    private AnchorsManager anchorsManager;
     [HideInInspector] public TMP_InputField inputField;
     [SerializeField] private Button saveButton;
     [SerializeField] private Button deleteButton;
-    [SerializeField] private TextMeshProUGUI warningText;
+    [SerializeField] private TextMeshProUGUI inputNameText;
+    [SerializeField] private TextMeshProUGUI anchorCanvasText;
     public InputActionReference touchPressAction;
     bool isHasAnchor = false;
     private void Awake()
@@ -21,8 +21,7 @@ public class AnchorsManagerCanvas : MonoBehaviour
         touchPressAction.action.started += OnTouchPress;
         anchorTypeDropdown = GetComponentInChildren<AnchorTypeDropdown>();
         inputField = GetComponentInChildren<TMP_InputField>();
-        StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
-
+        GameResources.Instance.anchorSceneText = anchorCanvasText;
     }
 
     private void Start()
@@ -30,7 +29,7 @@ public class AnchorsManagerCanvas : MonoBehaviour
         saveButton.onClick.AddListener(IsValidCloudAnchor);
         deleteButton.onClick.AddListener(() =>
         {
-            var temp = anchorsManager.DeleteAnchor();
+            var temp = GameResources.Instance.anchorsManager.DeleteAnchor();
             isHasAnchor = !temp;
         });
 
@@ -38,7 +37,6 @@ public class AnchorsManagerCanvas : MonoBehaviour
     private void OnDestroy()
     {
         touchPressAction.action.started -= OnTouchPress;
-        StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
         saveButton.onClick.RemoveListener(IsValidCloudAnchor);
         deleteButton.onClick.RemoveAllListeners();
     }
@@ -48,21 +46,16 @@ public class AnchorsManagerCanvas : MonoBehaviour
         Vector2 touchPosition = context.ReadValue<Vector2>();
         if (!isHasAnchor)
         {
-            isHasAnchor = await anchorsManager.PlaceAnchor(touchPosition);
+            isHasAnchor = await GameResources.Instance.anchorsManager.PlaceAnchor(touchPosition);
         }
     }
 
-
-    private void OnAnchorsManager(AnchorsManager manager)
-    {
-        anchorsManager = manager;
-    }
     void IsValidCloudAnchor()
     {
 
         if (string.IsNullOrWhiteSpace(inputField.text) && anchorTypeDropdown.dropdown.value == 0)
         {
-            warningText.text = "Please enter name";
+            inputNameText.text = "Please enter name";
         }
         else
         {

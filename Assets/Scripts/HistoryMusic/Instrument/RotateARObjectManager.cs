@@ -34,34 +34,50 @@ public class RotateARObjectManager : MonoBehaviour
     }
     private void RotateXPositive(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.Rotate(Vector3.right, 90);
     }
     private void RotateXNegative(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.Rotate(Vector3.right, -90);
     }
     private void RotateYPositive(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.Rotate(Vector3.up, 90);
     }
     private void RotateYNegative(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.Rotate(Vector3.up, -90);
     }
     private void RotateZPositive(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.Rotate(Vector3.forward, 90);
     }
     private void RotateZNegative(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.Rotate(Vector3.forward, -90);
     }
     private void ResetRotate(Transform transform)
     {
+        if (transform == null)
+            return;
         transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
     private void RotateObject(Transform transform)
     {
+        if (transform == null)
+            return;
         currentTransform = transform;
     }
 

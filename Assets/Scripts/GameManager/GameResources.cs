@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Tilemaps;
@@ -22,7 +23,6 @@ public class GameResources : MonoBehaviour
     }
 
     public Material defaultMaterial;
-    public Material selectAnchorMAT;
 
     #region SOUNDS
 
@@ -47,6 +47,11 @@ public class GameResources : MonoBehaviour
     public WallSO wallSO_ShowcaseVN;
     #endregion
 
+    #region AnchorsManager
+    [HideInInspector] public AnchorsManager anchorsManager;
+    public TextMeshProUGUI anchorSceneText;
+    public TextMeshProUGUI cloudAnchorSceneText;
+    #endregion
 
     #region Validation
 #if UNITY_EDITOR

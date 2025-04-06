@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-public class DrawAxis : MonoBehaviour
+public class DrawAxis : SingletonMonobehaviourPersistent<DrawAxis>
 {
+
     float axisLength = 0.5f;  // Tăng độ dài trục để dễ nhìn hơn
     float lineWidth = 0.02f;
 

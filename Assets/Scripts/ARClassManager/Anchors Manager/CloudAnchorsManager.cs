@@ -15,8 +15,6 @@ public class CloudAnchorsManager : MonoBehaviour
     public Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
     [ShowInInspector]
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
-    [SerializeField] private TextMeshProUGUI notifyforHost;
-    [SerializeField] private TextMeshProUGUI notifyforResolve;
     [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
     private AnchorType currentAnchorType;
@@ -115,7 +113,7 @@ public class CloudAnchorsManager : MonoBehaviour
         anchorDetails.anchorImage = anchorsManager.imageByte;
         anchorDetails.anchorName = nameCurrentAnchor;
         anchorDetails.anchorType = currentAnchorType;
-        notifyforHost.text = $"📍 Đã tạo Cloud Anchor: {hostCloudAnchorPromise}";
+        GameResources.Instance.anchorSceneText.text = $"Cloud Anchor created: {hostCloudAnchorPromise}";
         anchorDetails.cloudAnchorId = hostCloudAnchorPromise.Result.CloudAnchorId;
         return anchorDetails;
     }
@@ -134,7 +132,7 @@ public class CloudAnchorsManager : MonoBehaviour
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending)
         {
-            notifyforResolve.text = $"🔄 Đang tải Cloud Anchor {cloudAnchorId} + {Time.frameCount}";
+            GameResources.Instance.cloudAnchorSceneText.text = $"Loading Cloud Anchor: {cloudAnchorId} + {Time.frameCount}";
             yield return null;
         }
         if (resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
@@ -142,11 +140,11 @@ public class CloudAnchorsManager : MonoBehaviour
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
             QueryARCloudAnchor(aRCloudAnchor, cloudAnchorId);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
-            notifyforResolve.text = $"Position: {aRCloudAnchor.pose.position}, Rotation: {aRCloudAnchor.pose.rotation}";
+            GameResources.Instance.cloudAnchorSceneText.text = $"Position: {aRCloudAnchor.pose.position}, Rotation: {aRCloudAnchor.pose.rotation}";
         }
         else
         {
-            notifyforResolve.text = $"❌ Không thể tải Cloud Anchor {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
+            GameResources.Instance.cloudAnchorSceneText.text = $"Unable to load Cloud Anchor: {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
         }
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)
@@ -157,6 +155,7 @@ public class CloudAnchorsManager : MonoBehaviour
             if (anchorDetails != null)
             {
                 StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor, anchorDetails.anchorType);
+
             }
         }
 
@@ -177,13 +176,6 @@ public class CloudAnchorsManager : MonoBehaviour
         StaticEventHandler.InvokeCloudAnchorDetailsChanged(cloudAnchorDetails);
     }
 
-    #region Validation
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        HelperUtilities.ValidateCheckNullValue(this, nameof(notifyforHost), notifyforHost);
-    }
-#endif
-    #endregion
+
 }
 

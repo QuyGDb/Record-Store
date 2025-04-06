@@ -3,13 +3,10 @@ using UnityEngine.UI;
 
 public class AnchorDetectMode : MonoBehaviour
 {
-    private AnchorsManager anchorManager;
-
     private Button[] buttons;
     private void Awake()
     {
         buttons = GetComponentsInChildren<Button>();
-        StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
     }
     private void Start()
     {
@@ -18,27 +15,19 @@ public class AnchorDetectMode : MonoBehaviour
     }
     private void OnDestroy()
     {
-        StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
         buttons[0].onClick.RemoveListener(ToggleARPlane);
         buttons[1].onClick.RemoveListener(ToggleARPointCloud);
     }
 
 
-    private void OnAnchorsManager(AnchorsManager anchorManager)
-    {
-        if (anchorManager != null)
-        {
-            this.anchorManager = anchorManager;
-        }
-    }
     private void ToggleARPlane()
     {
-        if (anchorManager != null)
+        if (GameResources.Instance.anchorsManager != null)
         {
-            anchorManager.arPlaneManager.enabled = !anchorManager.arPlaneManager.enabled;
+            GameResources.Instance.anchorsManager.arPlaneManager.enabled = !GameResources.Instance.anchorsManager.arPlaneManager.enabled;
         }
 
-        foreach (var item in anchorManager.arPlaneManager.trackables)
+        foreach (var item in GameResources.Instance.anchorsManager.arPlaneManager.trackables)
         {
             item.gameObject.SetActive(!item.gameObject.activeSelf);
         }
@@ -47,11 +36,11 @@ public class AnchorDetectMode : MonoBehaviour
 
     private void ToggleARPointCloud()
     {
-        if (anchorManager != null)
+        if (GameResources.Instance.anchorsManager != null)
         {
-            anchorManager.arPointCloudManager.enabled = !anchorManager.arPointCloudManager.enabled;
+            GameResources.Instance.anchorsManager.arPointCloudManager.enabled = !GameResources.Instance.anchorsManager.arPointCloudManager.enabled;
         }
-        foreach (var item in anchorManager.arPointCloudManager.trackables)
+        foreach (var item in GameResources.Instance.anchorsManager.arPointCloudManager.trackables)
         {
             item.gameObject.SetActive(!item.gameObject.activeSelf);
         }

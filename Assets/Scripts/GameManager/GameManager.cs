@@ -13,7 +13,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void Start()
     {
-        ChangeApplicationState(ApplicationState.Start);
+        ChangeApplicationState(ApplicationState.CreateMapMode);
     }
     public void ChangeApplicationState(ApplicationState newState)
     {

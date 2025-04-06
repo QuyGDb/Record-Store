@@ -31,12 +31,10 @@ public class AnchorsManager : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
         arAnchorsManager.trackablesChanged.AddListener(OnAnchorChanged);
         StaticEventHandler.OnAnchorCreated += OnAnchorChanged;
+        GameResources.Instance.anchorsManager = this;
     }
 
-    private void Start()
-    {
-        StaticEventHandler.InvokeAnchorsManager(this);
-    }
+
 
     private void OnDestroy()
     {

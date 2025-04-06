@@ -20,12 +20,6 @@ public static class StaticEventHandler
         OnStartFirstSong?.Invoke(album);
     }
 
-    public static event Action<AnchorsManager> OnAnchorsManager;
-
-    public static void InvokeAnchorsManager(AnchorsManager anchorsManager)
-    {
-        OnAnchorsManager?.Invoke(anchorsManager);
-    }
     public static event Action<CloudAnchorsManager> OnCloudAnchorsManager;
 
     public static void InvokeCloudAnchorsManager(CloudAnchorsManager cloudAnchorsManager)
