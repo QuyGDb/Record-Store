@@ -121,4 +121,16 @@ public static class StaticEventHandler
         OnTransformWallManagerChanged?.Invoke(transformWallManager);
     }
 
+    public static event Action<Anchor, bool> OnAnchorCreated;
+
+    public static void InvokeAnchorChanged(Anchor anchor, bool isSelect)
+    {
+        OnAnchorCreated?.Invoke(anchor, isSelect);
+    }
+    public static event Action<ARAnchor> OnAnchorRemoved;
+
+    public static void InvokeAnchorRemoved(ARAnchor anchor)
+    {
+        OnAnchorRemoved?.Invoke(anchor);
+    }
 }

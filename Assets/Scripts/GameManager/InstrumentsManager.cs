@@ -5,7 +5,6 @@ using UnityEngine.XR.ARFoundation;
 public class InstrumentsManager : MonoBehaviour
 {
     public InstrumentShowcaseListSO instrumentShowcaseListSO;
-    private ARAnchor currentCloudAnchor;
     public float maxDistance = 100f;
     public LayerMask hitLayers;
     private InstrumentShowcase previousInstrumentShowcase;
@@ -18,9 +17,7 @@ public class InstrumentsManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        StaticEventHandler.OnAnchorSelected += StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSOSelected += StaticEventHandler_OnInstrumentSelected;
-        StaticEventHandler.OnCurrentAnchorChanged += StaticEventHandler_OnCurrentCloudAnchorChanged;
         StaticEventHandler.OnInstrumentShowcaseChanged += StaticEventHandler_OnInstrumentShowcaseChanged;
     }
 
@@ -36,27 +33,17 @@ public class InstrumentsManager : MonoBehaviour
 
     private void OnDisable()
     {
-        StaticEventHandler.OnAnchorSelected -= StaticEventHandler_OnCloudAnchorSelected;
         StaticEventHandler.OnInstrumentSOSelected -= StaticEventHandler_OnInstrumentSelected;
-        StaticEventHandler.OnCurrentAnchorChanged -= StaticEventHandler_OnCurrentCloudAnchorChanged;
         StaticEventHandler.OnInstrumentShowcaseChanged -= StaticEventHandler_OnInstrumentShowcaseChanged;
     }
 
 
 
-    private void StaticEventHandler_OnCloudAnchorSelected(ARAnchor anchor)
-    {
-        currentCloudAnchor = anchor;
-    }
-
     private void Start()
     {
         StaticEventHandler.InvokeInstrumentsManagerChanged(this);
     }
-    private void StaticEventHandler_OnCurrentCloudAnchorChanged(ARAnchor anchor)
-    {
-        currentCloudAnchor = anchor;
-    }
+
 
     private void StaticEventHandler_OnInstrumentSelected(InstrumentShowcaseSO instrumentShowcase, bool isAdd)
     {
@@ -71,17 +58,7 @@ public class InstrumentsManager : MonoBehaviour
         }
     }
 
-    public void PlaceInstrument()
-    {
-        if (currentCloudAnchor == null) return;
-        foreach (InstrumentShowcaseSO instrumentShowcase in instrumentShowcaseListSO.instrumentShowcaseList)
-        {
-            GameObject instrumentObject = Instantiate(instrumentShowcase.instrumentPrefab, currentCloudAnchor.transform);
-            instrumentObject.transform.rotation = Quaternion.Euler(-90, 0, 0);
-            instrumentObject.transform.localPosition = Vector3.zero;
-        }
-        instrumentShowcaseListSO.instrumentShowcaseList.Clear();
-    }
+
 
 
 

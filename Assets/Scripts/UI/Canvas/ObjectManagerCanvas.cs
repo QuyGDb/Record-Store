@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InstrumentManagerCanvas : MonoBehaviour
+public class ObjectManagerCanvas : MonoBehaviour
 {
     private Button[] buttons;
     private TMP_Dropdown musicObjectsDropdown;
@@ -23,10 +23,7 @@ public class InstrumentManagerCanvas : MonoBehaviour
     }
     private void OnInstrumentsManagerChanged(InstrumentsManager manager)
     {
-        buttons[1].onClick.AddListener(() =>
-        {
-            manager.PlaceInstrument();
-        });
+
         buttons[2].onClick.AddListener((manager.SaveObjectAtReleasePosition));
         buttons[3].onClick.AddListener((manager.DeteleCurrentSelectedObject));
 

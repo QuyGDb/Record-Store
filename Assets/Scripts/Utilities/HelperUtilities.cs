@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.ARFoundation;
 
 public static class HelperUtilities
 {
@@ -67,13 +69,7 @@ public static class HelperUtilities
 
         return error;
     }
-    /// <summary>
-    /// approximately equal check for Vector2
-    /// </summary>
-    public static bool ApproximatelyEqual(Vector2 v1, Vector2 v2, float epsilon)
-    {
-        return Mathf.Abs(v1.x - v2.x) < epsilon && Mathf.Abs(v1.y - v2.y) < epsilon;
-    }
+
 
 
     /// <summary>
@@ -88,29 +84,7 @@ public static class HelperUtilities
         return degrees;
 
     }
-    public static Sprite TextureToSprite(Texture2D texture)
-    {
-        if (texture == null) return null;
 
-        return Sprite.Create(texture,
-                             new Rect(0, 0, texture.width, texture.height),
-                             new Vector2(0.5f, 0.5f),
-                             100.0f); // Pixels Per Unit (PPU)
-    }
-    public static Texture2D SpriteToTexture(Sprite sprite)
-    {
-        if (sprite == null) return null;
-
-        Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
-        Color[] pixels = sprite.texture.GetPixels((int)sprite.rect.x,
-                                                  (int)sprite.rect.y,
-                                                  (int)sprite.rect.width,
-                                                  (int)sprite.rect.height);
-        texture.SetPixels(pixels);
-        texture.Apply();
-
-        return texture;
-    }
     public static byte[] TextureToBytes(Texture2D texture, bool usePNG = true)
     {
         if (texture == null) return null;
@@ -223,4 +197,72 @@ public static class HelperUtilities
         // formula to convert from the linear scale to the logarithmic decibel scale
         return Mathf.Log10((float)linear / linearScaleRange) * 20f;
     }
+    #region CaptureScreenshot
+    public static async Awaitable<byte[]> CaptureScreenshot(ARAnchor anchor)
+    {
+        await Awaitable.EndOfFrameAsync();
+        byte[] textureData;
+
+        int width = Screen.width;
+        int height = Screen.height;
+
+        Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+        texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        texture.Apply();
+        textureData = texture.EncodeToPNG();
+        return textureData;
+
+    }
+    public static Sprite TextureToSprite(Texture2D texture)
+    {
+        if (texture == null) return null;
+
+        return Sprite.Create(texture,
+                             new Rect(0, 0, texture.width, texture.height),
+                             new Vector2(0.5f, 0.5f),
+                             100.0f); // Pixels Per Unit (PPU)
+    }
+    public static Texture2D SpriteToTexture(Sprite sprite)
+    {
+        if (sprite == null) return null;
+
+        Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+        Color[] pixels = sprite.texture.GetPixels((int)sprite.rect.x,
+                                                  (int)sprite.rect.y,
+                                                  (int)sprite.rect.width,
+                                                  (int)sprite.rect.height);
+        texture.SetPixels(pixels);
+        texture.Apply();
+
+        return texture;
+    }
+    #endregion
+
+    public async static Awaitable<byte[]> CaptureWithARObjects()
+    {
+        await Awaitable.EndOfFrameAsync();
+
+        int width = Screen.width;
+        int height = Screen.height;
+
+        RenderTexture renderTexture = new RenderTexture(width, height, 24);
+        Camera.main.targetTexture = renderTexture;
+
+        Camera.main.Render();
+
+        Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+        RenderTexture.active = renderTexture;
+        texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        texture.Apply();
+
+        byte[] imageData = texture.EncodeToPNG();
+
+        Camera.main.targetTexture = null;
+        RenderTexture.active = null;
+        Object.Destroy(renderTexture);
+        Object.Destroy(texture);
+
+        return imageData;
+    }
+
 }

@@ -1,3 +1,5 @@
+using Google.XR.ARCoreExtensions;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +11,7 @@ public class NavigationBar : MonoBehaviour
     {
         buttons = GetComponentsInChildren<Button>(true);
         canvas = transform.parent.GetComponentsInChildren<Canvas>(true);
-
+        StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
     }
 
     private void Start()
@@ -28,7 +30,21 @@ public class NavigationBar : MonoBehaviour
         buttons[2].onClick.RemoveListener(ActiveAnchorCloudCanvas);
         buttons[3].onClick.RemoveListener(ActiveWallManagerCanvas);
         buttons[4].onClick.RemoveListener(ActiveObjectManagerCanvas);
+        StaticEventHandler.OnInstantiateAtAnchor -= OnInstantiateAtAnchor;
     }
+
+    private void OnInstantiateAtAnchor(ARCloudAnchor anchor, AnchorType type)
+    {
+        switch (type)
+        {
+            case AnchorType.IntrumentShowCaseVN:
+                ActiveWallManagerCanvas();
+                break;
+
+
+        }
+    }
+
     void ActiveInstructionCanvas()
     {
         DeactivateAllCanvas();

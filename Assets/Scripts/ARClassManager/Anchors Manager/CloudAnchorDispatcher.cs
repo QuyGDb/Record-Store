@@ -9,27 +9,27 @@ public class CloudAnchorDispatcher : MonoBehaviour
 {
     [SerializeField] private LayerMask cloudAnchorLayer; // Layer của cloud anchor
     private ARAnchor currentARCloudAnchor;
-    private InputSystem_Actions inputActions;
+    //  private InputSystem_Actions inputActions;
     int mainDropDownValue;
     void Awake()
     {
-        inputActions = new InputSystem_Actions();
+        // inputActions = new InputSystem_Actions();
     }
 
     void OnEnable()
     {
-        inputActions.Enable();
-        inputActions.Touch.TouchPress.performed += ctx => OnTouchPerformed(ctx);
-        inputActions.Mouse.MouseClick.performed += ctx => OnMousePerformed(ctx);
+        //inputActions.Enable();
+        //inputActions.Touch.TouchPress.performed += ctx => OnTouchPerformed(ctx);
+        //inputActions.Mouse.MouseClick.performed += ctx => OnMousePerformed(ctx);
         StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
     }
 
     void OnDisable()
     {
-        inputActions.Touch.TouchPress.performed -= ctx => OnTouchPerformed(ctx);
-        inputActions.Mouse.MouseClick.performed -= ctx => OnMousePerformed(ctx);
-        StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
-        inputActions.Disable();
+        //inputActions.Touch.TouchPress.performed -= ctx => OnTouchPerformed(ctx);
+        //inputActions.Mouse.MouseClick.performed -= ctx => OnMousePerformed(ctx);
+        //StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
+        //inputActions.Disable();
     }
 
     private void OnMainDropdownChanged(int value)

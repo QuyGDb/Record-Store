@@ -14,13 +14,7 @@ public enum MusicGenres
     CityPop,
 }
 
-public enum AnchorAction
-{
-    None,
-    Create,
-    Select,
-    Delete,
-}
+
 public enum AnchorType
 {
     None,
@@ -34,4 +28,11 @@ public enum PlaneEdge
     Right,
     Top,
     Bottom
+}
+public enum ApplicationState
+{
+    Start,
+    CreateMapMode,
+
+    LoadMapMode,
 }

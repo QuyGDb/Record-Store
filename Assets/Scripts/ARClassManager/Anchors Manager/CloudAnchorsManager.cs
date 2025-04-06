@@ -102,7 +102,6 @@ public class CloudAnchorsManager : MonoBehaviour
 
 #if UNITY_EDITOR
         AnchorDetails anchorDetailsEditor = new AnchorDetails();
-        anchorDetailsEditor.anchorImage = aRAnchor.GetComponentInChildren<Image>().sprite.texture.EncodeToPNG();
         anchorDetailsEditor.anchorName = nameCurrentAnchor;
         anchorDetailsEditor.cloudAnchorId = Random.Range(0, 10).ToString();
         yield return new WaitForSeconds(1);

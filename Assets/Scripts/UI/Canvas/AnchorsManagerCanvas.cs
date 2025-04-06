@@ -1,82 +1,84 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using static UnityEngine.Rendering.DebugUI;
 
 public class AnchorsManagerCanvas : MonoBehaviour
 {
-    private TMP_Dropdown anchorActionDropdown;
     private AnchorTypeDropdown anchorTypeDropdown;
     private AnchorsManager anchorsManager;
-    [SerializeField] private ARPlaneManager arPlaneManager;
     [HideInInspector] public TMP_InputField inputField;
-    [SerializeField] private UnityEngine.UI.Button saveButtons;
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button deleteButton;
     [SerializeField] private TextMeshProUGUI warningText;
-    bool isPlanesActive = false;
+    public InputActionReference touchPressAction;
+    bool isHasAnchor = false;
     private void Awake()
     {
-        anchorActionDropdown = GetComponentInChildren<TMP_Dropdown>();
+        touchPressAction.action.Enable();
+        touchPressAction.action.started += OnTouchPress;
         anchorTypeDropdown = GetComponentInChildren<AnchorTypeDropdown>();
         inputField = GetComponentInChildren<TMP_InputField>();
-        anchorActionDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         StaticEventHandler.OnAnchorsManager += OnAnchorsManager;
-        StaticEventHandler.OnMainDropdownChanged += OnMainDropdownChanged;
-        saveButtons.onClick.AddListener(IsVaildCloudAnchor);
+
+    }
+
+    private void Start()
+    {
+        saveButton.onClick.AddListener(IsValidCloudAnchor);
+        deleteButton.onClick.AddListener(() =>
+        {
+            var temp = anchorsManager.DeleteAnchor();
+            isHasAnchor = !temp;
+        });
 
     }
     private void OnDestroy()
     {
-        anchorActionDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
-        saveButtons.onClick.RemoveAllListeners();
+        touchPressAction.action.started -= OnTouchPress;
         StaticEventHandler.OnAnchorsManager -= OnAnchorsManager;
-        StaticEventHandler.OnMainDropdownChanged -= OnMainDropdownChanged;
-        saveButtons.onClick.RemoveListener(IsVaildCloudAnchor);
+        saveButton.onClick.RemoveListener(IsValidCloudAnchor);
+        deleteButton.onClick.RemoveAllListeners();
     }
 
-    private void OnMainDropdownChanged(int index)
+    private async void OnTouchPress(InputAction.CallbackContext context)
     {
-        if (index != 0)
+        Vector2 touchPosition = context.ReadValue<Vector2>();
+        if (!isHasAnchor)
         {
-            anchorActionDropdown.value = 0;
+            isHasAnchor = await anchorsManager.PlaceAnchor(touchPosition);
         }
     }
 
-    void IsVaildCloudAnchor()
+
+    private void OnAnchorsManager(AnchorsManager manager)
+    {
+        anchorsManager = manager;
+    }
+    void IsValidCloudAnchor()
     {
 
         if (string.IsNullOrWhiteSpace(inputField.text) && anchorTypeDropdown.dropdown.value == 0)
         {
-            warningText.text = "Vui lòng nhập dữ liệu!";
+            warningText.text = "Please enter name";
         }
         else
         {
             StaticEventHandler.InvokeSendInfo(inputField.text, anchorTypeDropdown.anchorType);
+
+            isHasAnchor = false;
         }
     }
-    private void OnAnchorsManager(AnchorsManager anchorsManager)
+
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        this.anchorsManager = anchorsManager;
-        anchorsManager.anchorAction = (AnchorAction)anchorActionDropdown.value;
+        HelperUtilities.ValidateCheckNullValue(this, nameof(saveButton), saveButton);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(deleteButton), deleteButton);
     }
-
-    private void OnDropdownValueChanged(int value)
-    {
-        anchorsManager.anchorAction = (AnchorAction)value;
-
-        if (value == 3)
-        {
-            anchorsManager.DeleteAnchor();
-        }
-        if (value == 4)
-        {
-            foreach (var plane in arPlaneManager.trackables)
-            {
-                plane.gameObject.SetActive(isPlanesActive);
-            }
-            isPlanesActive = !isPlanesActive;
-        }
-    }
-
+#endif
+    #endregion
 }

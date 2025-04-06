@@ -12,7 +12,6 @@ public class AnchorTypeDropdown : MonoBehaviour
     }
     void Start()
     {
-        // Gán sự kiện cho dropdown
         dropdown.onValueChanged.AddListener(HandleDropdownChange);
 
         PopulateDropdown();

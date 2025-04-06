@@ -14,12 +14,8 @@ public class CDAlbumManager : MonoBehaviour
     public AlbumSO albumSO;
     private void Start()
     {
-
         SelectAlbum();
-
     }
-
-
     private async void SelectAlbum()
     {
 
