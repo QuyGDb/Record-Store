@@ -51,6 +51,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
     {
+#if PLATFORM_ANDROID && !UNITY_EDITOR
         switch (type)
         {
             case AnchorType.IntrumentShowCaseVN:
@@ -67,12 +68,26 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
+#endif
+
+#if UNITY_EDITOR
+        List<InstrumentShowcaseSO> instrumentShowcaseSOs = GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList;
+        List<GameObject> instrumentShowcasePrefabList = new List<GameObject>();
+        foreach (var instrumentShowcaseSO in instrumentShowcaseSOs)
+        {
+            instrumentShowcasePrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
+        }
+        InitializeWall(aRAnchor, instrumentShowcasePrefabList);
+
+#endif
     }
 
     private void InitializeWall(ARCloudAnchor cloudAnchor, List<GameObject> instrumentShowcasePrefabList)
     {
         GameObject wall = Instantiate(GameResources.Instance.wallSO_ShowcaseVN.wallPrefab, transform);
+#if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(cloudAnchor.transform);
+#endif
         wall.transform.localPosition = new Vector3(0, 0, 0);
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         wallManager = wall.GetComponent<WallManager>();

@@ -35,6 +35,7 @@ public class InstrumentShowcase : MonoBehaviour
         gameObject.SetActive(false);
         await Awaitable.NextFrameAsync();
         gameObject.SetActive(true);
+        if (localTransfrom == null) return;
         gameObject.transform.localPosition = localTransfrom.localPosition;
         gameObject.transform.localRotation = localTransfrom.localRotation;
         gameObject.transform.localScale = localTransfrom.localScale;

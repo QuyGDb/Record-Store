@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 38144650074375740}
   - component: {fileID: -2682323343362697119}
   - component: {fileID: -326626179682307411}
+  - component: {fileID: 5259076826000963027}
   m_Layer: 0
   m_Name: InstrumentShowcaseVN_5Wrap
   m_TagString: Untagged
@@ -221,6 +222,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000b75b1e1dc39f4db2326e15ab40c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5259076826000963027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774994342586504966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0bca713724c264892186e6f7319a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instrumentShowcaseSO: {fileID: 11400000, guid: d624d768731187240958aafce96e2c3f,
+    type: 2}
 --- !u!1001 &2177580269067723130
 PrefabInstance:
   m_ObjectHideFlags: 0

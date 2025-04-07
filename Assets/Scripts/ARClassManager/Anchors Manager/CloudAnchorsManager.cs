@@ -130,6 +130,7 @@ public class CloudAnchorsManager : MonoBehaviour
 
     private IEnumerator ResolveCloudAnchorRoutine(string cloudAnchorId)
     {
+#if PLATFORM_ANDROID && !UNITY_EDITOR
         ResolveCloudAnchorPromise resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending)
@@ -149,6 +150,12 @@ public class CloudAnchorsManager : MonoBehaviour
         {
             GameResources.Instance.cloudAnchorSceneText.text = $"Unable to load Cloud Anchor: {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
         }
+#endif
+        yield return null;
+#if UNITY_EDITOR
+
+        StaticEventHandler.InvokeInstantiateAtAnchor(null, AnchorType.IntrumentShowCaseVN);
+#endif
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)
     {
