@@ -13,7 +13,7 @@ public class CloudAnchorsScrollView : MonoBehaviour
 
     private void Start()
     {
-        ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
+        cloudAnchorDetails = ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
         StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
     private void Awake()

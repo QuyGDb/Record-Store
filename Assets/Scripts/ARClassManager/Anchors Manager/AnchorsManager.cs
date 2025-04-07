@@ -92,9 +92,11 @@ public class AnchorsManager : MonoBehaviour
     }
     private void Update()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
         if (GameResources.Instance.anchorSceneText == null)
             return;
-        //  GameResources.Instance.anchorSceneText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
+        GameResources.Instance.anchorSceneText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
+#endif
         if (EventSystem.current.IsPointerOverGameObject())
             return;
     }
