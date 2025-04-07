@@ -20,12 +20,6 @@ public static class StaticEventHandler
         OnStartFirstSong?.Invoke(album);
     }
 
-    public static event Action<CloudAnchorsManager> OnCloudAnchorsManager;
-
-    public static void InvokeCloudAnchorsManager(CloudAnchorsManager cloudAnchorsManager)
-    {
-        OnCloudAnchorsManager?.Invoke(cloudAnchorsManager);
-    }
     public static event Action<string, AnchorType> OnSendAnchorInfo;
 
     public static void InvokeSendInfo(string name, AnchorType anchorType)
@@ -39,12 +33,7 @@ public static class StaticEventHandler
     {
         OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
     }
-    public static event Action<Dictionary<string, AnchorDetails>> OnCloudAnchorDetailsChanged;
 
-    public static void InvokeCloudAnchorDetailsChanged(Dictionary<string, AnchorDetails> cloudAnchorDetails)
-    {
-        OnCloudAnchorDetailsChanged?.Invoke(cloudAnchorDetails);
-    }
     public static event Action<InstrumentShowcaseListSO> OnInstrumentListSOChanged;
 
     public static void InvokeInstrumentShowCaseListVNChanged(InstrumentShowcaseListSO objectMusicList)
@@ -88,7 +77,6 @@ public static class StaticEventHandler
     }
 
     public static event Action<InstrumentShowcase> OnInstrumentShowcaseChanged;
-
     public static void InvokeInstrumentShowcaseChanged(InstrumentShowcase instrumentShowcase)
     {
         OnInstrumentShowcaseChanged?.Invoke(instrumentShowcase);
@@ -108,13 +96,6 @@ public static class StaticEventHandler
         OnInstantiateAtAnchor?.Invoke(aRAnchor, anchorType);
     }
 
-    public static event Action<TransformWallManager> OnTransformWallManagerChanged;
-
-    public static void InvokeTransformWallManager(TransformWallManager transformWallManager)
-    {
-        OnTransformWallManagerChanged?.Invoke(transformWallManager);
-    }
-
     public static event Action<Anchor, bool> OnAnchorCreated;
 
     public static void InvokeAnchorChanged(Anchor anchor, bool isSelect)
@@ -126,5 +107,12 @@ public static class StaticEventHandler
     public static void InvokeAnchorRemoved(ARAnchor anchor)
     {
         OnAnchorRemoved?.Invoke(anchor);
+    }
+
+    public static event Action<Dictionary<string, AnchorDetails>> OnAnchorDetailsChanged;
+
+    public static void InvokeAnchorDetailsChanged(Dictionary<string, AnchorDetails> anchorDetails)
+    {
+        OnAnchorDetailsChanged?.Invoke(anchorDetails);
     }
 }

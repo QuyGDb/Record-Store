@@ -33,6 +33,10 @@ public enum ApplicationState
 {
     Start,
     CreateMapMode,
-
+    Instruction,
+    Anchor,
+    CloudAnchor,
+    WallManager,
+    ObjectManager,
     LoadMapMode,
 }

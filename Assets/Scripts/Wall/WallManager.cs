@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Transformers;
 
-public class TransformWallManager : MonoBehaviour
+public class WallManager : MonoBehaviour
 {
     [HideInInspector] public WallSO wallSO;
     private Transform wallTransform;
+    private Rigidbody wallRigidbody;
+    private void Awake()
+    {
+        wallRigidbody = GetComponent<Rigidbody>();
+
+    }
     private void Start()
     {
 
@@ -12,6 +20,24 @@ public class TransformWallManager : MonoBehaviour
         {
             LoadTransfrom();
         }
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+    }
+
+    private void OnApplicationStateChanged(ApplicationState state)
+    {
+        if (state == ApplicationState.WallManager)
+        {
+            wallRigidbody.constraints = RigidbodyConstraints.None;
+        }
+        if (state == ApplicationState.ObjectManager)
+        {
+            wallRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
+
     }
 
     private async void LoadTransfrom()

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class GameResources : MonoBehaviour
@@ -49,8 +47,12 @@ public class GameResources : MonoBehaviour
 
     #region AnchorsManager
     [HideInInspector] public AnchorsManager anchorsManager;
-    public TextMeshProUGUI anchorSceneText;
-    public TextMeshProUGUI cloudAnchorSceneText;
+    [HideInInspector] public TextMeshProUGUI anchorSceneText;
+    [HideInInspector] public TextMeshProUGUI cloudAnchorSceneText;
+    [HideInInspector] public CloudAnchorsManager cloudAnchorsManager;
+    [HideInInspector] public SceneNavigationBar sceneNavigationBar;
+    [HideInInspector] public WallManager wallManager;
+    [HideInInspector] public Image cloudAnchorListScrollViewImage;
     #endregion
 
     #region Validation

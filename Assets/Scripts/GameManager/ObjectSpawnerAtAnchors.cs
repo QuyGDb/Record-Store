@@ -10,15 +10,43 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 {
     private List<GameObject> instrumentShowcaseList = new List<GameObject>();
 
-    private TransformWallManager transformWallManager;
+    private WallManager wallManager;
     private void Awake()
     {
         StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
 
     }
+    private void Start()
+    {
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+
+    }
     private void OnDestroy()
     {
         StaticEventHandler.OnInstantiateAtAnchor -= OnInstantiateAtAnchor;
+        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+    }
+
+    private void OnApplicationStateChanged(ApplicationState state)
+    {
+        if (state == ApplicationState.WallManager)
+        {
+            ChangeStateInstrumentList(false);
+        }
+        if (state == ApplicationState.ObjectManager)
+        {
+            ChangeStateInstrumentList(true);
+        }
+    }
+    void ChangeStateInstrumentList(bool isActive)
+    {
+        if (instrumentShowcaseList != null && instrumentShowcaseList.Count > 0)
+        {
+            foreach (var item in instrumentShowcaseList)
+            {
+                item.SetActive(isActive);
+            }
+        }
     }
 
     private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
@@ -47,11 +75,10 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         wall.transform.SetParent(cloudAnchor.transform);
         wall.transform.localPosition = new Vector3(0, 0, 0);
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        transformWallManager = wall.GetComponent<TransformWallManager>();
-        transformWallManager.wallSO = GameResources.Instance.wallSO_ShowcaseVN;
+        wallManager = wall.GetComponent<WallManager>();
+        wallManager.wallSO = GameResources.Instance.wallSO_ShowcaseVN;
         InitializeObjectsAtAnchors(wall.transform, instrumentShowcasePrefabList);
-
-        StaticEventHandler.InvokeTransformWallManager(transformWallManager);
+        GameResources.Instance.wallManager = wallManager;
     }
 
     void InitializeObjectsAtAnchors(Transform transform, List<GameObject> gameObject)

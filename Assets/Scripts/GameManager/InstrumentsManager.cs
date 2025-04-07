@@ -12,9 +12,7 @@ public class InstrumentsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMeshProUGUI;
 
     public float scaleSpeed = 0.1f;
-    private void Awake()
-    {
-    }
+
     private void OnEnable()
     {
         StaticEventHandler.OnInstrumentSOSelected += StaticEventHandler_OnInstrumentSelected;

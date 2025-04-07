@@ -1,16 +1,10 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
-using TMPro;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class AnchorsManager : MonoBehaviour
 {
@@ -21,7 +15,6 @@ public class AnchorsManager : MonoBehaviour
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
     [ShowInInspector] public Dictionary<string, ARAnchor> trackedAnchors = new Dictionary<string, ARAnchor>();
     [HideInInspector] public ARAnchor currentSelectAnchor;
-    [SerializeField] private TextMeshProUGUI quatityText;
     public byte[] imageByte;
     private void Awake()
     {
@@ -33,8 +26,6 @@ public class AnchorsManager : MonoBehaviour
         StaticEventHandler.OnAnchorCreated += OnAnchorChanged;
         GameResources.Instance.anchorsManager = this;
     }
-
-
 
     private void OnDestroy()
     {
@@ -53,8 +44,6 @@ public class AnchorsManager : MonoBehaviour
             currentSelectAnchor = null;
         }
     }
-
-
 
     private void OnAnchorChanged(ARTrackablesChangedEventArgs<ARAnchor> eventArgs)
     {
@@ -103,7 +92,9 @@ public class AnchorsManager : MonoBehaviour
     }
     private void Update()
     {
-        quatityText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
+        if (GameResources.Instance.anchorSceneText == null)
+            return;
+        //  GameResources.Instance.anchorSceneText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
         if (EventSystem.current.IsPointerOverGameObject())
             return;
     }
@@ -114,16 +105,4 @@ public class AnchorsManager : MonoBehaviour
         cameraPose.rotation = Camera.main.transform.rotation;
         return cameraPose;
     }
-
-
-
-
-    #region Validation
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        HelperUtilities.ValidateCheckNullValue(this, nameof(quatityText), quatityText);
-    }
-#endif
-    #endregion
 }

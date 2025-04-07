@@ -1,31 +1,39 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(ScrollView))]
+
 public class CloudAnchorsScrollView : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     public GameObject content;
-
     private List<GameObject> cloudAnchorImages = new List<GameObject>();
+    private Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
+    private Image scrollViewImage;
+
+    private void Start()
+    {
+        ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
+        StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
+    }
     private void Awake()
     {
-        StaticEventHandler.OnCloudAnchorDetailsChanged += OnCloudAnchorsManager;
+        StaticEventHandler.OnAnchorDetailsChanged += OnAnchorDetailsChanged;
+        scrollViewImage = GetComponent<Image>();
+        GameResources.Instance.cloudAnchorListScrollViewImage = scrollViewImage;
     }
+
     private void OnDestroy()
     {
-        StaticEventHandler.OnCloudAnchorDetailsChanged -= OnCloudAnchorsManager;
+        StaticEventHandler.OnAnchorDetailsChanged -= OnAnchorDetailsChanged;
     }
 
-    private void OnCloudAnchorsManager(Dictionary<string, AnchorDetails> cloudAnchorDetails)
+    private void OnAnchorDetailsChanged(Dictionary<string, AnchorDetails> cloudAnchorDetails)
     {
-
         foreach (var cloudAnchorImage in cloudAnchorImages)
         {
             Destroy(cloudAnchorImage);
         }
-
         foreach (var cloudAnchor in cloudAnchorDetails)
         {
             GameObject gameObject = Instantiate(prefab, content.transform);
@@ -34,19 +42,5 @@ public class CloudAnchorsScrollView : MonoBehaviour
         }
     }
 
-    private Sprite TextureToSprite(byte[] textureBytes)
-    {
-        Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-
-        if (!texture.LoadImage(textureBytes))
-        {
-            Debug.LogError("Không thể load hình từ byte array.");
-            return null;
-        }
-
-        Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-
-        return newSprite;
-    }
 
 }

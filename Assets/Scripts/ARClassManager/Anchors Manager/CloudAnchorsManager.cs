@@ -42,7 +42,7 @@ public class CloudAnchorsManager : MonoBehaviour
     private void Start()
     {
         LoadCloudAnchorDetails();
-        StaticEventHandler.InvokeCloudAnchorsManager(this);
+        GameResources.Instance.cloudAnchorsManager = this;
 
     }
     private void OnDestroy()
@@ -83,7 +83,7 @@ public class CloudAnchorsManager : MonoBehaviour
         HostCloudAnchorPromise hostCloudAnchorPromise = arAnchorsManager.HostCloudAnchorAsync(aRAnchor, 300);
         while (hostCloudAnchorPromise.State == PromiseState.Pending)
         {
-            notifyforHost.text = $"🔄 HOST + {Time.frameCount}";
+            GameResources.Instance.anchorSceneText.text = $"🔄 HOST + {Time.frameCount}";
             yield return null;
         }
 
@@ -91,16 +91,18 @@ public class CloudAnchorsManager : MonoBehaviour
         {
             AnchorDetails anchorDetails = InitializeAnchorDetails(aRAnchor, hostCloudAnchorPromise);
             cloudAnchorDetails.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
-            notifyforHost.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
+            GameResources.Instance.anchorSceneText.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
 
         }
         else
-            notifyforHost.text = $"Error {hostCloudAnchorPromise.Result.CloudAnchorState}";
+            GameResources.Instance.anchorSceneText.text = $"Error {hostCloudAnchorPromise.Result.CloudAnchorState}";
 #endif
 
 #if UNITY_EDITOR
         AnchorDetails anchorDetailsEditor = new AnchorDetails();
         anchorDetailsEditor.anchorName = nameCurrentAnchor;
+        anchorDetailsEditor.anchorType = currentAnchorType;
+        anchorDetailsEditor.anchorImage = anchorsManager.imageByte;
         anchorDetailsEditor.cloudAnchorId = Random.Range(0, 10).ToString();
         yield return new WaitForSeconds(1);
         cloudAnchorDetails.Add(anchorDetailsEditor.cloudAnchorId, anchorDetailsEditor);
@@ -141,6 +143,7 @@ public class CloudAnchorsManager : MonoBehaviour
             QueryARCloudAnchor(aRCloudAnchor, cloudAnchorId);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             GameResources.Instance.cloudAnchorSceneText.text = $"Position: {aRCloudAnchor.pose.position}, Rotation: {aRCloudAnchor.pose.rotation}";
+            GameResources.Instance.cloudAnchorListScrollViewImage.enabled = false;
         }
         else
         {
@@ -163,17 +166,12 @@ public class CloudAnchorsManager : MonoBehaviour
     void SaveCloudAnchorDetails()
     {
         ES3.Save("cloudAnchorDetails", cloudAnchorDetails);
-
-        foreach (var cloudAnchor in cloudAnchorDetails)
-        {
-            Debug.Log(cloudAnchor.Value.anchorName);
-        }
-        StaticEventHandler.InvokeCloudAnchorDetailsChanged(cloudAnchorDetails);
+        StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
     void LoadCloudAnchorDetails()
     {
         cloudAnchorDetails = ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
-        StaticEventHandler.InvokeCloudAnchorDetailsChanged(cloudAnchorDetails);
+        StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
 
 

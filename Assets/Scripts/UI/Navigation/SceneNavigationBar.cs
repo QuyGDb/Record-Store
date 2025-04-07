@@ -13,6 +13,7 @@ public class SceneNavigationBar : MonoBehaviour
         buttons = GetComponentsInChildren<Button>(true);
         StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
         currentSceneName = sceneNames[0];
+
     }
 
     private void Start()
@@ -45,30 +46,30 @@ public class SceneNavigationBar : MonoBehaviour
     }
     void ActiveInstructionScene()
     {
+        GameManager.Instance.ChangeApplicationState(ApplicationState.Instruction);
         LoadSceneWithName(sceneNames[0]);
-
     }
     void ActiveAnchorScene()
     {
-        //if (currentSceneName != sceneNames[1] || currentSceneName != sceneNames[0])
-        //    if (SceneManager.GetSceneByName(ARObjectScene).isLoaded)
-        //        SceneManager.UnloadSceneAsync(ARObjectScene);
+        GameManager.Instance.ChangeApplicationState(ApplicationState.Anchor);
         LoadSceneWithName(sceneNames[1]);
     }
-    void ActiveCloudAnchorScene()
+    public void ActiveCloudAnchorScene()
     {
-        //if (currentSceneName == sceneNames[1] || currentSceneName == sceneNames[0])
-        //    if (SceneManager.GetSceneByName(ARObjectScene).isLoaded)
-        //        SceneManager.UnloadSceneAsync(ARObjectScene);
+        GameManager.Instance.ChangeApplicationState(ApplicationState.CloudAnchor);
+        if (currentSceneName == sceneNames[2])
+            GameResources.Instance.cloudAnchorListScrollViewImage.enabled = !GameResources.Instance.cloudAnchorListScrollViewImage.enabled;
         LoadSceneWithName(sceneNames[2]);
     }
 
     void ActiveWallManagerCanvas()
     {
+        GameManager.Instance.ChangeApplicationState(ApplicationState.WallManager);
         LoadSceneWithName(sceneNames[3]);
     }
     void ActiveObjectManagerCanvas()
     {
+        GameManager.Instance.ChangeApplicationState(ApplicationState.ObjectManager);
         LoadSceneWithName(sceneNames[4]);
     }
 
@@ -76,13 +77,8 @@ public class SceneNavigationBar : MonoBehaviour
     {
         if (currentSceneName == name)
             return;
-
         SceneManager.UnloadSceneAsync(currentSceneName);
-
         SceneManager.LoadScene(name, LoadSceneMode.Additive);
         currentSceneName = name;
     }
-
-
-
 }

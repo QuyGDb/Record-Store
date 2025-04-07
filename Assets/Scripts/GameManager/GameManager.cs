@@ -23,13 +23,19 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             case ApplicationState.Start:
                 break;
             case ApplicationState.CreateMapMode:
-                SceneManager.LoadScene("NavigationScene", LoadSceneMode.Additive);
                 SceneManager.LoadScene("InstructionScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("NavigationScene", LoadSceneMode.Additive);
+                break;
+            case ApplicationState.Anchor:
+                break;
+            case ApplicationState.CloudAnchor:
+                break;
+            case ApplicationState.WallManager:
+                break;
+            case ApplicationState.ObjectManager:
                 break;
             case ApplicationState.LoadMapMode:
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
         OnApplicationStateChanged?.Invoke(newState);
     }

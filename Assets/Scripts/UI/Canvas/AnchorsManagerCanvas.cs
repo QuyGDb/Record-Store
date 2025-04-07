@@ -53,7 +53,7 @@ public class AnchorsManagerCanvas : MonoBehaviour
     void IsValidCloudAnchor()
     {
 
-        if (string.IsNullOrWhiteSpace(inputField.text) && anchorTypeDropdown.dropdown.value == 0)
+        if (string.IsNullOrWhiteSpace(inputField.text) || anchorTypeDropdown.dropdown.value == 0)
         {
             inputNameText.text = "Please enter name";
         }
