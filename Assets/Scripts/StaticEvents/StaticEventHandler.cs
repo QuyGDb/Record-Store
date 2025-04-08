@@ -6,6 +6,12 @@ using UnityEngine.XR.ARFoundation;
 
 public static class StaticEventHandler
 {
+    public static event Action<GameObject> OnXRGrabInteractableSelected;
+
+    public static void InvokeXRGrabInteractableSelected(GameObject interactable)
+    {
+        OnXRGrabInteractableSelected?.Invoke(interactable);
+    }
 
     public static event Action<AlbumSO, int> OnSongChanged;
 

@@ -1,5 +1,6 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,6 +25,7 @@ public class AnchorsManager : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
         arAnchorsManager.trackablesChanged.AddListener(OnAnchorChanged);
         StaticEventHandler.OnAnchorCreated += OnAnchorChanged;
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationState;
         GameResources.Instance.anchorsManager = this;
     }
 
@@ -31,6 +33,21 @@ public class AnchorsManager : MonoBehaviour
     {
         arAnchorsManager.trackablesChanged.RemoveListener(OnAnchorChanged);
         StaticEventHandler.OnAnchorCreated -= OnAnchorChanged;
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationState;
+    }
+
+    private void OnApplicationState(ApplicationState state)
+    {
+        if (state == ApplicationState.Anchor)
+        {
+            // Start repeating every 0.5 seconds
+            InvokeRepeating(nameof(CheckEstimateFeatureMapQualityForHosting), 0f, 0.5f);
+        }
+        else
+        {
+            // Cancel repeating
+            CancelInvoke(nameof(CheckEstimateFeatureMapQualityForHosting));
+        }
     }
 
     private void OnAnchorChanged(Anchor anchor, bool isSelect)
@@ -90,21 +107,20 @@ public class AnchorsManager : MonoBehaviour
     {
         return arAnchorsManager.TryRemoveAnchor(currentSelectAnchor);
     }
-    private void Update()
-    {
-#if UNITY_ANDROID && !UNITY_EDITOR
-        if (GameResources.Instance.anchorSceneText == null)
-            return;
-        GameResources.Instance.anchorSceneText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
-#endif
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-    }
     private Pose GetCameraPose()
     {
         Pose cameraPose = new Pose();
         cameraPose.position = Camera.main.transform.position;
         cameraPose.rotation = Camera.main.transform.rotation;
         return cameraPose;
+    }
+
+    void CheckEstimateFeatureMapQualityForHosting()
+    {
+#if PLATFORM_ANDROID && !UNITY_EDITOR
+        if (GameResources.Instance.anchorSceneText == null)
+            return;
+        GameResources.Instance.anchorSceneText.text = arAnchorsManager.EstimateFeatureMapQualityForHosting(GetCameraPose()).ToString();
+#endif
     }
 }

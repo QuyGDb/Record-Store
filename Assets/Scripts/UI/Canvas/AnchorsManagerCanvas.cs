@@ -44,7 +44,7 @@ public class AnchorsManagerCanvas : MonoBehaviour
     private async void OnTouchPress(InputAction.CallbackContext context)
     {
         Vector2 touchPosition = context.ReadValue<Vector2>();
-        if (!isHasAnchor)
+        if (!isHasAnchor && GameManager.Instance.applicationState == ApplicationState.Anchor)
         {
             isHasAnchor = await GameResources.Instance.anchorsManager.PlaceAnchor(touchPosition);
         }
@@ -60,7 +60,6 @@ public class AnchorsManagerCanvas : MonoBehaviour
         else
         {
             StaticEventHandler.InvokeSendInfo(inputField.text, anchorTypeDropdown.anchorType);
-
             isHasAnchor = false;
         }
     }

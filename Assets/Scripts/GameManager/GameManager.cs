@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
@@ -14,6 +15,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private void Start()
     {
         ChangeApplicationState(ApplicationState.CreateMapMode);
+    }
+    private void Update()
+    {
+        PreventPlaceAnchorOnUI();
+    }
+    private void PreventPlaceAnchorOnUI()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
     }
     public void ChangeApplicationState(ApplicationState newState)
     {
@@ -39,4 +49,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
         OnApplicationStateChanged?.Invoke(newState);
     }
+
+
 }

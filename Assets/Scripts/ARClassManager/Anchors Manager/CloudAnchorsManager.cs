@@ -151,9 +151,9 @@ public class CloudAnchorsManager : MonoBehaviour
             GameResources.Instance.cloudAnchorSceneText.text = $"Unable to load Cloud Anchor: {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
         }
 #endif
-        yield return null;
-#if UNITY_EDITOR
 
+#if UNITY_EDITOR
+        yield return null;
         StaticEventHandler.InvokeInstantiateAtAnchor(null, AnchorType.IntrumentShowCaseVN);
 #endif
     }

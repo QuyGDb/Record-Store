@@ -1,20 +1,25 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Transformers;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class WallManager : MonoBehaviour
 {
     [HideInInspector] public WallSO wallSO;
     private Transform wallTransform;
     private Rigidbody wallRigidbody;
+    private XRGrabInteractable wallInteractable;
     private void Awake()
     {
         wallRigidbody = GetComponent<Rigidbody>();
-
+        wallInteractable = GetComponent<XRGrabInteractable>();
     }
     private void Start()
     {
-
+        wallInteractable.selectEntered.AddListener((temp) =>
+        {
+            StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
+        });
         wallTransform = ES3.Load(wallSO.name, wallTransform);
         if (wallTransform != null)
         {
@@ -25,6 +30,10 @@ public class WallManager : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        wallInteractable.selectEntered.RemoveListener((temp) =>
+        {
+            StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
+        });
     }
 
     private void OnApplicationStateChanged(ApplicationState state)
@@ -39,7 +48,6 @@ public class WallManager : MonoBehaviour
         }
 
     }
-
     private async void LoadTransfrom()
     {
         await Awaitable.NextFrameAsync();
@@ -56,6 +64,7 @@ public class WallManager : MonoBehaviour
         switch (edge)
         {
             case PlaneEdge.Left:
+
                 scale.x += delta;
                 positionOffset += transform.right * (delta / 2f);
                 break;
@@ -75,10 +84,10 @@ public class WallManager : MonoBehaviour
                 positionOffset += transform.forward * (delta / 2f);
                 break;
         }
-
         transform.localScale = scale;
         transform.position += positionOffset;
         ES3.Save(wallSO.name, transform);
     }
+
 
 }

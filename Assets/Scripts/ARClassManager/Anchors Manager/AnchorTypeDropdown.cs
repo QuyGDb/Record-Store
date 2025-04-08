@@ -13,7 +13,6 @@ public class AnchorTypeDropdown : MonoBehaviour
     void Start()
     {
         dropdown.onValueChanged.AddListener(HandleDropdownChange);
-
         PopulateDropdown();
     }
 

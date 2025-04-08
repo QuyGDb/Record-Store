@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4848485297242854485}
   - component: {fileID: 5765741135257435575}
   - component: {fileID: 1110245754439936817}
-  - component: {fileID: 7532524534168257858}
-  - component: {fileID: 2686375504420146389}
+  - component: {fileID: 1145551473883793067}
+  - component: {fileID: 882114823357667889}
+  - component: {fileID: -1076891712369669673}
   m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8efba039a51ebcd4a8df98e224321e97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +111,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &5765741135257435575
@@ -126,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallSO: {fileID: 0}
+  inputActions: {fileID: -5112888916153672211, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!54 &1110245754439936817
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,7 +156,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7532524534168257858
+--- !u!114 &1145551473883793067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +171,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 1
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -272,11 +275,11 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers:
-  - {fileID: 2686375504420146389}
+  - {fileID: 882114823357667889}
   m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 0
+  m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
---- !u!114 &2686375504420146389
+--- !u!114 &882114823357667889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PermittedDisplacementAxes: 3
-  m_ConstrainedAxisDisplacementMode: 0
+  m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
   m_AllowTwoHandedScaling: 1
@@ -299,3 +302,20 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
+--- !u!114 &-1076891712369669673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981695149791669914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051dc4dc6a20004198491d39deedaef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pinchGapDeltaRef: {fileID: -5112888916153672211, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  scaleSensitivity: 0.01
+  minScale: {x: 0.1, y: 0.1, z: 0.1}
+  maxScale: {x: 3, y: 3, z: 3}

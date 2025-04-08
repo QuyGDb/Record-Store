@@ -35,8 +35,6 @@ public class InstrumentsManager : MonoBehaviour
         StaticEventHandler.OnInstrumentShowcaseChanged -= StaticEventHandler_OnInstrumentShowcaseChanged;
     }
 
-
-
     private void Start()
     {
         StaticEventHandler.InvokeInstrumentsManagerChanged(this);
@@ -55,10 +53,6 @@ public class InstrumentsManager : MonoBehaviour
             instrumentShowcaseListSO.instrumentShowcaseList.Remove(instrumentShowcase);
         }
     }
-
-
-
-
 
     public void SaveObjectAtReleasePosition()
     {

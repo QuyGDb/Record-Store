@@ -55,6 +55,7 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public Image cloudAnchorListScrollViewImage;
     #endregion
 
+
     #region Validation
 #if UNITY_EDITOR
     private void OnValidate()

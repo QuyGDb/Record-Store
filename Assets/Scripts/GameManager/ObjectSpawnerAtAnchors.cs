@@ -31,10 +31,18 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     {
         if (state == ApplicationState.WallManager)
         {
+            foreach (var item in instrumentShowcaseList)
+            {
+                item.transform.SetParent(this.transform);
+            }
             ChangeStateInstrumentList(false);
         }
         if (state == ApplicationState.ObjectManager)
         {
+            foreach (var item in instrumentShowcaseList)
+            {
+                item.transform.SetParent(wallManager.transform);
+            }
             ChangeStateInstrumentList(true);
         }
     }

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 710055179006322457}
   - component: {fileID: -7717547923480214367}
   - component: {fileID: 4878836974333202736}
-  - component: {fileID: -7105300172807611331}
   - component: {fileID: -4056105076720843391}
   m_Layer: 3
   m_Name: AnchorPrefab
@@ -238,7 +237,7 @@ MonoBehaviour:
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
-  m_TrackPosition: 1
+  m_TrackPosition: 0
   m_SmoothPosition: 0
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
@@ -272,33 +271,10 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers:
-  - {fileID: -7105300172807611331}
+  - {fileID: 0}
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 0
   m_FarAttachMode: 0
---- !u!114 &-7105300172807611331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9198575238293008141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PermittedDisplacementAxes: 3
-  m_ConstrainedAxisDisplacementMode: 2
-  m_TwoHandedRotationMode: 1
-  m_AllowOneHandedScaling: 0
-  m_AllowTwoHandedScaling: 0
-  m_OneHandedScaleSpeed: 0.5
-  m_ThresholdMoveRatioForScale: 0.05
-  m_ClampScaling: 1
-  m_MinimumScaleRatio: 0.25
-  m_MaximumScaleRatio: 2
-  m_ScaleMultiplier: 0.25
 --- !u!114 &-4056105076720843391
 MonoBehaviour:
   m_ObjectHideFlags: 0

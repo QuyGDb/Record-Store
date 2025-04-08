@@ -9,7 +9,7 @@ public class ScaleWallCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI placeHolder;
     private PlaneEdge selectedEdge;
     private Button[] buttons;
-    public int OnTransformWallManager { get; private set; }
+    public int onTransformWallManager;
 
     private void Awake()
     {
@@ -29,7 +29,10 @@ public class ScaleWallCanvas : MonoBehaviour
             placeHolder.text = "Enter scale value";
         }
     }
-
+    private void Start()
+    {
+        selectedEdge = PlaneEdge.Right;
+    }
 
     private void OnDestroy()
     {
@@ -54,6 +57,7 @@ public class ScaleWallCanvas : MonoBehaviour
     {
         switch (value)
         {
+
             case 0:
                 selectedEdge = PlaneEdge.Right;
                 break;
@@ -66,6 +70,7 @@ public class ScaleWallCanvas : MonoBehaviour
             case 3:
                 selectedEdge = PlaneEdge.Bottom;
                 break;
+
         }
     }
 
