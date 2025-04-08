@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 7370890605534716022}
   - component: {fileID: 700250012313907378}
   - component: {fileID: 242304348052078071}
+  - component: {fileID: 7703254997423074660}
   m_Layer: 5
   m_Name: SaveTransformButton
   m_TagString: Untagged
@@ -2269,7 +2270,6 @@ GameObject:
   - component: {fileID: 4981331127534484690}
   - component: {fileID: 1796042813807678016}
   - component: {fileID: 3998497859184824368}
-  - component: {fileID: 7553313776857327659}
   m_Layer: 5
   m_Name: ObjectManagerCanvas
   m_TagString: Untagged
@@ -2301,18 +2301,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027492695053272326}
   m_CullTransparentMesh: 1
---- !u!114 &7553313776857327659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7131344376593906255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd56c1dc659e5e4abf441743d05cd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7615369517354253708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2371,6 +2359,18 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &7703254997423074660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027492695053272326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd56c1dc659e5e4abf441743d05cd67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7716018804042049564
 MonoBehaviour:
   m_ObjectHideFlags: 0

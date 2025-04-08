@@ -14,10 +14,14 @@ public class InstrumentShowcase : MonoBehaviour
         localAxis = GetComponent<LocalAxis>();
         grabInteractable = GetComponent<XRGrabInteractable>();
         grabInteractable.selectEntered.AddListener(Select);
+        grabInteractable.selectExited.AddListener(Deselect);
         localTransfrom = ES3.Load(instrumentShowcaseSO.instrumentName, localTransfrom);
 
     }
-
+    private void Start()
+    {
+        LoadTransform();
+    }
     private void OnDestroy()
     {
         if (grabInteractable != null)
@@ -25,11 +29,6 @@ public class InstrumentShowcase : MonoBehaviour
             grabInteractable.selectEntered.RemoveListener(Select);
         }
     }
-    private void Start()
-    {
-        LoadTransform();
-    }
-
     public async void LoadTransform()
     {
         gameObject.SetActive(false);
@@ -40,14 +39,14 @@ public class InstrumentShowcase : MonoBehaviour
         gameObject.transform.localRotation = localTransfrom.localRotation;
         gameObject.transform.localScale = localTransfrom.localScale;
     }
-
     private void Select(SelectEnterEventArgs selectEnterEventArgs)
     {
         localAxis.enabled = true;
         StaticEventHandler.InvokeInstrumentShowcaseChanged(this);
         StaticEventHandler.InvokeRotateObjectChanged(this.transform);
+        StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
     }
-    public void Deselect()
+    private void Deselect(SelectExitEventArgs arg0)
     {
         localAxis.enabled = false;
     }

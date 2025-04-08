@@ -53,6 +53,7 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public SceneNavigationBar sceneNavigationBar;
     [HideInInspector] public WallManager wallManager;
     [HideInInspector] public Image cloudAnchorListScrollViewImage;
+    internal TransformObjectsManager transformObjectsManager;
     #endregion
 
 
