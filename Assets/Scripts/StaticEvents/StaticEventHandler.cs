@@ -53,21 +53,11 @@ public static class StaticEventHandler
     {
         OnInstrumentSOSelected?.Invoke(instrument, isSelected);
     }
-
     public static event Action<ARAnchor> OnCurrentAnchorChanged;
-
     public static void InvokeCurrentAnchorChanged(ARAnchor cloudAnchor)
     {
         OnCurrentAnchorChanged?.Invoke(cloudAnchor);
     }
-
-    public static event Action<InstrumentsManager> OnInstrumentsManagerChanged;
-
-    public static void InvokeInstrumentsManagerChanged(InstrumentsManager attachObjectManager)
-    {
-        OnInstrumentsManagerChanged?.Invoke(attachObjectManager);
-    }
-
     public static event Action<ARAnchor> OnAnchorSelected;
 
     public static void InvokeAnchorSelected(ARAnchor cloudAnchor)

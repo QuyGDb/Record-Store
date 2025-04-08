@@ -44,8 +44,11 @@ public class WallManager : MonoBehaviour
         }
         if (state == ApplicationState.ObjectManager)
         {
+
             wallRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
+        if (wallTransform != null)
+            ES3.Save(wallSO.name, wallTransform);
 
     }
     private async void LoadTransfrom()
@@ -89,5 +92,10 @@ public class WallManager : MonoBehaviour
         ES3.Save(wallSO.name, transform);
     }
 
+    private void OnApplicationQuit()
+    {
+        if (wallTransform != null)
+            ES3.Save(wallSO.name, wallTransform);
+    }
 
 }

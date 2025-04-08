@@ -1,10 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class PinchScaleInteractable : MonoBehaviour
+public class TransformObjectsManager : MonoBehaviour
 {
     [Header("Input Action")]
     public InputActionReference pinchGapDeltaRef;
@@ -22,6 +20,10 @@ public class PinchScaleInteractable : MonoBehaviour
         pinchAction.Enable();
         pinchAction.performed += OnPinchPerformed;
     }
+    private void Start()
+    {
+        GameResources.Instance.transformObjectsManager = this;
+    }
     private void OnXRGrabInteractableSelected(GameObject obj)
     {
         XRGrabInteractable interactable = obj.GetComponent<XRGrabInteractable>();
@@ -33,7 +35,6 @@ public class PinchScaleInteractable : MonoBehaviour
         {
             gameObjectSelected = obj;
         }
-
     }
 
     private void OnDestroy()
@@ -48,8 +49,17 @@ public class PinchScaleInteractable : MonoBehaviour
         float pinchDelta = context.ReadValue<float>();
         float scaleFactor = 1 + pinchDelta * scaleSensitivity;
         Vector3 newScale = gameObjectSelected.transform.localScale * scaleFactor;
-
         newScale = Vector3.Max(minScale, Vector3.Min(maxScale, newScale));
         gameObjectSelected.transform.localScale = newScale;
+    }
+
+
+    public void SaveTransformSelectInstrument()
+    {
+        InstrumentShowcase instrumentShowcase = gameObjectSelected.GetComponent<InstrumentShowcase>();
+        if (instrumentShowcase != null)
+        {
+            ES3.Save(instrumentShowcase.instrumentShowcaseSO.instrumentName, instrumentShowcase.transform);
+        }
     }
 }

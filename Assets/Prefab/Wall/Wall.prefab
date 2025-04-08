@@ -126,9 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f316947ff96c44ba060be865262ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallSO: {fileID: 0}
-  inputActions: {fileID: -5112888916153672211, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
+  wallSO: {fileID: 11400000, guid: 1ab769f58582c0c48963a8ee7f97a5d4, type: 2}
 --- !u!54 &1110245754439936817
 Rigidbody:
   m_ObjectHideFlags: 0
