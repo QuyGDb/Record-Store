@@ -1,76 +1,38 @@
 using Google.XR.ARCoreExtensions;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class ObjectSpawnerAtAnchors : MonoBehaviour
 {
-    private List<GameObject> instrumentShowcaseList = new List<GameObject>();
-
+    private List<GameObject> createdObjectsList = new List<GameObject>();
     private WallManager wallManager;
+    private Transform wallTransform;
+    private List<GameObject> objectsPrefabList = new List<GameObject>();
+
     private void Awake()
     {
         StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
-
-    }
-    private void Start()
-    {
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-
+        GameResources.Instance.objectSpawnerAtAnchors = this;
     }
     private void OnDestroy()
     {
         StaticEventHandler.OnInstantiateAtAnchor -= OnInstantiateAtAnchor;
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
-    }
-
-    private void OnApplicationStateChanged(ApplicationState state)
-    {
-        if (state == ApplicationState.WallManager)
-        {
-            foreach (var item in instrumentShowcaseList)
-            {
-                item.transform.SetParent(this.transform);
-            }
-            ChangeStateInstrumentList(false);
-        }
-        if (state == ApplicationState.ObjectManager)
-        {
-            foreach (var item in instrumentShowcaseList)
-            {
-                item.transform.SetParent(wallManager.transform);
-            }
-            ChangeStateInstrumentList(true);
-        }
-    }
-    void ChangeStateInstrumentList(bool isActive)
-    {
-        if (instrumentShowcaseList != null && instrumentShowcaseList.Count > 0)
-        {
-            foreach (var item in instrumentShowcaseList)
-            {
-                item.SetActive(isActive);
-            }
-        }
     }
 
     private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
     {
+        objectsPrefabList.Clear();
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         switch (type)
         {
             case AnchorType.IntrumentShowCaseVN:
-                List<InstrumentShowcaseSO> instrumentShowcaseSOs = GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList;
-                List<GameObject> instrumentShowcasePrefabList = new List<GameObject>();
-                foreach (var instrumentShowcaseSO in instrumentShowcaseSOs)
+                foreach (var instrumentShowcaseSO in GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList)
                 {
-                    instrumentShowcasePrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
+                    objectsPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
                 }
-                InitializeWall(aRAnchor, instrumentShowcasePrefabList);
-
+                InitializeWall(aRAnchor);
                 break;
 
             default:
@@ -80,17 +42,16 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
 #if UNITY_EDITOR
         List<InstrumentShowcaseSO> instrumentShowcaseSOs = GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList;
-        List<GameObject> instrumentShowcasePrefabList = new List<GameObject>();
         foreach (var instrumentShowcaseSO in instrumentShowcaseSOs)
         {
-            instrumentShowcasePrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
+            objectsPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
         }
-        InitializeWall(aRAnchor, instrumentShowcasePrefabList);
+        InitializeWall(aRAnchor);
 
 #endif
     }
 
-    private void InitializeWall(ARCloudAnchor cloudAnchor, List<GameObject> instrumentShowcasePrefabList)
+    private void InitializeWall(ARCloudAnchor cloudAnchor)
     {
         GameObject wall = Instantiate(GameResources.Instance.wallSO_ShowcaseVN.wallPrefab, transform);
 #if PLATFORM_ANDROID && !UNITY_EDITOR
@@ -100,17 +61,18 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         wallManager = wall.GetComponent<WallManager>();
         wallManager.wallSO = GameResources.Instance.wallSO_ShowcaseVN;
-        InitializeObjectsAtAnchors(wall.transform, instrumentShowcasePrefabList);
         GameResources.Instance.wallManager = wallManager;
+        wallTransform = wall.transform;
     }
-
-    void InitializeObjectsAtAnchors(Transform transform, List<GameObject> gameObject)
+    public void InitializeObjectsOnWall()
     {
-        foreach (var item in gameObject)
+        foreach (var item in objectsPrefabList)
         {
-            GameObject obj = Instantiate(item, transform);
-            instrumentShowcaseList.Add(obj);
+            GameObject obj = Instantiate(item, wallTransform);
+            createdObjectsList.Add(obj);
         }
-
+        XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
+        xRGrabInteractable.enabled = false;
+        StaticEventHandler.InvokeXRGrabInteractableSelected(null);
     }
 }

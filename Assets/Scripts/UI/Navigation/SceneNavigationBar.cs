@@ -58,7 +58,7 @@ public class SceneNavigationBar : MonoBehaviour
     {
         GameManager.Instance.ChangeApplicationState(ApplicationState.CloudAnchor);
         if (currentSceneName == sceneNames[2])
-            GameResources.Instance.cloudAnchorListScrollViewImage.enabled = !GameResources.Instance.cloudAnchorListScrollViewImage.enabled;
+            GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
         LoadSceneWithName(sceneNames[2]);
     }
 

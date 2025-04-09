@@ -7,7 +7,7 @@ public class RotateARObjectManager : MonoBehaviour
     Transform currentTransform;
     private void Awake()
     {
-        StaticEventHandler.OnRotateObjectChanged += RotateObject;
+        StaticEventHandler.OnXRGrabInteractableSelected += HandleXRGrabInteractableSelected;
         buttons = GetComponentsInChildren<Button>();
     }
 
@@ -23,7 +23,8 @@ public class RotateARObjectManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        StaticEventHandler.OnRotateObjectChanged -= RotateObject;
+        StaticEventHandler.OnXRGrabInteractableSelected -= HandleXRGrabInteractableSelected;
+
         buttons[0].onClick.RemoveListener(() => RotateXPositive(currentTransform));
         buttons[1].onClick.RemoveListener(() => RotateXNegative(currentTransform));
         buttons[2].onClick.RemoveListener(() => RotateYPositive(currentTransform));
@@ -31,7 +32,22 @@ public class RotateARObjectManager : MonoBehaviour
         buttons[4].onClick.RemoveListener(() => RotateZPositive(currentTransform));
         buttons[5].onClick.RemoveListener(() => RotateZNegative(currentTransform));
         buttons[6].onClick.RemoveListener(() => ResetRotate(currentTransform));
+
     }
+    private void HandleXRGrabInteractableSelected(GameObject obj)
+    {
+        if (obj == null)
+        {
+            currentTransform = null;
+            return;
+        }
+
+        if (obj.GetComponent<InstrumentShowcase>() != null)
+        {
+            currentTransform = obj.transform;
+        }
+    }
+
     private void RotateXPositive(Transform transform)
     {
         if (transform == null)
@@ -73,6 +89,8 @@ public class RotateARObjectManager : MonoBehaviour
         if (transform == null)
             return;
         transform.localRotation = Quaternion.Euler(0, 0, 0);
+        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localScale = new Vector3(1, 1, 1);
     }
     private void RotateObject(Transform transform)
     {

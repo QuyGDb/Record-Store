@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class SaveObjectsButton : MonoBehaviour
 {
     private Button button;
+    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
     private void Awake()
     {
         button = GetComponent<Button>();
+        GameResources.Instance.objectSceneText = textMeshProUGUI;
     }
     private void OnDestroy()
     {
@@ -19,6 +21,14 @@ public class SaveObjectsButton : MonoBehaviour
         button.onClick.AddListener((GameResources.Instance.transformObjectsManager.SaveTransformSelectInstrument));
     }
 
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(textMeshProUGUI), textMeshProUGUI);
+    }
+#endif
+    #endregion
 }
 
 

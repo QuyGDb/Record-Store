@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -48,54 +48,67 @@ public class WallManager : MonoBehaviour
             wallRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
         if (wallTransform != null)
-            ES3.Save(wallSO.name, wallTransform);
+            ES3.Save(wallSO.name, transform);
 
     }
     private async void LoadTransfrom()
     {
         await Awaitable.NextFrameAsync();
-        wallTransform.position = wallTransform.localPosition;
-        wallTransform.rotation = wallTransform.localRotation;
-        wallTransform.localScale = wallTransform.localScale;
+        transform.localPosition = wallTransform.localPosition;
+        transform.localRotation = wallTransform.localRotation;
+        transform.localScale = wallTransform.localScale;
 
     }
     public void StretchPlaneFromEdge(PlaneEdge edge, float delta)
     {
         Vector3 scale = transform.localScale;
         Vector3 positionOffset = Vector3.zero;
+        const float minScale = 0.01f;
 
         switch (edge)
         {
             case PlaneEdge.Left:
-
-                scale.x += delta;
-                positionOffset += transform.right * (delta / 2f);
+                if (scale.x + delta >= minScale)
+                {
+                    scale.x += delta;
+                    positionOffset -= transform.right * (delta / 2f);
+                }
                 break;
 
             case PlaneEdge.Right:
-                scale.x += delta;
-                positionOffset -= transform.right * (delta / 2f);
+                if (scale.x + delta >= minScale)
+                {
+                    scale.x += delta;
+                    positionOffset += transform.right * (delta / 2f);
+                }
                 break;
 
             case PlaneEdge.Top:
-                scale.z += delta;
-                positionOffset -= transform.forward * (delta / 2f);
+                if (scale.y + delta >= minScale)
+                {
+                    scale.y += delta;
+                    positionOffset += transform.up * (delta / 2f);
+                }
                 break;
 
             case PlaneEdge.Bottom:
-                scale.z += delta;
-                positionOffset += transform.forward * (delta / 2f);
+                if (scale.y + delta >= minScale)
+                {
+                    scale.y += delta;
+                    positionOffset -= transform.up * (delta / 2f);
+                }
                 break;
         }
+
         transform.localScale = scale;
-        transform.position += positionOffset;
-        ES3.Save(wallSO.name, transform);
+        transform.localPosition += positionOffset;
     }
+
 
     private void OnApplicationQuit()
     {
         if (wallTransform != null)
-            ES3.Save(wallSO.name, wallTransform);
+            ES3.Save(wallSO.name, transform);
     }
 
 }

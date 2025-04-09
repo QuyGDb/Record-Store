@@ -8,7 +8,7 @@ public class InstrumentShowcase : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     public InstrumentShowcaseSO instrumentShowcaseSO;
     private LocalAxis localAxis;
-    private LocalTransfrom localTransfrom;
+    private Transform localTransfrom;
     private void Awake()
     {
         localAxis = GetComponent<LocalAxis>();
@@ -43,7 +43,6 @@ public class InstrumentShowcase : MonoBehaviour
     {
         localAxis.enabled = true;
         StaticEventHandler.InvokeInstrumentShowcaseChanged(this);
-        StaticEventHandler.InvokeRotateObjectChanged(this.transform);
         StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
     }
     private void Deselect(SelectExitEventArgs arg0)

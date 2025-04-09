@@ -40,19 +40,8 @@ public static class StaticEventHandler
         OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
     }
 
-    public static event Action<InstrumentShowcaseListSO> OnInstrumentListSOChanged;
 
-    public static void InvokeInstrumentShowCaseListVNChanged(InstrumentShowcaseListSO objectMusicList)
-    {
-        OnInstrumentListSOChanged?.Invoke(objectMusicList);
-    }
 
-    public static event Action<InstrumentShowcaseSO, bool> OnInstrumentSOSelected;
-
-    public static void InvokeInstrumentShowcaseSOSelected(InstrumentShowcaseSO instrument, bool isSelected)
-    {
-        OnInstrumentSOSelected?.Invoke(instrument, isSelected);
-    }
     public static event Action<ARAnchor> OnCurrentAnchorChanged;
     public static void InvokeCurrentAnchorChanged(ARAnchor cloudAnchor)
     {
@@ -76,13 +65,6 @@ public static class StaticEventHandler
     public static void InvokeInstrumentShowcaseChanged(InstrumentShowcase instrumentShowcase)
     {
         OnInstrumentShowcaseChanged?.Invoke(instrumentShowcase);
-    }
-
-    public static event Action<Transform> OnRotateObjectChanged;
-
-    public static void InvokeRotateObjectChanged(Transform transform)
-    {
-        OnRotateObjectChanged?.Invoke(transform);
     }
 
     public static event Action<ARCloudAnchor, AnchorType> OnInstantiateAtAnchor;

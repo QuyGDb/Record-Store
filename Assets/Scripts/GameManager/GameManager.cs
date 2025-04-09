@@ -16,15 +16,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         ChangeApplicationState(ApplicationState.CreateMapMode);
     }
-    private void Update()
-    {
-        PreventPlaceAnchorOnUI();
-    }
-    private void PreventPlaceAnchorOnUI()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-    }
+
     public void ChangeApplicationState(ApplicationState newState)
     {
         applicationState = newState;

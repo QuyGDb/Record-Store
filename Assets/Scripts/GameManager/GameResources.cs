@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 [DisallowMultipleComponent]
 public class GameResources : MonoBehaviour
@@ -52,8 +53,10 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public CloudAnchorsManager cloudAnchorsManager;
     [HideInInspector] public SceneNavigationBar sceneNavigationBar;
     [HideInInspector] public WallManager wallManager;
-    [HideInInspector] public Image cloudAnchorListScrollViewImage;
-    internal TransformObjectsManager transformObjectsManager;
+    [HideInInspector] public GameObject contentCloudAnchor;
+    [HideInInspector] public ObjectSpawnerAtAnchors objectSpawnerAtAnchors;
+    [HideInInspector] public TransformObjectsManager transformObjectsManager;
+    [HideInInspector] public AROcclusionManager occlusionManager;
     #endregion
 
 
@@ -71,4 +74,6 @@ public class GameResources : MonoBehaviour
     }
 #endif
     #endregion
+
+    public TextMeshProUGUI objectSceneText;
 }
