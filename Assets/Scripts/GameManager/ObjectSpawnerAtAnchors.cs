@@ -9,6 +9,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     private List<GameObject> createdObjectsList = new List<GameObject>();
     private WallManager wallManager;
     private Transform wallTransform;
+    [SerializeField] private Transform objectParentForObjectOnWall;
     private List<GameObject> objectsPrefabList = new List<GameObject>();
 
     private void Awake()
@@ -47,7 +48,6 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             objectsPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
         }
         InitializeWall(aRAnchor);
-
 #endif
     }
 
@@ -56,6 +56,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         GameObject wall = Instantiate(GameResources.Instance.wallSO_ShowcaseVN.wallPrefab, transform);
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(cloudAnchor.transform);
+        objectParentForObjectOnWall.SetParent(cloudAnchor.transform);
 #endif
         wall.transform.localPosition = new Vector3(0, 0, 0);
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -66,9 +67,11 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     }
     public void InitializeObjectsOnWall()
     {
+        objectParentForObjectOnWall.localPosition = wallTransform.localPosition;
+        objectParentForObjectOnWall.localRotation = wallTransform.localRotation;
         foreach (var item in objectsPrefabList)
         {
-            GameObject obj = Instantiate(item, wallTransform);
+            GameObject obj = Instantiate(item, objectParentForObjectOnWall);
             createdObjectsList.Add(obj);
         }
         XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();

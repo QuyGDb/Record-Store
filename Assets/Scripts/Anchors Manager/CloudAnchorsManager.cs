@@ -132,7 +132,7 @@ public class CloudAnchorsManager : MonoBehaviour
     {
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         ResolveCloudAnchorPromise resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
-        GameResources.Instance.contentCloudAnchor.SetActive(GameResources.Instance.contentCloudAnchor.activeSelf);
+        GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending)
         {
@@ -144,6 +144,7 @@ public class CloudAnchorsManager : MonoBehaviour
             ARCloudAnchor aRCloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
             QueryARCloudAnchor(aRCloudAnchor, cloudAnchorId);
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
+            GameResources.Instance.resolveCloudAnchorIdList.Add(cloudAnchorId);
             GameResources.Instance.cloudAnchorSceneText.text = $"Position: {aRCloudAnchor.pose.position}, Rotation: {aRCloudAnchor.pose.rotation}";
         }
         else
@@ -154,6 +155,7 @@ public class CloudAnchorsManager : MonoBehaviour
 
 #if UNITY_EDITOR
         yield return null;
+        GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
         StaticEventHandler.InvokeInstantiateAtAnchor(null, AnchorType.IntrumentShowCaseVN);
 #endif
     }
@@ -165,7 +167,6 @@ public class CloudAnchorsManager : MonoBehaviour
             if (anchorDetails != null)
             {
                 StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor, anchorDetails.anchorType);
-
             }
         }
     }

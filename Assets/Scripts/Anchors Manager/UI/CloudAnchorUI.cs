@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
+using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,8 +13,10 @@ public class CloudAnchorUI : MonoBehaviour, IPointerClickHandler
     private bool isSelected = false;
     private Color defaultColor;
     private Color selectedColor;
+    public bool isResolved = false;
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (isResolved) return;
         isSelected = !isSelected;
         if (isSelected)
         {
@@ -31,17 +35,20 @@ public class CloudAnchorUI : MonoBehaviour, IPointerClickHandler
         selectedColor = new Color(0.5f, 0.5f, 0.5f, 1);
         targetImage = GetComponentInChildren<Image>();
         textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
-
     }
+
     private void Start()
     {
         SetSprite();
         SetInforAnchorImage();
+
     }
+
+
+
     void SetInforAnchorImage()
     {
         textMeshProUGUI.text = anchorDetails.anchorName + "  -  Type: " + anchorDetails.anchorType.ToString();
-
     }
     private Sprite SetSprite()
     {
@@ -54,8 +61,6 @@ public class CloudAnchorUI : MonoBehaviour, IPointerClickHandler
             new Vector2(0.5f, 0.5f)
         );
         targetImage.sprite = newSprite;
-
         return newSprite;
     }
-
 }

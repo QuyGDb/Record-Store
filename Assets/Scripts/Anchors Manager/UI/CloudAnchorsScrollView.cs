@@ -37,6 +37,12 @@ public class CloudAnchorsScrollView : MonoBehaviour
             GameObject gameObject = Instantiate(prefab, content.transform);
             cloudAnchorImages.Add(gameObject);
             gameObject.GetComponent<CloudAnchorUI>().anchorDetails = cloudAnchor.Value;
+            if (GameResources.Instance.resolveCloudAnchorIdList.Contains(cloudAnchor.Key))
+            {
+                CloudAnchorUI cloudAnchorUI = gameObject.GetComponent<CloudAnchorUI>();
+                cloudAnchorUI.targetImage.color = Color.cyan;
+                cloudAnchorUI.isResolved = true;
+            }
         }
     }
 

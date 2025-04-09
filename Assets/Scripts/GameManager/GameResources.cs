@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -57,6 +59,7 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public ObjectSpawnerAtAnchors objectSpawnerAtAnchors;
     [HideInInspector] public TransformObjectsManager transformObjectsManager;
     [HideInInspector] public AROcclusionManager occlusionManager;
+    [HideInInspector] public List<string> resolveCloudAnchorIdList;
     #endregion
 
 
