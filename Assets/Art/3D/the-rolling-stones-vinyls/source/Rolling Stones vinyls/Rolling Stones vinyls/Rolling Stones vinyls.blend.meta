@@ -1,0 +1,282 @@
+fileFormatVersion: 2
+guid: 9b61737ff7a3c034988a99c246fb547c
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Exile_poster
+    second: {fileID: 2100000, guid: a0a3d06c273e700448514218bba94454, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Exile_poster_back
+    second: {fileID: 2100000, guid: 78c28537e5ec0a444811f90bd41963c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cardboard
+    second: {fileID: 2100000, guid: a5f66cbeb005a854db21716ee74848b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover1_back
+    second: {fileID: 2100000, guid: 80f7cb0b0e3ab304ca07c83e68cc0bc4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover1_front
+    second: {fileID: 2100000, guid: edd6aa384e3cf964bacb0ced34e940d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover1_side
+    second: {fileID: 2100000, guid: fcbee6a4c646b3346ae44bc2495d0063, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover2-back
+    second: {fileID: 2100000, guid: 2d8b31ab9ac809f4684d2493359bb661, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover2-front
+    second: {fileID: 2100000, guid: ff05c26e018507045a48a4d3e22690c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover2-inside
+    second: {fileID: 2100000, guid: a830792c29a1ca54f8537376d7500a58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover2_side
+    second: {fileID: 2100000, guid: be5a58efdf939c444b155d8c64a7f62e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover4_back
+    second: {fileID: 2100000, guid: 5a71940a719373d4eac5d53c68448126, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover4_front
+    second: {fileID: 2100000, guid: 5818f8d4f18d6da418276bc996b576b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover4_side
+    second: {fileID: 2100000, guid: 09de990256e786b408b41b4b32a984b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover5_back
+    second: {fileID: 2100000, guid: c3e7751f297deed46ab8d643ac381c02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover5_front
+    second: {fileID: 2100000, guid: 91f66d4292172124293dee56f0f8a996, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover5_side
+    second: {fileID: 2100000, guid: c34804f673210944fa7f45433514ea34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: covervinyl1-back
+    second: {fileID: 2100000, guid: f7591bf416ca03948b72913996bb8486, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: covervinyl1-front
+    second: {fileID: 2100000, guid: ad449d24121b0654ca2918c944ec56ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: covervinyl2-back
+    second: {fileID: 2100000, guid: aea01075eafbb914da34b0b10892462c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: covervinyl2-front
+    second: {fileID: 2100000, guid: d04da7f977bf94f468be4a37bd09884a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: covervinyl4-back
+    second: {fileID: 2100000, guid: b3b383d4830cda843aad3cc1fc364bc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: covervinyl4-front
+    second: {fileID: 2100000, guid: f972b30b0be9b0640ab8d53210bb46da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_back
+    second: {fileID: 2100000, guid: 59b05942634fdbe4a93fa7d4019f53a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_back2
+    second: {fileID: 2100000, guid: 6b13a70f5d9faa54ca3fdacaa64975f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_back3
+    second: {fileID: 2100000, guid: e9d3fc48240a64946aa83e142462fba3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_back4
+    second: {fileID: 2100000, guid: 37706d9811241ed42aa31d62fd06a177, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_back5
+    second: {fileID: 2100000, guid: 1ead1c98e77dff844a5c9ec4821d6460, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_front
+    second: {fileID: 2100000, guid: 913e84075b001f543930973034ed0891, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_front2
+    second: {fileID: 2100000, guid: 4efc4cd213447e04ebc90e2964f8afc4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_front3
+    second: {fileID: 2100000, guid: 0ade98b8c9bdf21418680ade68591266, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_front4
+    second: {fileID: 2100000, guid: dc841180749da9341ab9b4470084bea7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_front5
+    second: {fileID: 2100000, guid: e6689544dc2496447ab7dd28f98fb759, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_side
+    second: {fileID: 2100000, guid: 08cf5e4e0eb6df24389ba5b0a4335db2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: label_side2
+    second: {fileID: 2100000, guid: db269f8f9b938ee48bff18efcfcfc0e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vinyl
+    second: {fileID: 2100000, guid: f343c3f5bc8e7d54db3bbb0dfff1a827, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

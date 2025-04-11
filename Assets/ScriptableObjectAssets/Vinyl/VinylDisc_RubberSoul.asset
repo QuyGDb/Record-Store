@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d745dd7ff27833041b74027b07f20c82, type: 3}
+  m_Name: VinylDisc_RubberSoul
+  m_EditorClassIdentifier: 
+  discName: Rubber Soul
+  songs:
+  - {fileID: 8300000, guid: e668075e6b2215f43b933669b5ccacc0, type: 3}
+  - {fileID: 8300000, guid: af8edd3fbcb94fc4b9449243ade5eac6, type: 3}
+  - {fileID: 8300000, guid: 13b04b0935a0e454e9626c5f8e5c2340, type: 3}
+  - {fileID: 8300000, guid: 48229070fb1e3744dad477b313987f45, type: 3}
+  - {fileID: 8300000, guid: d48bb79d45f0b9141958ee346fb9169e, type: 3}
+  - {fileID: 8300000, guid: d5b3402960bb23742be6b64295468824, type: 3}
+  - {fileID: 8300000, guid: 92aa95a4a8f3245468a75e1d9c4cec21, type: 3}
+  - {fileID: 8300000, guid: 02d88b0ca2951f14298ca389401c8d45, type: 3}
+  - {fileID: 8300000, guid: a779aff452f5b7640aec518fb32f5a4f, type: 3}
+  - {fileID: 8300000, guid: 093e511d7fc43194981f1cbfb1b2f1a7, type: 3}
+  - {fileID: 8300000, guid: b0e36679322cfcb4783f8aa5fe5ebd1e, type: 3}
+  - {fileID: 8300000, guid: d539d12e9dfd41540bc441738d090d8b, type: 3}
+  - {fileID: 8300000, guid: 45be07eb87b5ab1419342d20ee0209fc, type: 3}
+  - {fileID: 8300000, guid: 0af97c8d7af7d024da177e1dc282b014, type: 3}

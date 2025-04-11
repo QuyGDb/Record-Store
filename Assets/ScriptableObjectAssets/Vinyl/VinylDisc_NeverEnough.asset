@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d745dd7ff27833041b74027b07f20c82, type: 3}
+  m_Name: VinylDisc_NeverEnough
+  m_EditorClassIdentifier: 
+  discName: Never Enough
+  songs:
+  - {fileID: 8300000, guid: 7aa69add66611cb44b9aa02a176c9a5b, type: 3}
+  - {fileID: 8300000, guid: 6a6f04a622f2a1c438b96ef2f3ecdced, type: 3}
+  - {fileID: 8300000, guid: da907c58c7839ba49a0fa742d64608d8, type: 3}
+  - {fileID: 8300000, guid: e2e29be476af0954896f1b16ca066b58, type: 3}
+  - {fileID: 8300000, guid: d392634a808d08e4c971c81bfb8a83bb, type: 3}
+  - {fileID: 8300000, guid: 2d3b87ee55e93b74489201a895ba1a01, type: 3}
+  - {fileID: 8300000, guid: cc57145f71a42e74a89b8bc5d1d2d59b, type: 3}
+  - {fileID: 8300000, guid: 0e2c1b3e2ccb4c542a41e2516c9215d4, type: 3}
+  - {fileID: 8300000, guid: cce2698ce363284429083762d98ffe28, type: 3}
+  - {fileID: 8300000, guid: 7088ee613c735bc46a9cd42d2db241a7, type: 3}
+  - {fileID: 8300000, guid: 39ab144e5e4c4ec4d8d6b966627835b2, type: 3}
+  - {fileID: 8300000, guid: 903c0a838e638f441be43101e9458ece, type: 3}
+  - {fileID: 8300000, guid: 42df69b4847e6004fb5317c2baa9aebd, type: 3}
+  - {fileID: 8300000, guid: 9a950628425c51e44b65075e345d2015, type: 3}

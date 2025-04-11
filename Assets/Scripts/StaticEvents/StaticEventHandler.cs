@@ -2,6 +2,7 @@ using Google.XR.ARCoreExtensions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.XR.ARFoundation;
 
 public static class StaticEventHandler
@@ -20,12 +21,10 @@ public static class StaticEventHandler
         OnSongChanged?.Invoke(album, index);
     }
     public static event Action<AlbumSO> OnStartFirstSong;
-
     public static void InvokeStartFirstSong(AlbumSO album)
     {
         OnStartFirstSong?.Invoke(album);
     }
-
     public static event Action<string, AnchorType> OnSendAnchorInfo;
 
     public static void InvokeSendInfo(string name, AnchorType anchorType)
@@ -39,8 +38,6 @@ public static class StaticEventHandler
     {
         OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
     }
-
-
 
     public static event Action<ARAnchor> OnCurrentAnchorChanged;
     public static void InvokeCurrentAnchorChanged(ARAnchor cloudAnchor)
@@ -92,5 +89,12 @@ public static class StaticEventHandler
     public static void InvokeAnchorDetailsChanged(Dictionary<string, AnchorDetails> anchorDetails)
     {
         OnAnchorDetailsChanged?.Invoke(anchorDetails);
+    }
+
+    public static event Action<VinylDisc> OnVinylDiscChanged;
+
+    public static void InvokeVinylDiscChanged(VinylDisc vinylDisc)
+    {
+        OnVinylDiscChanged?.Invoke(vinylDisc);
     }
 }
