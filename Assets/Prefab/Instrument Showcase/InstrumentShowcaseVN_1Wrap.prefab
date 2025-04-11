@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5036155932325008367}
   - component: {fileID: 5616332198458184291}
   - component: {fileID: -4632662326069711787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: InstrumentShowcaseVN_1Wrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,8 +299,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4253107651058829156, guid: 10720a49e97d9564587a499ac78da7b1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7695118648155211319, guid: 10720a49e97d9564587a499ac78da7b1, type: 3}
+    - {fileID: 2587486476860365836, guid: 10720a49e97d9564587a499ac78da7b1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

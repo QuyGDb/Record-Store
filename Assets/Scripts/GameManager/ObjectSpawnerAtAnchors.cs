@@ -28,7 +28,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         switch (type)
         {
-            case AnchorType.IntrumentShowCaseVN:
+            case AnchorType.IntrumentShowCase:
                 foreach (var instrumentShowcaseSO in GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList)
                 {
                     objectsPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);

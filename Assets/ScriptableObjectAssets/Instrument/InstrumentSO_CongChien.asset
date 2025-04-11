@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeffcbf521f5c64595fa950da9cc2e4, type: 3}
+  m_Name: InstrumentSO_CongChien
+  m_EditorClassIdentifier: 
+  instrumentName: "C\u1ED3ng Chi\xEAn"
+  description: "C\u1ED3ng Chi\xEAng T\xE2y Nguy\xEAn l\xE0 m\u1ED9t lo\u1EA1i nh\u1EA1c
+    c\u1EE5 truy\u1EC1n th\u1ED1ng \u0111\u1ED9c \u0111\xE1o c\u1EE7a c\xE1c d\xE2n
+    t\u1ED9c \u1EDF khu v\u1EF1c T\xE2y Nguy\xEAn nh\u01B0 \xCA \u0110\xEA, Ba Na,
+    Gia Rai, M\u2019n\xF4ng... B\u1ED9 c\u1ED3ng chi\xEAng th\u01B0\u1EDDng g\u1ED3m
+    nhi\u1EC1u chi\u1EBFc c\xF3 k\xEDch th\u01B0\u1EDBc v\xE0 \xE2m thanh kh\xE1c
+    nhau, \u0111\u01B0\u1EE3c s\u1EED d\u1EE5ng trong c\xE1c l\u1EC5 h\u1ED9i, nghi
+    l\u1EC5 t\xE2m linh v\xE0 sinh ho\u1EA1t c\u1ED9ng \u0111\u1ED3ng. \xC2m thanh
+    c\u1ED3ng chi\xEAng vang v\u1ECDng, linh thi\xEAng, th\u1EC3 hi\u1EC7n t\xE2m
+    h\u1ED3n v\xE0 \u0111\u1EDDi s\u1ED1ng v\u0103n h\xF3a phong ph\xFA c\u1EE7a
+    ng\u01B0\u1EDDi T\xE2y Nguy\xEAn. N\u0103m 2005, Kh\xF4ng gian v\u0103n h\xF3a
+    c\u1ED3ng chi\xEAng T\xE2y Nguy\xEAn \u0111\xE3 \u0111\u01B0\u1EE3c UNESCO c\xF4ng
+    nh\u1EADn l\xE0 Ki\u1EC7t t\xE1c di s\u1EA3n truy\u1EC1n kh\u1EA9u v\xE0 phi
+    v\u1EADt th\u1EC3 c\u1EE7a nh\xE2n lo\u1EA1i."
+  videoClip: {fileID: 32900000, guid: fcf91e824adcd5b40937fbf24c1f626b, type: 3}
+  videoClipTitle: "C\u1ED3ng chi\xEAng T\xE2y Nguy\xEAn"

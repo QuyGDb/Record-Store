@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeffcbf521f5c64595fa950da9cc2e4, type: 3}
+  m_Name: InstrumentSO_KhenBau
+  m_EditorClassIdentifier: 
+  instrumentName: "Kh\xE8n b\u1EA7u 6 \u1ED1ng"
+  description: "Kh\xE8n b\u1EA7u 6 \u1ED1ng l\xE0 m\u1ED9t lo\u1EA1i nh\u1EA1c c\u1EE5
+    d\xE2n t\u1ED9c truy\u1EC1n th\u1ED1ng c\u1EE7a ng\u01B0\u1EDDi Th\xE1i v\xE0
+    m\u1ED9t s\u1ED1 d\xE2n t\u1ED9c thi\u1EC3u s\u1ED1 \u1EDF v\xF9ng n\xFAi ph\xEDa
+    B\u1EAFc Vi\u1EC7t Nam. Kh\xE8n g\u1ED3m 6 \u1ED1ng tr\xFAc c\u1EAFm v\xE0o m\u1ED9t
+    b\u1EA7u b\u1EB1ng g\u1ED7 ho\u1EB7c qu\u1EA3 b\u1EA7u kh\xF4, ph\xE1t ra \xE2m
+    thanh nh\u1EDD nguy\xEAn l\xFD rung c\u1EE7a l\u01B0\u1EE1i g\xE0 b\u1EB1ng \u0111\u1ED3ng.
+    \xC2m thanh c\u1EE7a kh\xE8n b\u1EA7u m\u01B0\u1EE3t m\xE0, s\xE2u l\u1EAFng,
+    th\u01B0\u1EDDng \u0111\u01B0\u1EE3c s\u1EED d\u1EE5ng trong c\xE1c d\u1ECBp
+    l\u1EC5 h\u1ED9i, giao duy\xEAn, ho\u1EB7c \u0111\u1EC3 th\u1EC3 hi\u1EC7n t\xECnh
+    c\u1EA3m c\xE1 nh\xE2n. \u0110\xE2y l\xE0 bi\u1EC3u t\u01B0\u1EE3ng v\u0103n
+    h\xF3a \u0111\u1EB7c s\u1EAFc, g\u1EAFn li\u1EC1n v\u1EDBi \u0111\u1EDDi s\u1ED1ng
+    tinh th\u1EA7n c\u1EE7a c\u1ED9ng \u0111\u1ED3ng."
+  videoClip: {fileID: 32900000, guid: e1e689f3cff161e439c31db73f3832a6, type: 3}
+  videoClipTitle: "Ngh\u1EC7 nh\xE2n kh\xE8n b\u1EA7u ng\u01B0\u1EDDi Raglai \u1EDF
+    Ph\u01B0\u1EDBc H\xE0 - Ninh Thu\u1EADn"

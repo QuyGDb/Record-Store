@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 965507959775875442}
   - component: {fileID: 8729349812464802681}
   - component: {fileID: -536802503497496288}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: InstrumentShowcaseVN_2Wrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

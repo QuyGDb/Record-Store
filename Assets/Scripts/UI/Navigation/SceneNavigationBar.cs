@@ -39,7 +39,7 @@ public class SceneNavigationBar : MonoBehaviour
     {
         switch (type)
         {
-            case AnchorType.IntrumentShowCaseVN:
+            case AnchorType.IntrumentShowCase:
                 break;
 
         }

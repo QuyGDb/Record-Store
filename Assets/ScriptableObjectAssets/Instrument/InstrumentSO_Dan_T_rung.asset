@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeffcbf521f5c64595fa950da9cc2e4, type: 3}
+  m_Name: InstrumentSO_Dan_T_rung
+  m_EditorClassIdentifier: 
+  instrumentName: "\u0110\xE0n T'r\u01B0ng "
+  description: "\u0110\xE0n T\u2019r\u01B0ng l\xE0 m\u1ED9t lo\u1EA1i nh\u1EA1c c\u1EE5
+    d\xE2n t\u1ED9c g\xF5, truy\u1EC1n th\u1ED1ng c\u1EE7a c\xE1c d\xE2n t\u1ED9c
+    T\xE2y Nguy\xEAn nh\u01B0 Ba Na, Gia Rai, X\xEA \u0110\u0103ng... \u0110\xE0n
+    \u0111\u01B0\u1EE3c l\xE0m t\u1EEB nhi\u1EC1u \u1ED1ng tre n\u1EE9a c\xF3 \u0111\u1ED9
+    d\xE0i ng\u1EAFn kh\xE1c nhau, x\u1EBFp theo th\u1EE9 t\u1EF1 \xE2m thanh v\xE0
+    treo tr\xEAn gi\xE1 g\u1ED7. Khi g\xF5 v\xE0o, \u0111\xE0n ph\xE1t ra nh\u1EEFng
+    \xE2m thanh trong tr\u1EBBo, vang v\u1ECDng n\xFAi r\u1EEBng. \u0110\xE0n T\u2019r\u01B0ng
+    th\u01B0\u1EDDng \u0111\u01B0\u1EE3c d\xF9ng trong bi\u1EC3u di\u1EC5n ngh\u1EC7
+    thu\u1EADt, l\u1EC5 h\u1ED9i v\xE0 sinh ho\u1EA1t c\u1ED9ng \u0111\u1ED3ng, th\u1EC3
+    hi\u1EC7n n\xE9t \u0111\u1EB9p m\u1ED9c m\u1EA1c, g\u1EAFn b\xF3 v\u1EDBi thi\xEAn
+    nhi\xEAn v\xE0 \u0111\u1EDDi s\u1ED1ng v\u0103n h\xF3a T\xE2y Nguy\xEAn."
+  videoClip: {fileID: 32900000, guid: 22aa927942268e14db1458485106ea0c, type: 3}
+  videoClipTitle: "\u0110\u1ED9c t\u1EA5u T'r\u01B0ng: T\xC2Y NGUY\xCAN CH\xC0O M\u1EB6T
+    TR\u1EDCI"
