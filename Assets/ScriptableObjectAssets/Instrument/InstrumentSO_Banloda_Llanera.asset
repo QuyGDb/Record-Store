@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeffcbf521f5c64595fa950da9cc2e4, type: 3}
+  m_Name: InstrumentSO_Banloda_Llanera
+  m_EditorClassIdentifier: 
+  instrumentName: Bandola Llanera
+  description: "Bandola Llanera l\xE0 m\u1ED9t nh\u1EA1c c\u1EE5 d\xE2y truy\u1EC1n
+    th\u1ED1ng c\u1EE7a v\xF9ng \u0111\u1ED3ng b\u1EB1ng Venezuela v\xE0 Colombia.
+    \u0110\xE0n c\xF3 th\xE2n h\xECnh qu\u1EA3 l\xEA, th\u01B0\u1EDDng c\xF3 4 d\xE2y,
+    v\xE0 \u0111\u01B0\u1EE3c ch\u01A1i b\u1EB1ng mi\u1EBFng g\u1EA3y. Bandola Llanera
+    th\u01B0\u1EDDng xu\u1EA5t hi\u1EC7n trong \xE2m nh\u1EA1c d\xE2n gian joropo,
+    v\u1EDBi \xE2m thanh \u0111\u1EB7c tr\u01B0ng v\xE0 k\u1EF9 thu\u1EADt ch\u01A1i
+    nhanh, linh ho\u1EA1t. \u0110\xE2y l\xE0 bi\u1EC3u t\u01B0\u1EE3ng \xE2m nh\u1EA1c
+    c\u1EE7a v\u0103n h\xF3a Llanero (ng\u01B0\u1EDDi d\xE2n v\xF9ng \u0111\u1ED3ng
+    b\u1EB1ng)."
+  videoClip: {fileID: 32900000, guid: f985143f89ec9b444aed1862a01f65d3, type: 3}
+  videoClipTitle: 'Bandola Llanera: Pajarillo'

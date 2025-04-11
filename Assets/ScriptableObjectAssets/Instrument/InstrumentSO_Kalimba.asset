@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeffcbf521f5c64595fa950da9cc2e4, type: 3}
+  m_Name: InstrumentSO_Kalimba
+  m_EditorClassIdentifier: 
+  instrumentName: Kalimba
+  description: "\u0110\xE0n Klong Put l\xE0 nh\u1EA1c c\u1EE5 truy\u1EC1n th\u1ED1ng
+    c\u1EE7a d\xE2n t\u1ED9c Ba Na \u1EDF T\xE2y Nguy\xEAn, thu\u1ED9c h\u1ECD nh\u1EA1c
+    c\u1EE5 g\xF5 \u2013 kh\xED. \u0110\xE0n g\u1ED3m nhi\u1EC1u \u1ED1ng tre ho\u1EB7c
+    n\u1EE9a c\xF3 \u0111\u1ED9 d\xE0i kh\xE1c nhau, \u0111\u1EB7t song song tr\xEAn
+    gi\xE1 \u0111\u1EE1. Khi ch\u01A1i, ng\u01B0\u1EDDi bi\u1EC3u di\u1EC5n v\u1ED7
+    tay g\u1EA7n mi\u1EC7ng \u1ED1ng, t\u1EA1o lu\u1ED3ng kh\xF4ng kh\xED l\xE0m
+    \u1ED1ng rung ph\xE1t ra \xE2m thanh.\n\n\u0110\xE0n th\u01B0\u1EDDng do ph\u1EE5
+    n\u1EEF ch\u01A1i trong c\xE1c d\u1ECBp l\u1EC5 h\u1ED9i, nghi l\u1EC5 c\u1ED9ng
+    \u0111\u1ED3ng. \xC2m thanh c\u1EE7a Klong Put vang xa, tr\u1EA7m b\u1ED5ng,
+    g\u1EE3i c\u1EA3m gi\xE1c g\u1EA7n g\u0169i v\u1EDBi n\xFAi r\u1EEBng, th\u1EC3
+    hi\u1EC7n s\u1EF1 tinh t\u1EBF v\xE0 t\xE0i hoa trong ngh\u1EC7 thu\u1EADt d\xE2n
+    gian T\xE2y Nguy\xEAn."
+  videoClip: {fileID: 32900000, guid: 541800ad1f79e2742a6914bb8a9742cb, type: 3}
+  videoClipTitle: Can't Help Falling In Love on a Kalimba

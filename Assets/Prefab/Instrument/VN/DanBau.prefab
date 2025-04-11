@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTranforms: {fileID: 0}
+  instrumentSO: {fileID: 11400000, guid: e5912f55f5b631c4da49942e4eab6202, type: 2}
 --- !u!65 &6248825881629061703
 BoxCollider:
   m_ObjectHideFlags: 0

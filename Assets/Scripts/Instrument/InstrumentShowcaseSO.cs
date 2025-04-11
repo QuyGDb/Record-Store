@@ -5,5 +5,4 @@ public class InstrumentShowcaseSO : ScriptableObject
 {
     public string instrumentName;
     public GameObject instrumentPrefab;
-    public Sprite instrumentSprite;
 }

@@ -18,8 +18,7 @@ public enum MusicGenres
 public enum AnchorType
 {
     None,
-    IntrumentShowCaseVN,
-    InstrumentShowCaseOversea,
+    IntrumentShowCase,
     Poster
 }
 public enum PlaneEdge

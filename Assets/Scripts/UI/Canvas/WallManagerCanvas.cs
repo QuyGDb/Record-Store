@@ -79,12 +79,12 @@ public class WallManagerCanvas : MonoBehaviour
     private void AddZpositon()
     {
         if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.position += new Vector3(0, 0, 0.01f);
+        GameResources.Instance.wallManager.transform.position += new Vector3(0, 0, 0.1f);
     }
     private void SubtractZpositon()
     {
         if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.position -= new Vector3(0, 0, 0.01f);
+        GameResources.Instance.wallManager.transform.position -= new Vector3(0, 0, 0.1f);
     }
 
     private void AddYRotate()

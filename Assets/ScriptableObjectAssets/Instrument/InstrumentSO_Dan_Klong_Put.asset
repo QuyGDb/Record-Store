@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeffcbf521f5c64595fa950da9cc2e4, type: 3}
+  m_Name: InstrumentSO_Dan_Klong_Put
+  m_EditorClassIdentifier: 
+  instrumentName: "\u0110\xE0n Klong Put"
+  description: "\u0110\xE0n Klong Put l\xE0 m\u1ED9t nh\u1EA1c c\u1EE5 g\xF5 \u0111\u1ED9c
+    \u0111\xE1o c\u1EE7a d\xE2n t\u1ED9c Ba Na \u1EDF T\xE2y Nguy\xEAn. \u0110\xE0n
+    g\u1ED3m nhi\u1EC1u \u1ED1ng tre d\xE0i ng\u1EAFn kh\xE1c nhau, \u0111\u01B0\u1EE3c
+    \u0111\u1EB7t n\u1EB1m ngang tr\xEAn gi\xE1 \u0111\u1EE1, m\u1ED7i \u1ED1ng ph\xE1t
+    ra m\u1ED9t \xE2m thanh kh\xE1c nhau. Ng\u01B0\u1EDDi ch\u01A1i kh\xF4ng d\xF9ng
+    tay g\xF5 tr\u1EF1c ti\u1EBFp m\xE0 v\u1ED7 tay g\u1EA7n mi\u1EC7ng \u1ED1ng,
+    t\u1EA1o ra lu\u1ED3ng kh\xED l\xE0m \u1ED1ng rung ph\xE1t ra \xE2m thanh. Klong
+    Put th\u01B0\u1EDDng do ph\u1EE5 n\u1EEF bi\u1EC3u di\u1EC5n trong c\xE1c d\u1ECBp
+    l\u1EC5 h\u1ED9i, th\u1EC3 hi\u1EC7n s\u1EF1 kh\xE9o l\xE9o v\xE0 c\u1EA3m x\xFAc
+    tinh t\u1EBF. \xC2m thanh c\u1EE7a \u0111\xE0n vang v\u1ECDng, ng\xE2n nga, g\u1EAFn
+    li\u1EC1n v\u1EDBi kh\xF4ng gian v\u0103n h\xF3a T\xE2y Nguy\xEAn."
+  videoClip: {fileID: 32900000, guid: 45b729ba101da8649b3e01a33aa919ac, type: 3}
+  videoClipTitle: "M\xD9A XU\xC2N \u0110\u1EBEN (H\u1EEFu Xu\xE2n) | \u0110\xE0n
+    K'longput Huy\u1EC1n Ly"
