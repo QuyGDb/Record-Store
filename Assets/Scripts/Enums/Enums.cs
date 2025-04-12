@@ -19,7 +19,7 @@ public enum AnchorType
 {
     None,
     IntrumentShowCase,
-    Poster
+    MusicHistory,
 }
 public enum PlaneEdge
 {

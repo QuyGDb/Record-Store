@@ -21,7 +21,7 @@ public class WallManagerCanvas : MonoBehaviour
         buttons[1].onClick.AddListener(SubtractZpositon);
         buttons[2].onClick.AddListener(AddYRotate);
         buttons[3].onClick.AddListener(SubtractYRotate);
-        buttons[4].onClick.AddListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjectsOnWall);
+        buttons[4].onClick.AddListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjects);
     }
 
     private void OnEnable()
@@ -41,7 +41,7 @@ public class WallManagerCanvas : MonoBehaviour
         buttons[1].onClick.RemoveListener(SubtractZpositon);
         buttons[2].onClick.RemoveListener(AddYRotate);
         buttons[3].onClick.RemoveListener(SubtractYRotate);
-        buttons[4].onClick.RemoveListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjectsOnWall);
+        buttons[4].onClick.RemoveListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjects);
     }
     private void OnInputFieldEndEdit(string value)
     {

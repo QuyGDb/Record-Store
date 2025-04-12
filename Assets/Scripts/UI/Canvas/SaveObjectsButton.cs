@@ -14,11 +14,11 @@ public class SaveObjectsButton : MonoBehaviour
     }
     private void OnDestroy()
     {
-        button.onClick.RemoveListener((GameResources.Instance.transformObjectsManager.SaveTransformSelectInstrument));
+        button.onClick.RemoveListener((GameResources.Instance.transformObjectsManager.SaveSelectedItemTransformWithIdentifier));
     }
     private void Start()
     {
-        button.onClick.AddListener((GameResources.Instance.transformObjectsManager.SaveTransformSelectInstrument));
+        button.onClick.AddListener((GameResources.Instance.transformObjectsManager.SaveSelectedItemTransformWithIdentifier));
     }
 
     #region Validation

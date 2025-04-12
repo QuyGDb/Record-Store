@@ -11,9 +11,9 @@ using Unity.Collections;
 
 public class ARCameraCapture : MonoBehaviour
 {
-    private ARCameraManager arCameraManager; // AR Camera Manager
+    private ARCameraManager arCameraManager;
     private Texture2D cameraTexture;
-    private byte[] imageData; // Ảnh dưới dạng byte[]
+    private byte[] imageData;
     [SerializeField] TextMeshProUGUI notify;
     private void Awake()
     {

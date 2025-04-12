@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eeeb5393ffa7ab84e80f46656b979d0f, type: 3}
-  m_Name: WallSO_InstrumentShowcaseVN
+  m_Name: WallSO_MusicHistory
   m_EditorClassIdentifier: 
-  wallName: InstrumentShowcase
+  wallName: MusicHistory
   wallPrefab: {fileID: 2981695149791669914, guid: 6e39ee2488a6cb6419c1f8b994fb1d26,
     type: 3}
