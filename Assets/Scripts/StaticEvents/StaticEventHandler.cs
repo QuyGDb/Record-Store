@@ -91,10 +91,4 @@ public static class StaticEventHandler
         OnAnchorDetailsChanged?.Invoke(anchorDetails);
     }
 
-    public static event Action<VinylDisc> OnVinylDiscChanged;
-
-    public static void InvokeVinylDiscChanged(VinylDisc vinylDisc)
-    {
-        OnVinylDiscChanged?.Invoke(vinylDisc);
-    }
 }

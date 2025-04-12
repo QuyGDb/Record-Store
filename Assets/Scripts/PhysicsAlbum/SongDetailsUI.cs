@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SongDetails : MonoBehaviour
+public class SongDetailsUI : MonoBehaviour
 {
     Image songImage;
     TextMeshProUGUI songName;

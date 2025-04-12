@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41ede1f0b490464688768f366dfff71, type: 3}
+  m_Name: MusicGenreSO_Rap
+  m_EditorClassIdentifier: 
+  musicGenreName: Rap
+  prefab:
+  - {fileID: 2129587118990349809, guid: b907fffb395a7244cb73d629c7e1f862, type: 3}
+  - {fileID: 6987356520514712180, guid: f8d7878e933721741986d2ef8540f60b, type: 3}
+  - {fileID: 478741773331695898, guid: 0c95826f0a69a5e4989be1792f24b405, type: 3}
+  - {fileID: 8558664971843493584, guid: 95239e50afa30e9418592dd6d7b7702a, type: 3}
+  - {fileID: 2706110344095920627, guid: dddf2e2ee4dba9441bc46aa0f5d6dc60, type: 3}
+  - {fileID: 1404669719991836212, guid: c34811d85de4bac4fac72abefed8b477, type: 3}
+  - {fileID: 401387996664054399, guid: 4b170428d59a6e04abf6b69aa5ef8280, type: 3}
+  - {fileID: 3267923072088712585, guid: 62d6094a8bf4dcd4ab07d4762aab6174, type: 3}

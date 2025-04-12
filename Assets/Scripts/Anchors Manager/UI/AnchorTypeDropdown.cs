@@ -34,8 +34,8 @@ public class AnchorTypeDropdown : MonoBehaviour
             case AnchorType.IntrumentShowCase:
                 anchorType = AnchorType.IntrumentShowCase;
                 break;
-            case AnchorType.Poster:
-                anchorType = AnchorType.Poster;
+            case AnchorType.MusicHistory:
+                anchorType = AnchorType.MusicHistory;
                 break;
             default:
                 break;

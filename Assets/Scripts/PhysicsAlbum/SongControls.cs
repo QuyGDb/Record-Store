@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -44,12 +45,10 @@ public class SongControls : MonoBehaviour
 
     void Start()
     {
-        // Khởi tạo delegate cho mỗi button
         actionPlayPrevious = () => PlayPreviousTrack(buttons[0]);
         actionPause = () => PauseTrack(buttons[1]);
         actionPlayNext = () => PlayNextTrack(buttons[2]);
 
-        // Gán listener sử dụng delegate đã lưu
         buttons[0].onClick.AddListener(actionPlayPrevious);
         buttons[1].onClick.AddListener(actionPause);
         buttons[2].onClick.AddListener(actionPlayNext);
@@ -57,7 +56,6 @@ public class SongControls : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Gỡ bỏ listener bằng delegate đã lưu
         buttons[0].onClick.RemoveListener(actionPlayPrevious);
         buttons[1].onClick.RemoveListener(actionPause);
         buttons[2].onClick.RemoveListener(actionPlayNext);
@@ -105,5 +103,18 @@ public class SongControls : MonoBehaviour
         audioSource.Play();
 
         StaticEventHandler.InvokeSongChanged(albumSO, currentTrack);
+        StopAllCoroutines();
+        StartCoroutine(CheckTrackEndCoroutine());
+    }
+
+    private IEnumerator CheckTrackEndCoroutine()
+    {
+        yield return new WaitUntil(() => !audioSource.isPlaying && audioSource.time > 0f);
+
+        if (currentTrack < albumSO.songs.Count - 1)
+        {
+            currentTrack++;
+            PlayTrack(null);
+        }
     }
 }

@@ -45,15 +45,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  selectAnchorMAT: {fileID: 2100000, guid: 44c1ad0abe3ac5045a486bfa0e51ade9, type: 2}
-  musicMasterMixerGroup: {fileID: 0}
-  musicLowSnapshot: {fileID: 0}
-  musicOnFullSnapshot: {fileID: 0}
-  musicOffSnapshot: {fileID: 0}
   instrumentShowCaseVN: {fileID: 11400000, guid: 5d32c388c91991545a5138a43635ae40,
-    type: 2}
-  instrumentShowCaseOversea: {fileID: 11400000, guid: 4c5c7175fdf2d2545b1b924ceef1cdd5,
     type: 2}
   Ngot: {fileID: 11400000, guid: f2101e50addd61e4c9bc456511a28f1f, type: 2}
   SDDBP: {fileID: 11400000, guid: fb94107dca78e424dae4ef006e58ca63, type: 2}
-  wallSO_ShowcaseVN: {fileID: 11400000, guid: 1ab769f58582c0c48963a8ee7f97a5d4, type: 2}
+  wallSO_Showcase: {fileID: 11400000, guid: 1ab769f58582c0c48963a8ee7f97a5d4, type: 2}
+  wall_HistoryMusic: {fileID: 11400000, guid: cc5842c989b189c4d9f729b8a2ac4f67, type: 2}
+  rap: {fileID: 11400000, guid: 92746c4c8024afc40afb083dc9ed5767, type: 2}
+  pop: {fileID: 11400000, guid: 0280c619553c0f448960c97f61361b32, type: 2}
+  rock: {fileID: 11400000, guid: fad9d3a4775bada47817afc84255e675, type: 2}
+  anchorsManager: {fileID: 0}
+  anchorSceneText: {fileID: 0}
+  cloudAnchorSceneText: {fileID: 0}
+  cloudAnchorsManager: {fileID: 0}
+  sceneNavigationBar: {fileID: 0}
+  wallManager: {fileID: 0}
+  contentCloudAnchor: {fileID: 0}
+  objectSpawnerAtAnchors: {fileID: 0}
+  transformObjectsManager: {fileID: 0}
+  occlusionManager: {fileID: 0}
+  resolveCloudAnchorIdList: []
+  objectSceneText: {fileID: 0}

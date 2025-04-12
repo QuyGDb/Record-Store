@@ -25,13 +25,7 @@ public class GameResources : MonoBehaviour
 
     public Material defaultMaterial;
 
-    #region SOUNDS
 
-    public AudioMixerGroup musicMasterMixerGroup;
-    public AudioMixerSnapshot musicLowSnapshot;
-    public AudioMixerSnapshot musicOnFullSnapshot;
-    public AudioMixerSnapshot musicOffSnapshot;
-    #endregion
 
 
 
@@ -45,9 +39,19 @@ public class GameResources : MonoBehaviour
     #endregion
 
     #region Wall
-    public WallSO wallSO_ShowcaseVN;
+    public WallSO wallSO_Showcase;
+    public WallSO wall_HistoryMusic;
+
+
     #endregion
 
+
+    #region History Music
+    public MusicGenreSO rap;
+    public MusicGenreSO pop;
+    public MusicGenreSO rock;
+
+    #endregion
     #region AnchorsManager
     [HideInInspector] public AnchorsManager anchorsManager;
     [HideInInspector] public TextMeshProUGUI anchorSceneText;
@@ -62,21 +66,17 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public List<string> resolveCloudAnchorIdList;
     #endregion
 
+    [HideInInspector] public TextMeshProUGUI objectSceneText;
 
     #region Validation
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        //HelperUtilities.ValidateCheckEmptyString(this, nameof(defaultMaterial), defaultMaterial.name);
-        //HelperUtilities.ValidateCheckEmptyString(this, nameof(selectAnchorMAT), selectAnchorMAT.name);
-        //HelperUtilities.ValidateCheckNullValue(this, nameof(musicMasterMixerGroup), musicMasterMixerGroup);
-        //HelperUtilities.ValidateCheckNullValue(this, nameof(musicLowSnapshot), musicLowSnapshot);
-        //HelperUtilities.ValidateCheckNullValue(this, nameof(musicOnFullSnapshot), musicOnFullSnapshot);
-        //HelperUtilities.ValidateCheckNullValue(this, nameof(musicOffSnapshot), musicOffSnapshot);
+        HelperUtilities.ValidateCheckEmptyString(this, nameof(defaultMaterial), defaultMaterial.name);
+
 
     }
 #endif
     #endregion
 
-    public TextMeshProUGUI objectSceneText;
 }

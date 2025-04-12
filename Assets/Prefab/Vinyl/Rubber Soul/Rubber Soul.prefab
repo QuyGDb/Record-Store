@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 2409352074928355253}
   - component: {fileID: 505837616712015488}
   - component: {fileID: 6696721447313269848}
+  - component: {fileID: 2734833025745929997}
   m_Layer: 11
   m_Name: Rubber Soul
   m_TagString: Untagged
@@ -287,3 +288,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.314, y: 0.3140001, z: 0.003000001}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2734833025745929997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408932044210559467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48f3ccf65b6fe8458256dfb3fbef06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vinylDiscSO: {fileID: 11400000, guid: 9e1dd2f086bdd224b9c79887ae2ca77f, type: 2}
+  disc: {fileID: 6202503628219035180}

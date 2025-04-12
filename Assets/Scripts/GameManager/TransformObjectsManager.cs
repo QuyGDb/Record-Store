@@ -50,23 +50,36 @@ public class TransformObjectsManager : MonoBehaviour
         newScale = Vector3.Max(minScale, Vector3.Min(maxScale, newScale));
         gameObjectSelected.transform.localScale = newScale;
     }
-
-
-    public void SaveTransformSelectInstrument()
+    public void SaveSelectedItemTransformWithIdentifier()
     {
+        if (gameObjectSelected == null) return;
         InstrumentShowcase instrumentShowcase = gameObjectSelected.GetComponent<InstrumentShowcase>();
         if (instrumentShowcase != null)
         {
-            ES3.Save(instrumentShowcase.instrumentShowcaseSO.instrumentName, instrumentShowcase.transform);
-            Vector3 pos = instrumentShowcase.transform.position;
-            Vector3 rot = instrumentShowcase.transform.eulerAngles;
-            Vector3 scale = instrumentShowcase.transform.localScale;
-
-            GameResources.Instance.objectSceneText.text =
-                $"Pos: ({pos.x:F2}, {pos.y:F2}, {pos.z:F2}) | " +
-                $"Rot: ({rot.x:F0}, {rot.y:F0}, {rot.z:F0}) | " +
-                $"Scale: ({scale.x:F2}, {scale.y:F2}, {scale.z:F2})";
-
+            SaveTransformSelectObject(instrumentShowcase.transform, instrumentShowcase.instrumentShowcaseSO.instrumentName);
+            return;
         }
+        PictureFrame pictureFrame = gameObjectSelected.GetComponent<PictureFrame>();
+        if (pictureFrame != null)
+        {
+            SaveTransformSelectObject(pictureFrame.transform, pictureFrame.pictureName);
+            return;
+        }
+
+    }
+
+    private void SaveTransformSelectObject(Transform objectTransform, string name)
+    {
+
+        ES3.Save(name, objectTransform.transform);
+        Vector3 pos = objectTransform.transform.position;
+        Vector3 rot = objectTransform.transform.eulerAngles;
+        Vector3 scale = objectTransform.transform.localScale;
+
+        GameResources.Instance.objectSceneText.text =
+            $"Pos: ({pos.x:F2}, {pos.y:F2}, {pos.z:F2}) | " +
+            $"Rot: ({rot.x:F0}, {rot.y:F0}, {rot.z:F0}) | " +
+            $"Scale: ({scale.x:F2}, {scale.y:F2}, {scale.z:F2})";
+
     }
 }
