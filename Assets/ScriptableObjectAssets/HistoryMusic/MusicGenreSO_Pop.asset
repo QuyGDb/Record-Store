@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MusicGenreSO_Pop
   m_EditorClassIdentifier: 
   musicGenreName: Pop
-  prefab:
+  prefabs:
   - {fileID: 712691225294588954, guid: 2fc7dcf10e50ffb47b584d7a1aae3b20, type: 3}
   - {fileID: 712691225294588954, guid: 397ea3563473f144888f088bf766dcaa, type: 3}
   - {fileID: 712691225294588954, guid: 6a082de46edb34c42819486d6fd35313, type: 3}
@@ -21,3 +21,5 @@ MonoBehaviour:
   - {fileID: 3361538553855854947, guid: 3c83f9c18409b6945840f4c3e6e587d9, type: 3}
   - {fileID: 712691225294588954, guid: d06545e7ea980f048a360069a29b68cb, type: 3}
   - {fileID: 712691225294588954, guid: e4380179ffe79624e80cd459bd066d78, type: 3}
+  logo: {fileID: 9198575238293008141, guid: 3a6f9b9a1efff9b4d92882d30b5e7865, type: 3}
+  videoClip: {fileID: 32900000, guid: 8bd5838e929c3a14fb0593f9b4bcf619, type: 3}

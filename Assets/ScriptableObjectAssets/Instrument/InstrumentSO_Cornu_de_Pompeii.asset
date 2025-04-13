@@ -27,3 +27,4 @@ MonoBehaviour:
     M\xE3 c\u1ED5."
   videoClip: {fileID: 32900000, guid: 319c9841e52604e4fb2d11ec78077086, type: 3}
   videoClipTitle: Cornu de Pompeii
+  positionUI: {x: 0, y: 0, z: 2}

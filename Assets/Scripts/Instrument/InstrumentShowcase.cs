@@ -9,6 +9,7 @@ public class InstrumentShowcase : MonoBehaviour
     public InstrumentShowcaseSO instrumentShowcaseSO;
     private LocalAxis localAxis;
     private Transform localTransfrom;
+
     private void Awake()
     {
         localAxis = GetComponent<LocalAxis>();
@@ -21,14 +22,26 @@ public class InstrumentShowcase : MonoBehaviour
     private void Start()
     {
         LoadTransform();
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
     {
+        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         if (grabInteractable != null)
         {
             grabInteractable.selectEntered.RemoveListener(Select);
         }
     }
+
+    private void OnApplicationStateChanged(ApplicationState state)
+    {
+        if (state == ApplicationState.LoadMapMode)
+        {
+            grabInteractable.enabled = false;
+            GetComponentInChildren<Collider>().enabled = false;
+        }
+    }
+
     public async void LoadTransform()
     {
         gameObject.SetActive(false);

@@ -249,6 +249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InstrumentShowcaseVN_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4655659482846781006, guid: 1b2e1d5790f1a304089665539151e417,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5848967199920498992, guid: 1b2e1d5790f1a304089665539151e417,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -300,7 +305,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8771404226127503901, guid: 1b2e1d5790f1a304089665539151e417, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b2e1d5790f1a304089665539151e417, type: 3}

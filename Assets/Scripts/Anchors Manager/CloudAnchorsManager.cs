@@ -103,7 +103,7 @@ public class CloudAnchorsManager : MonoBehaviour
         anchorDetailsEditor.anchorName = nameCurrentAnchor;
         anchorDetailsEditor.anchorType = currentAnchorType;
         anchorDetailsEditor.anchorImage = anchorsManager.imageByte;
-        anchorDetailsEditor.cloudAnchorId = Random.Range(0, 10).ToString();
+        anchorDetailsEditor.cloudAnchorId = Random.Range(0, 100).ToString();
         yield return new WaitForSeconds(1);
         cloudAnchorDetails.Add(anchorDetailsEditor.cloudAnchorId, anchorDetailsEditor);
 #endif

@@ -28,3 +28,4 @@ MonoBehaviour:
     v\u1EADt th\u1EC3 c\u1EE7a nh\xE2n lo\u1EA1i."
   videoClip: {fileID: 32900000, guid: fcf91e824adcd5b40937fbf24c1f626b, type: 3}
   videoClipTitle: "C\u1ED3ng chi\xEAng T\xE2y Nguy\xEAn"
+  positionUI: {x: 1.6, y: 0.8, z: 2}

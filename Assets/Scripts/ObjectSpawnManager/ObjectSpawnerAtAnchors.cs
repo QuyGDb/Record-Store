@@ -26,7 +26,11 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     {
         StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
         GameResources.Instance.objectSpawnerAtAnchors = this;
+    }
+    private void Start()
+    {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+
     }
     private void OnDestroy()
     {
@@ -74,6 +78,15 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             {
                 item.GetComponent<XRGrabInteractable>().enabled = true;
             }
+            instrumentOnWall.GetComponent<XRGrabInteractable>().enabled = false;
+            popGenreOnWall.GetComponent<XRGrabInteractable>().enabled = false;
+            rapGenreOnWall.GetComponent<XRGrabInteractable>().enabled = false;
+            rockGenreOnWall.GetComponent<XRGrabInteractable>().enabled = false;
+            instrumentOnWall.GetComponent<Collider>().enabled = false;
+            popGenreOnWall.GetComponent<Collider>().enabled = false;
+            rapGenreOnWall.GetComponent<Collider>().enabled = false;
+            rockGenreOnWall.GetComponent<Collider>().enabled = false;
+
         }
     }
 
@@ -84,6 +97,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         switch (type)
         {
             case AnchorType.IntrumentShowCase:
+
                 foreach (var instrumentShowcaseSO in GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList)
                 {
                     instrumentPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
@@ -112,23 +126,23 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         }
 #endif
 
-#if UNITY_EDITOR
-        List<InstrumentShowcaseSO> instrumentShowcaseSOs = GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList;
-        foreach (var instrumentShowcaseSO in instrumentShowcaseSOs)
-        {
-            instrumentPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
-        }
-        SetupInstrumentShowcaseWall(aRAnchor);
-#endif
     }
 
     private void SetupHistoryMusicWall(ARCloudAnchor aRAnchor)
     {
+        popGenreOnWall.gameObject.SetActive(true);
+        rapGenreOnWall.gameObject.SetActive(true);
+        rockGenreOnWall.gameObject.SetActive(true);
         GameObject wall = Instantiate(GameResources.Instance.wall_HistoryMusic.wallPrefab, transform);
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(aRAnchor.transform);
-        instrumentOnWall.SetParent(aRAnchor.transform);
+        popGenreOnWall.SetParent(aRAnchor.transform);
+        rapGenreOnWall.SetParent(aRAnchor.transform);
+        rockGenreOnWall.SetParent(aRAnchor.transform);
 #endif
+        popGenreOnWall.gameObject.SetActive(false);
+        rapGenreOnWall.gameObject.SetActive(false);
+        rockGenreOnWall.gameObject.SetActive(false);
         wall.transform.localPosition = new Vector3(0, 0, 0);
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         wallManager = wall.GetComponent<WallManager>();
@@ -139,11 +153,13 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void SetupInstrumentShowcaseWall(ARCloudAnchor cloudAnchor)
     {
+        instrumentOnWall.gameObject.SetActive(true);
         GameObject wall = Instantiate(GameResources.Instance.wallSO_Showcase.wallPrefab, transform);
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(cloudAnchor.transform);
         instrumentOnWall.SetParent(cloudAnchor.transform);
 #endif
+        instrumentOnWall.gameObject.SetActive(false);
         wall.transform.localPosition = new Vector3(0, 0, 0);
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         wallManager = wall.GetComponent<WallManager>();
@@ -158,7 +174,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         {
             InitializeInstrumentOnWall();
         }
-        else if (anchorType == AnchorType.MusicHistory)
+        if (anchorType == AnchorType.MusicHistory)
         {
             InitializeMusicHistoryOnWall();
         }
@@ -166,13 +182,13 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void InitializeInstrumentOnWall()
     {
-        instrumentOnWall.localPosition = wallTransform.localPosition;
-        instrumentOnWall.localRotation = wallTransform.localRotation;
+        instrumentOnWall.gameObject.SetActive(true);
         foreach (var item in instrumentPrefabList)
         {
             GameObject obj = Instantiate(item, instrumentOnWall);
             instrumentList.Add(obj);
-            GetComponent<XRGrabInteractable>().enabled = false;
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
+
         }
         XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;
@@ -181,29 +197,36 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void InitializeMusicHistoryOnWall()
     {
-        popGenreOnWall.localPosition = wallTransform.localPosition;
-        popGenreOnWall.localRotation = wallTransform.localRotation;
+        popGenreOnWall.gameObject.SetActive(true);
+        rapGenreOnWall.gameObject.SetActive(true);
+        rockGenreOnWall.gameObject.SetActive(true);
+
+
+        Instantiate(GameResources.Instance.pop.logo, popGenreOnWall);
         foreach (var item in popPrefabList)
         {
             GameObject obj = Instantiate(item, popGenreOnWall);
             popList.Add(obj);
-            GetComponent<XRGrabInteractable>().enabled = false;
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
         }
-        rapGenreOnWall.localPosition = wallTransform.localPosition;
-        rapGenreOnWall.localRotation = wallTransform.localRotation;
+
+        //rap
+
+        Instantiate(GameResources.Instance.rap.logo, rapGenreOnWall);
         foreach (var item in rapPrefabList)
         {
             GameObject obj = Instantiate(item, rapGenreOnWall);
             rapList.Add(obj);
-            GetComponent<XRGrabInteractable>().enabled = false;
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
         }
-        rockGenreOnWall.localPosition = wallTransform.localPosition;
-        rockGenreOnWall.localRotation = wallTransform.localRotation;
+
+        //rock
+        Instantiate(GameResources.Instance.rock.logo, rockGenreOnWall);
         foreach (var item in rockPrefabList)
         {
             GameObject obj = Instantiate(item, rockGenreOnWall);
             rockList.Add(obj);
-            GetComponent<XRGrabInteractable>().enabled = false;
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
         }
         XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;

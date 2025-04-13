@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MusicGenreSO_Rap
   m_EditorClassIdentifier: 
   musicGenreName: Rap
-  prefab:
+  prefabs:
   - {fileID: 2129587118990349809, guid: b907fffb395a7244cb73d629c7e1f862, type: 3}
   - {fileID: 6987356520514712180, guid: f8d7878e933721741986d2ef8540f60b, type: 3}
   - {fileID: 478741773331695898, guid: 0c95826f0a69a5e4989be1792f24b405, type: 3}
@@ -22,3 +22,5 @@ MonoBehaviour:
   - {fileID: 1404669719991836212, guid: c34811d85de4bac4fac72abefed8b477, type: 3}
   - {fileID: 401387996664054399, guid: 4b170428d59a6e04abf6b69aa5ef8280, type: 3}
   - {fileID: 3267923072088712585, guid: 62d6094a8bf4dcd4ab07d4762aab6174, type: 3}
+  logo: {fileID: 9198575238293008141, guid: 90d34a6bd2c093449b7e183643141e40, type: 3}
+  videoClip: {fileID: 32900000, guid: 526faf302efdf564b81896c63f5caa63, type: 3}

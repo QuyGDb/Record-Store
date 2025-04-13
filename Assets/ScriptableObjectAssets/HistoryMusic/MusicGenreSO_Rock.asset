@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MusicGenreSO_Rock
   m_EditorClassIdentifier: 
   musicGenreName: Rock
-  prefab:
+  prefabs:
   - {fileID: 6106919275758565524, guid: 6e40e6bdca36d214b98e7465bea3d770, type: 3}
   - {fileID: 7590403121882745764, guid: abf28c14fb461a8459dbb7c70d6c8058, type: 3}
   - {fileID: 7559650140154241148, guid: b6edf2f535366a2439eaa5d09aa45611, type: 3}
@@ -21,3 +21,5 @@ MonoBehaviour:
   - {fileID: 8384987751057692968, guid: 65ebe6b516626204dbaec61a8e8b2878, type: 3}
   - {fileID: 2362062228209219375, guid: 9818dc36350997c4d96b6b1345b5585a, type: 3}
   - {fileID: 1419879508908998278, guid: ac23db4e7b1968748a497f283c015c64, type: 3}
+  logo: {fileID: 9198575238293008141, guid: fafa2886a85e5354e9bbf45387457699, type: 3}
+  videoClip: {fileID: 32900000, guid: 415972e92802b6d47b7613197c86f085, type: 3}

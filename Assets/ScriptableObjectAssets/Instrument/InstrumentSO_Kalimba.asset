@@ -27,3 +27,4 @@ MonoBehaviour:
     gian T\xE2y Nguy\xEAn."
   videoClip: {fileID: 32900000, guid: 541800ad1f79e2742a6914bb8a9742cb, type: 3}
   videoClipTitle: Can't Help Falling In Love on a Kalimba
+  positionUI: {x: 0, y: 0, z: 2}

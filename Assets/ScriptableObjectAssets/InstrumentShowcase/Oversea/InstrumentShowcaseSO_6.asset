@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b36dd3db6589c94fbb0058683d56524, type: 3}
   m_Name: InstrumentShowcaseSO_6
   m_EditorClassIdentifier: 
-  instrumentName: InstrumentShowcaseOversea2
-  instrumentPrefab: {fileID: 9089247513283486491, guid: f1c255f822c881f41b6c0643aad1fcc1,
+  instrumentName: InstrumentShowcaseOversea1
+  instrumentPrefab: {fileID: 9089247513283486491, guid: d278967e4cb46154388c49271b90ee97,
     type: 3}
