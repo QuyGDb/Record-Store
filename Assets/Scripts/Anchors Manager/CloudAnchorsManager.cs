@@ -92,7 +92,6 @@ public class CloudAnchorsManager : MonoBehaviour
             AnchorDetails anchorDetails = InitializeAnchorDetails(aRAnchor, hostCloudAnchorPromise);
             cloudAnchorDetails.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
             GameResources.Instance.anchorSceneText.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
-
         }
         else
             GameResources.Instance.anchorSceneText.text = $"Error {hostCloudAnchorPromise.Result.CloudAnchorState}";

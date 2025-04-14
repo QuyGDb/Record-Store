@@ -7,15 +7,15 @@ public class ObjectParent : MonoBehaviour
     [SerializeField] private string objParentName;
     private Transform saveTransform;
 
-    private void Awake()
+    private void OnEnable()
     {
-        saveTransform = ES3.Load(objParentName, transform);
         LoadTransform();
     }
-    private void LoadTransform()
+    private async void LoadTransform()
     {
         if (saveTransform != null)
         {
+            await Awaitable.NextFrameAsync();
             transform.position = saveTransform.localPosition;
             transform.rotation = saveTransform.localRotation;
             transform.localScale = saveTransform.localScale;

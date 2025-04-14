@@ -142,14 +142,13 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         wallManager = wall.GetComponent<WallManager>();
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(aRAnchor.transform);
+        // tam thoi gan vao anchor, sau khi chinh xong wall, se gan vao world
         popGenreOnWall.SetParent(aRAnchor.transform);
         rapGenreOnWall.SetParent(aRAnchor.transform);
         rockGenreOnWall.SetParent(aRAnchor.transform);
 
         wall.transform.localPosition = new Vector3(0, 0, 0);
-        popGenreOnWall.localPosition = new Vector3(0, 0, 0);
-        rapGenreOnWall.localPosition = new Vector3(0, 0, 0);
-        rockGenreOnWall.localPosition = new Vector3(0, 0, 0);
+      
 #endif
         popGenreOnWall.gameObject.SetActive(false);
         rapGenreOnWall.gameObject.SetActive(false);
@@ -167,9 +166,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(cloudAnchor.transform);
         instrumentOnWall.SetParent(cloudAnchor.transform);
-
         wall.transform.localPosition = new Vector3(0, 0, 0);
-        instrumentOnWall.localPosition = new Vector3(0, 0, 0);
 #endif
         instrumentOnWall.gameObject.SetActive(false);
         wallManager.wallSO = GameResources.Instance.wallSO_Showcase;
@@ -190,8 +187,9 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void InitializeInstrumentOnWall()
     {
-        instrumentOnWall.gameObject.SetActive(true);
         instrumentOnWall.transform.SetParent(wallManager.transform);
+        instrumentOnWall.gameObject.SetActive(true);
+        instrumentOnWall.transform.localPosition = new Vector3(0, 0, 0);
         foreach (var item in instrumentPrefabList)
         {
             GameObject obj = Instantiate(item, instrumentOnWall);
@@ -205,12 +203,15 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void InitializeMusicHistoryOnWall()
     {
+        popGenreOnWall.transform.SetParent(wallManager.transform);
+        rapGenreOnWall.transform.SetParent(wallManager.transform);
+        rockGenreOnWall.transform.SetParent(wallManager.transform);
         popGenreOnWall.gameObject.SetActive(true);
         rapGenreOnWall.gameObject.SetActive(true);
         rockGenreOnWall.gameObject.SetActive(true);
-        popGenreOnWall.localPosition = new Vector3(popGenreOnWall.localPosition.x, popGenreOnWall.localPosition.y, wallManager.transform.localPosition.z);
-        rapGenreOnWall.localPosition = new Vector3(rapGenreOnWall.localPosition.x, rapGenreOnWall.localPosition.y, wallManager.transform.localPosition.z);
-        rockGenreOnWall.localPosition = new Vector3(rockGenreOnWall.localPosition.x, rockGenreOnWall.localPosition.y, wallManager.transform.localPosition.z);
+        popGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
+        rapGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
+        rockGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
         Instantiate(GameResources.Instance.pop.logo, popGenreOnWall);
         foreach (var item in popPrefabList)
         {
