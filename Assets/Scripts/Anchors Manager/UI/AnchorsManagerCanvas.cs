@@ -49,7 +49,6 @@ public class AnchorsManagerCanvas : MonoBehaviour
         Vector2 touchPosition = context.ReadValue<Vector2>();
         if (!isHasAnchor && GameManager.Instance.applicationState == ApplicationState.Anchor)
         {
-            Debug.Log(isHasAnchor);
             isHasAnchor = await GameResources.Instance.anchorsManager.PlaceAnchor(touchPosition);
         }
     }

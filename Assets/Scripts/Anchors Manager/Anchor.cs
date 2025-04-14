@@ -31,6 +31,7 @@ public class Anchor : MonoBehaviour
         if (isSelected)
         {
             spriteRenderer.color = Color.green;
+            StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         }
         else
         {

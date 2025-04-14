@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class RotateARObjectManager : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class RotateARObjectManager : MonoBehaviour
             return;
         }
 
-        if (obj.GetComponent<InstrumentShowcase>() != null)
+        if (obj.GetComponent<XRGrabInteractable>() != null)
         {
             currentTransform = obj.transform;
         }

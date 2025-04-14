@@ -68,6 +68,11 @@ public class GameResources : MonoBehaviour
 
     [HideInInspector] public TextMeshProUGUI objectSceneText;
 
+    // Vinyl ShowCase
+    public GameObject VinylShowCasePrefab;
+
+    // Portal
+    public GameObject PortalPrefab;
     #region Validation
 #if UNITY_EDITOR
     private void OnValidate()

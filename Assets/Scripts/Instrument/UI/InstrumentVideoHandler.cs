@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -7,37 +9,39 @@ public class InstrumentVideoHandler : MonoBehaviour
 {
     private VideoPlayer videoPlayer;
     private Slider slider;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         videoPlayer = GetComponentInChildren<VideoPlayer>();
         slider = GetComponentInChildren<Slider>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        slider.onValueChanged.AddListener((value) => { OnValueSliderChange(); });
+        videoPlayer.SetTargetAudioSource(0, audioSource);
+        videoPlayer.Prepare();
+        videoPlayer.prepareCompleted += OnVideoPrepared;
     }
+
+    private void OnVideoPrepared(VideoPlayer source)
+    {
+        source.Play();
+        audioSource.Play();
+    }
+
     private void Update()
     {
         if (videoPlayer.isPlaying)
         {
-            slider.value = (float)videoPlayer.time;
+            slider.value = (float)(videoPlayer.time / videoPlayer.clip.length);
         }
 
     }
     private void OnDestroy()
     {
-        if (slider != null)
-        {
-            slider.onValueChanged.RemoveListener((value) => { OnValueSliderChange(); });
-        }
-    }
-    private void OnValueSliderChange()
-    {
-        if (videoPlayer != null)
-        {
-            videoPlayer.time = slider.value;
-        }
+        videoPlayer.prepareCompleted -= OnVideoPrepared;
     }
 
     public void PlayVideo(VideoClip videoClip)
@@ -45,8 +49,6 @@ public class InstrumentVideoHandler : MonoBehaviour
         if (videoPlayer != null)
         {
             videoPlayer.clip = videoClip;
-            slider.minValue = 0f;
-            slider.maxValue = (float)videoClip.length;
             videoPlayer.Play();
         }
     }
