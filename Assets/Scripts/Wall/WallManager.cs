@@ -16,17 +16,15 @@ public class WallManager : MonoBehaviour
     }
     private void Start()
     {
+
         wallInteractable.selectEntered.AddListener((temp) =>
         {
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
-        wallTransform = ES3.Load(wallSO.name, wallTransform);
-        if (wallTransform != null)
-        {
-            LoadTransfrom();
-        }
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        LoadTransfrom();
     }
+
     private void OnDestroy()
     {
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
@@ -49,12 +47,15 @@ public class WallManager : MonoBehaviour
         }
 
     }
-    private async void LoadTransfrom()
+    public async void LoadTransfrom()
     {
+        wallTransform = ES3.Load(wallSO.name, defaultValue: transform);
+        if (wallTransform == null) return;
         await Awaitable.NextFrameAsync();
         transform.localPosition = wallTransform.localPosition;
         transform.localRotation = wallTransform.localRotation;
         transform.localScale = wallTransform.localScale;
+        return;
 
     }
     public void StretchPlaneFromEdge(PlaneEdge edge, float delta)

@@ -2527,6 +2527,7 @@ MonoBehaviour:
   lid: {fileID: 5258677163374866713}
   tonearm: {fileID: 4540085825803306461}
   platter: {fileID: 2744018936896950152}
+  isSpinning: 0
 --- !u!82 &5500212063257089962
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2550,7 +2551,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2585,7 +2586,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

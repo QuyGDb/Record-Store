@@ -156,7 +156,7 @@ public class CloudAnchorsManager : MonoBehaviour
 #if UNITY_EDITOR
         yield return null;
         GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
-        StaticEventHandler.InvokeInstantiateAtAnchor(null, AnchorType.MusicHistory);
+        StaticEventHandler.InvokeInstantiateAtAnchor(null, AnchorType.IntrumentShowCase);
 #endif
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)

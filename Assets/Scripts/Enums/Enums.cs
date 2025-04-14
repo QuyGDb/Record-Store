@@ -20,6 +20,8 @@ public enum AnchorType
     None,
     IntrumentShowCase,
     MusicHistory,
+    VinylShowCase,
+    Portal,
 }
 public enum PlaneEdge
 {

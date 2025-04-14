@@ -66,3 +66,6 @@ MonoBehaviour:
   occlusionManager: {fileID: 0}
   resolveCloudAnchorIdList: []
   objectSceneText: {fileID: 0}
+  VinylShowCasePrefab: {fileID: 2832176168749559416, guid: df75c6be209f1a640ad019922369eb24,
+    type: 3}
+  PortalPrefab: {fileID: 0}

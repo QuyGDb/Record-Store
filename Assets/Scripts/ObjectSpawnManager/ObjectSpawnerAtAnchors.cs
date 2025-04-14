@@ -92,7 +92,6 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
     {
         instrumentPrefabList.Clear();
-#if PLATFORM_ANDROID 
         switch (type)
         {
             case AnchorType.IntrumentShowCase:
@@ -120,12 +119,19 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
                 SetupHistoryMusicWall(aRAnchor);
                 anchorType = AnchorType.MusicHistory;
                 break;
+            case AnchorType.VinylShowCase:
+                CreateVinylShowCase(aRAnchor);
+                break;
+            case AnchorType.Portal:
+                CreatePortal(aRAnchor);
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-#endif
 
     }
+
+
 
     private void SetupHistoryMusicWall(ARCloudAnchor aRAnchor)
     {
@@ -133,16 +139,21 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         rapGenreOnWall.gameObject.SetActive(true);
         rockGenreOnWall.gameObject.SetActive(true);
         GameObject wall = Instantiate(GameResources.Instance.wall_HistoryMusic.wallPrefab, transform);
+        wallManager = wall.GetComponent<WallManager>();
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(aRAnchor.transform);
         popGenreOnWall.SetParent(aRAnchor.transform);
         rapGenreOnWall.SetParent(aRAnchor.transform);
         rockGenreOnWall.SetParent(aRAnchor.transform);
+
+        wall.transform.localPosition = new Vector3(0, 0, 0);
+        popGenreOnWall.localPosition = new Vector3(0, 0, 0);
+        rapGenreOnWall.localPosition = new Vector3(0, 0, 0);
+        rockGenreOnWall.localPosition = new Vector3(0, 0, 0);
 #endif
         popGenreOnWall.gameObject.SetActive(false);
         rapGenreOnWall.gameObject.SetActive(false);
         rockGenreOnWall.gameObject.SetActive(false);
-        wallManager = wall.GetComponent<WallManager>();
         wallManager.wallSO = GameResources.Instance.wall_HistoryMusic;
         GameResources.Instance.wallManager = wallManager;
     }
@@ -151,12 +162,16 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     {
         instrumentOnWall.gameObject.SetActive(true);
         GameObject wall = Instantiate(GameResources.Instance.wallSO_Showcase.wallPrefab, transform);
+        wallManager = wall.GetComponent<WallManager>();
+
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(cloudAnchor.transform);
         instrumentOnWall.SetParent(cloudAnchor.transform);
+
+        wall.transform.localPosition = new Vector3(0, 0, 0);
+        instrumentOnWall.localPosition = new Vector3(0, 0, 0);
 #endif
         instrumentOnWall.gameObject.SetActive(false);
-        wallManager = wall.GetComponent<WallManager>();
         wallManager.wallSO = GameResources.Instance.wallSO_Showcase;
         GameResources.Instance.wallManager = wallManager;
     }
@@ -176,14 +191,12 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     private void InitializeInstrumentOnWall()
     {
         instrumentOnWall.gameObject.SetActive(true);
-        Vector3 offset = new Vector3(0, 0, wallManager.transform.localPosition.z);
-        instrumentOnWall.localPosition = new Vector3(instrumentOnWall.localPosition.x, instrumentOnWall.localPosition.y, wallManager.transform.localPosition.z);
+        instrumentOnWall.transform.SetParent(wallManager.transform);
         foreach (var item in instrumentPrefabList)
         {
             GameObject obj = Instantiate(item, instrumentOnWall);
             instrumentList.Add(obj);
             obj.GetComponent<XRGrabInteractable>().enabled = false;
-
         }
         XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;
@@ -225,5 +238,21 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         xRGrabInteractable.enabled = false;
         StaticEventHandler.InvokeXRGrabInteractableSelected(null);
     }
+    private void CreateVinylShowCase(ARCloudAnchor aRCloudAnchor)
+    {
+        GameObject vinlyShowse = Instantiate(GameResources.Instance.VinylShowCasePrefab, transform);
 
+#if PLATFORM_ANDROID && !UNITY_EDITOR
+        vinlyShowse.transform.SetParent(aRCloudAnchor.transform);
+        vinlyShowse.transform.localPosition = new Vector3(0, 0, 0);
+#endif
+    }
+    private void CreatePortal(ARCloudAnchor aRCloudAnchor)
+    {
+        GameObject portal = Instantiate(GameResources.Instance.PortalPrefab, transform);
+#if PLATFORM_ANDROID && !UNITY_EDITOR
+        portal.transform.SetParent(aRCloudAnchor.transform);
+        portal.transform.localPosition = new Vector3(0, 0, 0);
+#endif
+    }
 }

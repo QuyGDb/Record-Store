@@ -12,38 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
   m_Name: ReferenceImageLibrary
   m_EditorClassIdentifier: 
-  m_GuidLow: 4898827249259621090
-  m_GuidHigh: 10524351884514617221
+  m_GuidLow: 4782631187742043751
+  m_GuidHigh: 5598098018439166141
   m_DataStore:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 5079242704638236242
-      m_GuidHigh: 10388539655331145344
+      m_GuidLow: 5161228680152283758
+      m_GuidHigh: 3157646693763105206
     m_SerializedTextureGuid:
       m_GuidLow: 6473018886127261108
       m_GuidHigh: 110065388846652248
-    m_Size: {x: 0.13, y: 0.108107045}
+    m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
     m_Name: Gieo
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
-      m_GuidLow: 5247788423317169233
-      m_GuidHigh: 9353622348928008082
+      m_GuidLow: 5744013312142589195
+      m_GuidHigh: 12243113117604905866
     m_SerializedTextureGuid:
       m_GuidLow: 1636006319120036856
       m_GuidHigh: 14548993666213708730
-    m_Size: {x: 0.3, y: 0.2794922}
-    m_SpecifySize: 0
-    m_Name: SDDBP
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 4794857974420274786
-      m_GuidHigh: 4464715969456403099
-    m_SerializedTextureGuid:
-      m_GuidLow: 0
-      m_GuidHigh: 0
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: 
+    m_Name: SDDBP
     m_Texture: {fileID: 0}
