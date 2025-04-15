@@ -24,8 +24,9 @@ public class GameResources : MonoBehaviour
         }
     }
 
+    [Header("Material")]
     public Material defaultMaterial;
-
+    public Material[] liveAidMAT;
 
 
 
@@ -40,6 +41,7 @@ public class GameResources : MonoBehaviour
     #endregion
 
     #region Wall
+    [Header("Wall")]
     public WallSO wallSO_Showcase;
     public WallSO wall_HistoryMusic;
 
@@ -48,6 +50,7 @@ public class GameResources : MonoBehaviour
 
 
     #region History Music
+    [Header("History Music")]
     public MusicGenreSO rap;
     public MusicGenreSO pop;
     public MusicGenreSO rock;
@@ -70,9 +73,12 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI objectSceneText;
 
     // Vinyl ShowCase
+    [Header("Vinyl ShowCase")]
     public GameObject VinylShowCasePrefab;
 
     // Portal
+
+    [Header("Portal")]
     public GameObject PortalPrefab;
     #region Validation
 

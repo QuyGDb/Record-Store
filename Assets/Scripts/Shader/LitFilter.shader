@@ -1,4 +1,4 @@
-Shader "Custom/Stencil Filter"
+Shader "Custom/Lit Stencil Filter"
 {
     Properties
     {

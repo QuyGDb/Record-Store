@@ -45,6 +45,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  liveAidMAT:
+  - {fileID: 2100000, guid: c7c8334bc53ceda4191e6b8492d40edc, type: 2}
+  - {fileID: 2100000, guid: d44bd14aa0776934299b489703994cd7, type: 2}
+  - {fileID: 2100000, guid: 4f1c8eec45a2e4042982e359537c908d, type: 2}
+  - {fileID: 2100000, guid: ef532ee7c682f15479ea3c6ea4fae9e5, type: 2}
+  - {fileID: 2100000, guid: a903d17097d9b5740b506a897143b1da, type: 2}
+  - {fileID: 2100000, guid: dc7439415dad06140957f9818753cd32, type: 2}
+  - {fileID: 2100000, guid: 966d9ccabeb40fe47af284dec2b1b401, type: 2}
+  - {fileID: 2100000, guid: 16b2d017088844a4b834584db3573515, type: 2}
+  - {fileID: 2100000, guid: 3191e2f38b0d5254e93130df28c594e8, type: 2}
+  - {fileID: 2100000, guid: c8f360211bcf4b94a97522e2afa32d21, type: 2}
+  - {fileID: 2100000, guid: 8abf5bdeadb6c1441aaecca6759f8bef, type: 2}
+  - {fileID: 2100000, guid: 2622e848c8020164ebad6ef08284102b, type: 2}
+  - {fileID: 2100000, guid: fab9fd9d9269e5b4cb97f46db19f8d94, type: 2}
+  - {fileID: 2100000, guid: 63dc8558fc3082d4ca8fd6079b9fc102, type: 2}
+  - {fileID: 2100000, guid: 0f1c2387ccbc14f4cb14775d95317375, type: 2}
+  - {fileID: 2100000, guid: b9990b12c29092e4c80e1eb05e32e31a, type: 2}
+  - {fileID: 2100000, guid: e547fe2ee6ae1324eaa8224d8e5aeae8, type: 2}
+  - {fileID: 2100000, guid: aabd6decfe4eb464d90a747fe4cd2b10, type: 2}
+  - {fileID: 2100000, guid: bfc7b0ee34226ce4d8c76a8384a2b518, type: 2}
+  - {fileID: 2100000, guid: 931ee3846f9d9804bb95683579573b62, type: 2}
+  - {fileID: 2100000, guid: 91194b9517cf542478d18d87d42d1f45, type: 2}
   instrumentShowCaseVN: {fileID: 11400000, guid: 5d32c388c91991545a5138a43635ae40,
     type: 2}
   Ngot: {fileID: 11400000, guid: f2101e50addd61e4c9bc456511a28f1f, type: 2}

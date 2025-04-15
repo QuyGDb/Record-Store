@@ -29,7 +29,27 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        LoadPrefabListFromRessource();
         LoadObjectFromPrefab();
+    }
+    private void LoadPrefabListFromRessource()
+    {
+        foreach (var instrumentShowcaseSO in GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList)
+        {
+            instrumentPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
+        }
+        foreach (var popPrefab in GameResources.Instance.pop.prefabs)
+        {
+            popPrefabList.Add(popPrefab);
+        }
+        foreach (var rapPrefab in GameResources.Instance.rap.prefabs)
+        {
+            rapPrefabList.Add(rapPrefab);
+        }
+        foreach (var rockPrefab in GameResources.Instance.rock.prefabs)
+        {
+            rockPrefabList.Add(rockPrefab);
+        }
     }
 
     private void LoadObjectFromPrefab()
@@ -41,6 +61,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             obj.GetComponent<XRGrabInteractable>().enabled = false;
             obj.gameObject.SetActive(false);
         }
+
         foreach (var item in popPrefabList)
         {
             GameObject obj = Instantiate(item, popGenreOnWall);
@@ -127,27 +148,10 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         switch (type)
         {
             case AnchorType.IntrumentShowCase:
-
-                foreach (var instrumentShowcaseSO in GameResources.Instance.instrumentShowCaseVN.instrumentShowcaseList)
-                {
-                    instrumentPrefabList.Add(instrumentShowcaseSO.instrumentPrefab);
-                }
                 SetupInstrumentShowcaseWall(aRAnchor);
                 anchorType = AnchorType.IntrumentShowCase;
                 break;
             case AnchorType.MusicHistory:
-                foreach (var popPrefab in GameResources.Instance.pop.prefabs)
-                {
-                    popPrefabList.Add(popPrefab);
-                }
-                foreach (var rapPrefab in GameResources.Instance.rap.prefabs)
-                {
-                    rapPrefabList.Add(rapPrefab);
-                }
-                foreach (var rockPrefab in GameResources.Instance.rock.prefabs)
-                {
-                    rockPrefabList.Add(rockPrefab);
-                }
                 SetupHistoryMusicWall(aRAnchor);
                 anchorType = AnchorType.MusicHistory;
                 break;

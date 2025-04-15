@@ -27,10 +27,9 @@ public class PortalShowcaseHandler : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.CompareTag("Door"))
+            if (hit.collider.gameObject.CompareTag("Portal"))
             {
-                Debug.Log(hit.collider.gameObject.name);
-                var portal = hit.collider.transform.parent.parent.GetComponent<Portal>();
+                var portal = hit.collider.GetComponent<Portal>();
                 if (portal != null)
                 {
                     portal.SetDoorState();
