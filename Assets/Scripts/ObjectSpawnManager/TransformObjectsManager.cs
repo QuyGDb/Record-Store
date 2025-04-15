@@ -8,6 +8,7 @@ public class TransformObjectsManager : MonoBehaviour
     public InputActionReference pinchGapDeltaRef;
     [Header("Scale Settings")]
     public float scaleSensitivity = 0.01f;
+    [Header("Scale Limits")]
     public Vector3 minScale = Vector3.one * 0.1f;
     public Vector3 maxScale = Vector3.one * 10f;
     private InputAction pinchAction;
@@ -63,6 +64,12 @@ public class TransformObjectsManager : MonoBehaviour
         if (pictureFrame != null)
         {
             SaveTransformSelectObject(pictureFrame.transform, pictureFrame.pictureName);
+            return;
+        }
+        PortalShowcaseHandler portalShowcase = gameObjectSelected.GetComponent<PortalShowcaseHandler>();
+        if (portalShowcase != null)
+        {
+            SaveTransformSelectObject(portalShowcase.transform, portalShowcase.portalname);
             return;
         }
 

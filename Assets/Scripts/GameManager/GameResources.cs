@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
@@ -74,11 +75,12 @@ public class GameResources : MonoBehaviour
     // Portal
     public GameObject PortalPrefab;
     #region Validation
+
+    public InputActionReference touchRef;
 #if UNITY_EDITOR
     private void OnValidate()
     {
         HelperUtilities.ValidateCheckEmptyString(this, nameof(defaultMaterial), defaultMaterial.name);
-
 
     }
 #endif

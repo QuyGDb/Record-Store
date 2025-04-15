@@ -316,4 +316,4 @@ MonoBehaviour:
     type: 3}
   scaleSensitivity: 0.01
   minScale: {x: 0.1, y: 0.1, z: 0.1}
-  maxScale: {x: 3, y: 3, z: 3}
+  maxScale: {x: 5, y: 5, z: 3}

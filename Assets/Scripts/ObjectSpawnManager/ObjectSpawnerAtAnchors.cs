@@ -29,7 +29,39 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        LoadObjectFromPrefab();
+    }
 
+    private void LoadObjectFromPrefab()
+    {
+        foreach (var item in instrumentPrefabList)
+        {
+            GameObject obj = Instantiate(item, instrumentOnWall);
+            instrumentList.Add(obj);
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            obj.gameObject.SetActive(false);
+        }
+        foreach (var item in popPrefabList)
+        {
+            GameObject obj = Instantiate(item, popGenreOnWall);
+            popList.Add(obj);
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            obj.gameObject.SetActive(false);
+        }
+        foreach (var item in rapPrefabList)
+        {
+            GameObject obj = Instantiate(item, rapGenreOnWall);
+            rapList.Add(obj);
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            obj.gameObject.SetActive(false);
+        }
+        foreach (var item in rockPrefabList)
+        {
+            GameObject obj = Instantiate(item, rockGenreOnWall);
+            rockList.Add(obj);
+            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            obj.gameObject.SetActive(false);
+        }
     }
     private void OnDestroy()
     {
@@ -142,7 +174,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         wallManager = wall.GetComponent<WallManager>();
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(aRAnchor.transform);
-        // tam thoi gan vao anchor, sau khi chinh xong wall, se gan vao world
+        // tam thoi gan vao anchor, sau khi chinh xong wall, se gan vao wall
         popGenreOnWall.SetParent(aRAnchor.transform);
         rapGenreOnWall.SetParent(aRAnchor.transform);
         rockGenreOnWall.SetParent(aRAnchor.transform);
@@ -190,11 +222,10 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         instrumentOnWall.transform.SetParent(wallManager.transform);
         instrumentOnWall.gameObject.SetActive(true);
         instrumentOnWall.transform.localPosition = new Vector3(0, 0, 0);
-        foreach (var item in instrumentPrefabList)
+        instrumentOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        foreach (var item in instrumentList)
         {
-            GameObject obj = Instantiate(item, instrumentOnWall);
-            instrumentList.Add(obj);
-            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            item.gameObject.SetActive(true);
         }
         XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;
@@ -210,30 +241,27 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         rapGenreOnWall.gameObject.SetActive(true);
         rockGenreOnWall.gameObject.SetActive(true);
         popGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
+        popGenreOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         rapGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
+        rapGenreOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         rockGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
+        rockGenreOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         Instantiate(GameResources.Instance.pop.logo, popGenreOnWall);
-        foreach (var item in popPrefabList)
+        foreach (var item in popList)
         {
-            GameObject obj = Instantiate(item, popGenreOnWall);
-            popList.Add(obj);
-            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            item.gameObject.SetActive(true);
         }
         //rap
         Instantiate(GameResources.Instance.rap.logo, rapGenreOnWall);
-        foreach (var item in rapPrefabList)
+        foreach (var item in rapList)
         {
-            GameObject obj = Instantiate(item, rapGenreOnWall);
-            rapList.Add(obj);
-            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            item.gameObject.SetActive(true);
         }
         //rock
         Instantiate(GameResources.Instance.rock.logo, rockGenreOnWall);
-        foreach (var item in rockPrefabList)
+        foreach (var item in rockList)
         {
-            GameObject obj = Instantiate(item, rockGenreOnWall);
-            rockList.Add(obj);
-            obj.GetComponent<XRGrabInteractable>().enabled = false;
+            item.gameObject.SetActive(true);
         }
         XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;

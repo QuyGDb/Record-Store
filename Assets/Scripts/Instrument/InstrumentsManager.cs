@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InstrumentsManager : MonoBehaviour
 {
-    [SerializeField] private InputActionReference touchActionRef;
     private InputAction touchAction;
     [SerializeField] private GameObject instrumentUIPrefab;
     private InstrumentUI instrumentUI;
@@ -14,7 +11,7 @@ public class InstrumentsManager : MonoBehaviour
     private Vector3 offset = new Vector3(0, 0.35f, -0.35f);
     private void Awake()
     {
-        touchAction = touchActionRef.action;
+        touchAction = GameResources.Instance.touchRef.action;
         touchAction.Enable();
         touchAction.started += OnTouchStarted;
     }
