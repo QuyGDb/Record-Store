@@ -31,7 +31,10 @@ public class WallManagerCanvas : MonoBehaviour
             placeHolder.text = "Enter scale value";
         }
     }
-
+    private void Start()
+    {
+        selectedEdge = PlaneEdge.Left;
+    }
 
     private void OnDestroy()
     {

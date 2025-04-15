@@ -7,12 +7,11 @@ public class MusicHistoryManager : MonoBehaviour
 {
     [SerializeField] private GameObject musicHistoryPrefab;
     private MusicHistoryUI musicHistoryUI;
-    [SerializeField] private InputActionReference touchActionRef;
     private InputAction touchAction;
     private Vector3 offset = new Vector3(0, 0, -0.35f);
     private void Awake()
     {
-        touchAction = touchActionRef.action;
+        touchAction = GameResources.Instance.touchRef.action;
         touchAction.Enable();
         touchAction.started += OnTouchStarted;
     }

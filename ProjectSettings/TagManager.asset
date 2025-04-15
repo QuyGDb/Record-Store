@@ -7,6 +7,8 @@ TagManager:
   - Rap
   - Pop
   - Rock
+  - Portal
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - Showcase
   - Plane Visual
   - Vinyl
-  - 
-  - 
+  - Mask
+  - InsideMask
   - 
   - 
   - 
