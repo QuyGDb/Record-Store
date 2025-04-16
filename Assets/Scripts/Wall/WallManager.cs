@@ -43,15 +43,17 @@ public class WallManager : MonoBehaviour
         if (state == ApplicationState.ObjectManager)
         {
             wallRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            ES3.Save(wallSO.name, transform);
+            ES3.Save(wallSO.wallName, transform);
         }
 
     }
     public async void LoadTransfrom()
     {
-        wallTransform = ES3.Load(wallSO.name, defaultValue: transform);
-        if (wallTransform == null) return;
         await Awaitable.NextFrameAsync();
+
+        if (!ES3.KeyExists(wallSO.wallName)) return;
+        wallTransform = ES3.Load(wallSO.wallName, transform);
+        if (wallTransform == null) return;
         transform.localPosition = wallTransform.localPosition;
         transform.localRotation = wallTransform.localRotation;
         transform.localScale = wallTransform.localScale;
@@ -98,16 +100,10 @@ public class WallManager : MonoBehaviour
                 }
                 break;
         }
-
         transform.localScale = scale;
         transform.localPosition += positionOffset;
     }
 
 
-    private void OnApplicationQuit()
-    {
-        if (wallTransform != null)
-            ES3.Save(wallSO.name, transform);
-    }
 
 }

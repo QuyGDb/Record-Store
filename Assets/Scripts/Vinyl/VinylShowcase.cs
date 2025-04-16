@@ -13,22 +13,35 @@ public class VinylShowcase : MonoBehaviour
     }
     private void Start()
     {
-        loadedTransform = ES3.Load(gameObject.name, transform);
-        if (loadedTransform != null)
-        {
-            transform.localPosition = loadedTransform.localPosition;
-            transform.localRotation = loadedTransform.localRotation;
-            transform.localScale = loadedTransform.localScale;
-        }
+        LoadTransform();
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
     {
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
+    async void LoadTransform()
+    {
+        await Awaitable.NextFrameAsync();
+        if (ES3.KeyExists(gameObject.name))
+        {
+            loadedTransform = ES3.Load(gameObject.name, transform);
+        }
+        if (loadedTransform != null)
+        {
+            transform.localPosition = loadedTransform.localPosition;
+            transform.localRotation = loadedTransform.localRotation;
+            transform.localScale = loadedTransform.localScale;
+        }
+    }
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
+        if (state == ApplicationState.ObjectManager)
+        {
+            ES3.Save(gameObject.name, transform);
+        }
+
         if (state == ApplicationState.LoadMapMode)
         {
             grabInteractable.enabled = false;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DrawAxis : SingletonMonobehaviourPersistent<DrawAxis>
 {
@@ -8,9 +9,24 @@ public class DrawAxis : SingletonMonobehaviourPersistent<DrawAxis>
 
     private void Start()
     {
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         DrawLine(Vector3.zero, Vector3.right * axisLength, Color.red, lineWidth);   // X - Đỏ
         DrawLine(Vector3.zero, Vector3.up * axisLength, Color.green, lineWidth);    // Y - Xanh lá
         DrawLine(Vector3.zero, Vector3.forward * axisLength, Color.blue, lineWidth);// Z - Xanh dương
+    }
+
+    private void OnApplicationStateChanged(ApplicationState state)
+    {
+        if (state == ApplicationState.LoadMapMode)
+        {
+            this.enabled = false;
+        }
+
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
     void DrawLine(Vector3 start, Vector3 end, Color color, float width)
     {
