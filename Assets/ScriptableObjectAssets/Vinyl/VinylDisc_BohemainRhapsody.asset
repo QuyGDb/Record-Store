@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d745dd7ff27833041b74027b07f20c82, type: 3}
+  m_Name: VinylDisc_BohemainRhapsody
+  m_EditorClassIdentifier: 
+  discName: Bohemian Rhapsody
+  songs:
+  - {fileID: 8300000, guid: a3956dfe2de2a4f49b3c2e23b7a8cb35, type: 3}
+  - {fileID: 8300000, guid: 8fda2e78c1f617a4f8b5157631fbb685, type: 3}
+  - {fileID: 8300000, guid: 90ba55964396cb14fa7a34c523601061, type: 3}
+  - {fileID: 8300000, guid: f9f4e53e274483f49b58b20bf2ba441f, type: 3}
+  - {fileID: 8300000, guid: 8d90e369be682694b8420e77482b227b, type: 3}
+  - {fileID: 8300000, guid: 3636cb851f3cc6b488e0c666d89e0730, type: 3}
+  - {fileID: 8300000, guid: 828fc3d0bae0ce74cb19808eeec9d215, type: 3}
+  - {fileID: 8300000, guid: c831cd9ff20861c408f9a2afd49cab13, type: 3}
+  - {fileID: 8300000, guid: 62e1099328458b8418db0eb86325fcbb, type: 3}
+  - {fileID: 8300000, guid: 47c47c5b62b69d64e9b2d2b3e70e55d6, type: 3}
+  - {fileID: 8300000, guid: 9cdae40205c5d6e42b079029b4510bbd, type: 3}
+  - {fileID: 8300000, guid: 1468d7ca7a8a10d479f969d969466089, type: 3}
+  - {fileID: 8300000, guid: 93eac2a7345836f49bc2f367f50c94aa, type: 3}
+  - {fileID: 8300000, guid: ddab9fe023151c8499d68ffcc1893157, type: 3}
+  - {fileID: 8300000, guid: 45c21a0cd353fe54a8d25476390e1a31, type: 3}
+  - {fileID: 8300000, guid: 4e5ef1e13de298f4e8ae5606329dec05, type: 3}
+  - {fileID: 8300000, guid: 8076dd184cbe5a740891874e5ea0f217, type: 3}
+  - {fileID: 8300000, guid: bc5f817c3c7ff6746902e862add69f47, type: 3}
+  - {fileID: 8300000, guid: d404723fa4331fa469c4ba2beda353fc, type: 3}
+  - {fileID: 8300000, guid: 09c033239e8412943b15b182060c71c5, type: 3}
+  - {fileID: 8300000, guid: 483af5f34d543b2439900adfb9438844, type: 3}

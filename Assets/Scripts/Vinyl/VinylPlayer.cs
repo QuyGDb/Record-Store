@@ -83,7 +83,7 @@ public class VinylPlayer : MonoBehaviour
     }
     private async void PickupVinyl()
     {
-
+        if (GameManager.Instance.applicationState != ApplicationState.LoadMapMode) return;
         Vector2 tapPosition = touchAction.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(tapPosition);
 
@@ -98,7 +98,6 @@ public class VinylPlayer : MonoBehaviour
                     await disc.SelectPickAnimation(platter);
                     currentVinylDisc = disc;
                     previousVinylDics = currentVinylDisc;
-
                 }
                 if (currentVinylDisc != disc)
                 {
@@ -142,6 +141,10 @@ public class VinylPlayer : MonoBehaviour
     private void PlayCurrentTrack(VinylDiscSO vinylDiscSO)
     {
         audioSource.clip = vinylDiscSO.songs[currentTrack];
+        if (vinylDiscSO.discName == "Bohemian Rhapsody")
+        {
+            StaticEventHandler.InvokeMovePortal();
+        }
         audioSource.Play();
         StartCoroutine(CheckTrackEndCoroutine(vinylDiscSO));
     }

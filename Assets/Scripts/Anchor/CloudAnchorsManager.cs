@@ -17,7 +17,7 @@ public class CloudAnchorsManager : MonoBehaviour
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
     [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
-    private AnchorType currentAnchorType;
+    [SerializeField] private AnchorType currentAnchorType;
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
@@ -43,12 +43,23 @@ public class CloudAnchorsManager : MonoBehaviour
     {
         LoadCloudAnchorDetails();
         GameResources.Instance.cloudAnchorsManager = this;
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+
 
     }
     private void OnDestroy()
     {
         StaticEventHandler.OnSendAnchorInfo -= OnSendAnchorInfo;
         StaticEventHandler.OnSelectCloudAnchor -= OnSelectCloudAnchor;
+        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+    }
+
+    private void OnApplicationStateChanged(ApplicationState state)
+    {
+        if (state == ApplicationState.CloudAnchor)
+        {
+            cloudAnchorsSelectedList.Clear();
+        }
     }
 
     private void OnSelectCloudAnchor(bool isOn, string cloudAnchorId)
@@ -148,14 +159,14 @@ public class CloudAnchorsManager : MonoBehaviour
         }
         else
         {
-            GameResources.Instance.cloudAnchorSceneText.text = $"Unable to load Cloud Anchor: {cloudAnchorId}. Trạng thái: {resolveCloudAnchorPromise.Result.CloudAnchorState}";
+            GameResources.Instance.cloudAnchorSceneText.text = $"Unable to load Cloud Anchor: {cloudAnchorId}.{resolveCloudAnchorPromise.Result.CloudAnchorState}";
         }
 #endif
 
 #if UNITY_EDITOR
         yield return null;
         GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
-        StaticEventHandler.InvokeInstantiateAtAnchor(null, AnchorType.MusicHistory);
+        StaticEventHandler.InvokeInstantiateAtAnchor(null, currentAnchorType);
 #endif
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)

@@ -10,5 +10,6 @@ public class AROcclusionHandler : MonoBehaviour
     {
         occlusionManager = GetComponent<AROcclusionManager>();
         GameResources.Instance.occlusionManager = occlusionManager;
+        occlusionManager.enabled = false;
     }
 }

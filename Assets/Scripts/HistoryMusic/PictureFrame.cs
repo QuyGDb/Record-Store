@@ -7,16 +7,26 @@ public class PictureFrame : MonoBehaviour
     public string pictureName;
     private Transform loadedTransform;
     private XRGrabInteractable grabInteractable;
+
     private void Awake()
+    {
+        grabInteractable = GetComponent<XRGrabInteractable>();
+    }
+    private void OnEnable()
+    {
+        LoadTransform();
+    }
+
+    private async void LoadTransform()
     {
         loadedTransform = ES3.Load(pictureName, transform);
         if (loadedTransform != null)
         {
+            await Awaitable.NextFrameAsync();
             transform.localPosition = loadedTransform.localPosition;
             transform.localRotation = loadedTransform.localRotation;
             transform.localScale = loadedTransform.localScale;
         }
-        grabInteractable = GetComponent<XRGrabInteractable>();
     }
     private void Start()
     {

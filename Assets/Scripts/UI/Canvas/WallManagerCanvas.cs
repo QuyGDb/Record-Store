@@ -9,7 +9,8 @@ public class WallManagerCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI placeHolder;
     [SerializeField] private PlaneEdge selectedEdge;
     private Button[] buttons;
-
+    private const string MusicHistory = "MusicHistory";
+    private const string InstrumentShowcase = "InstrumentShowcase";
     private void Awake()
     {
         dropdown = GetComponentInChildren<TMP_Dropdown>();
@@ -17,8 +18,8 @@ public class WallManagerCanvas : MonoBehaviour
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         inputField.onEndEdit.AddListener(OnInputFieldEndEdit);
         buttons = GetComponentsInChildren<Button>();
-        buttons[0].onClick.AddListener(AddZpositon);
-        buttons[1].onClick.AddListener(SubtractZpositon);
+        buttons[0].onClick.AddListener(MoveWallForward);
+        buttons[1].onClick.AddListener(MoveWallBehind);
         buttons[2].onClick.AddListener(AddYRotate);
         buttons[3].onClick.AddListener(SubtractYRotate);
         buttons[4].onClick.AddListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjects);
@@ -40,8 +41,8 @@ public class WallManagerCanvas : MonoBehaviour
     {
         dropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
         inputField.onEndEdit.RemoveListener(OnInputFieldEndEdit);
-        buttons[0].onClick.RemoveListener(AddZpositon);
-        buttons[1].onClick.RemoveListener(SubtractZpositon);
+        buttons[0].onClick.RemoveListener(MoveWallForward);
+        buttons[1].onClick.RemoveListener(MoveWallBehind);
         buttons[2].onClick.RemoveListener(AddYRotate);
         buttons[3].onClick.RemoveListener(SubtractYRotate);
         buttons[4].onClick.RemoveListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjects);
@@ -79,26 +80,34 @@ public class WallManagerCanvas : MonoBehaviour
         }
     }
 
-    private void AddZpositon()
+    private void MoveWallForward()
     {
         if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.position += new Vector3(0, 0, 0.1f);
+        if (GameResources.Instance.wallManager.wallSO.wallName == InstrumentShowcase)
+            GameResources.Instance.wallManager.transform.position += new Vector3(0, 0, 0.1f);
+        if (GameResources.Instance.wallManager.wallSO.wallName == MusicHistory)
+            GameResources.Instance.wallManager.transform.position += new Vector3(0.1f, 0, 0f);
+
+
     }
-    private void SubtractZpositon()
+    private void MoveWallBehind()
     {
         if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.position -= new Vector3(0, 0, 0.1f);
+        if (GameResources.Instance.wallManager.wallSO.wallName == InstrumentShowcase)
+            GameResources.Instance.wallManager.transform.position -= new Vector3(0, 0, 0.1f);
+        if (GameResources.Instance.wallManager.wallSO.wallName == MusicHistory)
+            GameResources.Instance.wallManager.transform.position -= new Vector3(0.1f, 0, 0f);
     }
 
     private void AddYRotate()
     {
         if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.Rotate(new Vector3(0, 1, 0), 1);
+        GameResources.Instance.wallManager.transform.Rotate(new Vector3(0, 1, 0), 5);
     }
     private void SubtractYRotate()
     {
         if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.Rotate(new Vector3(0, -1, 0), 1);
+        GameResources.Instance.wallManager.transform.Rotate(new Vector3(0, -1, 0), 5);
     }
     #region Validation
 #if UNITY_EDITOR

@@ -91,4 +91,10 @@ public static class StaticEventHandler
         OnAnchorDetailsChanged?.Invoke(anchorDetails);
     }
 
+    public static event Action OnMovePortal;
+
+    public static void InvokeMovePortal()
+    {
+        OnMovePortal?.Invoke();
+    }
 }

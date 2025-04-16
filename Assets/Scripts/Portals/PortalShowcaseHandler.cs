@@ -1,10 +1,8 @@
-using System;
-using Unity.Jobs;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Interaction.Toolkit.Transformers;
 
 public class PortalShowcaseHandler : MonoBehaviour
 {
@@ -43,14 +41,22 @@ public class PortalShowcaseHandler : MonoBehaviour
         portalTranform = ES3.Load(portalname, transform);
         LoadTransform();
         grabTransformer.selectEntered.AddListener(OnSelectEntered);
+        StaticEventHandler.OnMovePortal += MovePortal;
     }
+
+
+
     private void OnDestroy()
     {
         grabTransformer.selectEntered.RemoveListener(OnSelectEntered);
         touchAction.started -= OnTouchStarted;
         touchAction.Disable();
+        StaticEventHandler.OnMovePortal -= MovePortal;
     }
-
+    private void MovePortal()
+    {
+        transform.DOLocalMoveZ(-1f, 2.5f);
+    }
     private void OnSelectEntered(SelectEnterEventArgs arg0)
     {
         StaticEventHandler.InvokeXRGrabInteractableSelected(this.gameObject);

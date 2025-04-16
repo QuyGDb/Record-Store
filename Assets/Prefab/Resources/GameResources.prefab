@@ -90,7 +90,7 @@ MonoBehaviour:
   objectSceneText: {fileID: 0}
   VinylShowCasePrefab: {fileID: 2832176168749559416, guid: df75c6be209f1a640ad019922369eb24,
     type: 3}
-  PortalPrefab: {fileID: 4426484966907149773, guid: d1c1de7e5eb6c6548982a4c473daba2c,
+  PortalPrefab: {fileID: 394549489824438457, guid: c5003fa8fcbc47440a30b5fb6b611d98,
     type: 3}
   touchRef: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}

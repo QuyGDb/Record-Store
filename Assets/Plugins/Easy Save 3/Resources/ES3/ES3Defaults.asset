@@ -40,9 +40,6 @@ MonoBehaviour:
     - EasyTextEffects
     - Google.XR.ARCoreExtensions
     - Google.XR.ARCoreExtensions.GeospatialCreator
-    - Unity.XR.Interaction.Toolkit.Samples.ARStarterAssets
-    - Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator
-    - Unity.XR.Interaction.Toolkit.Samples.StarterAssets
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

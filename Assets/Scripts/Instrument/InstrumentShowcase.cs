@@ -16,12 +16,14 @@ public class InstrumentShowcase : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
         grabInteractable.selectEntered.AddListener(Select);
         grabInteractable.selectExited.AddListener(Deselect);
-        localTransfrom = ES3.Load(instrumentShowcaseSO.instrumentName, localTransfrom);
 
+    }
+    private void OnEnable()
+    {
+        LoadTransform();
     }
     private void Start()
     {
-        LoadTransform();
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
@@ -44,9 +46,8 @@ public class InstrumentShowcase : MonoBehaviour
 
     public async void LoadTransform()
     {
-        gameObject.SetActive(false);
+        localTransfrom = ES3.Load<Transform>(instrumentShowcaseSO.instrumentName, transform);
         await Awaitable.NextFrameAsync();
-        gameObject.SetActive(true);
         if (localTransfrom == null) return;
         gameObject.transform.localPosition = localTransfrom.localPosition;
         gameObject.transform.localRotation = localTransfrom.localRotation;

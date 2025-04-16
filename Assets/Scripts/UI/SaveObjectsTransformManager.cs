@@ -16,12 +16,18 @@ public class SaveObjectsTransformManager : MonoBehaviour
     private void Start()
     {
         buttons[0].onClick.AddListener((GameResources.Instance.transformObjectsManager.SaveSelectedItemTransformWithIdentifier));
-        buttons[1].onClick.AddListener(() => GameManager.Instance.ChangeApplicationState(ApplicationState.LoadMapMode));
+        buttons[1].onClick.AddListener(ChangeToLoadMapMode);
     }
     private void OnDestroy()
     {
         buttons[0].onClick.RemoveListener((GameResources.Instance.transformObjectsManager.SaveSelectedItemTransformWithIdentifier));
-        buttons[1].onClick.RemoveListener(() => GameManager.Instance.ChangeApplicationState(ApplicationState.LoadMapMode));
+        buttons[1].onClick.RemoveListener(ChangeToLoadMapMode);
+    }
+
+    void ChangeToLoadMapMode()
+    {
+        GameManager.Instance.ChangeApplicationState(ApplicationState.LoadMapMode);
+        transform.parent.gameObject.SetActive(false);
     }
 
     #region Validation

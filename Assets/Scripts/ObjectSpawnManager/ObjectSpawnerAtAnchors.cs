@@ -10,7 +10,8 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
     private List<GameObject> popList = new List<GameObject>();
     private List<GameObject> rapList = new List<GameObject>();
     private List<GameObject> rockList = new List<GameObject>();
-    private WallManager wallManager;
+    private WallManager instrumentWallManager;
+    private WallManager musicHistoryWallManager;
     [SerializeField] private Transform instrumentOnWall;
     [SerializeField] private Transform popGenreOnWall;
     [SerializeField] private Transform rapGenreOnWall;
@@ -60,6 +61,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             instrumentList.Add(obj);
             obj.GetComponent<XRGrabInteractable>().enabled = false;
             obj.gameObject.SetActive(false);
+            obj.GetComponentInChildren<Collider>().enabled = false;
         }
 
         foreach (var item in popPrefabList)
@@ -68,6 +70,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             popList.Add(obj);
             obj.GetComponent<XRGrabInteractable>().enabled = false;
             obj.gameObject.SetActive(false);
+            obj.GetComponentInChildren<Collider>().enabled = false;
         }
         foreach (var item in rapPrefabList)
         {
@@ -75,6 +78,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             rapList.Add(obj);
             obj.GetComponent<XRGrabInteractable>().enabled = false;
             obj.gameObject.SetActive(false);
+            obj.GetComponentInChildren<Collider>().enabled = false;
         }
         foreach (var item in rockPrefabList)
         {
@@ -82,6 +86,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             rockList.Add(obj);
             obj.GetComponent<XRGrabInteractable>().enabled = false;
             obj.gameObject.SetActive(false);
+            obj.GetComponentInChildren<Collider>().enabled = false;
         }
     }
     private void OnDestroy()
@@ -97,19 +102,31 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             foreach (var item in instrumentList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = false;
+                item.GetComponentInChildren<Collider>().enabled = false;
             }
             foreach (var item in popList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = false;
+                item.GetComponentInChildren<Collider>().enabled = false;
             }
             foreach (var item in rapList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = false;
+                item.GetComponentInChildren<Collider>().enabled = false;
             }
             foreach (var item in rockList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = false;
+                item.GetComponentInChildren<Collider>().enabled = false;
             }
+            instrumentOnWall.GetComponent<XRGrabInteractable>().enabled = true;
+            popGenreOnWall.GetComponent<XRGrabInteractable>().enabled = true;
+            rapGenreOnWall.GetComponent<XRGrabInteractable>().enabled = true;
+            rockGenreOnWall.GetComponent<XRGrabInteractable>().enabled = true;
+            instrumentOnWall.GetComponent<Collider>().enabled = true;
+            popGenreOnWall.GetComponent<Collider>().enabled = true;
+            rapGenreOnWall.GetComponent<Collider>().enabled = true;
+            rockGenreOnWall.GetComponent<Collider>().enabled = true;
         }
 
         if (state == ApplicationState.ObjectManager)
@@ -117,18 +134,22 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
             foreach (var item in instrumentList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = true;
+                item.GetComponentInChildren<Collider>().enabled = true;
             }
             foreach (var item in popList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = true;
+                item.GetComponentInChildren<Collider>().enabled = true;
             }
             foreach (var item in rapList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = true;
+                item.GetComponentInChildren<Collider>().enabled = true;
             }
             foreach (var item in rockList)
             {
                 item.GetComponent<XRGrabInteractable>().enabled = true;
+                item.GetComponentInChildren<Collider>().enabled = true;
             }
             instrumentOnWall.GetComponent<XRGrabInteractable>().enabled = false;
             popGenreOnWall.GetComponent<XRGrabInteractable>().enabled = false;
@@ -167,37 +188,33 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     }
 
-
-
     private void SetupHistoryMusicWall(ARCloudAnchor aRAnchor)
     {
         popGenreOnWall.gameObject.SetActive(true);
         rapGenreOnWall.gameObject.SetActive(true);
         rockGenreOnWall.gameObject.SetActive(true);
         GameObject wall = Instantiate(GameResources.Instance.wall_HistoryMusic.wallPrefab, transform);
-        wallManager = wall.GetComponent<WallManager>();
+        musicHistoryWallManager = wall.GetComponent<WallManager>();
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(aRAnchor.transform);
         // tam thoi gan vao anchor, sau khi chinh xong wall, se gan vao wall
         popGenreOnWall.SetParent(aRAnchor.transform);
         rapGenreOnWall.SetParent(aRAnchor.transform);
         rockGenreOnWall.SetParent(aRAnchor.transform);
-
         wall.transform.localPosition = new Vector3(0, 0, 0);
-      
 #endif
         popGenreOnWall.gameObject.SetActive(false);
         rapGenreOnWall.gameObject.SetActive(false);
         rockGenreOnWall.gameObject.SetActive(false);
-        wallManager.wallSO = GameResources.Instance.wall_HistoryMusic;
-        GameResources.Instance.wallManager = wallManager;
+        musicHistoryWallManager.wallSO = GameResources.Instance.wall_HistoryMusic;
+        GameResources.Instance.wallManager = musicHistoryWallManager;
     }
 
     private void SetupInstrumentShowcaseWall(ARCloudAnchor cloudAnchor)
     {
         instrumentOnWall.gameObject.SetActive(true);
         GameObject wall = Instantiate(GameResources.Instance.wallSO_Showcase.wallPrefab, transform);
-        wallManager = wall.GetComponent<WallManager>();
+        instrumentWallManager = wall.GetComponent<WallManager>();
 
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(cloudAnchor.transform);
@@ -205,8 +222,8 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         wall.transform.localPosition = new Vector3(0, 0, 0);
 #endif
         instrumentOnWall.gameObject.SetActive(false);
-        wallManager.wallSO = GameResources.Instance.wallSO_Showcase;
-        GameResources.Instance.wallManager = wallManager;
+        instrumentWallManager.wallSO = GameResources.Instance.wallSO_Showcase;
+        GameResources.Instance.wallManager = instrumentWallManager;
     }
 
     public void InitializeObjects()
@@ -223,27 +240,27 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
 
     private void InitializeInstrumentOnWall()
     {
-        instrumentOnWall.transform.SetParent(wallManager.transform);
         instrumentOnWall.gameObject.SetActive(true);
+        HelperUtilities.SetParentKeepWorld(instrumentOnWall, instrumentWallManager.transform);
         instrumentOnWall.transform.localPosition = new Vector3(0, 0, 0);
         instrumentOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         foreach (var item in instrumentList)
         {
             item.gameObject.SetActive(true);
         }
-        XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
+        XRGrabInteractable xRGrabInteractable = instrumentWallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;
         StaticEventHandler.InvokeXRGrabInteractableSelected(null);
     }
 
     private void InitializeMusicHistoryOnWall()
     {
-        popGenreOnWall.transform.SetParent(wallManager.transform);
-        rapGenreOnWall.transform.SetParent(wallManager.transform);
-        rockGenreOnWall.transform.SetParent(wallManager.transform);
         popGenreOnWall.gameObject.SetActive(true);
         rapGenreOnWall.gameObject.SetActive(true);
         rockGenreOnWall.gameObject.SetActive(true);
+        HelperUtilities.SetParentKeepWorld(popGenreOnWall, musicHistoryWallManager.transform);
+        HelperUtilities.SetParentKeepWorld(rapGenreOnWall, musicHistoryWallManager.transform);
+        HelperUtilities.SetParentKeepWorld(rockGenreOnWall, musicHistoryWallManager.transform);
         popGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
         popGenreOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         rapGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
@@ -267,7 +284,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         {
             item.gameObject.SetActive(true);
         }
-        XRGrabInteractable xRGrabInteractable = wallManager.GetComponent<XRGrabInteractable>();
+        XRGrabInteractable xRGrabInteractable = musicHistoryWallManager.GetComponent<XRGrabInteractable>();
         xRGrabInteractable.enabled = false;
         StaticEventHandler.InvokeXRGrabInteractableSelected(null);
     }
