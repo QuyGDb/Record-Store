@@ -38,7 +38,6 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     void Start()
     {
-        portalTranform = ES3.Load(portalname, transform);
         LoadTransform();
         grabTransformer.selectEntered.AddListener(OnSelectEntered);
         StaticEventHandler.OnMovePortal += MovePortal;
@@ -64,12 +63,14 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     async void LoadTransform()
     {
+        if (!ES3.KeyExists(portalname)) return;
+        portalTranform = ES3.Load(portalname, transform);
         if (portalTranform != null)
         {
             await Awaitable.NextFrameAsync();
-            grabTransformer.transform.localPosition = portalTranform.localPosition;
-            grabTransformer.transform.localRotation = portalTranform.localRotation;
-            grabTransformer.transform.localScale = portalTranform.localScale;
+            transform.localPosition = portalTranform.localPosition;
+            transform.localRotation = portalTranform.localRotation;
+            transform.localScale = portalTranform.localScale;
         }
     }
 }

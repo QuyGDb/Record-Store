@@ -12,13 +12,12 @@ public class PictureFrame : MonoBehaviour
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
     }
-    private void OnEnable()
-    {
-        LoadTransform();
-    }
+
 
     private async void LoadTransform()
     {
+        if (ES3.KeyExists(pictureName) == false)
+            return;
         loadedTransform = ES3.Load(pictureName, transform);
         if (loadedTransform != null)
         {
@@ -35,6 +34,7 @@ public class PictureFrame : MonoBehaviour
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        LoadTransform();
     }
     private void OnDestroy()
     {

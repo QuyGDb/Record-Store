@@ -5169,8 +5169,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Artist: Ng\u1ECDt"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
-  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
+  m_fontAsset: {fileID: 11400000, guid: ef671587b5962194b988c24c1c624b2f, type: 2}
+  m_sharedMaterial: {fileID: -2447701677003281479, guid: ef671587b5962194b988c24c1c624b2f,
     type: 2}
   m_fontSharedMaterials:
   - {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
@@ -5334,8 +5334,8 @@ MonoBehaviour:
 
     Alternative Rock'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
-  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
+  m_fontAsset: {fileID: 11400000, guid: ef671587b5962194b988c24c1c624b2f, type: 2}
+  m_sharedMaterial: {fileID: -2447701677003281479, guid: ef671587b5962194b988c24c1c624b2f,
     type: 2}
   m_fontSharedMaterials:
   - {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
@@ -5497,8 +5497,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Album: Gieo'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
-  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
+  m_fontAsset: {fileID: 11400000, guid: ef671587b5962194b988c24c1c624b2f, type: 2}
+  m_sharedMaterial: {fileID: -2447701677003281479, guid: ef671587b5962194b988c24c1c624b2f,
     type: 2}
   m_fontSharedMaterials:
   - {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
@@ -5660,8 +5660,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "M\u1EA5y khi"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
-  m_sharedMaterial: {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90,
+  m_fontAsset: {fileID: 11400000, guid: ef671587b5962194b988c24c1c624b2f, type: 2}
+  m_sharedMaterial: {fileID: -2447701677003281479, guid: ef671587b5962194b988c24c1c624b2f,
     type: 2}
   m_fontSharedMaterials:
   - {fileID: -2961015723004676919, guid: f04b0e9be94eb8a41a62fd5ac8d65d90, type: 2}
@@ -5828,7 +5828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1353925569, guid: 5c3dc604ca6bec940bd928da64f675f0, type: 3}
+  m_Sprite: {fileID: 1270923209, guid: d58210936903f2341b5e8eb35a267e72, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6036,7 +6036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -491910622, guid: 5c3dc604ca6bec940bd928da64f675f0, type: 3}
+  m_Sprite: {fileID: -1916970399, guid: d58210936903f2341b5e8eb35a267e72, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6169,7 +6169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -491910622, guid: 5c3dc604ca6bec940bd928da64f675f0, type: 3}
+  m_Sprite: {fileID: 1287293624, guid: d58210936903f2341b5e8eb35a267e72, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

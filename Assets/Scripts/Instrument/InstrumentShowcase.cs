@@ -18,13 +18,11 @@ public class InstrumentShowcase : MonoBehaviour
         grabInteractable.selectExited.AddListener(Deselect);
 
     }
-    private void OnEnable()
-    {
-        LoadTransform();
-    }
+
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        LoadTransform();
     }
     private void OnDestroy()
     {
@@ -46,7 +44,9 @@ public class InstrumentShowcase : MonoBehaviour
 
     public async void LoadTransform()
     {
-        localTransfrom = ES3.Load<Transform>(instrumentShowcaseSO.instrumentName, transform);
+        if (ES3.KeyExists(instrumentShowcaseSO.instrumentName) == false)
+            return;
+        localTransfrom = ES3.Load(instrumentShowcaseSO.instrumentName, transform);
         await Awaitable.NextFrameAsync();
         if (localTransfrom == null) return;
         gameObject.transform.localPosition = localTransfrom.localPosition;

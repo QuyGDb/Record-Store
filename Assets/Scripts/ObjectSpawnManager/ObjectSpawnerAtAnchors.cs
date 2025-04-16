@@ -267,6 +267,7 @@ public class ObjectSpawnerAtAnchors : MonoBehaviour
         rapGenreOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         rockGenreOnWall.transform.localPosition = new Vector3(0, 0, 0);
         rockGenreOnWall.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
         Instantiate(GameResources.Instance.pop.logo, popGenreOnWall);
         foreach (var item in popList)
         {
