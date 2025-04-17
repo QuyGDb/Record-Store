@@ -5,41 +5,29 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class VinylShowcase : MonoBehaviour
 {
     XRGrabInteractable grabInteractable;
-    Transform loadedTransform;
+    ObjectSaver objectSaver;
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        objectSaver = GetComponent<ObjectSaver>();
 
     }
     private void Start()
     {
-        LoadTransform();
+        objectSaver.LoadTransform(gameObject.name);
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
     {
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
-    async void LoadTransform()
-    {
-        await Awaitable.NextFrameAsync();
-        if (ES3.KeyExists(gameObject.name))
-        {
-            loadedTransform = ES3.Load(gameObject.name, transform);
-        }
-        if (loadedTransform != null)
-        {
-            transform.localPosition = loadedTransform.localPosition;
-            transform.localRotation = loadedTransform.localRotation;
-            transform.localScale = loadedTransform.localScale;
-        }
-    }
+
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
         if (state == ApplicationState.ObjectManager)
         {
-            ES3.Save(gameObject.name, transform);
+            objectSaver.SaveTransform(gameObject.name);
         }
 
         if (state == ApplicationState.LoadMapMode)

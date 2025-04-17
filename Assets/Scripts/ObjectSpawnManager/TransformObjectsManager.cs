@@ -66,27 +66,17 @@ public class TransformObjectsManager : MonoBehaviour
             SaveTransformSelectObject(pictureFrame.transform, pictureFrame.pictureName);
             return;
         }
-        PortalShowcaseHandler portalShowcase = gameObjectSelected.GetComponent<PortalShowcaseHandler>();
-        if (portalShowcase != null)
-        {
-            SaveTransformSelectObject(portalShowcase.transform, portalShowcase.portalname);
-            return;
-        }
 
     }
 
     private void SaveTransformSelectObject(Transform objectTransform, string name)
     {
-
-        ES3.Save(name, objectTransform.transform);
-        Vector3 pos = objectTransform.transform.position;
-        Vector3 rot = objectTransform.transform.eulerAngles;
-        Vector3 scale = objectTransform.transform.localScale;
-
-        GameResources.Instance.objectSceneText.text =
-            $"Pos: ({pos.x:F2}, {pos.y:F2}, {pos.z:F2}) | " +
-            $"Rot: ({rot.x:F0}, {rot.y:F0}, {rot.z:F0}) | " +
-            $"Scale: ({scale.x:F2}, {scale.y:F2}, {scale.z:F2})";
+        ObjectSaver objectSaver = objectTransform.GetComponent<ObjectSaver>();
+        if (objectSaver != null)
+        {
+            objectSaver.SaveTransform(name);
+        }
+        GameResources.Instance.objectSceneText.text = objectTransform.name;
 
     }
 }

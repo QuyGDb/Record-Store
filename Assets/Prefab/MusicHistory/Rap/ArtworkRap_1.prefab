@@ -13,10 +13,25 @@ PrefabInstance:
       propertyPath: m_TrackScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2715052867118913235, guid: 69706d25e915e9d4aa3981d787c6dc3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4364301547697480968, guid: 69706d25e915e9d4aa3981d787c6dc3a,
         type: 3}
       propertyPath: m_Name
       value: ArtworkRap_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364301547697480968, guid: 69706d25e915e9d4aa3981d787c6dc3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943366444984023448, guid: 69706d25e915e9d4aa3981d787c6dc3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8891917310971323715, guid: 69706d25e915e9d4aa3981d787c6dc3a,
         type: 3}

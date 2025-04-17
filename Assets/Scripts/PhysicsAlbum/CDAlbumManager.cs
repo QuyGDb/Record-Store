@@ -11,6 +11,7 @@ public class CDAlbumManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI artistName;
     [SerializeField] private TextMeshProUGUI albumName;
     [SerializeField] private TextMeshProUGUI genres;
+    [SerializeField] private TextMeshProUGUI releaseYear;
     public AlbumSO albumSO;
     private void Start()
     {
@@ -31,6 +32,7 @@ public class CDAlbumManager : MonoBehaviour
         artistName.text = "Artist: " + albumSO.artistName;
         albumName.text = "Album: " + albumSO.albumName;
         genres.text = "Genres: " + albumSO.genres;
+        releaseYear.text = "Release Year: " + albumSO.releaseYear.ToString();
         artistImage.gameObject.SetActive(false);
         albumName.gameObject.SetActive(false);
         genres.gameObject.SetActive(false);

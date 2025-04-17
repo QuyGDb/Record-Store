@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_TrackScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 261604562971751632, guid: 357943ccc96b1da4bae0691cbc76e2ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2096028140251288382, guid: 357943ccc96b1da4bae0691cbc76e2ea,
         type: 3}
       propertyPath: m_Size.x
@@ -38,6 +43,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DanhDoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364301547697480968, guid: 357943ccc96b1da4bae0691cbc76e2ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943366444984023448, guid: 357943ccc96b1da4bae0691cbc76e2ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6975592961529557886, guid: 357943ccc96b1da4bae0691cbc76e2ea,
         type: 3}

@@ -5,28 +5,16 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class PictureFrame : MonoBehaviour
 {
     public string pictureName;
-    private Transform loadedTransform;
     private XRGrabInteractable grabInteractable;
-
+    private ObjectSaver objectSaver;
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        objectSaver = GetComponent<ObjectSaver>();
     }
 
 
-    private async void LoadTransform()
-    {
-        if (ES3.KeyExists(pictureName) == false)
-            return;
-        loadedTransform = ES3.Load(pictureName, transform);
-        if (loadedTransform != null)
-        {
-            await Awaitable.NextFrameAsync();
-            transform.localPosition = loadedTransform.localPosition;
-            transform.localRotation = loadedTransform.localRotation;
-            transform.localScale = loadedTransform.localScale;
-        }
-    }
+
     private void Start()
     {
         grabInteractable.selectEntered.AddListener((temp) =>
@@ -34,7 +22,7 @@ public class PictureFrame : MonoBehaviour
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        LoadTransform();
+        objectSaver.LoadTransform(pictureName);
     }
     private void OnDestroy()
     {

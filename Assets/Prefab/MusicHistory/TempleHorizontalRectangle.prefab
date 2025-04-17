@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 17429724475404818}
   - component: {fileID: -2910508832995526770}
   - component: {fileID: 6480225255504076773}
+  - component: {fileID: 308167077250259151}
   m_Layer: 0
   m_Name: TempleHorizontalRectangle
   m_TagString: Untagged
@@ -222,6 +223,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pictureName: ArtworkRap_2
+--- !u!114 &308167077250259151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364301547697480968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f645c5c132596c048a412ac0379846a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6943366444984023448
 GameObject:
   m_ObjectHideFlags: 0

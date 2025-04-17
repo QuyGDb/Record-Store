@@ -19,10 +19,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 1f02c098ad0f0fa4f956f60c5ab56893,
         type: 3}
+    - target: {fileID: 2715052867118913235, guid: 69706d25e915e9d4aa3981d787c6dc3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4364301547697480968, guid: 69706d25e915e9d4aa3981d787c6dc3a,
         type: 3}
       propertyPath: m_Name
       value: RockArtwork1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364301547697480968, guid: 69706d25e915e9d4aa3981d787c6dc3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943366444984023448, guid: 69706d25e915e9d4aa3981d787c6dc3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7911323317214252353, guid: 69706d25e915e9d4aa3981d787c6dc3a,
         type: 3}

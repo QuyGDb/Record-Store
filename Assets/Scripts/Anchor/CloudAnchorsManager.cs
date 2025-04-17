@@ -18,6 +18,7 @@ public class CloudAnchorsManager : MonoBehaviour
     [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
     [SerializeField] private AnchorType currentAnchorType;
+    string key = "cloudAnchorDetails";
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
@@ -182,12 +183,17 @@ public class CloudAnchorsManager : MonoBehaviour
     }
     void SaveCloudAnchorDetails()
     {
-        ES3.Save("cloudAnchorDetails", cloudAnchorDetails);
+        ES3.Save(key, cloudAnchorDetails);
         StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
     void LoadCloudAnchorDetails()
     {
-        cloudAnchorDetails = ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
+        if (!ES3.KeyExists(key))
+        {
+            cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
+            return;
+        }
+        cloudAnchorDetails = ES3.Load(key, cloudAnchorDetails);
         StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
 

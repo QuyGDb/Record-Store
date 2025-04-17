@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System;
-using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,6 +7,7 @@ public class Portal : MonoBehaviour
 
     [SerializeField] Transform doorTranform;
     [SerializeField] Transform mask;
+    [SerializeField] LayerMask layer;
     private Vector3 overturnMark = new Vector3(0, 180, 0);
     private Vector3 openDoor = new Vector3(0, 148f, 0);
     bool isOpen;
@@ -84,15 +83,25 @@ public class Portal : MonoBehaviour
         }
         wasInFront = isInFront;
     }
+
     private void Update()
     {
         whileCameraColliding();
+        if (inOtherWorld)
+        {
+            Camera.main.cullingMask = layer;
+        }
+        else
+        {
+            Camera.main.cullingMask = -1;
+        }
     }
 
     void OnTriggerExit(Collider collider)
     {
         if (collider.transform != Camera.main.transform)
             return;
+
         hasCollided = false;
     }
     bool GetIsInFront()

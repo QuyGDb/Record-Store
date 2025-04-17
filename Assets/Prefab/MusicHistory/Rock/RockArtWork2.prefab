@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_TrackScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 858232712181344680, guid: e219ef31604499946a0d612d8737c7ba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2096028140251288382, guid: e219ef31604499946a0d612d8737c7ba,
         type: 3}
       propertyPath: m_Sprite
@@ -23,6 +28,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RockArtWork2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364301547697480968, guid: e219ef31604499946a0d612d8737c7ba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4573762467122966789, guid: e219ef31604499946a0d612d8737c7ba,
         type: 3}
@@ -38,6 +48,11 @@ PrefabInstance:
         type: 3}
       propertyPath: pictureName
       value: RockArtWork2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943366444984023448, guid: e219ef31604499946a0d612d8737c7ba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8891917310971323715, guid: e219ef31604499946a0d612d8737c7ba,
         type: 3}
