@@ -8,7 +8,7 @@ public class InstrumentsManager : MonoBehaviour
     [SerializeField] private GameObject instrumentUIPrefab;
     private InstrumentUI instrumentUI;
     private InstrumentSO instrumentSO;
-    private Vector3 offset = new Vector3(0, 0.35f, -0.35f);
+    private Vector3 offset;
     private void Awake()
     {
         touchAction = GameResources.Instance.touchRef.action;
@@ -38,9 +38,10 @@ public class InstrumentsManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, instrumentLayerMask))
         {
+            offset = (hit.point - Camera.main.transform.position).normalized;
             var instrument = hit.collider.gameObject.GetComponent<Instrument>();
             instrumentSO = instrument.instrumentSO;
-            instrumentUI.SetData(instrumentSO, hit.transform.position + offset);
+            instrumentUI.SetData(instrumentSO, hit.transform.position - offset);
         }
     }
 

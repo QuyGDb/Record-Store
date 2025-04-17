@@ -6,23 +6,23 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class WallManager : MonoBehaviour
 {
     [HideInInspector] public WallSO wallSO;
-    private Transform wallTransform;
     private Rigidbody wallRigidbody;
     private XRGrabInteractable wallInteractable;
+    private ObjectSaver objectSaver;
     private void Awake()
     {
         wallRigidbody = GetComponent<Rigidbody>();
         wallInteractable = GetComponent<XRGrabInteractable>();
+        objectSaver = GetComponent<ObjectSaver>();
     }
     private void Start()
     {
-
         wallInteractable.selectEntered.AddListener((temp) =>
         {
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        LoadTransfrom();
+        objectSaver.LoadTransform(wallSO.wallName);
     }
 
     private void OnDestroy()
@@ -43,23 +43,11 @@ public class WallManager : MonoBehaviour
         if (state == ApplicationState.ObjectManager)
         {
             wallRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            ES3.Save(wallSO.wallName, transform);
+            objectSaver.SaveTransform(wallSO.wallName);
         }
 
     }
-    public async void LoadTransfrom()
-    {
-        await Awaitable.NextFrameAsync();
 
-        if (!ES3.KeyExists(wallSO.wallName)) return;
-        wallTransform = ES3.Load(wallSO.wallName, transform);
-        if (wallTransform == null) return;
-        transform.localPosition = wallTransform.localPosition;
-        transform.localRotation = wallTransform.localRotation;
-        transform.localScale = wallTransform.localScale;
-        return;
-
-    }
     public void StretchPlaneFromEdge(PlaneEdge edge, float delta)
     {
         Vector3 scale = transform.localScale;

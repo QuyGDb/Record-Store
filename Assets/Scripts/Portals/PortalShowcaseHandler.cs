@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -7,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class PortalShowcaseHandler : MonoBehaviour
 {
     private XRGrabInteractable grabTransformer;
-    private Transform portalTranform;
+    private ObjectSaver objectSaver;
     private InputAction touchAction;
     public string portalname = "PortalShowcase";
     private void Awake()
@@ -16,11 +17,13 @@ public class PortalShowcaseHandler : MonoBehaviour
         touchAction.Enable();
         touchAction.started += OnTouchStarted;
         grabTransformer = GetComponent<XRGrabInteractable>();
+        objectSaver = GetComponent<ObjectSaver>();
 
     }
 
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.applicationState != ApplicationState.LoadMapMode) return;
         Vector2 touchPosition = context.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -38,9 +41,11 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     void Start()
     {
-        LoadTransform();
+        objectSaver.LoadTransform(portalname);
         grabTransformer.selectEntered.AddListener(OnSelectEntered);
         StaticEventHandler.OnMovePortal += MovePortal;
+        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+
     }
 
 
@@ -51,7 +56,21 @@ public class PortalShowcaseHandler : MonoBehaviour
         touchAction.started -= OnTouchStarted;
         touchAction.Disable();
         StaticEventHandler.OnMovePortal -= MovePortal;
+        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
+
+    private void OnApplicationStateChanged(ApplicationState state)
+    {
+        if (state == ApplicationState.ObjectManager)
+        {
+            objectSaver.SaveTransform(portalname);
+        }
+        if (state == ApplicationState.LoadMapMode)
+        {
+            grabTransformer.enabled = false;
+        }
+    }
+
     private void MovePortal()
     {
         transform.DOLocalMoveZ(-1f, 2.5f);
@@ -61,16 +80,5 @@ public class PortalShowcaseHandler : MonoBehaviour
         StaticEventHandler.InvokeXRGrabInteractableSelected(this.gameObject);
     }
 
-    async void LoadTransform()
-    {
-        if (!ES3.KeyExists(portalname)) return;
-        portalTranform = ES3.Load(portalname, transform);
-        if (portalTranform != null)
-        {
-            await Awaitable.NextFrameAsync();
-            transform.localPosition = portalTranform.localPosition;
-            transform.localRotation = portalTranform.localRotation;
-            transform.localScale = portalTranform.localScale;
-        }
-    }
+
 }

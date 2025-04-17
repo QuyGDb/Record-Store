@@ -8,12 +8,12 @@ public class InstrumentShowcase : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     public InstrumentShowcaseSO instrumentShowcaseSO;
     private LocalAxis localAxis;
-    private Transform localTransfrom;
-
+    ObjectSaver objectSaver;
     private void Awake()
     {
         localAxis = GetComponent<LocalAxis>();
         grabInteractable = GetComponent<XRGrabInteractable>();
+        objectSaver = GetComponent<ObjectSaver>();
         grabInteractable.selectEntered.AddListener(Select);
         grabInteractable.selectExited.AddListener(Deselect);
 
@@ -22,7 +22,7 @@ public class InstrumentShowcase : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        LoadTransform();
+        objectSaver.LoadTransform(instrumentShowcaseSO.instrumentName);
     }
     private void OnDestroy()
     {
@@ -42,17 +42,7 @@ public class InstrumentShowcase : MonoBehaviour
         }
     }
 
-    public async void LoadTransform()
-    {
-        if (ES3.KeyExists(instrumentShowcaseSO.instrumentName) == false)
-            return;
-        localTransfrom = ES3.Load(instrumentShowcaseSO.instrumentName, transform);
-        await Awaitable.NextFrameAsync();
-        if (localTransfrom == null) return;
-        gameObject.transform.localPosition = localTransfrom.localPosition;
-        gameObject.transform.localRotation = localTransfrom.localRotation;
-        gameObject.transform.localScale = localTransfrom.localScale;
-    }
+
     private void Select(SelectEnterEventArgs selectEnterEventArgs)
     {
         localAxis.enabled = true;

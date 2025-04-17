@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4663285078875087031}
   - component: {fileID: 8698980106286280671}
   - component: {fileID: 2172611197787918008}
+  - component: {fileID: -3963467380157686159}
   m_Layer: 0
   m_Name: InstrumentShowcaseVN_2
   m_TagString: Untagged
@@ -109,6 +110,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.63046944, y: 0.12699291, z: 0.4141431}
   m_Center: {x: 0.0015675128, y: -0.0632488, z: 0.20693006}
+--- !u!114 &-3963467380157686159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3600045166406027491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f645c5c132596c048a412ac0379846a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4228444196691609659
 PrefabInstance:
   m_ObjectHideFlags: 0

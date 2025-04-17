@@ -5,26 +5,17 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class ObjectParent : MonoBehaviour
 {
     [SerializeField] private string objParentName;
-    private Transform saveTransform;
+    private ObjectSaver objectSaver;
 
-
-    private async void LoadTransform()
+    private void Awake()
     {
-        await Awaitable.NextFrameAsync();
-        if (ES3.KeyExists(objParentName) == false)
-            return;
-        saveTransform = ES3.Load(objParentName, transform);
-        if (saveTransform != null)
-        {
-            transform.localPosition = saveTransform.localPosition;
-            transform.localRotation = saveTransform.localRotation;
-            transform.localScale = saveTransform.localScale;
-        }
+        objectSaver = GetComponent<ObjectSaver>();
+
     }
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        LoadTransform();
+        objectSaver.LoadTransform(objParentName);
     }
 
     private void OnDestroy()
@@ -36,7 +27,12 @@ public class ObjectParent : MonoBehaviour
     {
         if (state == ApplicationState.ObjectManager)
         {
-            ES3.Save(objParentName, transform);
+            objectSaver.SaveTransform(objParentName);
+        }
+        if (state == ApplicationState.LoadMapMode)
+        {
+            GetComponent<LocalAxis>().enabled = false;
+
         }
     }
 }
