@@ -17,7 +17,6 @@ public class ObjectParent : MonoBehaviour
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         objectSaver.LoadTransform(objParentName);
     }
-
     private void OnDestroy()
     {
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
@@ -28,11 +27,6 @@ public class ObjectParent : MonoBehaviour
         if (state == ApplicationState.ObjectManager)
         {
             objectSaver.SaveTransform(objParentName);
-        }
-        if (state == ApplicationState.LoadMapMode)
-        {
-            GetComponent<LocalAxis>().enabled = false;
-
         }
     }
 }

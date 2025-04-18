@@ -273,29 +273,5 @@ public static class HelperUtilities
 
         return imageData;
     }
-    public static void SetParentKeepWorld(this Transform child, Transform newParent)
-    {
-        Vector3 worldPos = child.position;
-        Quaternion worldRot = child.rotation;
-        Vector3 worldScale = child.lossyScale;
 
-        child.SetParent(newParent, true);
-
-        child.position = worldPos;
-        child.rotation = worldRot;
-
-        if (newParent != null)
-        {
-            Vector3 parentScale = newParent.lossyScale;
-            child.localScale = new Vector3(
-                worldScale.x / parentScale.x,
-                worldScale.y / parentScale.y,
-                worldScale.z / parentScale.z
-            );
-        }
-        else
-        {
-            child.localScale = worldScale;
-        }
-    }
 }

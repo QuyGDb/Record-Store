@@ -18,8 +18,7 @@ public enum MusicGenres
 public enum AnchorType
 {
     None,
-    IntrumentShowCase,
-    MusicHistory,
+    Wall,
     VinylShowCase,
     Portal,
 }
@@ -38,6 +37,7 @@ public enum ApplicationState
     Anchor,
     CloudAnchor,
     WallManager,
+    ObjectParent,
     ObjectManager,
     LoadMapMode,
 }

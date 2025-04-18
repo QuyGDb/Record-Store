@@ -5,7 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class WallManager : MonoBehaviour
 {
-    [HideInInspector] public WallSO wallSO;
     private Rigidbody wallRigidbody;
     private XRGrabInteractable wallInteractable;
     private ObjectSaver objectSaver;
@@ -22,7 +21,7 @@ public class WallManager : MonoBehaviour
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        objectSaver.LoadTransform(wallSO.wallName);
+        objectSaver.LoadTransform(gameObject.name);
     }
 
     private void OnDestroy()
@@ -43,7 +42,7 @@ public class WallManager : MonoBehaviour
         if (state == ApplicationState.ObjectManager)
         {
             wallRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            objectSaver.SaveTransform(wallSO.wallName);
+            objectSaver.SaveTransform(gameObject.name);
         }
 
     }

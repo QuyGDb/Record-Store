@@ -41,8 +41,6 @@ public class InstrumentShowcase : MonoBehaviour
             GetComponentInChildren<Collider>().enabled = false;
         }
     }
-
-
     private void Select(SelectEnterEventArgs selectEnterEventArgs)
     {
         localAxis.enabled = true;

@@ -32,7 +32,7 @@ public class GameResources : MonoBehaviour
 
 
     #region Instrument Showcase
-    public InstrumentShowcaseListSO instrumentShowCaseVN;
+    public InstrumentShowcaseListSO instrumentShowCase;
     #endregion
 
     #region Physical CD Album
@@ -40,13 +40,7 @@ public class GameResources : MonoBehaviour
     public AlbumSO SDDBP;
     #endregion
 
-    #region Wall
-    [Header("Wall")]
-    public WallSO wallSO_Showcase;
-    public WallSO wall_HistoryMusic;
 
-
-    #endregion
 
 
     #region History Music
@@ -56,22 +50,27 @@ public class GameResources : MonoBehaviour
     public MusicGenreSO rock;
 
     #endregion
-    #region AnchorsManager
+
+    #region Pool Reference
     [HideInInspector] public AnchorsManager anchorsManager;
+    [HideInInspector] public CloudAnchorsManager cloudAnchorsManager;
+
     [HideInInspector] public TextMeshProUGUI anchorSceneText;
     [HideInInspector] public TextMeshProUGUI cloudAnchorSceneText;
-    [HideInInspector] public CloudAnchorsManager cloudAnchorsManager;
+
     [HideInInspector] public SceneNavigationBar sceneNavigationBar;
-    [HideInInspector] public WallManager wallManager;
+
+    [HideInInspector] public WallManager currentwallManager;
     [HideInInspector] public GameObject contentCloudAnchor;
-    [HideInInspector] public ObjectSpawnerAtAnchors objectSpawnerAtAnchors;
+    [HideInInspector] public ObjectSpawnerAtWall objectSpawnerAtAnchors;
     [HideInInspector] public TransformObjectsManager transformObjectsManager;
     [HideInInspector] public AROcclusionManager occlusionManager;
     [HideInInspector] public List<string> resolveCloudAnchorIdList;
-    #endregion
-
     [HideInInspector] public TextMeshProUGUI objectSceneText;
 
+    [HideInInspector] public InstrumentShowcaseManager instrumentShowcaseManager;
+    [HideInInspector] public PictureFrameManager pictureFrameManager;
+    #endregion
     // Vinyl ShowCase
     [Header("Vinyl ShowCase")]
     public GameObject VinylShowCasePrefab;
@@ -81,6 +80,9 @@ public class GameResources : MonoBehaviour
     [Header("Portal")]
     public GameObject PortalPrefab;
     #region Validation
+    // Wall
+    [Header("Wall")]
+    public GameObject wallPrefab;
 
     public InputActionReference touchRef;
 #if UNITY_EDITOR

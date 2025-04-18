@@ -34,6 +34,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 break;
             case ApplicationState.WallManager:
                 break;
+            case ApplicationState.ObjectParent:
+                break;
             case ApplicationState.ObjectManager:
                 break;
             case ApplicationState.LoadMapMode:

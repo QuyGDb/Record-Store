@@ -3,12 +3,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class MusicHistoryManager : MonoBehaviour
+public class MusicHistoryUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject musicHistoryPrefab;
     private MusicHistoryUI musicHistoryUI;
     private InputAction touchAction;
     private Vector3 offset;
+
     private void Awake()
     {
         touchAction = GameResources.Instance.touchRef.action;
@@ -58,4 +59,6 @@ public class MusicHistoryManager : MonoBehaviour
 
         }
     }
+
+   
 }

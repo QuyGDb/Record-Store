@@ -22,7 +22,8 @@ public class WallManagerCanvas : MonoBehaviour
         buttons[1].onClick.AddListener(MoveWallBehind);
         buttons[2].onClick.AddListener(AddYRotate);
         buttons[3].onClick.AddListener(SubtractYRotate);
-        buttons[4].onClick.AddListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjects);
+        buttons[4].onClick.AddListener(GameResources.Instance.instrumentShowcaseManager.ShowObjects);
+        buttons[5].onClick.AddListener(GameResources.Instance.pictureFrameManager.ShowObjects);
     }
 
     private void OnEnable()
@@ -45,13 +46,14 @@ public class WallManagerCanvas : MonoBehaviour
         buttons[1].onClick.RemoveListener(MoveWallBehind);
         buttons[2].onClick.RemoveListener(AddYRotate);
         buttons[3].onClick.RemoveListener(SubtractYRotate);
-        buttons[4].onClick.RemoveListener(GameResources.Instance.objectSpawnerAtAnchors.InitializeObjects);
+        buttons[4].onClick.RemoveListener(GameResources.Instance.instrumentShowcaseManager.ShowObjects);
+        buttons[5].onClick.RemoveListener(GameResources.Instance.pictureFrameManager.ShowObjects);
     }
     private void OnInputFieldEndEdit(string value)
     {
         if (float.TryParse(value, out float result))
         {
-            GameResources.Instance.wallManager.StretchPlaneFromEdge(selectedEdge, result);
+            GameResources.Instance.currentwallManager.StretchPlaneFromEdge(selectedEdge, result);
         }
         else
         {
@@ -82,32 +84,26 @@ public class WallManagerCanvas : MonoBehaviour
 
     private void MoveWallForward()
     {
-        if (GameResources.Instance.wallManager == null) return;
-        if (GameResources.Instance.wallManager.wallSO.wallName == InstrumentShowcase)
-            GameResources.Instance.wallManager.transform.position += new Vector3(0, 0, 0.1f);
-        if (GameResources.Instance.wallManager.wallSO.wallName == MusicHistory)
-            GameResources.Instance.wallManager.transform.position += new Vector3(0.1f, 0, 0f);
+        if (GameResources.Instance.currentwallManager == null) return;
+        GameResources.Instance.currentwallManager.transform.position += new Vector3(0, 0, 0.1f);
 
 
     }
     private void MoveWallBehind()
     {
-        if (GameResources.Instance.wallManager == null) return;
-        if (GameResources.Instance.wallManager.wallSO.wallName == InstrumentShowcase)
-            GameResources.Instance.wallManager.transform.position -= new Vector3(0, 0, 0.1f);
-        if (GameResources.Instance.wallManager.wallSO.wallName == MusicHistory)
-            GameResources.Instance.wallManager.transform.position -= new Vector3(0.1f, 0, 0f);
+        if (GameResources.Instance.currentwallManager == null) return;
+        GameResources.Instance.currentwallManager.transform.position -= new Vector3(0, 0, 0.1f);
     }
 
     private void AddYRotate()
     {
-        if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.Rotate(new Vector3(0, 1, 0), 5);
+        if (GameResources.Instance.currentwallManager == null) return;
+        GameResources.Instance.currentwallManager.transform.Rotate(new Vector3(0, 1, 0), 5);
     }
     private void SubtractYRotate()
     {
-        if (GameResources.Instance.wallManager == null) return;
-        GameResources.Instance.wallManager.transform.Rotate(new Vector3(0, -1, 0), 5);
+        if (GameResources.Instance.currentwallManager == null) return;
+        GameResources.Instance.currentwallManager.transform.Rotate(new Vector3(0, -1, 0), 5);
     }
     #region Validation
 #if UNITY_EDITOR

@@ -11,7 +11,6 @@ public class SceneNavigationBar : MonoBehaviour
     private void Awake()
     {
         buttons = GetComponentsInChildren<Button>(true);
-        StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
         currentSceneName = sceneNames[0];
 
     }
@@ -32,18 +31,9 @@ public class SceneNavigationBar : MonoBehaviour
         buttons[2].onClick.RemoveListener(ActiveCloudAnchorScene);
         buttons[3].onClick.RemoveListener(ActiveWallManagerCanvas);
         buttons[4].onClick.RemoveListener(ActiveObjectManagerCanvas);
-        StaticEventHandler.OnInstantiateAtAnchor -= OnInstantiateAtAnchor;
     }
 
-    private void OnInstantiateAtAnchor(ARCloudAnchor anchor, AnchorType type)
-    {
-        switch (type)
-        {
-            case AnchorType.IntrumentShowCase:
-                break;
 
-        }
-    }
     void ActiveInstructionScene()
     {
         GameManager.Instance.ChangeApplicationState(ApplicationState.Instruction);

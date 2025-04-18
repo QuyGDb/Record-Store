@@ -8,12 +8,12 @@ public class ObjectSaver : MonoBehaviour
         if (gameObject == null) return;
         arTransform.position = transform.localPosition;
         arTransform.rotation = transform.localRotation;
-        arTransform.scale = transform.lossyScale;
+        arTransform.scale = transform.localScale;
         ES3.Save(key, arTransform);
     }
-    public void LoadTransform(string key)
+    public async void LoadTransform(string key)
     {
-        //await Awaitable.NextFrameAsync();
+        await Awaitable.NextFrameAsync();
         if (ES3.KeyExists(key) == false) return;
         ES3.LoadInto(key, arTransform);
         transform.localPosition = arTransform.position;

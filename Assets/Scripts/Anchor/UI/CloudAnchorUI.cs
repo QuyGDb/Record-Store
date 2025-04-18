@@ -44,8 +44,6 @@ public class CloudAnchorUI : MonoBehaviour, IPointerClickHandler
 
     }
 
-
-
     void SetInforAnchorImage()
     {
         textMeshProUGUI.text = anchorDetails.anchorName + "  -  Type: " + anchorDetails.anchorType.ToString();
