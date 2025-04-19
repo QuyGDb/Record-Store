@@ -25,13 +25,10 @@ public class VinylShowcase : MonoBehaviour
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
-        if (state == ApplicationState.ObjectManager)
+
+        if (state == ApplicationState.TestMap)
         {
             objectSaver.SaveTransform(gameObject.name);
-        }
-
-        if (state == ApplicationState.LoadMapMode)
-        {
             grabInteractable.enabled = false;
         }
     }

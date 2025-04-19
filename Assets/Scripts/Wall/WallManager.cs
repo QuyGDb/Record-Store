@@ -45,7 +45,7 @@ public class WallManager : MonoBehaviour
             wallInteractable.enabled = false;
             wallCollider.enabled = false;
         }
-        if (state == ApplicationState.ObjectManager)
+        if (state == ApplicationState.ObjectParent)
         {
             objectSaver.SaveTransform(gameObject.name);
         }

@@ -93,13 +93,6 @@ public static class HelperUtilities
         return usePNG ? texture.EncodeToPNG() : texture.EncodeToJPG();
     }
 
-    /// <summary>
-    /// Get a random direction vector
-    /// </summary>
-    public static Vector2 GetRandomDirection()
-    {
-        return Random.insideUnitCircle.normalized;
-    }
 
     /// <summary>
     /// Get the direction vector from an angle in degrees

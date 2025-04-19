@@ -33,6 +33,7 @@ public class PictureFrame : MonoBehaviour
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
+
         if (state == ApplicationState.ObjectManager)
         {
             ToggleInteractableItem(gameObject, true);

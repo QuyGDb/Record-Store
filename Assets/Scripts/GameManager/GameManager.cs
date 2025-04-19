@@ -14,7 +14,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void Start()
     {
-        ChangeApplicationState(ApplicationState.CreateMapMode);
+        ChangeApplicationState(ApplicationState.Start);
     }
 
     public void ChangeApplicationState(ApplicationState newState)
@@ -23,11 +23,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         switch (applicationState)
         {
             case ApplicationState.Start:
-                SceneManager.LoadScene("RecordStoreInit");
+                SceneManager.LoadScene("RecordStoreInit", LoadSceneMode.Additive);
                 break;
             case ApplicationState.CreateMapMode:
-                //SceneManager.LoadScene("InstructionScene", LoadSceneMode.Additive);
-                //SceneManager.LoadScene("NavigationScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("InstructionScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("CreateMapNavigationScene", LoadSceneMode.Additive);
+                break;
+            case ApplicationState.LoadingMapMode:
+                SceneManager.LoadScene("LoadMapScene", LoadSceneMode.Additive);
                 break;
             case ApplicationState.Anchor:
                 break;
@@ -39,7 +42,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 break;
             case ApplicationState.ObjectManager:
                 break;
-            case ApplicationState.LoadMapMode:
+            case ApplicationState.TestMap:
                 break;
         }
         OnApplicationStateChanged?.Invoke(newState);

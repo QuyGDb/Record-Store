@@ -26,7 +26,7 @@ public class SaveObjectsTransformManager : MonoBehaviour
 
     void ChangeToLoadMapMode()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.LoadMapMode);
+        GameManager.Instance.ChangeApplicationState(ApplicationState.TestMap);
         transform.parent.gameObject.SetActive(false);
     }
 

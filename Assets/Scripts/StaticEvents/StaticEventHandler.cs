@@ -75,4 +75,11 @@ public static class StaticEventHandler
     {
         OnMovePortal?.Invoke();
     }
+
+    public static event Action<string> OnNameMapText;
+
+    public static void InvokeNameMapText(string es3name)
+    {
+        OnNameMapText?.Invoke(es3name);
+    }
 }
