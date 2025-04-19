@@ -18,11 +18,17 @@ public class ObjectParent : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        objectSaver.LoadTransform(objParentName);
+        StaticEventHandler.OnNameMapText += OnNameMapText;
     }
     private void OnDestroy()
     {
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        StaticEventHandler.OnNameMapText -= OnNameMapText;
+    }
+
+    private void OnNameMapText(string es3Name)
+    {
+        objectSaver.LoadTransform(objParentName);
     }
 
     private void OnApplicationStateChanged(ApplicationState state)
@@ -37,7 +43,6 @@ public class ObjectParent : MonoBehaviour
         }
         if (state == ApplicationState.ObjectParent)
         {
-
             ToggleInteractableObjectParent(true);
             localAxis.enabled = true;
         }

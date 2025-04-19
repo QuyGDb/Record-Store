@@ -58,7 +58,7 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI anchorSceneText;
     [HideInInspector] public TextMeshProUGUI cloudAnchorSceneText;
 
-    [HideInInspector] public LoadMapSceneNavigationBar sceneNavigationBar;
+    [HideInInspector] public CreateMapSceneNavigationBar sceneNavigationBar;
 
     [HideInInspector] public WallManager currentwallManager;
     [HideInInspector] public GameObject contentCloudAnchor;

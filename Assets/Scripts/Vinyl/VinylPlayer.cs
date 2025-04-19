@@ -84,7 +84,7 @@ public class VinylPlayer : MonoBehaviour
     }
     private async void PickupVinyl()
     {
-        if (GameManager.Instance.applicationState != ApplicationState.LoadMapMode) return;
+        if (GameManager.Instance.applicationState != ApplicationState.TestMap) return;
         Vector2 tapPosition = touchAction.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(tapPosition);
 

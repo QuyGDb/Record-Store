@@ -127,18 +127,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4128464314545561625}
   m_CullTransparentMesh: 1
---- !u!114 &60970917918390369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4128464314545561625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7bb032c0baf674eb36ac6e0dedec99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &202277617169908024
 RectTransform:
   m_ObjectHideFlags: 0
@@ -755,7 +743,7 @@ GameObject:
   - component: {fileID: 25920010751625591}
   - component: {fileID: 7662666415318623572}
   - component: {fileID: 4962496296657629274}
-  - component: {fileID: 60970917918390369}
+  - component: {fileID: 7662666415318623573}
   m_Layer: 5
   m_Name: NavigationBar
   m_TagString: Untagged
@@ -1096,6 +1084,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7662666415318623573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128464314545561625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e167409079df8024680a86f0470a493f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7662867911275055014
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4750796961421578499}
   - component: {fileID: 3871655362890944385}
   - component: {fileID: 6440025119376741866}
-  - component: {fileID: -3399321857574462218}
   m_Layer: 0
   m_Name: InstrumentShowcaseOversea3
   m_TagString: Untagged
@@ -110,18 +109,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.53979695, y: 0.19181375, z: 0.3343153}
   m_Center: {x: -0.00068730116, y: -0.095957235, z: 0.1675032}
---- !u!114 &-3399321857574462218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62574126209303206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f645c5c132596c048a412ac0379846a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6466121342443382806
 PrefabInstance:
   m_ObjectHideFlags: 0

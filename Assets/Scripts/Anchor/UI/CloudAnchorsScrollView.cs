@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,18 +9,20 @@ public class CloudAnchorsScrollView : MonoBehaviour
     [SerializeField] private GameObject prefab;
     public GameObject content;
     private List<GameObject> cloudAnchorImages = new List<GameObject>();
-    private Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
+    [SerializeField] private Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
 
     private void Start()
     {
-        cloudAnchorDetails = ES3.Load("cloudAnchorDetails", cloudAnchorDetails);
         StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
     private void Awake()
     {
+        var settings = new ES3Settings(Settings.es3Name);
+        cloudAnchorDetails = ES3.Load("cloudAnchorDetails", cloudAnchorDetails, settings);
         StaticEventHandler.OnAnchorDetailsChanged += OnAnchorDetailsChanged;
         GameResources.Instance.contentCloudAnchor = content;
     }
+
 
     private void OnDestroy()
     {
@@ -34,6 +37,7 @@ public class CloudAnchorsScrollView : MonoBehaviour
         }
         foreach (var cloudAnchor in cloudAnchorDetails)
         {
+
             GameObject gameObject = Instantiate(prefab, content.transform);
             cloudAnchorImages.Add(gameObject);
             gameObject.GetComponent<CloudAnchorUI>().anchorDetails = cloudAnchor.Value;

@@ -42,9 +42,9 @@ public class CloudAnchorsManager : MonoBehaviour
     }
     private void Start()
     {
-        LoadCloudAnchorDetails();
         GameResources.Instance.cloudAnchorsManager = this;
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        StaticEventHandler.OnNameMapText += LoadCloudAnchorDetails;
 
 
     }
@@ -53,7 +53,10 @@ public class CloudAnchorsManager : MonoBehaviour
         StaticEventHandler.OnSendAnchorInfo -= OnSendAnchorInfo;
         StaticEventHandler.OnSelectCloudAnchor -= OnSelectCloudAnchor;
         GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        StaticEventHandler.OnNameMapText -= LoadCloudAnchorDetails;
     }
+
+
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
@@ -183,17 +186,21 @@ public class CloudAnchorsManager : MonoBehaviour
     }
     void SaveCloudAnchorDetails()
     {
-        ES3.Save(key, cloudAnchorDetails);
+        ES3.Save(key, cloudAnchorDetails, Settings.es3Name);
         StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
-    void LoadCloudAnchorDetails()
+    void LoadCloudAnchorDetails(string es3Name)
     {
-        if (!ES3.KeyExists(key))
+        var settings = new ES3Settings(es3Name);
+        if (!ES3.KeyExists(key, settings))
         {
             cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
+            Debug.Log($"LoadCloudAnchorDetails: {es3Name}");
+
             return;
         }
-        cloudAnchorDetails = ES3.Load(key, cloudAnchorDetails);
+
+        cloudAnchorDetails = ES3.Load(key, cloudAnchorDetails, settings);
         StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
     }
 

@@ -16,13 +16,13 @@ public class InstrumentShowcase : MonoBehaviour
         objectSaver = GetComponent<ObjectSaver>();
         grabInteractable.selectEntered.AddListener(Select);
         grabInteractable.selectExited.AddListener(Deselect);
-
     }
 
     private void Start()
     {
         GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         objectSaver.LoadTransform(instrumentShowcaseSO.instrumentName);
+        Debug.Log("InstrumentShowcaseSO name: " + instrumentShowcaseSO.instrumentName + Settings.es3Name);
     }
     private void OnDestroy()
     {
@@ -33,8 +33,10 @@ public class InstrumentShowcase : MonoBehaviour
         }
     }
 
+
     private void OnApplicationStateChanged(ApplicationState state)
     {
+
         if (state == ApplicationState.ObjectManager)
         {
             ToggleInteractableItem(gameObject, true);

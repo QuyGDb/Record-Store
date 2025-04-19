@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadMapSceneNavigationBar : MonoBehaviour
+public class CreateMapSceneNavigationBar : MonoBehaviour
 {
     Button[] buttons = new Button[5];
     private string currentSceneName;
