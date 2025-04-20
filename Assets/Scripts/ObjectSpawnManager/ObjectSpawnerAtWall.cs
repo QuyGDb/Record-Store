@@ -7,7 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class ObjectSpawnerAtWall : MonoBehaviour
 {
     [SerializeField] Transform[] objectTranformList;
-    private XRGrabInteractable wallXRGrabInteractable;
     private void Awake()
     {
         GameResources.Instance.objectSpawnerAtAnchors = this;
@@ -44,10 +43,9 @@ public class ObjectSpawnerAtWall : MonoBehaviour
     void CreateWall(ARCloudAnchor arAnchor)
     {
         GameObject wall = Instantiate(GameResources.Instance.wallPrefab, transform);
-        wallXRGrabInteractable = wall.GetComponent<XRGrabInteractable>();
         GameResources.Instance.currentwallManager = wall.GetComponent<WallManager>();
-#if PLATFORM_ANDROID 
-        if (arAnchor == false) return;
+#if PLATFORM_ANDROID && !UNITY_EDITOR
+        if (arAnchor == null) return;
         wall.transform.SetParent(arAnchor.transform);
         wall.transform.localPosition = new Vector3(0, 0, 0);
         foreach (var item in objectTranformList)

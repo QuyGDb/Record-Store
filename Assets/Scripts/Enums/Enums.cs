@@ -36,9 +36,13 @@ public enum ApplicationState
     LoadingMapMode,
     Instruction,
     Anchor,
-    CloudAnchor,
+    CloudAnchorInCreateMap,
     WallManager,
     ObjectParent,
     ObjectManager,
     TestMap,
+    // load map scene
+    ListMap,
+    CloudAnchorInLoadMap,
+    View,
 }

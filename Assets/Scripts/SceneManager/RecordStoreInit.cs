@@ -24,12 +24,12 @@ public class RecordStoreInit : MonoBehaviour
     void NavigateCreateStoreScene()
     {
         UnloadInitScene();
-        GameManager.Instance.ChangeApplicationState(ApplicationState.CreateMapMode);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.CreateMapMode);
     }
     void NavigateLoadStoreScene()
     {
         UnloadInitScene();
-        GameManager.Instance.ChangeApplicationState(ApplicationState.LoadingMapMode);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.LoadingMapMode);
     }
     void UnloadInitScene()
     {

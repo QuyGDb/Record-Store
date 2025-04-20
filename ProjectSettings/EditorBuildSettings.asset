@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Scene/MainScene.unity
     guid: 4755b35b590504809a7525fd2109c2e2
   - enabled: 1
-    path: Assets/Scenes/Game Scene/CreateMapNavigationScene.unity
+    path: Assets/Scenes/Navigation/CreateMapNavigationScene.unity
     guid: 3c54bdc244e845249a062c0e9902e74c
   - enabled: 1
     path: Assets/Scenes/Function Scene/InstructionScene.unity
@@ -30,11 +30,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Scene/RecordStoreInit.unity
     guid: 34462e28069a0ed45ab696cf330ae371
   - enabled: 1
-    path: Assets/Scenes/Game Scene/LoadMapScene.unity
+    path: Assets/Scenes/Game Scene/ListMapScene.unity
     guid: 84aaa3009bd636741add42e2223f646c
   - enabled: 1
-    path: Assets/Scenes/Game Scene/LoadmapNagigationScene.unity
-    guid: 3104c2a46bd2e6d43b1df741997cb045
+    path: Assets/Scenes/Game Scene/CloudAnchorSceneLoadMap.unity
+    guid: b758edf4cefd25c4eafe0d8a8d781b75
+  - enabled: 1
+    path: Assets/Scenes/Game Scene/ViewScene.unity
+    guid: aedf63489261ade4d8cd2f71c79d8a72
+  - enabled: 1
+    path: Assets/Scenes/Navigation/LoadMapNavigation.unity
+    guid: 0f3867076b7f1ce468640a874daa9f19
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}

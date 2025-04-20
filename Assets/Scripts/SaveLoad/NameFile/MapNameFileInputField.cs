@@ -3,7 +3,7 @@ using UnityEngine;
 public class MapNameFileInputField : MonoBehaviour
 {
     private TMPro.TMP_InputField inputField;
-
+    string nameExtension = ".es3";
     private void Awake()
     {
         inputField = GetComponent<TMPro.TMP_InputField>();
@@ -21,7 +21,7 @@ public class MapNameFileInputField : MonoBehaviour
     }
     private void OnEndEdit(string text)
     {
-        Settings.es3Name = text;
-        StaticEventHandler.InvokeNameMapText(text);
+        Settings.es3Name = text + nameExtension;
+        StaticEventHandler.InvokeNameMapText(text + nameExtension);
     }
 }

@@ -22,8 +22,7 @@ public class WallManagerCanvas : MonoBehaviour
         buttons[1].onClick.AddListener(MoveWallBehind);
         buttons[2].onClick.AddListener(AddYRotate);
         buttons[3].onClick.AddListener(SubtractYRotate);
-        buttons[4].onClick.AddListener(GameResources.Instance.instrumentShowcaseManager.ShowObjects);
-        buttons[5].onClick.AddListener(GameResources.Instance.pictureFrameManager.ShowObjects);
+        buttons[4].onClick.AddListener(ShowObjects);
     }
 
     private void OnEnable()
@@ -46,8 +45,12 @@ public class WallManagerCanvas : MonoBehaviour
         buttons[1].onClick.RemoveListener(MoveWallBehind);
         buttons[2].onClick.RemoveListener(AddYRotate);
         buttons[3].onClick.RemoveListener(SubtractYRotate);
-        buttons[4].onClick.RemoveListener(GameResources.Instance.instrumentShowcaseManager.ShowObjects);
-        buttons[5].onClick.RemoveListener(GameResources.Instance.pictureFrameManager.ShowObjects);
+        buttons[4].onClick.RemoveListener(ShowObjects);
+    }
+    void ShowObjects()
+    {
+        GameResources.Instance.instrumentShowcaseManager.ShowObjects();
+        GameResources.Instance.pictureFrameManager.ShowObjects();
     }
     private void OnInputFieldEndEdit(string value)
     {
@@ -84,7 +87,7 @@ public class WallManagerCanvas : MonoBehaviour
 
     private void MoveWallForward()
     {
-        if (GameManager.Instance.applicationState != ApplicationState.WallManager) return;
+        if (ApplicationManager.Instance.applicationState != ApplicationState.WallManager) return;
         if (GameResources.Instance.currentwallManager == null) return;
         GameResources.Instance.currentwallManager.transform.position += new Vector3(0, 0, 0.1f);
 
@@ -92,7 +95,7 @@ public class WallManagerCanvas : MonoBehaviour
     }
     private void MoveWallBehind()
     {
-        if (GameManager.Instance.applicationState != ApplicationState.WallManager) return;
+        if (ApplicationManager.Instance.applicationState != ApplicationState.WallManager) return;
         if (GameResources.Instance.currentwallManager == null) return;
         GameResources.Instance.currentwallManager.transform.position -= new Vector3(0, 0, 0.1f);
     }
@@ -100,13 +103,13 @@ public class WallManagerCanvas : MonoBehaviour
     private void AddYRotate()
     {
         if (GameResources.Instance.currentwallManager == null) return;
-        if (GameManager.Instance.applicationState != ApplicationState.WallManager) return;
+        if (ApplicationManager.Instance.applicationState != ApplicationState.WallManager) return;
         GameResources.Instance.currentwallManager.transform.Rotate(new Vector3(0, 1, 0), 5);
     }
     private void SubtractYRotate()
     {
         if (GameResources.Instance.currentwallManager == null) return;
-        if (GameManager.Instance.applicationState != ApplicationState.WallManager) return;
+        if (ApplicationManager.Instance.applicationState != ApplicationState.WallManager) return;
         GameResources.Instance.currentwallManager.transform.Rotate(new Vector3(0, -1, 0), 5);
     }
     #region Validation

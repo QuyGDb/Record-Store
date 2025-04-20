@@ -1,9 +1,7 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -25,7 +23,7 @@ public class AnchorsManager : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
         arAnchorsManager.trackablesChanged.AddListener(OnAnchorChanged);
         StaticEventHandler.OnAnchorCreated += OnAnchorChanged;
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationState;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationState;
         GameResources.Instance.anchorsManager = this;
     }
 
@@ -33,7 +31,7 @@ public class AnchorsManager : MonoBehaviour
     {
         arAnchorsManager.trackablesChanged.RemoveListener(OnAnchorChanged);
         StaticEventHandler.OnAnchorCreated -= OnAnchorChanged;
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationState;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationState;
     }
 
     private void OnApplicationState(ApplicationState state)
@@ -50,6 +48,14 @@ public class AnchorsManager : MonoBehaviour
                 Destroy(item.Value.gameObject);
             }
             CancelInvoke(nameof(CheckEstimateFeatureMapQualityForHosting));
+        }
+        if (state == ApplicationState.ListMap)
+        {
+            foreach (var item in trackedAnchors)
+            {
+                Destroy(item.Value.gameObject);
+            }
+            arPointCloudManager.enabled = false;
         }
     }
 

@@ -17,12 +17,12 @@ public class ObjectParent : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         StaticEventHandler.OnNameMapText += OnNameMapText;
     }
     private void OnDestroy()
     {
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         StaticEventHandler.OnNameMapText -= OnNameMapText;
     }
 

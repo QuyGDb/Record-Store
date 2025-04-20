@@ -20,13 +20,13 @@ public class WallManager : MonoBehaviour
         {
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         objectSaver.LoadTransform(gameObject.name);
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         wallInteractable.selectEntered.RemoveListener((temp) =>
         {
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);

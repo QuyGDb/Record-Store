@@ -66,28 +66,29 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
     }
     public async void ShowObjects()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
+        if (GameResources.Instance.currentwallManager == null) return;
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
         if (isCreated) return;
         foreach (var item in popList)
         {
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.NextFrameAsync();
+            await Awaitable.WaitForSecondsAsync(0.2f);
         }
         foreach (var item in rapList)
         {
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.NextFrameAsync();
+            await Awaitable.WaitForSecondsAsync(0.4f);
         }
         foreach (var item in rockList)
         {
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.NextFrameAsync();
+            await Awaitable.WaitForSecondsAsync(0.3f);
         }
         isCreated = true;
     }

@@ -29,7 +29,7 @@ public class InstrumentsUIManager : MonoBehaviour
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (GameManager.Instance.applicationState != ApplicationState.TestMap) return;
+        if (ApplicationManager.Instance.applicationState != ApplicationState.TestMap) return;
         Vector2 touchPosition = context.ReadValue<Vector2>();
 
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);

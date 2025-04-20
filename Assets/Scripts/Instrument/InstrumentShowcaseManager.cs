@@ -35,14 +35,15 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
     }
     public async void ShowObjects()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
+        if (GameResources.Instance.currentwallManager == null) return;
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
         if (isCreated) return;
         foreach (var item in instrumentList)
         {
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.NextFrameAsync();
+            await Awaitable.WaitForSecondsAsync(0.5f);
         }
         isCreated = true;
     }

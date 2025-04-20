@@ -13,13 +13,13 @@ public class LogoGenres : MonoBehaviour
     }
     void Start()
     {
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         CreateLogoForGenres();
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
 
     private void OnApplicationStateChanged(ApplicationState state)

@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Content: {fileID: 4220760123138080031}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 0
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -905,106 +905,29 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'AR Foundation allows you to work with augmented reality platforms in a
-    multi-platform way within Unity. This package presents an interface for Unity
-    developers to use, but does not implement any AR features itself. To use AR Foundation
-    on a target device, you will also need a separate package for that platform (e.g.,
-    ARKit XR Plugin on iOS or ARCore XR Plugin on Android).
-
-
-
-    AR Foundation
-    is a set of MonoBehaviours and APIs for dealing with devices that support following
-    concepts:
-
-
-
-    World tracking: track the device''s position and orientation
-    in physical space.
-
-    Plane detection: detect horizontal and vertical surfaces.
-
-    Point
-    clouds, also known as feature points.
-
-    Anchor: an arbitrary position and
-    orientation that the device tracks.
-
-    Light estimation: estimates for average
-    color temperature and brightness in physical space.
-
-    Environment probe: a
-    means for generating a cube map to represent a particular area of the physical
-    environment.
-
-    Face tracking: detect and track human faces.
-
-    Image tracking:
-    detect and track 2D images.
-
-    If you are migrating from AR Foundation 1.0,
-    see the Migration Guide.
-
-
-
-    Subsystems
-
-    AR Foundation is built on subsystems.
-    A "subsystem" is a platform-agnostic interface for surfacing different types
-    of information. The AR-related subsystems are defined in the AR Subsystems package
-    and use the namespace UnityEngine.XR.ARSubsystems. You will occasionally need
-    to interact with the types in the AR Subsystems package.
-
-
-
-    Each subsystem
-    handles some specific functionality. For example, the plane detection interface
-    is provided by the XRPlaneSubsystem.
-
-
-
-    Providers
-
-    A "provider" is a
-    concrete implementation of a subsystem. For example, the ARCore XR Plugin package
-    contains the ARCore implementation for many of the AR subsystems.
-
-
-
-    Because
-    different providers have varying support for specific features, each subsystem
-    also has a descriptor that indicates which specific subsystem features it supports.
-    For example, the XRPlaneSubsystemDescriptor contains properties indicating whether
-    horizontal or vertical plane detection is supported.
-
-
-
-    While it is up to
-    the providers to determine how they will implement each subsystem, in general
-    they are wrapping that platform''s native SDK (e.g., ARKit on iOS and ARCore
-    on Android).
-
-
-
-    Installing AR Foundation
-
-    To install this package, follow
-    the instructions in the Package Manager documentation.
-
-
-
-    Subsystems are
-    implemented in other packages, so to use AR Foundation, you will also need to
-    install at least one platform-specific AR package (Window > Package Manager):
-
-
-
-    ARKit
-    XR Plugin
-
-    ARCore XR Plugin
-
-'
+  m_text: "\t RECORD STORE AR \u2013 USER GUIDE\nMAP NAME\nAt the top of every instruction
+    page, you will see the Map Name.\n\nEach map must have a unique name.\n\nMap
+    names must not contain spaces.\n(Tip: Use underscores _ or dashes - if needed.)\n\nExample:\n
+    MyRecordStore_Map01\n\n KEY CONCEPTS\nAnchor: A fixed point in the Augmented
+    Reality (AR) space where you can attach virtual objects like walls, instruments,
+    or picture frames.\n\nCloud Anchor: An anchor stored on the cloud platform, allowing
+    you or others to resolve it later and display virtual objects in the exact same
+    position as before.\n\nANCHOR PAGE\nPurpose: Create anchors at positions where
+    you want to place virtual objects in the environment.\n\nImportant Notes When
+    Placing Anchors:\n\nOnly place anchors when the AR environment quality is labeled
+    as: Sufficient, Good, or Excellent.\n\nThe app will display the current environment
+    quality \u2013 if it's low (e.g., Insufficient), move the device slowly and scan
+    more of the environment to improve tracking.\n\n\u2601CLOUD ANCHOR PAGE\nPurpose:
+    Manage and process operations related to Cloud Anchors.\n\n\U0001F539 Main Features:\n\nUpload
+    anchors to the cloud.\n\nView a list of previously created Cloud Anchor IDs.\n\nResolve
+    Cloud Anchors to reload previously set up environments.\n\n WALL PAGE\nPurpose:
+    Customize walls and object clusters attached to them.\n\nFunctions:\n\nAdjust
+    wall size using drag and touch gestures.\n\nMove the wall to a new position (still
+    attached to the anchor).\n\nEdit object clusters such as:\n\n Instrument Showcase\n\nPicture
+    Frame\n\n OBJECT PAGE\nPurpose: Customize and manage individual objects in the
+    AR space.\n\nFeatures:\n\nAdjust the scale of virtual objects (make them larger
+    or smaller as needed).\n\nView the scanned environment map for better spatial
+    understanding.\n\nUpload the map to the cloud for future use and synchronization."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef671587b5962194b988c24c1c624b2f, type: 2}
   m_sharedMaterial: {fileID: -2447701677003281479, guid: ef671587b5962194b988c24c1c624b2f,

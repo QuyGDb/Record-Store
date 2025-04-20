@@ -15,11 +15,11 @@ public class VinylShowcase : MonoBehaviour
     private void Start()
     {
         objectSaver.LoadTransform(gameObject.name);
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
     {
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
 
 

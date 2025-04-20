@@ -23,7 +23,7 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.applicationState != ApplicationState.TestMap) return;
+        if (ApplicationManager.Instance.applicationState != ApplicationState.TestMap) return;
         Vector2 touchPosition = context.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -44,7 +44,7 @@ public class PortalShowcaseHandler : MonoBehaviour
         objectSaver.LoadTransform(portalname);
         grabTransformer.selectEntered.AddListener(OnSelectEntered);
         StaticEventHandler.OnMovePortal += MovePortal;
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
 
     }
 
@@ -56,7 +56,7 @@ public class PortalShowcaseHandler : MonoBehaviour
         touchAction.started -= OnTouchStarted;
         touchAction.Disable();
         StaticEventHandler.OnMovePortal -= MovePortal;
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
 
     private void OnApplicationStateChanged(ApplicationState state)

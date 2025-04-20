@@ -36,17 +36,17 @@ public class CreateMapSceneNavigationBar : MonoBehaviour
 
     void ActiveInstructionScene()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.Instruction);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.Instruction);
         LoadSceneWithName(sceneNames[0]);
     }
     void ActiveAnchorScene()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.Anchor);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.Anchor);
         LoadSceneWithName(sceneNames[1]);
     }
     public void ActiveCloudAnchorScene()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.CloudAnchor);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.CloudAnchorInCreateMap);
         if (currentSceneName == sceneNames[2])
             GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
         LoadSceneWithName(sceneNames[2]);
@@ -54,12 +54,12 @@ public class CreateMapSceneNavigationBar : MonoBehaviour
 
     void ActiveWallManagerCanvas()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.WallManager);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.WallManager);
         LoadSceneWithName(sceneNames[3]);
     }
     void ActiveObjectManagerCanvas()
     {
-        GameManager.Instance.ChangeApplicationState(ApplicationState.ObjectManager);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectManager);
         LoadSceneWithName(sceneNames[4]);
     }
 

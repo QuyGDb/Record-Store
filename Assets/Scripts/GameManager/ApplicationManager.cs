@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class GameManager : SingletonMonobehaviour<GameManager>
+public class ApplicationManager : SingletonMonobehaviour<ApplicationManager>
 {
     public Action<ApplicationState> OnApplicationStateChanged;
     public ApplicationState applicationState = ApplicationState.Start;
@@ -30,11 +30,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 SceneManager.LoadScene("CreateMapNavigationScene", LoadSceneMode.Additive);
                 break;
             case ApplicationState.LoadingMapMode:
-                SceneManager.LoadScene("LoadMapScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("ListMapScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("LoadMapNavigation", LoadSceneMode.Additive);
                 break;
             case ApplicationState.Anchor:
                 break;
-            case ApplicationState.CloudAnchor:
+            case ApplicationState.CloudAnchorInCreateMap:
                 break;
             case ApplicationState.WallManager:
                 break;
@@ -43,6 +44,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             case ApplicationState.ObjectManager:
                 break;
             case ApplicationState.TestMap:
+                break;
+            case ApplicationState.ListMap:
+                break;
+            case ApplicationState.Instruction:
+                break;
+            case ApplicationState.View:
                 break;
         }
         OnApplicationStateChanged?.Invoke(newState);

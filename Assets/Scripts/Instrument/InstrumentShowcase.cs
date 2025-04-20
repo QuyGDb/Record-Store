@@ -20,13 +20,13 @@ public class InstrumentShowcase : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         objectSaver.LoadTransform(instrumentShowcaseSO.instrumentName);
         Debug.Log("InstrumentShowcaseSO name: " + instrumentShowcaseSO.instrumentName + Settings.es3Name);
     }
     private void OnDestroy()
     {
-        GameManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
+        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         if (grabInteractable != null)
         {
             grabInteractable.selectEntered.RemoveListener(Select);
@@ -46,6 +46,8 @@ public class InstrumentShowcase : MonoBehaviour
             ToggleInteractableItem(gameObject, false);
             StaticEventHandler.InvokeXRGrabInteractableSelected(null);
         }
+
+
     }
     void ToggleInteractableItem(GameObject item, bool isEnabled)
     {
