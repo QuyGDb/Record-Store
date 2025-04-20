@@ -145,41 +145,47 @@ public class CloudAnchorsManager : MonoBehaviour
     private IEnumerator ResolveCloudAnchorRoutine(string cloudAnchorId)
     {
 #if PLATFORM_ANDROID && !UNITY_EDITOR
-    var resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
-    
-    if (!GameResources.Instance.contentCloudAnchor.activeSelf)
-        GameResources.Instance.contentCloudAnchor.SetActive(true);
+        var resolveCloudAnchorPromise = arAnchorsManager.ResolveCloudAnchorAsync(cloudAnchorId);
 
-    float timeout = 10f;
-    float timer = 0f;
+        if (!GameResources.Instance.contentCloudAnchor.activeSelf)
+            GameResources.Instance.contentCloudAnchor.SetActive(true);
 
-    while (resolveCloudAnchorPromise.State == PromiseState.Pending && timer < timeout)
-    {
-        timer += Time.deltaTime;
-        yield return null;
-    }
+        float timeout = 10f;
+        float timer = 0f;
 
-    if (resolveCloudAnchorPromise.State == PromiseState.Pending)
-    {
-        Debug.LogWarning("Cloud anchor resolve timed out.");
-        yield break;
-    }
+        while (resolveCloudAnchorPromise.State == PromiseState.Pending && timer < timeout)
+        {
+            if (GameResources.Instance.notifyResolveText != null)
+                GameResources.Instance.notifyResolveText.text = $"🔄 RESOLVE + {Time.frameCount}";
 
-    if (resolveCloudAnchorPromise.Result != null && resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
-    {
-        var cloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
-        QueryARCloudAnchor(cloudAnchor, cloudAnchorId);
+            timer += Time.deltaTime;
+            yield return null;
+        }
 
-        cloudAnchorsSelectedList.Remove(cloudAnchorId);
-        GameResources.Instance.resolveCloudAnchorIdList.Add(cloudAnchorId);
+        if (resolveCloudAnchorPromise.State == PromiseState.Pending)
+        {
+            Debug.LogWarning("Cloud anchor resolve timed out.");
+            yield break;
+        }
 
-        Debug.Log($"Successfully resolved cloud anchor: {cloudAnchorId}, Position: {cloudAnchor.pose.position}");
-    }
-    else
-    {
-        var state = resolveCloudAnchorPromise.Result?.CloudAnchorState.ToString() ?? "Unknown";
-        Debug.LogWarning($"Unable to resolve cloud anchor: {cloudAnchorId}. State: {state}");
-    }
+        if (resolveCloudAnchorPromise.Result != null && resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
+        {
+            var cloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
+            QueryARCloudAnchor(cloudAnchor, cloudAnchorId);
+
+            cloudAnchorsSelectedList.Remove(cloudAnchorId);
+            GameResources.Instance.resolveCloudAnchorIdList.Add(cloudAnchorId);
+            if (GameResources.Instance.notifyResolveText != null)
+                GameResources.Instance.notifyResolveText.text = $"Cloud Anchor resolved: {cloudAnchorId}";
+            Debug.Log($"Successfully resolved cloud anchor: {cloudAnchorId}, Position: {cloudAnchor.pose.position}");
+        }
+        else
+        {
+            var state = resolveCloudAnchorPromise.Result?.CloudAnchorState.ToString() ?? "Unknown";
+            if (GameResources.Instance.notifyResolveText != null)
+                GameResources.Instance.notifyResolveText.text = $"Error {state}";
+            Debug.LogWarning($"Unable to resolve cloud anchor: {cloudAnchorId}. State: {state}");
+        }
 #endif
 
 #if UNITY_EDITOR

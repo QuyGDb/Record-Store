@@ -54,15 +54,11 @@ public class GameResources : MonoBehaviour
     #region Pool Reference
     [HideInInspector] public AnchorsManager anchorsManager;
     [HideInInspector] public CloudAnchorsManager cloudAnchorsManager;
-
     [HideInInspector] public TextMeshProUGUI anchorSceneText;
-    [HideInInspector] public TextMeshProUGUI cloudAnchorSceneText;
-
+    [HideInInspector] public TextMeshProUGUI notifyResolveText;
     [HideInInspector] public CreateMapSceneNavigationBar sceneNavigationBar;
-
     [HideInInspector] public WallManager currentwallManager;
     [HideInInspector] public GameObject contentCloudAnchor;
-    [HideInInspector] public ObjectSpawnerAtWall objectSpawnerAtAnchors;
     [HideInInspector] public TransformObjectsManager transformObjectsManager;
     [HideInInspector] public AROcclusionManager occlusionManager;
     [HideInInspector] public List<string> resolveCloudAnchorIdList;

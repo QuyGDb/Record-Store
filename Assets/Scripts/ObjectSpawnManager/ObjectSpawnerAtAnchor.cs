@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class ObjectSpawnerAtWall : MonoBehaviour
+public class ObjectSpawnerAtAnchor : MonoBehaviour
 {
     [SerializeField] Transform[] objectTranformList;
-    private void Awake()
-    {
-        GameResources.Instance.objectSpawnerAtAnchors = this;
-    }
+
     private void Start()
     {
         StaticEventHandler.OnInstantiateAtWall += OnInstantiateAtAnchor;
@@ -20,7 +17,6 @@ public class ObjectSpawnerAtWall : MonoBehaviour
     {
         StaticEventHandler.OnInstantiateAtWall -= OnInstantiateAtAnchor;
     }
-
 
     private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
     {
@@ -44,14 +40,16 @@ public class ObjectSpawnerAtWall : MonoBehaviour
     {
         GameObject wall = Instantiate(GameResources.Instance.wallPrefab, transform);
         GameResources.Instance.currentwallManager = wall.GetComponent<WallManager>();
-#if PLATFORM_ANDROID && !UNITY_EDITOR
+#if PLATFORM_ANDROID
         if (arAnchor == null) return;
         wall.transform.SetParent(arAnchor.transform);
         wall.transform.localPosition = new Vector3(0, 0, 0);
+        wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
         foreach (var item in objectTranformList)
         {
             item.SetParent(arAnchor.transform);
             item.localPosition = new Vector3(0, 0, 0);
+            item.localRotation = Quaternion.Euler(0, 0, 0);
         }
 #endif
     }
@@ -63,6 +61,7 @@ public class ObjectSpawnerAtWall : MonoBehaviour
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         vinlyShowse.transform.SetParent(aRCloudAnchor.transform);
         vinlyShowse.transform.localPosition = new Vector3(0, 0, 0);
+        vinlyShowse.transform.localRotation = Quaternion.Euler(0, 0, 0);
 #endif
     }
     private void CreatePortal(ARCloudAnchor aRCloudAnchor)
@@ -71,6 +70,7 @@ public class ObjectSpawnerAtWall : MonoBehaviour
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         portal.transform.SetParent(aRCloudAnchor.transform);
         portal.transform.localPosition = new Vector3(0, 0, 0);
+        portal.transform.localRotation = Quaternion.Euler(0, 0, 0);
 #endif
     }
 

@@ -13,7 +13,7 @@ public class CloudAnchorCanvas : MonoBehaviour
     }
     private void Start()
     {
-        GameResources.Instance.cloudAnchorSceneText = cloudAnchorText;
+        GameResources.Instance.notifyResolveText = cloudAnchorText;
         AddEventForButton();
     }
     private void OnDestroy()

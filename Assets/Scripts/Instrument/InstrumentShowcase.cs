@@ -32,8 +32,6 @@ public class InstrumentShowcase : MonoBehaviour
             grabInteractable.selectEntered.RemoveListener(Select);
         }
     }
-
-
     private void OnApplicationStateChanged(ApplicationState state)
     {
 
@@ -46,8 +44,6 @@ public class InstrumentShowcase : MonoBehaviour
             ToggleInteractableItem(gameObject, false);
             StaticEventHandler.InvokeXRGrabInteractableSelected(null);
         }
-
-
     }
     void ToggleInteractableItem(GameObject item, bool isEnabled)
     {
