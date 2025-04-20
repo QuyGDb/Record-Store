@@ -22,7 +22,6 @@ public class InstrumentShowcase : MonoBehaviour
     {
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         objectSaver.LoadTransform(instrumentShowcaseSO.instrumentName);
-        Debug.Log("InstrumentShowcaseSO name: " + instrumentShowcaseSO.instrumentName + Settings.es3Name);
     }
     private void OnDestroy()
     {
