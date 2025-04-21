@@ -13,6 +13,7 @@ public class SongControls : MonoBehaviour
     private AlbumSO albumSO;
     private int currentTrack;
     private PhysicalCDAlbum physicalCDAlbum;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -81,16 +82,22 @@ public class SongControls : MonoBehaviour
 
     void PauseTrack(Button button)
     {
-        if (audioSource.isPlaying)
+        if (audioSource.isPlaying && audioSource.time > 0f)
         {
             audioSource.Pause();
+            Debug.Log("Paused");
             button.GetComponent<SongControlsButton>().ClickEffect();
+            return;
         }
-        else
+        if (!audioSource.isPlaying && audioSource.time > 0f)
         {
-            button.GetComponent<SongControlsButton>().ClickEffect();
             audioSource.Play();
+            Debug.Log("Resumed");
+            button.GetComponent<SongControlsButton>().ClickEffect();
+            return;
+
         }
+
     }
 
     void PlayTrack(Button button)
@@ -109,7 +116,10 @@ public class SongControls : MonoBehaviour
 
     private IEnumerator CheckTrackEndCoroutine()
     {
-        yield return new WaitUntil(() => !audioSource.isPlaying && audioSource.time > 0f);
+        yield return new WaitUntil(() =>
+            !audioSource.isPlaying &&
+            Mathf.Approximately(audioSource.time, audioSource.clip.length)
+        );
 
         if (currentTrack < albumSO.songs.Count - 1)
         {
@@ -117,4 +127,5 @@ public class SongControls : MonoBehaviour
             PlayTrack(null);
         }
     }
+
 }

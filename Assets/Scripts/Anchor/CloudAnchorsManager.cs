@@ -168,27 +168,24 @@ public class CloudAnchorsManager : MonoBehaviour
 
         if (resolveCloudAnchorPromise.State == PromiseState.Pending)
         {
-            Debug.LogWarning("Cloud anchor resolve timed out.");
             yield break;
         }
 
         if (resolveCloudAnchorPromise.Result != null && resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
-            var cloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
+            ARCloudAnchor cloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
             QueryARCloudAnchor(cloudAnchor, cloudAnchorId);
 
             cloudAnchorsSelectedList.Remove(cloudAnchorId);
             GameResources.Instance.resolveCloudAnchorIdList.Add(cloudAnchorId);
             if (GameResources.Instance.notifyResolveText != null)
                 GameResources.Instance.notifyResolveText.text = $"Cloud Anchor resolved: {cloudAnchorId}";
-            Debug.Log($"Successfully resolved cloud anchor: {cloudAnchorId}, Position: {cloudAnchor.pose.position}");
         }
         else
         {
             var state = resolveCloudAnchorPromise.Result?.CloudAnchorState.ToString() ?? "Unknown";
             if (GameResources.Instance.notifyResolveText != null)
                 GameResources.Instance.notifyResolveText.text = $"Error {state}";
-            Debug.LogWarning($"Unable to resolve cloud anchor: {cloudAnchorId}. State: {state}");
         }
 #endif
 

@@ -30,33 +30,36 @@ public class MusicHistoryUIManager : MonoBehaviour
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (ApplicationManager.Instance.applicationState != ApplicationState.TestMap) return;
-        Vector2 touchPosition = context.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-        int musicHistoryLayerMask = 1 << LayerMask.NameToLayer("MusicHistory");
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, musicHistoryLayerMask))
+        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap
+            || ApplicationManager.Instance.applicationState == ApplicationState.View)
         {
-            offset = (Camera.main.transform.position - hit.point).normalized;
-            if (hit.transform.CompareTag("Pop"))
+            Vector2 touchPosition = context.ReadValue<Vector2>();
+            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+            int musicHistoryLayerMask = 1 << LayerMask.NameToLayer("MusicHistory");
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, musicHistoryLayerMask))
             {
-                musicHistoryUI.gameObject.SetActive(true);
-                musicHistoryUI.gameObject.transform.position = hit.transform.position + offset;
-                musicHistoryUI.PlayVideo(GameResources.Instance.pop.videoClip);
-            }
-            else if (hit.transform.CompareTag("Rap"))
-            {
-                musicHistoryUI.gameObject.SetActive(true);
-                musicHistoryUI.gameObject.transform.position = hit.transform.position + offset;
-                musicHistoryUI.PlayVideo(GameResources.Instance.rap.videoClip);
-            }
+                offset = (Camera.main.transform.position - hit.point).normalized;
+                if (hit.transform.CompareTag("Pop"))
+                {
+                    musicHistoryUI.gameObject.SetActive(true);
+                    musicHistoryUI.gameObject.transform.position = hit.transform.position + offset;
+                    musicHistoryUI.PlayVideo(GameResources.Instance.pop.videoClip);
+                }
+                else if (hit.transform.CompareTag("Rap"))
+                {
+                    musicHistoryUI.gameObject.SetActive(true);
+                    musicHistoryUI.gameObject.transform.position = hit.transform.position + offset;
+                    musicHistoryUI.PlayVideo(GameResources.Instance.rap.videoClip);
+                }
 
-            else if (hit.transform.CompareTag("Rock"))
-            {
-                musicHistoryUI.gameObject.SetActive(true);
-                musicHistoryUI.gameObject.transform.position = hit.transform.position + offset;
-                musicHistoryUI.PlayVideo(GameResources.Instance.rock.videoClip);
-            }
+                else if (hit.transform.CompareTag("Rock"))
+                {
+                    musicHistoryUI.gameObject.SetActive(true);
+                    musicHistoryUI.gameObject.transform.position = hit.transform.position + offset;
+                    musicHistoryUI.PlayVideo(GameResources.Instance.rock.videoClip);
+                }
 
+            }
         }
     }
 

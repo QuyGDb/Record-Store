@@ -84,31 +84,34 @@ public class VinylPlayer : MonoBehaviour
     }
     private async void PickupVinyl()
     {
-        if (ApplicationManager.Instance.applicationState != ApplicationState.TestMap) return;
-        Vector2 tapPosition = touchAction.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(tapPosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap ||
+            ApplicationManager.Instance.applicationState == ApplicationState.View)
         {
-            if (hit.collider.TryGetComponent<VinylDisc>(out VinylDisc disc))
+            Vector2 tapPosition = touchAction.ReadValue<Vector2>();
+            Ray ray = Camera.main.ScreenPointToRay(tapPosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (!isOpen)
+                if (hit.collider.TryGetComponent<VinylDisc>(out VinylDisc disc))
                 {
-                    OpenLidVinylPlayer();
-                    isPicked = true;
-                    await disc.SelectPickAnimation(platter);
-                    currentVinylDisc = disc;
-                    previousVinylDics = currentVinylDisc;
-                }
-                if (currentVinylDisc != disc)
-                {
-                    PauseOrResumeVinyl();
-                    tonearm.DOLocalRotate(tonearmClosedRotation, 2f);
-                    await previousVinylDics.ReturnDiscToOriginalPosition();
-                    currentVinylDisc = disc;
-                    previousVinylDics = currentVinylDisc;
-                    await currentVinylDisc.SelectPickAnimation(platter);
-                    isPicked = true;
+                    if (!isOpen)
+                    {
+                        OpenLidVinylPlayer();
+                        isPicked = true;
+                        await disc.SelectPickAnimation(platter);
+                        currentVinylDisc = disc;
+                        previousVinylDics = currentVinylDisc;
+                    }
+                    if (currentVinylDisc != disc)
+                    {
+                        PauseOrResumeVinyl();
+                        tonearm.DOLocalRotate(tonearmClosedRotation, 2f);
+                        await previousVinylDics.ReturnDiscToOriginalPosition();
+                        currentVinylDisc = disc;
+                        previousVinylDics = currentVinylDisc;
+                        await currentVinylDisc.SelectPickAnimation(platter);
+                        isPicked = true;
+                    }
                 }
             }
         }

@@ -17,7 +17,7 @@ public class DrawAxis : SingletonMonobehaviourPersistent<DrawAxis>
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
-        if (state == ApplicationState.TestMap)
+        if (state == ApplicationState.TestMap || state == ApplicationState.ListMap)
         {
             this.enabled = false;
         }

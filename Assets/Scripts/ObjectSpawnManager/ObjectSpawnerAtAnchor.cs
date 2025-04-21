@@ -50,6 +50,7 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
             item.SetParent(arAnchor.transform);
             item.localPosition = new Vector3(0, 0, 0);
             item.localRotation = Quaternion.Euler(0, 0, 0);
+            item.GetComponent<ObjectParent>().LoadTransformObjectParent();
         }
 #endif
     }

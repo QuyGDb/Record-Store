@@ -18,15 +18,13 @@ public class ObjectParent : MonoBehaviour
     private void Start()
     {
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        StaticEventHandler.OnNameMapText += OnNameMapText;
     }
     private void OnDestroy()
     {
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
-        StaticEventHandler.OnNameMapText -= OnNameMapText;
     }
 
-    private void OnNameMapText(string es3Name)
+    public void LoadTransformObjectParent()
     {
         objectSaver.LoadTransform(objParentName);
     }
@@ -39,7 +37,8 @@ public class ObjectParent : MonoBehaviour
         }
         if (state == ApplicationState.ObjectManager)
         {
-            objectSaver.SaveTransform(objParentName);
+            objectSaver.SaveTransform
+                (objParentName);
         }
         if (state == ApplicationState.ObjectParent)
         {
