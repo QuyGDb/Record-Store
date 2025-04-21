@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -74,21 +73,21 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(0.2f);
+            await Awaitable.WaitForSecondsAsync(Random.Range(0.2f, 1f));
         }
         foreach (var item in rapList)
         {
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(0.4f);
+            await Awaitable.WaitForSecondsAsync(Random.Range(0.2f, 1f));
         }
         foreach (var item in rockList)
         {
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(0.3f);
+            await Awaitable.WaitForSecondsAsync(Random.Range(0.2f, 1f));
         }
         isCreated = true;
     }

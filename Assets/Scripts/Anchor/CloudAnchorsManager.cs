@@ -96,9 +96,13 @@ public class CloudAnchorsManager : MonoBehaviour
     {
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         HostCloudAnchorPromise hostCloudAnchorPromise = arAnchorsManager.HostCloudAnchorAsync(aRAnchor, 300);
-        while (hostCloudAnchorPromise.State == PromiseState.Pending)
+        float timeout = 100f;
+        float timer = 0f;
+        while (hostCloudAnchorPromise.State == PromiseState.Pending && timer < timeout)
         {
+
             GameResources.Instance.anchorSceneText.text = $"🔄 HOST + {Time.frameCount}";
+            timer += Time.deltaTime;
             yield return null;
         }
 
@@ -150,7 +154,7 @@ public class CloudAnchorsManager : MonoBehaviour
         if (!GameResources.Instance.contentCloudAnchor.activeSelf)
             GameResources.Instance.contentCloudAnchor.SetActive(true);
 
-        float timeout = 10f;
+        float timeout = 100f;
         float timer = 0f;
 
         while (resolveCloudAnchorPromise.State == PromiseState.Pending && timer < timeout)

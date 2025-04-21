@@ -43,7 +43,7 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
             item.gameObject.SetActive(true);
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(0.5f);
+            await Awaitable.WaitForSecondsAsync(Random.Range(0.5f, 1f));
         }
         isCreated = true;
     }

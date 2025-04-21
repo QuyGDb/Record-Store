@@ -108,7 +108,7 @@ Material:
     - _DistortTexXSpeed: 5
     - _DistortTexYSpeed: 5
     - _EditorDrawers: 6
-    - _FadeAmount: 0
+    - _FadeAmount: 0.40789217
     - _FadeBurnGlow: 112
     - _FadeBurnTransition: 0.085
     - _FadeBurnWidth: 0.51

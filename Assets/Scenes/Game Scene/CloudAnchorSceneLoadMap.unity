@@ -402,7 +402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Show Instrument picture frame
+  m_text: Show Instrument and picture frame
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef671587b5962194b988c24c1c624b2f, type: 2}
   m_sharedMaterial: {fileID: -2447701677003281479, guid: ef671587b5962194b988c24c1c624b2f,
