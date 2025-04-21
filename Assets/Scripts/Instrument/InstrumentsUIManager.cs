@@ -29,23 +29,26 @@ public class InstrumentsUIManager : MonoBehaviour
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (ApplicationManager.Instance.applicationState != ApplicationState.TestMap) return;
-        Vector2 touchPosition = context.ReadValue<Vector2>();
-
-        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-
-        int instrumentLayerMask = 1 << LayerMask.NameToLayer("Instrument");
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, instrumentLayerMask))
+        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap
+            || ApplicationManager.Instance.applicationState == ApplicationState.View)
         {
-            offset = (Camera.main.transform.position - hit.point).normalized;
-            var instrument = hit.collider.gameObject.GetComponent<Instrument>();
-            instrumentSO = instrument.instrumentSO;
-            instrumentUI.SetData(instrumentSO, hit.transform.position + offset);
+
+            Vector2 touchPosition = context.ReadValue<Vector2>();
+
+            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+
+            int instrumentLayerMask = 1 << LayerMask.NameToLayer("Instrument");
+
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, instrumentLayerMask))
+            {
+                offset = (Camera.main.transform.position - hit.point).normalized;
+                var instrument = hit.collider.gameObject.GetComponent<Instrument>();
+                instrumentSO = instrument.instrumentSO;
+                instrumentUI.SetData(instrumentSO, hit.transform.position + offset);
+            }
         }
+
     }
-
-
 
 
 }

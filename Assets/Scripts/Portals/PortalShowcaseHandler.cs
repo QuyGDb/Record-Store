@@ -23,17 +23,20 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
-        if (ApplicationManager.Instance.applicationState != ApplicationState.TestMap) return;
-        Vector2 touchPosition = context.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap ||
+           ApplicationManager.Instance.applicationState == ApplicationState.View)
         {
-            if (hit.collider.gameObject.CompareTag("Portal"))
+            Vector2 touchPosition = context.ReadValue<Vector2>();
+            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var portal = hit.collider.GetComponent<Portal>();
-                if (portal != null)
+                if (hit.collider.gameObject.CompareTag("Portal"))
                 {
-                    portal.SetDoorState();
+                    var portal = hit.collider.GetComponent<Portal>();
+                    if (portal != null)
+                    {
+                        portal.SetDoorState();
+                    }
                 }
             }
         }
@@ -47,8 +50,6 @@ public class PortalShowcaseHandler : MonoBehaviour
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
 
     }
-
-
 
     private void OnDestroy()
     {
@@ -67,6 +68,7 @@ public class PortalShowcaseHandler : MonoBehaviour
             objectSaver.SaveTransform(portalname);
             grabTransformer.enabled = false;
         }
+
     }
 
     private void MovePortal()
