@@ -12,31 +12,31 @@ EditorBuildSettings:
     path: Assets/Scenes/Navigation/CreateMapNavigationScene.unity
     guid: 3c54bdc244e845249a062c0e9902e74c
   - enabled: 1
-    path: Assets/Scenes/Function Scene/InstructionScene.unity
+    path: Assets/Scenes/Function Scene/CreateMap/InstructionScene.unity
     guid: fb83186b540ad794d99ae26273046696
   - enabled: 1
-    path: Assets/Scenes/Function Scene/AnchorScene.unity
+    path: Assets/Scenes/Function Scene/CreateMap/AnchorScene.unity
     guid: aa67c75f21981144596a75479b51d357
   - enabled: 1
-    path: Assets/Scenes/Function Scene/CloudAnchorScene.unity
+    path: Assets/Scenes/Function Scene/CreateMap/CloudAnchorScene.unity
     guid: fe5c6e7547096a447aa6d295c3050791
   - enabled: 1
-    path: Assets/Scenes/Function Scene/WallManagerScene.unity
+    path: Assets/Scenes/Function Scene/CreateMap/WallManagerScene.unity
     guid: 96a2aa28615ba3244aaec5ad6428b378
   - enabled: 1
-    path: Assets/Scenes/Function Scene/ObjectManagerScene.unity
+    path: Assets/Scenes/Function Scene/CreateMap/ObjectManagerScene.unity
     guid: 4a4e4866e7d500d45a84610be047e8d4
   - enabled: 1
     path: Assets/Scenes/Game Scene/RecordStoreInit.unity
     guid: 34462e28069a0ed45ab696cf330ae371
   - enabled: 1
-    path: Assets/Scenes/Game Scene/ListMapScene.unity
+    path: Assets/Scenes/Function Scene/LoadMap/ListMapScene.unity
     guid: 84aaa3009bd636741add42e2223f646c
   - enabled: 1
-    path: Assets/Scenes/Game Scene/CloudAnchorSceneLoadMap.unity
+    path: Assets/Scenes/Function Scene/LoadMap/CloudAnchorSceneLoadMap.unity
     guid: b758edf4cefd25c4eafe0d8a8d781b75
   - enabled: 1
-    path: Assets/Scenes/Game Scene/ViewScene.unity
+    path: Assets/Scenes/Function Scene/LoadMap/ViewScene.unity
     guid: aedf63489261ade4d8cd2f71c79d8a72
   - enabled: 1
     path: Assets/Scenes/Navigation/LoadMapNavigation.unity
