@@ -42,19 +42,25 @@ public class AnchorsManager : MonoBehaviour
         }
         else
         {
-            // Cancel repeating
-            foreach (var item in trackedAnchors)
+            if (ApplicationManager.Instance.previousApplicationState == ApplicationState.Anchor)
             {
-                Destroy(item.Value.gameObject);
+                foreach (var item in trackedAnchors)
+                {
+                    Destroy(item.Value.gameObject);
+                }
+                CancelInvoke(nameof(CheckEstimateFeatureMapQualityForHosting));
             }
-            CancelInvoke(nameof(CheckEstimateFeatureMapQualityForHosting));
         }
-        if (state == ApplicationState.ListMap)
+        if (state == ApplicationState.View)
         {
             foreach (var item in trackedAnchors)
             {
-                Destroy(item.Value.gameObject);
+                item.Value.GetComponent<SpriteRenderer>().enabled = false;
+                item.Value.GetComponent<LocalAxis>().enabled = false;
             }
+        }
+        if (state == ApplicationState.ListMap)
+        {
             arPointCloudManager.enabled = false;
             arPlaneManager.enabled = false;
         }

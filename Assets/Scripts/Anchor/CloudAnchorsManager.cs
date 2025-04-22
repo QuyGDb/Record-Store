@@ -160,7 +160,7 @@ public class CloudAnchorsManager : MonoBehaviour
         while (resolveCloudAnchorPromise.State == PromiseState.Pending && timer < timeout)
         {
             if (GameResources.Instance.notifyResolveText != null)
-                GameResources.Instance.notifyResolveText.text = $"🔄 RESOLVE + {Time.frameCount}";
+                GameResources.Instance.notifyResolveText.text = $"RESOLVE + {Time.frameCount}";
 
             timer += Time.deltaTime;
             yield return null;

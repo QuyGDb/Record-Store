@@ -122,6 +122,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roman Cornu Horn
       objectReference: {fileID: 0}
+    - target: {fileID: 2906328258474970420, guid: f753b69ebd9c13245bac25834784932b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3894730108644578580, guid: f753b69ebd9c13245bac25834784932b,
         type: 3}
       propertyPath: m_LocalScale.x

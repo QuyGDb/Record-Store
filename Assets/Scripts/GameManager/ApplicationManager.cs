@@ -7,6 +7,7 @@ public class ApplicationManager : SingletonMonobehaviour<ApplicationManager>
 {
     public Action<ApplicationState> OnApplicationStateChanged;
     public ApplicationState applicationState = ApplicationState.Start;
+    public ApplicationState previousApplicationState;
     protected override void Awake()
     {
         base.Awake();
@@ -19,7 +20,9 @@ public class ApplicationManager : SingletonMonobehaviour<ApplicationManager>
 
     public void ChangeApplicationState(ApplicationState newState)
     {
+        previousApplicationState = applicationState;
         applicationState = newState;
+
         switch (applicationState)
         {
             case ApplicationState.Start:
