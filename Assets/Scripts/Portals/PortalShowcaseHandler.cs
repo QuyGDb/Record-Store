@@ -73,7 +73,7 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     private void MovePortal()
     {
-        transform.DOLocalMoveZ(1f, 2.5f);
+        transform.DOLocalMoveX(-1f, 2.5f);
     }
     private void OnSelectEntered(SelectEnterEventArgs arg0)
     {

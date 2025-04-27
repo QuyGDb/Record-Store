@@ -267,6 +267,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 62574126209303206, guid: 5282705cf25c3cf4a8a4d74f2cb6857c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273043892201025964, guid: 5282705cf25c3cf4a8a4d74f2cb6857c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6269288188594120948, guid: 5282705cf25c3cf4a8a4d74f2cb6857c,
         type: 3}
       propertyPath: m_LocalPosition.x

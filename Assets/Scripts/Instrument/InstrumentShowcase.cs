@@ -21,6 +21,9 @@ public class InstrumentShowcase : MonoBehaviour
     private void Start()
     {
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+    }
+    public void LoadInstrumentShowcaseTransform()
+    {
         objectSaver.LoadTransform(instrumentShowcaseSO.instrumentName);
     }
     private void OnDestroy()

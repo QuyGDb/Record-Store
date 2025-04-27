@@ -40,6 +40,7 @@ MonoBehaviour:
     - EasyTextEffects
     - Google.XR.ARCoreExtensions
     - Google.XR.ARCoreExtensions.GeospatialCreator
+    - MeshBakerCore
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

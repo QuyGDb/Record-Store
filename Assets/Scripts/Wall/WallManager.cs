@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class WallManager : MonoBehaviour
@@ -21,7 +20,6 @@ public class WallManager : MonoBehaviour
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        objectSaver.LoadTransform(gameObject.name);
     }
 
     private void OnDestroy()

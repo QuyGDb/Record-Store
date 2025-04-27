@@ -20,6 +20,10 @@ public class PictureFrame : MonoBehaviour
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
+    }
+
+    public void LoadTransformPictureFrame()
+    {
         objectSaver.LoadTransform(pictureName);
     }
     private void OnDestroy()
