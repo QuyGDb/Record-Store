@@ -40,11 +40,13 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
     {
         GameObject wall = Instantiate(GameResources.Instance.wallPrefab, transform);
         GameResources.Instance.currentwallManager = wall.GetComponent<WallManager>();
+
 #if PLATFORM_ANDROID
         if (arAnchor == null) return;
         wall.transform.SetParent(arAnchor.transform);
         wall.transform.localPosition = new Vector3(0, 0, 0);
         wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        wall.GetComponent<ObjectSaver>().LoadTransform(wall.name);
         foreach (var item in objectTranformList)
         {
             item.SetParent(arAnchor.transform);

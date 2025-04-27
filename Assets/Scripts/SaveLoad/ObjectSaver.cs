@@ -5,9 +5,6 @@ public class ObjectSaver : MonoBehaviour
 {
     private ARTransform arTransform = new ARTransform();
     ES3Settings settings;
-
-
-
     public void SaveTransform(string key)
     {
         if (gameObject == null) return;
@@ -23,12 +20,17 @@ public class ObjectSaver : MonoBehaviour
     {
         await Awaitable.NextFrameAsync();
         settings = new ES3Settings(Settings.es3Name);
-        if (!ES3.KeyExists(key, settings)) return;
-        Debug.Log("Loading transform: " + Settings.es3Name);
-        ES3.LoadInto(key, arTransform, settings);
-        transform.localPosition = arTransform.position;
-        transform.localRotation = arTransform.rotation;
-        transform.localScale = arTransform.scale;
-
+        if (ES3.KeyExists(key, settings))
+        {
+            Debug.Log("Loading transform: " + Settings.es3Name);
+            ES3.LoadInto(key, arTransform, settings);
+            transform.localPosition = arTransform.position;
+            transform.localRotation = arTransform.rotation;
+            transform.localScale = arTransform.scale;
+        }
+        else
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
 }

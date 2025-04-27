@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine;
 
 public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
 {
@@ -11,14 +11,19 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
     public Transform popGenreOnWall;
     public Transform rapGenreOnWall;
     public Transform rockGenreOnWall;
+
     private List<GameObject> popPrefabList = new List<GameObject>();
     private List<GameObject> rapPrefabList = new List<GameObject>();
     private List<GameObject> rockPrefabList = new List<GameObject>();
-    bool isCreated = false;
+
+    private List<(List<GameObject> prefabList, List<GameObject> instanceList, Transform parent)> genreData = new List<(List<GameObject>, List<GameObject>, Transform)>();
+
+    private bool isCreated = false;
+
     private void Start()
     {
-        LoadPrefabListFromRessource();
-        LoadObjectFromPrefab();
+        LoadPrefabListFromResources();
+        LoadObjectFromPrefabs();
         GameResources.Instance.pictureFrameManager = this;
     }
 
@@ -27,67 +32,45 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
         item.GetComponent<XRGrabInteractable>().enabled = isEnabled;
         item.GetComponentInChildren<Collider>().enabled = isEnabled;
     }
-    private void LoadPrefabListFromRessource()
+
+    private void LoadPrefabListFromResources()
     {
-        foreach (var popPrefab in GameResources.Instance.pop.prefabs)
+        popPrefabList.AddRange(GameResources.Instance.pop.prefabs);
+        rapPrefabList.AddRange(GameResources.Instance.rap.prefabs);
+        rockPrefabList.AddRange(GameResources.Instance.rock.prefabs);
+
+        genreData.Add((popPrefabList, popList, popGenreOnWall));
+        genreData.Add((rapPrefabList, rapList, rapGenreOnWall));
+        genreData.Add((rockPrefabList, rockList, rockGenreOnWall));
+    }
+
+    private void LoadObjectFromPrefabs()
+    {
+        foreach (var (prefabList, instanceList, parent) in genreData)
         {
-            popPrefabList.Add(popPrefab);
-        }
-        foreach (var rapPrefab in GameResources.Instance.rap.prefabs)
-        {
-            rapPrefabList.Add(rapPrefab);
-        }
-        foreach (var rockPrefab in GameResources.Instance.rock.prefabs)
-        {
-            rockPrefabList.Add(rockPrefab);
+            foreach (var prefab in prefabList)
+            {
+                GameObject obj = Instantiate(prefab, parent);
+                instanceList.Add(obj);
+                obj.transform.localPosition = Settings.hidenPosition;
+            }
         }
     }
-    private void LoadObjectFromPrefab()
-    {
-        foreach (var item in popPrefabList)
-        {
-            GameObject obj = Instantiate(item, popGenreOnWall);
-            popList.Add(obj);
-            obj.gameObject.SetActive(false);
-        }
-        foreach (var item in rapPrefabList)
-        {
-            GameObject obj = Instantiate(item, rapGenreOnWall);
-            rapList.Add(obj);
-            obj.gameObject.SetActive(false);
-        }
-        foreach (var item in rockPrefabList)
-        {
-            GameObject obj = Instantiate(item, rockGenreOnWall);
-            rockList.Add(obj);
-            obj.gameObject.SetActive(false);
-        }
-    }
+
     public async void ShowObjects()
     {
         if (GameResources.Instance.currentwallManager == null) return;
         ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
         if (isCreated) return;
-        foreach (var item in popList)
+
+        foreach (var (_, instanceList, _) in genreData)
         {
-            item.gameObject.SetActive(true);
-            item.GetComponent<XRGrabInteractable>().enabled = false;
-            item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(Random.Range(0.2f, 1f));
-        }
-        foreach (var item in rapList)
-        {
-            item.gameObject.SetActive(true);
-            item.GetComponent<XRGrabInteractable>().enabled = false;
-            item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(Random.Range(0.2f, 1f));
-        }
-        foreach (var item in rockList)
-        {
-            item.gameObject.SetActive(true);
-            item.GetComponent<XRGrabInteractable>().enabled = false;
-            item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(Random.Range(0.2f, 1f));
+            foreach (var item in instanceList)
+            {
+                item.GetComponent<PictureFrame>().LoadTransformPictureFrame();
+                ToggleInteractableItem(item, false);
+                await Awaitable.NextFrameAsync();
+            }
         }
         isCreated = true;
     }

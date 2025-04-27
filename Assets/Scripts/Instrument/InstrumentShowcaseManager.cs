@@ -29,9 +29,8 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
         {
             GameObject obj = Instantiate(item, instrumentOnWall);
             instrumentList.Add(obj);
-            obj.gameObject.SetActive(false);
+            obj.transform.localPosition = Settings.hidenPosition;
         }
-
     }
     public async void ShowObjects()
     {
@@ -40,10 +39,10 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
         if (isCreated) return;
         foreach (var item in instrumentList)
         {
-            item.gameObject.SetActive(true);
+            item.GetComponent<InstrumentShowcase>().LoadInstrumentShowcaseTransform();
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.WaitForSecondsAsync(Random.Range(0.5f, 1f));
+            await Awaitable.NextFrameAsync();
         }
         isCreated = true;
     }
