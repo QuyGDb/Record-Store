@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class VinylShowcase : MonoBehaviour
+public class VinylShowcase : MonoBehaviour, INameable
 {
     XRGrabInteractable grabInteractable;
     ObjectSaver objectSaver;
@@ -11,10 +11,11 @@ public class VinylShowcase : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
         objectSaver = GetComponent<ObjectSaver>();
 
+
     }
     private void Start()
     {
-        objectSaver.LoadTransform(gameObject.name);
+        objectSaver.LoadTransform();
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
@@ -31,5 +32,10 @@ public class VinylShowcase : MonoBehaviour
             objectSaver.SaveTransform(gameObject.name);
             grabInteractable.enabled = false;
         }
+    }
+
+    public string GetKey()
+    {
+        return gameObject.name;
     }
 }

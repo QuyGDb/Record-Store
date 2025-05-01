@@ -118,7 +118,6 @@ public class SupabaseStorage : SingletonMonobehaviour<SupabaseStorage>
             Debug.Log($"❌ Failed to download {fileName}: {req.error}\nRaw response: {req.downloadHandler.text}");
             return;
         }
-
         string path = Path.Combine(Application.persistentDataPath, fileName);
         File.WriteAllBytes(path, req.downloadHandler.data);
         Debug.Log($"✅ Downloaded: {fileName} → {path}");

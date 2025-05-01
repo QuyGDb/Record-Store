@@ -57,7 +57,7 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
         }
     }
 
-    public async void ShowObjects()
+    public void ShowObjects()
     {
         if (GameResources.Instance.currentwallManager == null) return;
         ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
@@ -67,9 +67,8 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
         {
             foreach (var item in instanceList)
             {
-                item.GetComponent<PictureFrame>().LoadTransformPictureFrame();
+                item.GetComponent<ObjectSaver>().LoadTransform();
                 ToggleInteractableItem(item, false);
-                await Awaitable.NextFrameAsync();
             }
         }
         isCreated = true;

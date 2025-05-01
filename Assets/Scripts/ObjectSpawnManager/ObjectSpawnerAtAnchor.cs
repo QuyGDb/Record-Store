@@ -2,6 +2,8 @@ using Google.XR.ARCoreExtensions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class ObjectSpawnerAtAnchor : MonoBehaviour
@@ -11,6 +13,7 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
     private void Start()
     {
         StaticEventHandler.OnInstantiateAtWall += OnInstantiateAtAnchor;
+
     }
 
     private void OnDestroy()
@@ -42,21 +45,32 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
         GameResources.Instance.currentwallManager = wall.GetComponent<WallManager>();
 
 #if PLATFORM_ANDROID
+        SetTransformWall(wall, arAnchor);
+        SetTransformWallAndObjectParent(arAnchor);
+#endif
+    }
+
+    private async void SetTransformWallAndObjectParent(ARCloudAnchor arAnchor)
+    {
+        await Awaitable.NextFrameAsync();
         if (arAnchor == null) return;
-        wall.transform.SetParent(arAnchor.transform);
-        wall.transform.localPosition = new Vector3(0, 0, 0);
-        wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        wall.GetComponent<ObjectSaver>().LoadTransform(wall.name);
         foreach (var item in objectTranformList)
         {
             item.SetParent(arAnchor.transform);
             item.localPosition = new Vector3(0, 0, 0);
             item.localRotation = Quaternion.Euler(0, 0, 0);
-            item.GetComponent<ObjectParent>().LoadTransformObjectParent();
+            item.GetComponent<ObjectSaver>().LoadTransform();
         }
-#endif
     }
-
+    private async void SetTransformWall(GameObject wall, ARCloudAnchor arAnchor)
+    {
+        await Awaitable.NextFrameAsync();
+        if (arAnchor == null) return;
+        wall.transform.SetParent(arAnchor.transform);
+        wall.transform.localPosition = new Vector3(0, 0, 0);
+        wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        wall.GetComponent<ObjectSaver>().LoadTransform();
+    }
     private void CreateVinylShowCase(ARCloudAnchor aRCloudAnchor)
     {
         GameObject vinlyShowse = Instantiate(GameResources.Instance.VinylShowCasePrefab, transform);
@@ -76,5 +90,6 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
         portal.transform.localRotation = Quaternion.Euler(0, 0, 0);
 #endif
     }
+
 
 }

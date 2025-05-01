@@ -1,16 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class PictureFrame : MonoBehaviour
+public class PictureFrame : MonoBehaviour, INameable
 {
     public string pictureName;
     private XRGrabInteractable grabInteractable;
-    private ObjectSaver objectSaver;
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-        objectSaver = GetComponent<ObjectSaver>();
     }
 
     private void Start()
@@ -22,10 +19,6 @@ public class PictureFrame : MonoBehaviour
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
 
-    public void LoadTransformPictureFrame()
-    {
-        objectSaver.LoadTransform(pictureName);
-    }
     private void OnDestroy()
     {
         grabInteractable.selectEntered.RemoveListener((temp) =>
@@ -34,6 +27,7 @@ public class PictureFrame : MonoBehaviour
         });
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
+
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
@@ -51,5 +45,10 @@ public class PictureFrame : MonoBehaviour
     {
         item.GetComponent<XRGrabInteractable>().enabled = isEnabled;
         item.GetComponentInChildren<Collider>().enabled = isEnabled;
+    }
+
+    public string GetKey()
+    {
+        return pictureName;
     }
 }

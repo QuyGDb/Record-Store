@@ -1,36 +1,62 @@
 using System;
+using System.Xml;
 using UnityEngine;
 
 public class ObjectSaver : MonoBehaviour
 {
     private ARTransform arTransform = new ARTransform();
     ES3Settings settings;
+    INameable nameable;
+    string key;
+    bool isHasArTransform = false;
     public void SaveTransform(string key)
     {
         if (gameObject == null) return;
-        settings = new ES3Settings(Settings.es3Name);
-        Debug.Log("Saving transform: " + Settings.es3Name);
         arTransform.position = transform.localPosition;
         arTransform.rotation = transform.localRotation;
         arTransform.scale = transform.localScale;
         ES3.Save(key, arTransform, settings);
-
     }
-    public async void LoadTransform(string key)
+    private void Awake()
     {
-        await Awaitable.NextFrameAsync();
         settings = new ES3Settings(Settings.es3Name);
-        if (ES3.KeyExists(key, settings))
+        nameable = GetComponent<INameable>();
+        StaticEventHandler.OnNameMapText += StaticEventHandler_OnNameMapText;
+    }
+
+    private void OnDestroy()
+    {
+        StaticEventHandler.OnNameMapText -= StaticEventHandler_OnNameMapText;
+    }
+
+    private void StaticEventHandler_OnNameMapText(string obj)
+    {
+        key = nameable.GetKey();
+        GetTransform();
+    }
+
+    public void LoadTransform()
+    {
+        if (isHasArTransform)
         {
-            Debug.Log("Loading transform: " + Settings.es3Name);
-            ES3.LoadInto(key, arTransform, settings);
             transform.localPosition = arTransform.position;
             transform.localRotation = arTransform.rotation;
             transform.localScale = arTransform.scale;
         }
         else
         {
-            transform.localPosition = Vector3.zero;
+            transform.position = Vector3.zero;
+        }
+    }
+
+    public void GetTransform()
+    {
+
+        if (ES3.KeyExists(key, settings))
+        {
+            ES3.LoadInto(key, arTransform, settings);
+            isHasArTransform = true;
+            Debug.Log(arTransform.position + " " + arTransform.rotation + " " + arTransform.scale);
         }
     }
 }

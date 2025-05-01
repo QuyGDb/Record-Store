@@ -32,17 +32,16 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
             obj.transform.localPosition = Settings.hidenPosition;
         }
     }
-    public async void ShowObjects()
+    public void ShowObjects()
     {
         if (GameResources.Instance.currentwallManager == null) return;
         ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
         if (isCreated) return;
         foreach (var item in instrumentList)
         {
-            item.GetComponent<InstrumentShowcase>().LoadInstrumentShowcaseTransform();
+            item.GetComponent<ObjectSaver>().LoadTransform();
             item.GetComponent<XRGrabInteractable>().enabled = false;
             item.GetComponentInChildren<Collider>().enabled = false;
-            await Awaitable.NextFrameAsync();
         }
         isCreated = true;
     }

@@ -28,8 +28,7 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
   - {fileID: 8589528374656985182}
-  - {fileID: 2869751109051800984}
-  m_RendererFeatureMap: 5e6891278c22347798ddd0d86d67d327
+  m_RendererFeatureMap: 5e6891278c223477
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -55,25 +54,6 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
---- !u!114 &2869751109051800984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c451514b0e750a4419af3d6ae960d103, type: 3}
-  m_Name: AlwaysDrawRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  settings:
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 4608
-    shaderTagId: UniversalForward
-    renderPassEvent: 250
 --- !u!114 &8589528374656985182
 MonoBehaviour:
   m_ObjectHideFlags: 0

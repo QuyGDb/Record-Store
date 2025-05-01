@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class PortalShowcaseHandler : MonoBehaviour
+public class PortalShowcaseHandler : MonoBehaviour, INameable
 {
     private XRGrabInteractable grabTransformer;
     private ObjectSaver objectSaver;
@@ -44,7 +44,7 @@ public class PortalShowcaseHandler : MonoBehaviour
 
     void Start()
     {
-        objectSaver.LoadTransform(portalname);
+        objectSaver.LoadTransform();
         grabTransformer.selectEntered.AddListener(OnSelectEntered);
         StaticEventHandler.OnMovePortal += MovePortal;
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
@@ -80,5 +80,8 @@ public class PortalShowcaseHandler : MonoBehaviour
         StaticEventHandler.InvokeXRGrabInteractableSelected(this.gameObject);
     }
 
-
+    public string GetKey()
+    {
+        return portalname;
+    }
 }

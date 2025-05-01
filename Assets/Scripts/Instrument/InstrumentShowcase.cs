@@ -3,17 +3,15 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class InstrumentShowcase : MonoBehaviour
+public class InstrumentShowcase : MonoBehaviour, INameable
 {
     private XRGrabInteractable grabInteractable;
     public InstrumentShowcaseSO instrumentShowcaseSO;
     private LocalAxis localAxis;
-    ObjectSaver objectSaver;
     private void Awake()
     {
         localAxis = GetComponent<LocalAxis>();
         grabInteractable = GetComponent<XRGrabInteractable>();
-        objectSaver = GetComponent<ObjectSaver>();
         grabInteractable.selectEntered.AddListener(Select);
         grabInteractable.selectExited.AddListener(Deselect);
     }
@@ -21,10 +19,7 @@ public class InstrumentShowcase : MonoBehaviour
     private void Start()
     {
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-    }
-    public void LoadInstrumentShowcaseTransform()
-    {
-        objectSaver.LoadTransform(instrumentShowcaseSO.instrumentName);
+
     }
     private void OnDestroy()
     {
@@ -34,6 +29,7 @@ public class InstrumentShowcase : MonoBehaviour
             grabInteractable.selectEntered.RemoveListener(Select);
         }
     }
+
     private void OnApplicationStateChanged(ApplicationState state)
     {
 
@@ -60,5 +56,10 @@ public class InstrumentShowcase : MonoBehaviour
     private void Deselect(SelectExitEventArgs arg0)
     {
         localAxis.enabled = false;
+    }
+
+    public string GetKey()
+    {
+        return instrumentShowcaseSO.instrumentName;
     }
 }

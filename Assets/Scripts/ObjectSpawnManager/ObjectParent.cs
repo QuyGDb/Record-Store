@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class ObjectParent : MonoBehaviour
+public class ObjectParent : MonoBehaviour, INameable
 {
     [SerializeField] private string objParentName;
     private ObjectSaver objectSaver;
@@ -13,6 +13,7 @@ public class ObjectParent : MonoBehaviour
     {
         objectSaver = GetComponent<ObjectSaver>();
         localAxis = GetComponent<LocalAxis>();
+
 
     }
     private void Start()
@@ -24,10 +25,6 @@ public class ObjectParent : MonoBehaviour
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
 
-    public void LoadTransformObjectParent()
-    {
-        objectSaver.LoadTransform(objParentName);
-    }
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
@@ -72,5 +69,10 @@ public class ObjectParent : MonoBehaviour
     {
         GetComponent<XRGrabInteractable>().enabled = isEnable;
         GetComponent<Collider>().enabled = isEnable;
+    }
+
+    public string GetKey()
+    {
+        return objParentName;
     }
 }
