@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class WallManager : MonoBehaviour
+public class WallManager : MonoBehaviour, INameable
 {
     private XRGrabInteractable wallInteractable;
     private ObjectSaver objectSaver;
@@ -45,7 +45,7 @@ public class WallManager : MonoBehaviour
         }
         if (state == ApplicationState.ObjectParent)
         {
-            objectSaver.SaveTransform(gameObject.name);
+            objectSaver.SaveTransform();
         }
 
     }
@@ -94,6 +94,8 @@ public class WallManager : MonoBehaviour
         transform.localPosition += positionOffset;
     }
 
-
-
+    public string GetKey()
+    {
+        return gameObject.name;
+    }
 }

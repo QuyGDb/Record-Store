@@ -8,12 +8,12 @@ public class ObjectParent : MonoBehaviour, INameable
     [SerializeField] private string objParentName;
     private ObjectSaver objectSaver;
     private LocalAxis localAxis;
-    Transform parentTransform;
+    public Transform parentTransform;
+    private bool isLoadedTransform = false;
     private void Awake()
     {
         objectSaver = GetComponent<ObjectSaver>();
         localAxis = GetComponent<LocalAxis>();
-
 
     }
     private void Start()
@@ -30,41 +30,37 @@ public class ObjectParent : MonoBehaviour, INameable
     {
         if (state == ApplicationState.WallManager)
         {
-            parentTransform = transform.parent;
+            if (GameResources.Instance.currentwallManager == null) return;
+            transform.SetParent(GameResources.Instance.currentwallManager.transform);
+            if (!isLoadedTransform)
+            {
+                objectSaver.LoadTransform();
+                isLoadedTransform = true;
+            }
         }
         if (state == ApplicationState.ObjectManager)
         {
-            objectSaver.SaveTransform
-                (objParentName);
+            objectSaver.SaveTransform();
         }
         if (state == ApplicationState.ObjectParent)
         {
             ToggleInteractableObjectParent(true);
             localAxis.enabled = true;
+            if (parentTransform == null)
+            {
+                parentTransform = transform.parent.parent;
+            }
+            transform.SetParent(parentTransform);
+            transform.localScale = Vector3.one;
         }
         else
         {
             ToggleInteractableObjectParent(false);
             localAxis.enabled = false;
         }
-        KeepObjectParentOnWall(state);
-
     }
 
-    void KeepObjectParentOnWall(ApplicationState applicationState)
-    {
-        if (applicationState == ApplicationState.WallManager)
-        {
-            if (GameResources.Instance.currentwallManager == null) return;
-            transform.SetParent(GameResources.Instance.currentwallManager.transform);
-        }
-        else
-        {
-            if (parentTransform == null) return;
-            transform.SetParent(parentTransform);
-            transform.localScale = Vector3.one;
-        }
-    }
+
     void ToggleInteractableObjectParent(bool isEnable)
     {
         GetComponent<XRGrabInteractable>().enabled = isEnable;

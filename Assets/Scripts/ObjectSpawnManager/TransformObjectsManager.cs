@@ -58,24 +58,24 @@ public class TransformObjectsManager : MonoBehaviour
         InstrumentShowcase instrumentShowcase = gameObjectSelected.GetComponent<InstrumentShowcase>();
         if (instrumentShowcase != null)
         {
-            SaveTransformSelectObject(instrumentShowcase.transform, instrumentShowcase.instrumentShowcaseSO.instrumentName);
+            SaveTransformSelectObject(instrumentShowcase.transform);
             return;
         }
         PictureFrame pictureFrame = gameObjectSelected.GetComponent<PictureFrame>();
         if (pictureFrame != null)
         {
-            SaveTransformSelectObject(pictureFrame.transform, pictureFrame.pictureName);
+            SaveTransformSelectObject(pictureFrame.transform);
             return;
         }
 
     }
 
-    private void SaveTransformSelectObject(Transform objectTransform, string name)
+    private void SaveTransformSelectObject(Transform objectTransform)
     {
         ObjectSaver objectSaver = objectTransform.GetComponent<ObjectSaver>();
         if (objectSaver != null)
         {
-            objectSaver.SaveTransform(name);
+            objectSaver.SaveTransform();
         }
         GameResources.Instance.objectSceneText.text = objectTransform.name;
 

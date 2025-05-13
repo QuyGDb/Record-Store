@@ -1,24 +1,27 @@
 using Google.XR.ARCoreExtensions;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class ObjectSpawnerAtAnchor : MonoBehaviour
 {
     [SerializeField] Transform[] objectTranformList;
-
+    private GameObject wall;
+    GameObject vinlyShowse;
+    GameObject portal;
     private void Start()
     {
-        StaticEventHandler.OnInstantiateAtWall += OnInstantiateAtAnchor;
-
+        StaticEventHandler.OnInstantiateAtAnchor += OnInstantiateAtAnchor;
+        wall = Instantiate(GameResources.Instance.wallPrefab, transform);
+        wall.transform.localPosition = Settings.hidenPosition;
+        vinlyShowse = Instantiate(GameResources.Instance.VinylShowCasePrefab, transform);
+        vinlyShowse.transform.localPosition = Settings.hidenPosition;
+        portal = Instantiate(GameResources.Instance.PortalPrefab, transform);
+        portal.transform.localPosition = Settings.hidenPosition;
     }
 
     private void OnDestroy()
     {
-        StaticEventHandler.OnInstantiateAtWall -= OnInstantiateAtAnchor;
+        StaticEventHandler.OnInstantiateAtAnchor -= OnInstantiateAtAnchor;
     }
 
     private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
@@ -26,70 +29,63 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
         switch (type)
         {
             case AnchorType.Wall:
-                CreateWall(aRAnchor);
+                ActiveWall(aRAnchor);
                 break;
             case AnchorType.VinylShowCase:
-                CreateVinylShowCase(aRAnchor);
+                ActiveVinylShowCase(aRAnchor);
                 break;
             case AnchorType.Portal:
-                CreatePortal(aRAnchor);
+                ActivePortal(aRAnchor);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-
     }
-    void CreateWall(ARCloudAnchor arAnchor)
-    {
-        GameObject wall = Instantiate(GameResources.Instance.wallPrefab, transform);
-        GameResources.Instance.currentwallManager = wall.GetComponent<WallManager>();
 
-#if PLATFORM_ANDROID
+    void ActiveWall(ARCloudAnchor arAnchor)
+    {
+        GameResources.Instance.currentwallManager = wall.GetComponent<WallManager>();
         SetTransformWall(wall, arAnchor);
         SetTransformWallAndObjectParent(arAnchor);
-#endif
     }
 
     private async void SetTransformWallAndObjectParent(ARCloudAnchor arAnchor)
     {
         await Awaitable.NextFrameAsync();
-        if (arAnchor == null) return;
         foreach (var item in objectTranformList)
         {
+#if PLATFORM_ANDROID && !UNITY_EDITOR
             item.SetParent(arAnchor.transform);
-            item.localPosition = new Vector3(0, 0, 0);
-            item.localRotation = Quaternion.Euler(0, 0, 0);
+            item.GetComponent<ObjectParent>().parentTransform = arAnchor.transform;
+#endif
             item.GetComponent<ObjectSaver>().LoadTransform();
+
         }
     }
+
     private async void SetTransformWall(GameObject wall, ARCloudAnchor arAnchor)
     {
         await Awaitable.NextFrameAsync();
-        if (arAnchor == null) return;
+#if PLATFORM_ANDROID && !UNITY_EDITOR
         wall.transform.SetParent(arAnchor.transform);
-        wall.transform.localPosition = new Vector3(0, 0, 0);
-        wall.transform.localRotation = Quaternion.Euler(0, 0, 0);
+#endif
         wall.GetComponent<ObjectSaver>().LoadTransform();
     }
-    private void CreateVinylShowCase(ARCloudAnchor aRCloudAnchor)
-    {
-        GameObject vinlyShowse = Instantiate(GameResources.Instance.VinylShowCasePrefab, transform);
 
+    private void ActiveVinylShowCase(ARCloudAnchor aRCloudAnchor)
+    {
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         vinlyShowse.transform.SetParent(aRCloudAnchor.transform);
-        vinlyShowse.transform.localPosition = new Vector3(0, 0, 0);
-        vinlyShowse.transform.localRotation = Quaternion.Euler(0, 0, 0);
 #endif
+        vinlyShowse.GetComponent<ObjectSaver>().LoadTransform();
     }
-    private void CreatePortal(ARCloudAnchor aRCloudAnchor)
+
+    private void ActivePortal(ARCloudAnchor aRCloudAnchor)
     {
-        GameObject portal = Instantiate(GameResources.Instance.PortalPrefab, transform);
+
 #if PLATFORM_ANDROID && !UNITY_EDITOR
         portal.transform.SetParent(aRCloudAnchor.transform);
-        portal.transform.localPosition = new Vector3(0, 0, 0);
-        portal.transform.localRotation = Quaternion.Euler(0, 0, 0);
 #endif
+        portal.GetComponent<ObjectSaver>().LoadTransform();
     }
-
-
 }

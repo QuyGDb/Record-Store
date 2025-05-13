@@ -43,11 +43,11 @@ public static class StaticEventHandler
         OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
     }
 
-    public static event Action<ARCloudAnchor, AnchorType> OnInstantiateAtWall;
+    public static event Action<ARCloudAnchor, AnchorType> OnInstantiateAtAnchor;
 
-    public static void InvokeInstantiateAtWall(ARCloudAnchor aRAnchor, AnchorType anchorType)
+    public static void InvokeInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType anchorType)
     {
-        OnInstantiateAtWall?.Invoke(aRAnchor, anchorType);
+        OnInstantiateAtAnchor?.Invoke(aRAnchor, anchorType);
     }
     public static event Action<Anchor, bool> OnAnchorCreated;
 

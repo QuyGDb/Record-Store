@@ -2,9 +2,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class CloudAnchorsManager : MonoBehaviour
@@ -45,9 +43,8 @@ public class CloudAnchorsManager : MonoBehaviour
         GameResources.Instance.cloudAnchorsManager = this;
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
         StaticEventHandler.OnNameMapText += LoadCloudAnchorDetails;
-
-
     }
+
     private void OnDestroy()
     {
         StaticEventHandler.OnSendAnchorInfo -= OnSendAnchorInfo;
@@ -55,8 +52,6 @@ public class CloudAnchorsManager : MonoBehaviour
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         StaticEventHandler.OnNameMapText -= LoadCloudAnchorDetails;
     }
-
-
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
@@ -192,7 +187,7 @@ public class CloudAnchorsManager : MonoBehaviour
 #if UNITY_EDITOR
         yield return null;
         GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
-        StaticEventHandler.InvokeInstantiateAtWall(null, currentAnchorType);
+        StaticEventHandler.InvokeInstantiateAtAnchor(null, currentAnchorType);
 #endif
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)
@@ -202,7 +197,7 @@ public class CloudAnchorsManager : MonoBehaviour
             AnchorDetails anchorDetails = cloudAnchorDetails[cloudAnchorId];
             if (anchorDetails != null)
             {
-                StaticEventHandler.InvokeInstantiateAtWall(aRAnchor, anchorDetails.anchorType);
+                StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor, anchorDetails.anchorType);
             }
         }
     }

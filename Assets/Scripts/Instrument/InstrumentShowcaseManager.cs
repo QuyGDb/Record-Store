@@ -35,7 +35,6 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
     public void ShowObjects()
     {
         if (GameResources.Instance.currentwallManager == null) return;
-        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
         if (isCreated) return;
         foreach (var item in instrumentList)
         {

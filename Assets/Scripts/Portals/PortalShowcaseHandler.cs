@@ -44,7 +44,6 @@ public class PortalShowcaseHandler : MonoBehaviour, INameable
 
     void Start()
     {
-        objectSaver.LoadTransform();
         grabTransformer.selectEntered.AddListener(OnSelectEntered);
         StaticEventHandler.OnMovePortal += MovePortal;
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
@@ -65,7 +64,7 @@ public class PortalShowcaseHandler : MonoBehaviour, INameable
 
         if (state == ApplicationState.TestMap)
         {
-            objectSaver.SaveTransform(portalname);
+            objectSaver.SaveTransform();
             grabTransformer.enabled = false;
         }
 

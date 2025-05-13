@@ -15,7 +15,6 @@ public class VinylShowcase : MonoBehaviour, INameable
     }
     private void Start()
     {
-        objectSaver.LoadTransform();
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
     private void OnDestroy()
@@ -29,7 +28,7 @@ public class VinylShowcase : MonoBehaviour, INameable
 
         if (state == ApplicationState.TestMap)
         {
-            objectSaver.SaveTransform(gameObject.name);
+            objectSaver.SaveTransform();
             grabInteractable.enabled = false;
         }
     }

@@ -9,8 +9,6 @@ public class WallManagerCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI placeHolder;
     [SerializeField] private PlaneEdge selectedEdge;
     private Button[] buttons;
-    private const string MusicHistory = "MusicHistory";
-    private const string InstrumentShowcase = "InstrumentShowcase";
     private void Awake()
     {
         dropdown = GetComponentInChildren<TMP_Dropdown>();
@@ -51,6 +49,7 @@ public class WallManagerCanvas : MonoBehaviour
     {
         GameResources.Instance.instrumentShowcaseManager.ShowObjects();
         GameResources.Instance.pictureFrameManager.ShowObjects();
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
     }
     private void OnInputFieldEndEdit(string value)
     {

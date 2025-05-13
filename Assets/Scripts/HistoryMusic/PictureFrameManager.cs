@@ -60,7 +60,7 @@ public class PictureFrameManager : MonoBehaviour, IObjectDisplayer
     public void ShowObjects()
     {
         if (GameResources.Instance.currentwallManager == null) return;
-        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.ObjectParent);
+
         if (isCreated) return;
 
         foreach (var (_, instanceList, _) in genreData)

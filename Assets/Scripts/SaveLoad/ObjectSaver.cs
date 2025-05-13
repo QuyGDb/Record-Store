@@ -9,7 +9,7 @@ public class ObjectSaver : MonoBehaviour
     INameable nameable;
     string key;
     bool isHasArTransform = false;
-    public void SaveTransform(string key)
+    public void SaveTransform()
     {
         if (gameObject == null) return;
         arTransform.position = transform.localPosition;
@@ -19,7 +19,6 @@ public class ObjectSaver : MonoBehaviour
     }
     private void Awake()
     {
-        settings = new ES3Settings(Settings.es3Name);
         nameable = GetComponent<INameable>();
         StaticEventHandler.OnNameMapText += StaticEventHandler_OnNameMapText;
     }
@@ -28,10 +27,14 @@ public class ObjectSaver : MonoBehaviour
     {
         StaticEventHandler.OnNameMapText -= StaticEventHandler_OnNameMapText;
     }
-
-    private void StaticEventHandler_OnNameMapText(string obj)
+    private void Start()
     {
         key = nameable.GetKey();
+    }
+    private void StaticEventHandler_OnNameMapText(string obj)
+    {
+
+        settings = new ES3Settings(Settings.es3Name);
         GetTransform();
     }
 
@@ -45,7 +48,7 @@ public class ObjectSaver : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.zero;
+            transform.localPosition = Vector3.zero;
         }
     }
 
@@ -56,7 +59,6 @@ public class ObjectSaver : MonoBehaviour
         {
             ES3.LoadInto(key, arTransform, settings);
             isHasArTransform = true;
-            Debug.Log(arTransform.position + " " + arTransform.rotation + " " + arTransform.scale);
         }
     }
 }
