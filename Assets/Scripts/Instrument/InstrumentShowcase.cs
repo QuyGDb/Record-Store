@@ -2,7 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Transformers;
 
+[RequireComponent(typeof(XRGrabInteractable))]
+[RequireComponent(typeof(XRGeneralGrabTransformer))]
+[RequireComponent(typeof(LocalAxis))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ObjectSaver))]
 public class InstrumentShowcase : MonoBehaviour, INameable
 {
     private XRGrabInteractable grabInteractable;
