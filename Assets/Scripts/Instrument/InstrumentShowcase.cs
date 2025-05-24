@@ -6,20 +6,17 @@ using UnityEngine.XR.Interaction.Toolkit.Transformers;
 
 [RequireComponent(typeof(XRGrabInteractable))]
 [RequireComponent(typeof(XRGeneralGrabTransformer))]
-[RequireComponent(typeof(LocalAxis))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(ObjectSaver))]
 public class InstrumentShowcase : MonoBehaviour, INameable
 {
     private XRGrabInteractable grabInteractable;
     public InstrumentShowcaseSO instrumentShowcaseSO;
-    private LocalAxis localAxis;
     private void Awake()
     {
-        localAxis = GetComponent<LocalAxis>();
         grabInteractable = GetComponent<XRGrabInteractable>();
-        grabInteractable.selectEntered.AddListener(Select);
-        grabInteractable.selectExited.AddListener(Deselect);
+        //grabInteractable.selectEntered.AddListener(Select);
+        //grabInteractable.selectExited.AddListener(Deselect);
     }
 
     private void Start()
@@ -32,7 +29,7 @@ public class InstrumentShowcase : MonoBehaviour, INameable
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         if (grabInteractable != null)
         {
-            grabInteractable.selectEntered.RemoveListener(Select);
+            //  grabInteractable.selectEntered.RemoveListener(Select);
         }
     }
 
@@ -54,15 +51,15 @@ public class InstrumentShowcase : MonoBehaviour, INameable
         item.GetComponent<XRGrabInteractable>().enabled = isEnabled;
         item.GetComponentInChildren<Collider>().enabled = isEnabled;
     }
-    private void Select(SelectEnterEventArgs selectEnterEventArgs)
-    {
-        localAxis.enabled = true;
-        StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
-    }
-    private void Deselect(SelectExitEventArgs arg0)
-    {
-        localAxis.enabled = false;
-    }
+    //private void Select(SelectEnterEventArgs selectEnterEventArgs)
+    //{
+    //    localAxis.enabled = true;
+    //    StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
+    //}
+    //private void Deselect(SelectExitEventArgs arg0)
+    //{
+    //    localAxis.enabled = false;
+    //}
 
     public string GetKey()
     {
