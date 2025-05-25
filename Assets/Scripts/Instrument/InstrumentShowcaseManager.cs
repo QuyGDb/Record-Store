@@ -40,7 +40,6 @@ public class InstrumentShowcaseManager : MonoBehaviour, IObjectDisplayer
         {
             item.GetComponent<ObjectSaver>().LoadTransform();
             item.GetComponent<XRGrabInteractable>().enabled = false;
-            item.GetComponentInChildren<Collider>().enabled = false;
         }
         isCreated = true;
     }

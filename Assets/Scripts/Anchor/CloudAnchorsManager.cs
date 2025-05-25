@@ -15,13 +15,12 @@ public class CloudAnchorsManager : MonoBehaviour
     public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
     [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
     private string nameCurrentAnchor;
-    [SerializeField] private AnchorType currentAnchorType;
     string key = "cloudAnchorDetails";
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
         arAnchorsManager = GetComponent<ARAnchorManager>();
-        StaticEventHandler.OnSendAnchorInfo += OnSendAnchorInfo;
+        StaticEventHandler.OnHostCurrentSelectAnchor += HostCurrentSelectAnchor;
         StaticEventHandler.OnSelectCloudAnchor += OnSelectCloudAnchor;
 
     }
@@ -47,7 +46,7 @@ public class CloudAnchorsManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        StaticEventHandler.OnSendAnchorInfo -= OnSendAnchorInfo;
+        StaticEventHandler.OnHostCurrentSelectAnchor -= HostCurrentSelectAnchor;
         StaticEventHandler.OnSelectCloudAnchor -= OnSelectCloudAnchor;
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
         StaticEventHandler.OnNameMapText -= LoadCloudAnchorDetails;
@@ -73,12 +72,6 @@ public class CloudAnchorsManager : MonoBehaviour
         }
     }
 
-    private void OnSendAnchorInfo(string name, AnchorType anchorType)
-    {
-        nameCurrentAnchor = name;
-        currentAnchorType = anchorType;
-        HostCurrentSelectAnchor();
-    }
     public void HostCurrentSelectAnchor()
     {
         ARAnchor anchor = anchorsManager.currentSelectAnchor;
@@ -113,8 +106,6 @@ public class CloudAnchorsManager : MonoBehaviour
 
 #if UNITY_EDITOR
         AnchorDetails anchorDetailsEditor = new AnchorDetails();
-        anchorDetailsEditor.anchorName = nameCurrentAnchor;
-        anchorDetailsEditor.anchorType = currentAnchorType;
         anchorDetailsEditor.anchorImage = anchorsManager.imageByte;
         anchorDetailsEditor.cloudAnchorId = Random.Range(0, 100).ToString();
         yield return new WaitForSeconds(1);
@@ -126,8 +117,6 @@ public class CloudAnchorsManager : MonoBehaviour
     {
         AnchorDetails anchorDetails = new AnchorDetails();
         anchorDetails.anchorImage = anchorsManager.imageByte;
-        anchorDetails.anchorName = nameCurrentAnchor;
-        anchorDetails.anchorType = currentAnchorType;
         GameResources.Instance.anchorSceneText.text = $"Cloud Anchor created: {hostCloudAnchorPromise}";
         anchorDetails.cloudAnchorId = hostCloudAnchorPromise.Result.CloudAnchorId;
         return anchorDetails;
@@ -187,7 +176,7 @@ public class CloudAnchorsManager : MonoBehaviour
 #if UNITY_EDITOR
         yield return null;
         GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
-        StaticEventHandler.InvokeInstantiateAtAnchor(null, currentAnchorType);
+        StaticEventHandler.InvokeInstantiateAtAnchor(null);
 #endif
     }
     void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)
@@ -197,7 +186,7 @@ public class CloudAnchorsManager : MonoBehaviour
             AnchorDetails anchorDetails = cloudAnchorDetails[cloudAnchorId];
             if (anchorDetails != null)
             {
-                StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor, anchorDetails.anchorType);
+                StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor);
             }
         }
     }

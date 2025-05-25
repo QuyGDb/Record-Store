@@ -7,13 +7,11 @@ public class ObjectParent : MonoBehaviour, INameable
 {
     [SerializeField] private string objParentName;
     private ObjectSaver objectSaver;
-    private LocalAxis localAxis;
     public Transform parentTransform;
     private bool isLoadedTransform = false;
     private void Awake()
     {
         objectSaver = GetComponent<ObjectSaver>();
-        localAxis = GetComponent<LocalAxis>();
 
     }
     private void Start()
@@ -45,7 +43,6 @@ public class ObjectParent : MonoBehaviour, INameable
         if (state == ApplicationState.ObjectParent)
         {
             ToggleInteractableObjectParent(true);
-            localAxis.enabled = true;
             if (parentTransform == null)
             {
                 parentTransform = transform.parent.parent;
@@ -56,7 +53,6 @@ public class ObjectParent : MonoBehaviour, INameable
         else
         {
             ToggleInteractableObjectParent(false);
-            localAxis.enabled = false;
         }
     }
 

@@ -24,7 +24,7 @@ public class LogoGenres : MonoBehaviour
 
     private void OnApplicationStateChanged(ApplicationState state)
     {
-        if (state == ApplicationState.ObjectParent)
+        if (state == ApplicationState.ObjectParent || state == ApplicationState.CloudAnchorInLoadMap)
         {
             pop.SetActive(true);
             rap.SetActive(true);

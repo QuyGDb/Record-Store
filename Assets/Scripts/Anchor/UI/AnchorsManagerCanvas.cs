@@ -8,11 +8,8 @@ using UnityEngine.XR.ARFoundation;
 
 public class AnchorsManagerCanvas : MonoBehaviour
 {
-    private AnchorTypeDropdown anchorTypeDropdown;
-    [HideInInspector] public TMP_InputField inputField;
     [SerializeField] private Button saveButton;
     [SerializeField] private Button deleteButton;
-    [SerializeField] private TextMeshProUGUI inputNameText;
     [SerializeField] private TextMeshProUGUI anchorCanvasText;
     public InputActionReference touchPressAction;
     bool isHasAnchor = false;
@@ -20,8 +17,6 @@ public class AnchorsManagerCanvas : MonoBehaviour
     {
         touchPressAction.action.Enable();
         touchPressAction.action.started += OnTouchPress;
-        anchorTypeDropdown = GetComponentInChildren<AnchorTypeDropdown>();
-        inputField = GetComponentInChildren<TMP_InputField>();
         GameResources.Instance.anchorSceneText = anchorCanvasText;
     }
 
@@ -55,15 +50,8 @@ public class AnchorsManagerCanvas : MonoBehaviour
 
     void IsValidCloudAnchor()
     {
-        if (string.IsNullOrWhiteSpace(inputField.text) || anchorTypeDropdown.dropdown.value == 0)
-        {
-            inputNameText.text = "Please enter name";
-        }
-        else
-        {
-            StaticEventHandler.InvokeSendInfo(inputField.text, anchorTypeDropdown.anchorType);
-            isHasAnchor = false;
-        }
+        if (!isHasAnchor) return;
+        StaticEventHandler.InvokeHostCurrentSelectAnchor();
     }
 
     #region Validation
