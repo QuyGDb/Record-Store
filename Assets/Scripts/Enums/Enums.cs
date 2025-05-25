@@ -15,13 +15,7 @@ public enum MusicGenres
 }
 
 
-public enum AnchorType
-{
-    None,
-    Wall,
-    VinylShowCase,
-    Portal,
-}
+
 public enum PlaneEdge
 {
     Left,

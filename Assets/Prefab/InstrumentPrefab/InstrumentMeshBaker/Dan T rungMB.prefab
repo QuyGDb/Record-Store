@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5311379718780192785}
   - component: {fileID: 7685714904072910177}
   - component: {fileID: 1204268758524270128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeshBaker-mesh-mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,10 +221,9 @@ GameObject:
   - component: {fileID: 2027894866711957151}
   - component: {fileID: -2645571485656144925}
   - component: {fileID: 2005041178026183129}
-  - component: {fileID: -8602805816903877501}
   - component: {fileID: -5337065534326435752}
   - component: {fileID: -5002053289521968173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dan T rungMB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7979458703003375317}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -247,7 +246,7 @@ Transform:
   - {fileID: 2023752525783440549}
   - {fileID: 2783708070956234872}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &2027894866711957151
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -364,7 +363,7 @@ MonoBehaviour:
   m_SmoothPosition: 0
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
-  m_TrackRotation: 1
+  m_TrackRotation: 0
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
@@ -409,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PermittedDisplacementAxes: 7
+  m_PermittedDisplacementAxes: 3
   m_ConstrainedAxisDisplacementMode: 1
   m_TwoHandedRotationMode: 1
   m_AllowOneHandedScaling: 1
@@ -420,18 +419,6 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
---- !u!114 &-8602805816903877501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7979458703003375317}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000b75b1e1dc39f4db2326e15ab40c53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-5337065534326435752
 MonoBehaviour:
   m_ObjectHideFlags: 0

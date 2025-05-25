@@ -29,11 +29,11 @@ public static class StaticEventHandler
     {
         OnStartFirstSong?.Invoke(album);
     }
-    public static event Action<string, AnchorType> OnSendAnchorInfo;
+    public static event Action OnHostCurrentSelectAnchor;
 
-    public static void InvokeSendInfo(string name, AnchorType anchorType)
+    public static void InvokeHostCurrentSelectAnchor()
     {
-        OnSendAnchorInfo?.Invoke(name, anchorType);
+        OnHostCurrentSelectAnchor?.Invoke();
     }
 
     public static event Action<bool, string> OnSelectCloudAnchor;
@@ -43,11 +43,11 @@ public static class StaticEventHandler
         OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
     }
 
-    public static event Action<ARCloudAnchor, AnchorType> OnInstantiateAtAnchor;
+    public static event Action<ARCloudAnchor> OnInstantiateAtAnchor;
 
-    public static void InvokeInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType anchorType)
+    public static void InvokeInstantiateAtAnchor(ARCloudAnchor aRAnchor)
     {
-        OnInstantiateAtAnchor?.Invoke(aRAnchor, anchorType);
+        OnInstantiateAtAnchor?.Invoke(aRAnchor);
     }
     public static event Action<Anchor, bool> OnAnchorCreated;
 
