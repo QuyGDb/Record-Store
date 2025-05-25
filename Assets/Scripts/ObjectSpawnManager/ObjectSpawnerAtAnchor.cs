@@ -24,22 +24,11 @@ public class ObjectSpawnerAtAnchor : MonoBehaviour
         StaticEventHandler.OnInstantiateAtAnchor -= OnInstantiateAtAnchor;
     }
 
-    private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor, AnchorType type)
+    private void OnInstantiateAtAnchor(ARCloudAnchor aRAnchor)
     {
-        switch (type)
-        {
-            case AnchorType.Wall:
-                ActiveWall(aRAnchor);
-                break;
-            case AnchorType.VinylShowCase:
-                ActiveVinylShowCase(aRAnchor);
-                break;
-            case AnchorType.Portal:
-                ActivePortal(aRAnchor);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
-        }
+        ActiveWall(aRAnchor);
+        ActiveVinylShowCase(aRAnchor);
+        ActivePortal(aRAnchor);
     }
 
     void ActiveWall(ARCloudAnchor arAnchor)

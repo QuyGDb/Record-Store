@@ -56,7 +56,6 @@ public class AnchorsManager : MonoBehaviour
             foreach (var item in trackedAnchors)
             {
                 item.Value.GetComponent<SpriteRenderer>().enabled = false;
-                item.Value.GetComponent<LocalAxis>().enabled = false;
             }
         }
         if (state == ApplicationState.ListMap)
