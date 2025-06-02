@@ -26,7 +26,6 @@ public class ApplicationManager : SingletonMonobehaviour<ApplicationManager>
         switch (applicationState)
         {
             case ApplicationState.Start:
-                SceneManager.LoadScene("RecordStoreInit", LoadSceneMode.Additive);
                 break;
             case ApplicationState.CreateMapMode:
                 SceneManager.LoadScene("InstructionScene", LoadSceneMode.Additive);

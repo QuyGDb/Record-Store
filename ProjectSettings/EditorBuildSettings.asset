@@ -6,25 +6,25 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game Scene/MainScene.unity
+    path: Assets/Scenes/Main/MainScene.unity
     guid: 4755b35b590504809a7525fd2109c2e2
   - enabled: 1
     path: Assets/Scenes/Navigation/CreateMapNavigationScene.unity
     guid: 3c54bdc244e845249a062c0e9902e74c
   - enabled: 1
-    path: Assets/Scenes/Function Scene/CreateMap/InstructionScene.unity
+    path: Assets/Scenes/Function Scene/Admin/InstructionScene.unity
     guid: fb83186b540ad794d99ae26273046696
   - enabled: 1
-    path: Assets/Scenes/Function Scene/CreateMap/AnchorScene.unity
+    path: Assets/Scenes/Function Scene/Admin/AnchorScene.unity
     guid: aa67c75f21981144596a75479b51d357
   - enabled: 1
-    path: Assets/Scenes/Function Scene/CreateMap/CloudAnchorScene.unity
+    path: Assets/Scenes/Function Scene/Admin/CloudAnchorScene.unity
     guid: fe5c6e7547096a447aa6d295c3050791
   - enabled: 1
-    path: Assets/Scenes/Function Scene/CreateMap/WallManagerScene.unity
+    path: Assets/Scenes/Function Scene/Admin/WallManagerScene.unity
     guid: 96a2aa28615ba3244aaec5ad6428b378
   - enabled: 1
-    path: Assets/Scenes/Function Scene/CreateMap/ObjectManagerScene.unity
+    path: Assets/Scenes/Function Scene/Admin/ObjectManagerScene.unity
     guid: 4a4e4866e7d500d45a84610be047e8d4
   - enabled: 1
     path: Assets/Scenes/Game Scene/RecordStoreInit.unity

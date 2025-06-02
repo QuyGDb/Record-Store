@@ -27,6 +27,4 @@ public class CloudAnchorCanvas : MonoBehaviour
         buttons[1].onClick.AddListener(GameResources.Instance.cloudAnchorsManager.RemoveCloudAnchorInAnchorDetails);
 
     }
-
-
 }

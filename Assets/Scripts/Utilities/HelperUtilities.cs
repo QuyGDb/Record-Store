@@ -240,6 +240,19 @@ public static class HelperUtilities
     }
     #endregion
 
+    public static Sprite SetSprite(byte [] spriteBytes)
+    {
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(spriteBytes);
+        Sprite newSprite = Sprite.Create(
+            texture,
+            new Rect(0, 0, texture.width, texture.height),
+            new Vector2(0.5f, 0.5f)
+        );
+        return newSprite;
+    }
+
+
     public async static Awaitable<byte[]> CaptureWithARObjects()
     {
         await Awaitable.EndOfFrameAsync();
