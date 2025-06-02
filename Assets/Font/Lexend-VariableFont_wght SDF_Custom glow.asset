@@ -109,7 +109,7 @@ Material:
     - _GlowInner: 0.535
     - _GlowOffset: 1
     - _GlowOuter: 0
-    - _GlowPower: 0
+    - _GlowPower: 0.29651237
     - _GradientScale: 4
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
@@ -135,9 +135,9 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 512
     - _TextureWidth: 512
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
+    - _UnderlayDilate: 0.23
+    - _UnderlayOffsetX: -0.34
+    - _UnderlayOffsetY: -0.59
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Lexend-VariableFont_wght SDF_Custom
+  m_Name: Lexend-VariableFont_wght SDF_Custom glow
   m_EditorClassIdentifier: 
   m_Version: 1.1.0
   m_FaceInfo:

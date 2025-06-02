@@ -1,13 +1,23 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class MapManager : MonoBehaviour
 {
     public GameObject fileItemPrefab;
     public Transform contentPanel;
     [SerializeField] private TextMeshProUGUI currentMapText;
+    private Button backBtn;
+    private Canvas homeCanvas;
+
+    [SerializeField] private string[] files;
+
+    ES3Settings settings;
+
+    Dictionary<string, AnchorDetails> anchorDetails = new Dictionary<string, AnchorDetails>();
+
+    string key = "cloudAnchorDetails";
     const string currentMap = "Current Map: ";
     private void Start()
     {
@@ -17,21 +27,21 @@ public class MapManager : MonoBehaviour
     {
         await SupabaseStorage.Instance.ListAndDownloadAllFiles();
         string path = Application.persistentDataPath;
-        string[] files = Directory.GetFiles(path, "*.es3");
+        files = Directory.GetFiles(path, "*.es3");
 
         foreach (string filePath in files)
         {
-
             GameObject item = Instantiate(fileItemPrefab, contentPanel);
             string fileName = Path.GetFileName(filePath);
-
+            settings = new ES3Settings(fileName);
+            ES3.LoadInto(key, anchorDetails, settings);
+            Sprite sprite = HelperUtilities.SetSprite(anchorDetails[key].anchorImage);
             item.GetComponentInChildren<TextMeshProUGUI>().text = fileName;
-
+            item.GetComponent<Image>().sprite = sprite;
             Button btn = item.GetComponent<Button>();
             if (btn != null)
             {
-                string capturedFileName = fileName;
-                btn.onClick.AddListener(() => OnFileClicked(capturedFileName));
+                btn.onClick.AddListener(() => OnFileClicked(fileName));
             }
         }
 

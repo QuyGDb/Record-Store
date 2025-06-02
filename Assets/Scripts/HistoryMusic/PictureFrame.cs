@@ -16,6 +16,8 @@ public class PictureFrame : MonoBehaviour, INameable
         {
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
+        if(ApplicationManager.Instance == null)
+            return;
         ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
     }
 
@@ -25,6 +27,8 @@ public class PictureFrame : MonoBehaviour, INameable
         {
             StaticEventHandler.InvokeXRGrabInteractableSelected(gameObject);
         });
+        if (ApplicationManager.Instance == null)
+            return;
         ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
     }
 

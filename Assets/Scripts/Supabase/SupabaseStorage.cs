@@ -73,10 +73,7 @@ public class SupabaseStorage : SingletonMonobehaviour<SupabaseStorage>
         while (!asyncListOp.isDone) await Task.Yield();
 
         if (listReq.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError("❌ Failed to list files: " + listReq.error);
             return;
-        }
 
         var filesJson = JSON.Parse(listReq.downloadHandler.text);
         foreach (JSONNode file in filesJson)
@@ -85,18 +82,16 @@ public class SupabaseStorage : SingletonMonobehaviour<SupabaseStorage>
 
             if (!_processedFiles.Add(fileName))
             {
-                Debug.LogWarning($"Skipping duplicate entry from bucket: {fileName}");
                 continue;
             }
 
             string localPath = Path.Combine(Application.persistentDataPath, fileName);
             if (File.Exists(localPath))
             {
-                Debug.Log($"Already downloaded, skip: {fileName}");
                 continue;
             }
 
-            await DownloadFile(fileName); // CHUYỂN sang async luôn
+            await DownloadFile(fileName); 
         }
     }
 
@@ -113,14 +108,9 @@ public class SupabaseStorage : SingletonMonobehaviour<SupabaseStorage>
         while (!asyncOp.isDone) await Task.Yield();
 
         if (req.result != UnityWebRequest.Result.Success || req.downloadHandler.data == null)
-        {
-
-            Debug.Log($"❌ Failed to download {fileName}: {req.error}\nRaw response: {req.downloadHandler.text}");
             return;
-        }
         string path = Path.Combine(Application.persistentDataPath, fileName);
         File.WriteAllBytes(path, req.downloadHandler.data);
-        Debug.Log($"✅ Downloaded: {fileName} → {path}");
     }
 
 
