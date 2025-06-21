@@ -12,6 +12,7 @@ public class ObjectSaver : MonoBehaviour
     public void SaveTransform()
     {
         if (gameObject == null) return;
+
         arTransform.position = transform.localPosition;
         arTransform.rotation = transform.localRotation;
         arTransform.scale = transform.localScale;
@@ -21,16 +22,29 @@ public class ObjectSaver : MonoBehaviour
     {
         nameable = GetComponent<INameable>();
         StaticEventHandler.OnNameMapText += StaticEventHandler_OnNameMapText;
+        nameable = GetComponent<INameable>();
+        if (nameable == null)
+        {
+
+            return;
+        }
+
+        if (string.IsNullOrEmpty(key))
+        {
+            key = nameable.GetKey();
+            if (string.IsNullOrEmpty(key))
+            {
+                Debug.LogError("Key is null or empty.");
+                return;
+            }
+        }
     }
 
     private void OnDestroy()
     {
         StaticEventHandler.OnNameMapText -= StaticEventHandler_OnNameMapText;
     }
-    private void Start()
-    {
-        key = nameable.GetKey();
-    }
+
     private void StaticEventHandler_OnNameMapText(string obj)
     {
 

@@ -51,14 +51,14 @@ public class AnchorsManager : MonoBehaviour
                 CancelInvoke(nameof(CheckEstimateFeatureMapQualityForHosting));
             }
         }
-        if (state == ApplicationState.View)
+        if (state == ApplicationState.Client)
         {
             foreach (var item in trackedAnchors)
             {
                 item.Value.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
-        if (state == ApplicationState.ListMap)
+        if (state == ApplicationState.Client)
         {
             arPointCloudManager.enabled = false;
             arPlaneManager.enabled = false;

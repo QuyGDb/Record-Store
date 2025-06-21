@@ -11,7 +11,7 @@ Texture2D:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
   m_IsAlphaChannelOptional: 0
-  serializedVersion: 4
+  serializedVersion: 3
   m_Width: 512
   m_Height: 512
   m_CompleteImageSize: 262144
@@ -109,7 +109,7 @@ Material:
     - _GlowInner: 0.535
     - _GlowOffset: 1
     - _GlowOuter: 0
-    - _GlowPower: 0.38945556
+    - _GlowPower: 0.7255578
     - _GradientScale: 4
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0

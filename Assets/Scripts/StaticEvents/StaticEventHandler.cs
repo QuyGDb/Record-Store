@@ -24,6 +24,7 @@ public static class StaticEventHandler
     {
         OnSongChanged?.Invoke(album, index);
     }
+
     public static event Action<AlbumSO> OnStartFirstSong;
     public static void InvokeStartFirstSong(AlbumSO album)
     {
@@ -36,12 +37,6 @@ public static class StaticEventHandler
         OnHostCurrentSelectAnchor?.Invoke();
     }
 
-    public static event Action<bool, string> OnSelectCloudAnchor;
-
-    public static void InvokeSelectCloudAnchor(bool isSelect, string cloudAnchorId)
-    {
-        OnSelectCloudAnchor?.Invoke(isSelect, cloudAnchorId);
-    }
 
     public static event Action<ARCloudAnchor> OnInstantiateAtAnchor;
 
@@ -62,12 +57,6 @@ public static class StaticEventHandler
         OnAnchorRemoved?.Invoke(anchor);
     }
 
-    public static event Action<Dictionary<string, AnchorDetails>> OnAnchorDetailsChanged;
-
-    public static void InvokeAnchorDetailsChanged(Dictionary<string, AnchorDetails> anchorDetails)
-    {
-        OnAnchorDetailsChanged?.Invoke(anchorDetails);
-    }
 
     public static event Action OnMovePortal;
 
@@ -81,5 +70,11 @@ public static class StaticEventHandler
     public static void InvokeNameMapText(string es3name)
     {
         OnNameMapText?.Invoke(es3name);
+    }
+    public static event Action<bool, string> OnCloudAnchorResolved;
+
+    public static void InvokeCloudAnchorResolved(bool success, string message)
+    {
+        OnCloudAnchorResolved?.Invoke(success, message);
     }
 }

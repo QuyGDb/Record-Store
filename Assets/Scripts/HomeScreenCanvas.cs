@@ -5,10 +5,12 @@ using UnityEngine.UI;
 public class HomeScreenCanvas : MonoBehaviour
 {
 
+    // Client
     [SerializeField] private Canvas mapCanvas;
     [SerializeField] private Image vinylIcon;
     public TextMeshProUGUI uiText;
 
+    [SerializeField] private GameObject albumSpawer;
     public Material textMat;
     public Color colorA = Color.red;
     public Color colorB = Color.blue;
@@ -32,18 +34,18 @@ public class HomeScreenCanvas : MonoBehaviour
         textMat.SetFloat("_GlowPower", glowPower);
     }
 
-    public void OnMapButtonClicked()
+    public void ClientButton()
     {
-        if (mapCanvas == null)
-        {
-            Debug.LogError("Map Canvas is not assigned.");
-            return;
-        }
+
         mapCanvas.enabled = true;
         gameObject.SetActive(false);
+        albumSpawer.gameObject.SetActive(false);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.Client);
     }
-    public void LoadInstructionsScene()
+    public void AdminButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("InstructionScene");
+        gameObject.SetActive(false);
+        albumSpawer.gameObject.SetActive(false);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.Admin);
     }
 }

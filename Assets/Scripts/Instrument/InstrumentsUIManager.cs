@@ -29,8 +29,8 @@ public class InstrumentsUIManager : MonoBehaviour
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap
-            || ApplicationManager.Instance.applicationState == ApplicationState.View)
+        if (ApplicationManager.Instance.currentAppState == ApplicationState.TestMap
+            || ApplicationManager.Instance.currentAppState == ApplicationState.Client)
         {
 
             Vector2 touchPosition = context.ReadValue<Vector2>();
@@ -38,7 +38,6 @@ public class InstrumentsUIManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(touchPosition);
 
             int instrumentLayerMask = 1 << LayerMask.NameToLayer("Instrument");
-            Debug.Log("Instrument Layer Mask: " + instrumentLayerMask);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, instrumentLayerMask))
             {
                 offset = (Camera.main.transform.position - hit.point).normalized;

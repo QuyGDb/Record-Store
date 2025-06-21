@@ -1,4 +1,5 @@
 using System;
+using Google.XR.ARCoreExtensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -6,35 +7,30 @@ using UnityEngine.SceneManagement;
 public class ApplicationManager : SingletonMonobehaviour<ApplicationManager>
 {
     public Action<ApplicationState> OnApplicationStateChanged;
-    public ApplicationState applicationState = ApplicationState.Start;
+    public ApplicationState currentAppState = ApplicationState.None;
     public ApplicationState previousApplicationState;
+    public CloudAnchorsManager cloudAnchorsManager;
+
     protected override void Awake()
     {
         base.Awake();
     }
 
-    private void Start()
-    {
-        ChangeApplicationState(ApplicationState.Start);
-    }
 
     public void ChangeApplicationState(ApplicationState newState)
     {
-        previousApplicationState = applicationState;
-        applicationState = newState;
+        previousApplicationState = currentAppState;
+        currentAppState = newState;
 
-        switch (applicationState)
+        switch (currentAppState)
         {
-            case ApplicationState.Start:
-                break;
             case ApplicationState.Admin:
                 SceneManager.LoadScene("InstructionScene", LoadSceneMode.Additive);
-                SceneManager.LoadScene("CreateMapNavigationScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("NavigationScene", LoadSceneMode.Additive);
                 break;
-
             case ApplicationState.Anchor:
                 break;
-            case ApplicationState.CloudAnchorInCreateMap:
+            case ApplicationState.CloudAnchor:
                 break;
             case ApplicationState.WallManager:
                 break;
@@ -43,12 +39,6 @@ public class ApplicationManager : SingletonMonobehaviour<ApplicationManager>
             case ApplicationState.ObjectManager:
                 break;
             case ApplicationState.TestMap:
-                break;
-            case ApplicationState.ListMap:
-                break;
-            case ApplicationState.Instruction:
-                break;
-            case ApplicationState.View:
                 break;
         }
         OnApplicationStateChanged?.Invoke(newState);

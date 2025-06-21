@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CreateMapSceneNavigationBar : MonoBehaviour
+public class NavigationBar : MonoBehaviour
 {
     Button[] buttons = new Button[5];
     private string currentSceneName;
@@ -12,7 +12,6 @@ public class CreateMapSceneNavigationBar : MonoBehaviour
     {
         buttons = GetComponentsInChildren<Button>(true);
         currentSceneName = sceneNames[0];
-
     }
 
     private void Start()
@@ -22,7 +21,6 @@ public class CreateMapSceneNavigationBar : MonoBehaviour
         buttons[2].onClick.AddListener(ActiveCloudAnchorScene);
         buttons[3].onClick.AddListener(ActiveWallManagerCanvas);
         buttons[4].onClick.AddListener(ActiveObjectManagerCanvas);
-        ActiveInstructionScene();
     }
     private void OnDestroy()
     {
@@ -46,9 +44,7 @@ public class CreateMapSceneNavigationBar : MonoBehaviour
     }
     public void ActiveCloudAnchorScene()
     {
-        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.CloudAnchorInCreateMap);
-        if (currentSceneName == sceneNames[2])
-            GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
+        ApplicationManager.Instance.ChangeApplicationState(ApplicationState.CloudAnchor);
         LoadSceneWithName(sceneNames[2]);
     }
 

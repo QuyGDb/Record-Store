@@ -38,6 +38,7 @@ public class ObjectParent : MonoBehaviour, INameable
         }
         if (state == ApplicationState.ObjectManager)
         {
+            if (objectSaver == null) return;
             objectSaver.SaveTransform();
         }
         if (state == ApplicationState.ObjectParent)

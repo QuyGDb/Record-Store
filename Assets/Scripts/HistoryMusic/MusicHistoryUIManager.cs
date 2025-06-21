@@ -30,8 +30,8 @@ public class MusicHistoryUIManager : MonoBehaviour
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap
-            || ApplicationManager.Instance.applicationState == ApplicationState.View)
+        if (ApplicationManager.Instance.currentAppState == ApplicationState.TestMap
+            || ApplicationManager.Instance.currentAppState == ApplicationState.Client)
         {
             Vector2 touchPosition = context.ReadValue<Vector2>();
             Ray ray = Camera.main.ScreenPointToRay(touchPosition);

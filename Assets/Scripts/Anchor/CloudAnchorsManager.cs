@@ -1,76 +1,36 @@
 ﻿using Google.XR.ARCoreExtensions;
 using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 public class CloudAnchorsManager : MonoBehaviour
 {
     AnchorsManager anchorsManager;
-    private ARAnchorManager arAnchorsManager;
     [ShowInInspector]
-    public Dictionary<string, AnchorDetails> cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
+    public AnchorDetails currentAnchorDetails;
     [ShowInInspector]
-    public Dictionary<string, ARCloudAnchor> cloudAnchors = new Dictionary<string, ARCloudAnchor>();
-    [SerializeField] List<string> cloudAnchorsSelectedList = new List<string>();
-    private string nameCurrentAnchor;
+    public ARCloudAnchor currentCloudAnchor;
     string key = "cloudAnchorDetails";
+
     private void Awake()
     {
         anchorsManager = GetComponent<AnchorsManager>();
-        arAnchorsManager = GetComponent<ARAnchorManager>();
         StaticEventHandler.OnHostCurrentSelectAnchor += HostCurrentSelectAnchor;
-        StaticEventHandler.OnSelectCloudAnchor += OnSelectCloudAnchor;
 
     }
 
-    public void RemoveCloudAnchorInAnchorDetails()
-    {
-        if (cloudAnchorsSelectedList == null || cloudAnchorsSelectedList.Count == 0) return;
-        foreach (var cloudAnchorsSelected in cloudAnchorsSelectedList)
-        {
-            if (cloudAnchorDetails.ContainsKey(cloudAnchorsSelected))
-            {
-                cloudAnchorDetails.Remove(cloudAnchorsSelected);
-            }
-        }
-        SaveCloudAnchorDetails();
-    }
     private void Start()
     {
         GameResources.Instance.cloudAnchorsManager = this;
-        ApplicationManager.Instance.OnApplicationStateChanged += OnApplicationStateChanged;
-        StaticEventHandler.OnNameMapText += LoadCloudAnchorDetails;
     }
 
     private void OnDestroy()
     {
         StaticEventHandler.OnHostCurrentSelectAnchor -= HostCurrentSelectAnchor;
-        StaticEventHandler.OnSelectCloudAnchor -= OnSelectCloudAnchor;
-        ApplicationManager.Instance.OnApplicationStateChanged -= OnApplicationStateChanged;
-        StaticEventHandler.OnNameMapText -= LoadCloudAnchorDetails;
     }
 
-    private void OnApplicationStateChanged(ApplicationState state)
-    {
-        if (state == ApplicationState.CloudAnchorInCreateMap || state == ApplicationState.CloudAnchorInLoadMap)
-        {
-            cloudAnchorsSelectedList.Clear();
-        }
-    }
 
-    private void OnSelectCloudAnchor(bool isOn, string cloudAnchorId)
-    {
-        if (isOn)
-        {
-            cloudAnchorsSelectedList.Add(cloudAnchorId);
-        }
-        else
-        {
-            cloudAnchorsSelectedList.Remove(cloudAnchorId);
-        }
-    }
 
     public void HostCurrentSelectAnchor()
     {
@@ -96,8 +56,8 @@ public class CloudAnchorsManager : MonoBehaviour
 
         if (hostCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
-            AnchorDetails anchorDetails = InitializeAnchorDetails(aRAnchor, hostCloudAnchorPromise);
-            cloudAnchorDetails.Add(hostCloudAnchorPromise.Result.CloudAnchorId, anchorDetails);
+            currentAnchorDetails = InitializeAnchorDetails(aRAnchor, hostCloudAnchorPromise);
+            currentCloudAnchor = hostCloudAnchorPromise.Result;
             GameResources.Instance.anchorSceneText.text = $"{hostCloudAnchorPromise.Result.CloudAnchorId}";
         }
         else
@@ -105,11 +65,10 @@ public class CloudAnchorsManager : MonoBehaviour
 #endif
 
 #if UNITY_EDITOR
-        AnchorDetails anchorDetailsEditor = new AnchorDetails();
-        anchorDetailsEditor.anchorImage = anchorsManager.imageByte;
-        anchorDetailsEditor.cloudAnchorId = Random.Range(0, 100).ToString();
+        currentAnchorDetails = new AnchorDetails();
+        currentAnchorDetails.anchorImage = anchorsManager.imageByte;
+        currentAnchorDetails.cloudAnchorId = Random.Range(0, 100).ToString();
         yield return new WaitForSeconds(1);
-        cloudAnchorDetails.Add(anchorDetailsEditor.cloudAnchorId, anchorDetailsEditor);
 #endif
         SaveCloudAnchorDetails();
     }
@@ -117,16 +76,15 @@ public class CloudAnchorsManager : MonoBehaviour
     {
         AnchorDetails anchorDetails = new AnchorDetails();
         anchorDetails.anchorImage = anchorsManager.imageByte;
-        GameResources.Instance.anchorSceneText.text = $"Cloud Anchor created: {hostCloudAnchorPromise}";
         anchorDetails.cloudAnchorId = hostCloudAnchorPromise.Result.CloudAnchorId;
         return anchorDetails;
     }
 
     public void ResolveSelectedCloudAnchor()
     {
-        foreach (var cloudAnchorId in cloudAnchorsSelectedList)
+        if (currentAnchorDetails != null)
         {
-            StartCoroutine(ResolveCloudAnchorRoutine(cloudAnchorId));
+            StartCoroutine(ResolveCloudAnchorRoutine(currentAnchorDetails.cloudAnchorId));
         }
     }
 
@@ -157,55 +115,57 @@ public class CloudAnchorsManager : MonoBehaviour
 
         if (resolveCloudAnchorPromise.Result != null && resolveCloudAnchorPromise.Result.CloudAnchorState == CloudAnchorState.Success)
         {
-            ARCloudAnchor cloudAnchor = resolveCloudAnchorPromise.Result.Anchor;
-            QueryARCloudAnchor(cloudAnchor, cloudAnchorId);
-
-            cloudAnchorsSelectedList.Remove(cloudAnchorId);
-            GameResources.Instance.resolveCloudAnchorIdList.Add(cloudAnchorId);
             if (GameResources.Instance.notifyResolveText != null)
+            {
+                  StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor);
                 GameResources.Instance.notifyResolveText.text = $"Cloud Anchor resolved: {cloudAnchorId}";
+            }
+            StaticEventHandler.InvokeCloudAnchorResolved(true, $"Cloud Anchor resolved: {cloudAnchorId}");
+            currentCloudAnchor = resolveCloudAnchorPromise.Result;
         }
         else
         {
             var state = resolveCloudAnchorPromise.Result?.CloudAnchorState.ToString() ?? "Unknown";
             if (GameResources.Instance.notifyResolveText != null)
-                GameResources.Instance.notifyResolveText.text = $"Error {state}";
+                GameResources.Instance.notifyResolveText.text = $"Failed to resolve: {state}";
+            StaticEventHandler.InvokeCloudAnchorResolved(false, $"Failed to resolve: {state}");
         }
 #endif
 
 #if UNITY_EDITOR
-        yield return null;
-        GameResources.Instance.contentCloudAnchor.SetActive(!GameResources.Instance.contentCloudAnchor.activeSelf);
         StaticEventHandler.InvokeInstantiateAtAnchor(null);
+        StaticEventHandler.InvokeCloudAnchorResolved(true, $"Failed");
+        yield return null;
 #endif
     }
-    void QueryARCloudAnchor(ARCloudAnchor aRAnchor, string cloudAnchorId)
+
+
+    public void SaveCloudAnchorDetails()
     {
-        if (cloudAnchorDetails.ContainsKey(cloudAnchorId))
+        ES3.Save(key, currentAnchorDetails, Settings.es3Name);
+    }
+
+    private void OnEnable()
+    {
+        StaticEventHandler.OnNameMapText += LoadCloudAnchorDetails;
+    }
+    private void OnDisable()
+    {
+        StaticEventHandler.OnNameMapText -= LoadCloudAnchorDetails;
+    }
+
+    public void LoadCloudAnchorDetails(string fileName)
+    {
+        if (ES3.FileExists(fileName))
         {
-            AnchorDetails anchorDetails = cloudAnchorDetails[cloudAnchorId];
-            if (anchorDetails != null)
-            {
-                StaticEventHandler.InvokeInstantiateAtAnchor(aRAnchor);
-            }
+            currentAnchorDetails = ES3.Load<AnchorDetails>(key, fileName);
+        }
+        else
+        {
+            currentAnchorDetails = null;
         }
     }
-    void SaveCloudAnchorDetails()
-    {
-        ES3.Save(key, cloudAnchorDetails, Settings.es3Name);
-        StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
-    }
-    void LoadCloudAnchorDetails(string es3Name)
-    {
-        var settings = new ES3Settings(es3Name);
-        if (!ES3.KeyExists(key, settings))
-        {
-            cloudAnchorDetails = new Dictionary<string, AnchorDetails>();
-            return;
-        }
-        cloudAnchorDetails = ES3.Load(key, cloudAnchorDetails, settings);
-        StaticEventHandler.InvokeAnchorDetailsChanged(cloudAnchorDetails);
-    }
+
 
 
 }

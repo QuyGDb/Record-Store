@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -8,17 +9,14 @@ public class MapManager : MonoBehaviour
     public GameObject fileItemPrefab;
     public Transform contentPanel;
     [SerializeField] private TextMeshProUGUI currentMapText;
-    private Button backBtn;
-    private Canvas homeCanvas;
 
     [SerializeField] private string[] files;
 
     ES3Settings settings;
 
-    Dictionary<string, AnchorDetails> anchorDetailsDict = new Dictionary<string, AnchorDetails>();
-
     string key = "cloudAnchorDetails";
     const string currentMap = "Current Map: ";
+    [SerializeField] private Canvas mapCanvas;
     private void Start()
     {
         ShowFiles();
@@ -34,30 +32,59 @@ public class MapManager : MonoBehaviour
             GameObject item = Instantiate(fileItemPrefab, contentPanel);
             string fileName = Path.GetFileName(filePath);
             settings = new ES3Settings(fileName);
-            anchorDetailsDict.Clear();
-            ES3.LoadInto(key, anchorDetailsDict, settings);
-            anchorDetailsDict.Clear();
-            AnchorDetails firstAnchorDetail = null;
-            if (anchorDetailsDict.Count > 0)
+            AnchorDetails anchorDetail = null;
+            if (ES3.FileExists(fileName))
             {
-                firstAnchorDetail = new List<AnchorDetails>(anchorDetailsDict.Values)[0];
+                anchorDetail = ES3.Load<AnchorDetails>(key, fileName);
             }
-            Sprite sprite = HelperUtilities.SetSprite(firstAnchorDetail.anchorImage);
-            item.GetComponentInChildren<TextMeshProUGUI>().text = fileName;
-            //   item.GetComponent<Image>().sprite = sprite;
+            if (anchorDetail != null)
+            {
+                item.GetComponent<Image>().sprite = HelperUtilities.SetSprite(anchorDetail.anchorImage);
+                item.GetComponentInChildren<TextMeshProUGUI>().text = fileName;
+            }
             Button btn = item.GetComponent<Button>();
             if (btn != null)
             {
                 btn.onClick.AddListener(() => OnFileClicked(fileName));
             }
         }
-
     }
-
     void OnFileClicked(string fileName)
     {
         Settings.es3Name = fileName;
         currentMapText.text = currentMap + fileName;
         StaticEventHandler.InvokeNameMapText(fileName);
+    }
+
+    public void LoadBtn()
+    {
+        ApplicationManager.Instance.cloudAnchorsManager.ResolveSelectedCloudAnchor();
+    }
+
+    private IEnumerator ShowObjectsWithDelay()
+    {
+        yield return new WaitForSeconds(1f);
+
+    }
+
+    private void OnCloudAnchorResolved(bool success, string message)
+    {
+        if (success && mapCanvas != null)
+        {
+            mapCanvas.gameObject.SetActive(false);
+            GameResources.Instance.instrumentShowcaseManager.ShowObjects();
+            GameResources.Instance.pictureFrameManager.ShowObjects();
+            // StartCoroutine(ShowObjectsWithDelay());
+        }
+    }
+
+    private void OnEnable()
+    {
+        StaticEventHandler.OnCloudAnchorResolved += OnCloudAnchorResolved;
+    }
+
+    private void OnDisable()
+    {
+        StaticEventHandler.OnCloudAnchorResolved -= OnCloudAnchorResolved;
     }
 }

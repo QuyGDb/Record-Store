@@ -23,8 +23,8 @@ public class PortalShowcaseHandler : MonoBehaviour, INameable
 
     private void OnTouchStarted(InputAction.CallbackContext context)
     {
-        if (ApplicationManager.Instance.applicationState == ApplicationState.TestMap ||
-           ApplicationManager.Instance.applicationState == ApplicationState.View)
+        if (ApplicationManager.Instance.currentAppState == ApplicationState.TestMap ||
+           ApplicationManager.Instance.currentAppState == ApplicationState.Client)
         {
             Vector2 touchPosition = context.ReadValue<Vector2>();
             Ray ray = Camera.main.ScreenPointToRay(touchPosition);

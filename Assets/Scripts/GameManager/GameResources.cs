@@ -56,12 +56,9 @@ public class GameResources : MonoBehaviour
     [HideInInspector] public CloudAnchorsManager cloudAnchorsManager;
     [HideInInspector] public TextMeshProUGUI anchorSceneText;
     [HideInInspector] public TextMeshProUGUI notifyResolveText;
-    [HideInInspector] public CreateMapSceneNavigationBar sceneNavigationBar;
     [HideInInspector] public WallManager currentwallManager;
-    [HideInInspector] public GameObject contentCloudAnchor;
     [HideInInspector] public TransformObjectsManager transformObjectsManager;
     [HideInInspector] public AROcclusionManager occlusionManager;
-    [HideInInspector] public List<string> resolveCloudAnchorIdList;
     [HideInInspector] public TextMeshProUGUI objectSceneText;
 
     [HideInInspector] public InstrumentShowcaseManager instrumentShowcaseManager;

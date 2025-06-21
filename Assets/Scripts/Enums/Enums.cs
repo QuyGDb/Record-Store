@@ -25,13 +25,15 @@ public enum PlaneEdge
 }
 public enum ApplicationState
 {
-    Start,
     Admin,
     Anchor,
-    CloudAnchorInCreateMap,
+    CloudAnchor,
     WallManager,
     ObjectParent,
     ObjectManager,
     TestMap,
+    Client,
+    Instruction,
+    None
 
 }

@@ -319,19 +319,9 @@ MonoBehaviour:
   albumSpawer: {fileID: 2041378649}
   textMat: {fileID: -2447701677003281479, guid: 4238eccdc3115574696adf75d543bec5,
     type: 2}
-  colorA:
-    r: 0.19607843
-    g: 0.4627451
-    b: 0.2
-    a: 1
-  colorB:
-    r: 0.13333334
-    g: 0.81960785
-    b: 0.4392157
-    a: 1
+  colorA: {r: 0.19607843, g: 0.4627451, b: 0.2, a: 1}
+  colorB: {r: 0.13333334, g: 0.81960785, b: 0.4392157, a: 1}
   speed: 2
-  basePower: 0
-  amplitude: 1
 --- !u!1 &780177853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,8 +1176,6 @@ MonoBehaviour:
   tweenDuration: 1
   horizontalOffset: 300
   initialScale: {x: 100, y: 100, z: 100}
-  pool: []
-  currentIndex: -1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
